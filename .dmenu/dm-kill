@@ -1,0 +1,23 @@
+#!/bin/bash
+
+
+#script to kill processes
+
+
+ps=$( ps ch -eo pid,comm,user | grep $USER )
+
+
+
+
+choice=$(printf '%s\n' "${ps[@]}" | awk '{print $2}' | rofi -dmenu  -p "Kill:")
+
+
+
+ps=$( ps ch -eo pid,comm,user | grep $choice | awk '{print $1}' )
+
+
+#process=$(echo $choice | awk '{ print $1 }' )
+
+
+kill $ps 2> /dev/null
+

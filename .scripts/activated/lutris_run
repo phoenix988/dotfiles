@@ -1,0 +1,22 @@
+#!/usr/bin/fish
+
+
+
+set proton_path "$HOME/.steam/root/compatibilitytools.d/"
+set  lutris_path "$HOME/.local/share/lutris/runners/wine/"
+
+set custom_protons (ls $proton_path )
+set lutris_proton (ls $lutris_path)
+
+
+
+for custom in $custom_protons 
+
+
+echo $lutris_proton | xargs -n1 | grep $custom &> /dev/null
+
+
+[ $status != "0" ] && ln -s $proton_path/$custom   $lutris_path/$custom
+
+
+end

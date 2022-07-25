@@ -1,0 +1,110 @@
+#!/bin/bash
+
+#Gets your username to see if your root or not
+whoami=$(whoami)
+
+#here you can create variables to use in the script
+gui_editor="neovide"
+
+#Choose the config files you want quick access to
+#Just add them in the array with this format "NAME - path_to_file"
+#This is files for your regular user
+declare -A files
+
+files[abbr]="$HOME/.config/fish/conf.d/abbr.fish"
+files[alacritty]="$HOME/.config/alacritty/alacritty.yml"
+files[alias list]="$HOME/Documents/alias.list"
+files[awesome]="$HOME/.config/awesome/rc.lua"
+files[awesome autostart]="$HOME/.config/awesome/autostart.sh"
+files[bash]="$HOME/.bashrc"
+files[conky]="$HOME/.config/conky/doomone-qtile.conkyrc"
+files[dm editconfig]="$HOME/.dmenu/dm-editconfig"
+files[dmenu]="$HOME/.dmenu"
+files[dunst]="$HOME/.config/dunst/dunstrc"
+files[fish]="$HOME/.config/fish/config.fish"
+files[kitty]="$HOME/.config/kitty/kitty.conf"
+files[kitty theme]="$HOME/.config/kitty/theme.conf "
+files[lithuanian]="$HOME/lithuanian/learnscript.sh"
+files[mutt]="$HOME/.config/mutt/muttrc"
+files[ncspot]="$HOME/.config/ncspot/config.toml"
+files[nvim]="$HOME/.config/nvim/init.vim"
+files[nvim plugins]="$HOME/.config/nvim/vim-plug/plugins.vim"
+files[fish]="$HOME/.config/fish/config.fish"
+files[pcmanfm]="$HOME/.config/pcmanfm/default/pcmanfm.conf"
+files[picom]="$HOME/.config/qtile/picom.conf"
+files[picom jona]="$HOME/.config/qtile/picom-jona.conf"
+files[script]="$HOME/.scripts"
+files[qtile]="$HOME/.config/qtile/config.py"
+files[qtile autostart]="$HOME/.config/qtile/autostart.sh"
+files[qutebrowser config]="$HOME/.config/qutebrowser/config.py"
+files[qutebrowser quickmarks]="$HOME/.config/qutebrowser/quickmarks"
+files[rofi themes]="$HOME/.config/rofi/themes"
+files[rtorrent]="$HOME/.rtorrent.rc"
+files[starship]="$HOME/.config/starship.toml"
+files[tmux]="$HOME/.tmux.conf.local"
+files[vieb]="$HOME/.config/Vieb/viebrc"
+files[vifm]="$HOME/.config/vifm/vifmrc"
+files[vifm colors]="$HOME/.config/vifm/colors"
+files[xmobar1]="$HOME/.config/xmobar/xmobarrc0"
+files[xmobar2]="$HOME/.config/xmobar/xmobarrc1"
+files[xmobar]="$HOME/.config/xmobar/"
+files[xmonad]="$HOME/.xmonad/xmonad.hs"
+files[zsh]="$HOME/.zshrc"
+
+#This is for files that requires root permissions:
+declare -A rootoptions
+
+rootoptions[autofs auto]="/etc/autofs/auto.mnt"
+rootoptions[autofs external]="/etc/autofs/external.mnt"
+rootoptions[autofs master]="/etc/autofs/auto.master"
+rootoptions[dunst]="/etc/dunst/dunstrc"
+rootoptions[exports]="/etc/exports"
+rootoptions[fstab]="/etc/fstab"
+rootoptions[fish]="/etc/fish/config.fish"
+rootoptions[grub]="/etc/default/grub"
+rootoptions[host]="/etc/hosts"
+rootoptions[lightdm webkit2]="/etc/lightdm/lightdm-webkit2-greeter.conf"
+rootoptions[lightdm]="/etc/lightdm/lightdm.conf"
+rootoptions[mutt wizard]="/usr/share/mutt-wizard/mutt-wizard.muttrc"
+rootoptions[pacman]="/etc/pacman.conf"
+rootoptions[rofi themes]="/usr/share/rofi/themes"
+
+
+
+
+
+#This will determine if your root or not
+#If you run this script as root your options will be text files that requires root permissions
+#And also if the choice variable is empty it will just exit the script
+if [ $whoami = "root" ] ; then
+
+
+#I use print to format the array 
+choice=$(printf '%s\n' "${!rootoptions[@]}" |  rofi -dmenu -p "Edit config file (You are root):" )
+  
+#Exit if the choice variable is empty
+[ -z "$choice" ] && exit
+
+#This will fix the output so only the path to the file will get stored in the variable 
+selection=$(printf '%s\n' "${rootoptions["${choice}"]}" )
+
+[ \( $TERM = "xterm-color" \) -o \( $TERM = "xterm-256color" \) -o \( $TERM = "xterm-kitty" \) -o \( $TERM = "screen-256color" \) ] && vim $selection || exec $gui_editor $selection
+
+
+      else
+
+#I use print to format the array then I use sed to make the output cleaner
+choice=$(printf '%s\n' "${!files[@]}" | sed -e 's/^\/*//g' -e '/-/d' -e '/^home/d' | rofi -dmenu -p "Edit config file:" )
+
+
+#Exit if the choice variable is empty
+[ -z "$choice" ] && exit 
+
+selection=$(printf '%s\n' "${files[${choice}]}" )
+
+[ \( $TERM = "xterm-color" \) -o \( $TERM = "xterm-256color" \) -o \( $TERM = "xterm-kitty" \)  -o \( $TERM = "screen-256color" \) ] && vim $selection || exec $gui_editor $selection
+
+
+fi 
+
+

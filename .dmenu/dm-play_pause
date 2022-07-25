@@ -1,0 +1,31 @@
+#!/usr/bin/fish
+#
+#
+
+set check_back "back"
+while [ $check_back = "back" ]
+
+set players (playerctl -l)
+
+
+
+set choice ( echo $players "exit" | xargs -n1 | rofi -dmenu -p "Choose Instance To Control: " )
+
+[ -z $choice ] && exit
+[ $choice = "exit" ] && exit
+
+
+while true
+
+set play_pause ( printf "play\npause\nnext\nprevious\nback\nexit" | rofi -dmenu -p "What action do you want to perform: ?")
+
+set check_back "$play_pause"
+
+[ $play_pause = "exit" ] && exit
+[ $play_pause = "back" ] && break
+
+playerctl $play_pause -p $choice
+
+end
+end
+

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+declare -a options=(
+"se"
+"us"
+)
+
+choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu  -p "Choose Layout:" )
+
+
+setxkbmap $choice

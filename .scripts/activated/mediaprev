@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+mediaplayers=$(playerctl -l)
+
+playerctl previous $mediaplayers[1]

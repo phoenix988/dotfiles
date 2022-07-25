@@ -1,0 +1,28 @@
+#!/usr/bin/fish
+
+
+
+set dir_to_move "$HOME/Videos/davinci/mov"
+set dir_to_convert "$HOME/Videos/davinci/convert_to_mov"
+
+
+set files ( ls $dir_to_convert )
+  
+
+for file in $files 
+
+    set format_to ( echo $file | awk -F . '{print $1}' )
+
+
+
+
+    ffmpeg -i $dir_to_convert/$file -c:v dnxhd -profile:v dnxhr_hq -pix_fmt yuv422p -vsync 2 -c:a pcm_s16le -f mov $dir_to_move/$format_to.mov
+
+
+rm $dir_to_convert/$file
+
+
+end
+
+
+

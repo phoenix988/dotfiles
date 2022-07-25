@@ -1,0 +1,45 @@
+#!/bin/bash
+
+
+path_log="$HOME/.scripts/activated/file_backups/logs"
+
+count_rsync=$(ls -t $path_log | grep -v error | grep rsync | wc -l)
+count_rsync_error=$(ls -t $path_log | grep error-rsync | wc -l)
+count_tar=$(ls -t $path_log | grep -v error | grep tar | wc -l)
+count_tar_error=$(ls -t $path_log | grep error-tar  | wc -l)
+
+
+
+while [ $count_rsync -gt "30" ] ; do 
+
+
+ delete=$( ls -t $path_log | grep -v error | grep rsync | tail -n1 )
+ rm -f $path_log/$delete
+ count_rsync=$( expr $count_rsync - 1 )
+
+done 
+
+while [ $count_rsync_error -gt "30" ] ; do  
+
+delete=$(ls -t $path_log | grep error-rsync | tail -n1)
+rm -f $path_log/$delete
+count_rsync_error=$( expr $count_rsync_error - 1 )
+
+done 
+
+while [ $count_tar -gt "30" ] ; do 
+
+
+delete=$(ls -t $path_log | grep -v error | grep tar | tail -n1)
+rm -f $path_log/$delete
+count_tar=$( expr $count_tar - 1 )
+
+done 
+while [ $count_tar_error -gt "30" ] ; do  
+
+
+delete=$(ls -t $path_log | grep -v error | grep tar | tail -n1)
+rm -f $path_log/$delete
+count_tar_error=$( expr $count_tar_error - 1 )
+
+done 

@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+
+
+#using the terminal to quickly move a window to another workspace 
+
+xdotool key Super_L+Shift_L+$1

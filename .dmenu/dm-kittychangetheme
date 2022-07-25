@@ -1,0 +1,20 @@
+#!/bin/bash
+
+theme=$( cat /home/karl/.config/kitty/themelist )
+
+export kittydir=/home/karl/.config/kitty
+
+
+choice=$(printf '%s\n' "${theme[@]}" | rofi -dmenu -p "Choose Theme For Kitty:"   )
+
+
+ [ -z $choice ]  && exit
+
+
+unlink $kittydir/theme.conf      
+
+ln -s /home/karl/.config/kitty/kitty-themes/themes/$choice /home/karl/.config/kitty/theme.conf
+
+
+
+

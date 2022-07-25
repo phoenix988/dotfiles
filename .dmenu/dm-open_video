@@ -1,0 +1,37 @@
+#!/bin/bash
+
+check=""
+
+
+while [ -z $check ] ; do
+
+path_group=$(ls -d /home/karl/mv/*/* | awk -F / '{print $5}' | sort -u )
+
+
+choice=$(printf '%s\n' "${path_group[@]}" | sed -e 's/^./\U&/g' | rofi -dmenu -p "Choose group:")
+choice=$(echo $choice | sed -e 's/^./\L&/g')
+
+[ -z $choice ] && exit
+
+path_ls=$(find /mnt/music/  \( -iname "*.mkv" \) -o \( -iname "*.webm"  \) -o \( -iname "*.mp4" \) | grep $choice  | awk -F / '{print $NF}')
+
+
+choice_song=$(printf '%s\n' "${path_ls[@]}" "Back" | rofi -dmenu -p "Choose song:") 
+
+[ $choice_song != "Back" ] && check="1"
+
+[ -z "$choice_song"  ] && exit || mpv "/home/karl/mv/$choice/$choice_song"
+
+done
+
+
+
+
+
+
+
+
+
+
+
+

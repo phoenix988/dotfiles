@@ -1,0 +1,72 @@
+#!/bin/bash
+
+
+backup_path="/mnt/backup/home/home-config/karl/ /media/cloud_storage/Backups/homefolder/karl/"
+
+declare -a options=(
+
+       "$HOME/.config/qtile"
+       "$HOME/.config/kitty"
+       "$HOME/.config/fish"
+       "$HOME/.config/nvim"
+       "$HOME/.config/mutt"
+       "$HOME/.config/qutebrowser"
+       "$HOME/.config/awesome"
+       "$HOME/.config/chromium"
+       "$HOME/.tmux"
+       "$HOME/.zshrc"
+       "$HOME/.bashrc"
+       "$HOME/.tmux.conf.local"
+       "$HOME/.gnupg"
+
+)
+
+declare -a sym_options=(
+
+     "$HOME/.dmenu/"       
+     "$HOME/.scripts/"
+
+)
+
+
+
+backup_files=$(printf '%s\n' "${options[@]}") 
+sym_files=$(printf '%s\n' "${sym_options[@]}") 
+
+
+for backup in $backup_files ; do
+  
+    for bp in $backup_path ; do 
+
+    
+    [ -d $bp ] || mkdir -p $bp
+
+    location=$($echo $backup | awk -F / '{ print $NF }' )
+
+    rsync -avh $backup $bp/$location/ 
+
+done
+
+done
+
+
+
+
+for sym in $sym_files ; do
+
+    for bp in $backup_path ; do 
+
+    location=$(echo $sym | awk -F / '{ print $4 }' )
+
+
+    rsync -avh $sym $bp/$location/
+
+done
+
+
+done
+
+mv /mnt/backup/home/home-config/karl/.* /mnt/backup/home/home-config/karl/* /mnt/backup/home/home-config/ 2> /dev/null
+rm -rf /mnt/backup/home/home-config/karl
+
+

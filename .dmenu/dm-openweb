@@ -1,0 +1,29 @@
+#!/bin/bash
+
+
+    browser=$(cat $HOME/.config/qtile/config.py | grep BROWSER | awk '{print $3}'  )
+
+
+
+#Readssites from qutebrowsers quickmark tab
+list=$(cat ~/.config/qutebrowser/quickmarks | sed -e "s/^/(/g" -e "s/ /) /g" )
+
+
+
+choice=$(printf '%s\n' $list | xargs -n2 | rofi -dmenu -p "Open Website:")
+
+
+
+[ -z "$choice"  ] && exit
+
+
+
+list=$(echo $choice | awk '{print $NF}') 
+
+
+#Opening website
+$browser $list
+
+
+
+

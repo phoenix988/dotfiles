@@ -1,0 +1,31 @@
+#!/bin/bash
+
+
+
+#This script will only work for qtile rightnow unless you modify it
+if [ $DESKTOP_SESSION = "qtile" ] ; then
+
+    browser=$(cat $HOME/.config/qtile/config.py | grep BROWSER | awk '{print $3}'  )
+
+fi
+
+
+#Readssites from qutebrowsers quickmark tab
+doc_path=$(ls -a /usr/share/doc/arch-wiki/html/en )
+
+
+choice=$(printf '%s\n' $doc_path | cut -d. -f1 | rofi -dmenu -p "Search the arch wiki:")
+
+[ -z $choice  ] && exit 
+
+
+ list=$( ls -d /usr/share/doc/arch-wiki/html/en/$choice.html )
+
+
+
+#Opening website
+$browser $list
+
+
+
+

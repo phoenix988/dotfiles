@@ -1,0 +1,27 @@
+#!/bin/bash
+
+theme=$( ls /home/karl/.config/urxvt/themes )
+
+export urxvt_link_path=$HOME
+
+choice=$(printf '%s\n' "${theme[@]}" | rofi -dmenu -p "Choose Theme:"   )
+
+
+if [ -z $choice ] ; then 
+
+echo " "
+
+
+else
+
+unlink $urxvt_link_path/.Xresources      
+
+ln -s /home/karl/.config/urxvt/themes/$choice $HOME/.Xresources 
+
+
+xrdb $HOME/.Xresources
+
+
+fi 
+
+

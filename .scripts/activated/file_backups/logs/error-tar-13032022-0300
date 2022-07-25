@@ -1,0 +1,13 @@
+tar: Removing leading `/' from member names
+tar: Removing leading `/' from hard link targets
+tar: /home/karl/.config: file changed as we read it
+tar: /etc/autofs/autofs_ldap_auth.conf: Cannot open: Permission denied
+tar: Exiting with failure status due to previous errors
+rm: cannot remove '.': Is a directory
+rm: cannot remove '.': Is a directory
+rm: cannot remove '.': Is a directory
+rm: cannot remove '.': Is a directory
+rm: cannot remove '.': Is a directory
+rm: cannot remove '.': Is a directory
+rm: cannot remove '.': Is a directory
+rm: cannot remove '.': Is a directory

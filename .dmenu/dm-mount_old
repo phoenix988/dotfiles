@@ -1,0 +1,163 @@
+#!/bin/bash 
+
+
+
+
+
+  harddriveuuid=$(ls /dev/disk/by-uuid)
+
+
+for huuid in $harddriveuuid 
+do 
+
+  mountableharddrives=$(blkid --uuid $huuid)
+
+  harddrives_we_can_mount=$( echo $harddrives_we_can_mount $mountableharddrives )
+
+done
+
+
+
+
+  number_of_drives=$(echo $harddrives_we_can_mount | wc -w )
+
+
+
+  make_names=$(seq 1 $number_of_drives)
+
+
+
+  
+
+ for harddrives_mount in $harddrives_we_can_mount ; do
+
+  
+
+
+
+    
+
+   filter_non_btrfs=$(lsblk -f $harddrives_mount | awk '{print $2}' | grep -v FSTYPE )
+
+
+    if [ $filter_non_btrfs = "btrfs" ] ; then
+
+       
+
+      btrfsharddrives_we_can_mount=$( echo $btrfsharddrives_we_can_mount $harddrives_mount )
+
+
+    
+
+    fi
+
+
+
+
+ done 
+
+echo $btrfsharddrives_we_can_mount
+
+
+  declare -a options=(
+
+$btrfsharddrives_we_can_mount
+
+)
+
+
+ choice=$(printf '%s\n' "${options[@]}" | dmenu -i -l 20 -p "Choose HardDrive to mount ?:" -sb "#51005e"  )
+ 
+
+
+
+ filesystem_used=$(lsblk -f $choice | awk '{print $2}' | grep -v FSTYPE )
+
+ label_of_choosen_disk=$(lsblk -f $choice | awk '{print $3}' | grep -v FSVER )
+ uuid_of_choosen_disk=$(lsblk -f $choice | awk '{print $4}' | grep -v LABEL )
+
+
+
+ if [ $filesystem_used = "btrfs" ] ; then 
+
+
+mountpoints=$(cat /etc/fstab | grep  $uuid_of_choosen_disk | egrep -v '(subvol)' | awk '{print $2}') 
+
+
+if [ -z "$mountpoints" ] ; then 
+
+
+mountpoints=$(cat /etc/fstab | grep  $label_of_choosen_disk | egrep -v '(subvol)' | awk '{print $2}') 
+
+
+fi 
+
+else 
+
+  exit
+ 
+fi 
+
+
+mount | grep $mountpoints &> /dev/null 
+
+
+
+if [ $? != 0 ] ; then 
+
+  
+  for mp in $mountpoints ; do
+
+
+  sudo mount $mp
+
+done 
+
+fi 
+
+
+subvolumes_available=$( sudo btrfs subvolume list $mountpoints | grep -v .snapshots | awk '{print $9}' )
+
+declare -a options=(
+
+$subvolumes_available 
+
+)
+ 
+
+
+ choice_subvolume=$(printf '%s\n' "${options[@]}" | dmenu -i -l 20 -p "Choose Subvolume you want to mount ?:" -sb "#51005e"  )
+
+
+
+for mp in $mountpoints ; do
+ sudo umount $mp 
+
+done
+
+
+
+
+
+
+random=$(echo $((1000 + $RANDOM % 100000)))
+
+
+
+mkdir /mnt/manual_mounts/$random           
+
+
+
+
+sudo mount -o subvol=$choice_subvolume $choice /mnt/manual_mounts/$random 
+
+
+
+
+
+
+
+
+
+
+

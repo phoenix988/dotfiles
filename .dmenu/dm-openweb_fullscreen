@@ -1,0 +1,59 @@
+#!/bin/bash
+
+
+browser="brave"
+url=$(cat $HOME/.config/qutebrowser/quickmarks | sed -e "s/^/(/g" -e "s/ /) /g" | grep -v qute)
+
+declare -a options=(
+
+"$url"
+
+
+)
+
+
+
+
+choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu -p "Open Website in fullscreen:")
+
+if [ -z $choice  ] ; then
+
+    exit 
+
+fi 
+
+list=$(echo $choice | awk '{print $NF}'  )
+
+
+check_https=$(echo $list | grep https )
+check_http=$(echo $list | grep http | grep -v https )
+
+
+
+
+if [ -z $check_http ] ; then 
+
+  none="0"
+
+else
+  
+  convert=$(echo $check_http | sed -e 's/http/https/g')
+
+$browser --new-window --app=$list
+
+exit
+
+fi
+
+if [ -z $check_https ] ; then
+
+
+$browser --new-window --app=https://$list
+
+  else
+
+$browser --new-window --app=$list
+
+
+fi
+

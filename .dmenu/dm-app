@@ -1,0 +1,35 @@
+#!/bin/bash
+
+declare -a options=(
+"qutebrowser"
+"timeshift"
+"spotify"
+"gimp"
+"bitwarden"
+"steam"
+"kdenlive"
+"celluloid"
+"vieb"
+"olive-editor"
+"kitty  htop"
+
+
+)
+
+
+appimage=$(find /opt /home/karl/Applications -iname "*.Appimage")
+
+
+choice=$(printf '%s\n' "${options[@]}" "${appimage[@]}" | rofi -dmenu  -p "Open App:"  )
+
+
+ [ -z $choice ] && exitt
+
+
+
+$choice
+
+
+
+
+

@@ -1,0 +1,17 @@
+#!/bin/bash 
+
+
+
+list=$(ls -d /usr/share/fonts/*/* | grep -v fonts.dir | grep -v fonts.scale)
+
+
+
+
+
+choice=$(printf '%s\n' "${list[@]}" | cut -d '/' -f 5,6 | rofi -dmenu -p "Font:" )
+
+[ -z $choice ] && exit
+
+create_proper_path="/usr/share/fonts/$choice"
+
+display $create_proper_path 

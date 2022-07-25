@@ -1,0 +1,97 @@
+#!/bin/bash 
+
+
+check_back="Back"
+
+while [ $check_back = "Back" ] ; do
+
+
+mountpoints=$(cat /etc/fstab | egrep '(noauto)' | awk '$3 == "btrfs" { print $2}' ) 
+
+declare -a options=(
+
+"Mount_All"
+"Umount_All"
+"Expand Options"
+"Exit"
+
+)
+
+
+      
+
+
+    choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu -p "Choose Mountpoint or Mount/Umount All ?:" )
+
+if [  "$choice" = "Exit" ] ; then
+
+check_back="Exit"
+
+
+exit
+
+fi
+
+ [ -z "$choice" ] && exit
+
+
+
+
+
+if [ "$choice" = "Mount_All" ] ; then
+
+     
+
+
+     for mp in $mountpoints ; do
+
+          sudo mount $mp
+
+           done 
+
+             fi
+
+
+if [ "$choice" = "Umount_All" ]  ; then
+
+
+     for mp in $mountpoints ; do 
+    sudo umount $mp 
+done 
+fi 
+
+
+if [ "$choice" = "Expand Options" ] ; then 
+
+     
+declare -a options=(
+
+$mountpoints
+"Back"
+"Exit"
+
+)
+
+
+check_choice=""
+
+while [ "$check_choice" != "Back" ] ; do
+
+
+new_choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu -p  "Choose Mountpoint or Mount/Umount All ?:" )
+
+[ $new_choice = "Exit" ] && exit
+
+[ -z $new_choice ] && check_choice="Back" || check_choice="$new_choice"
+
+
+
+sudo mount $new_choice
+
+
+done
+
+fi 
+
+done
+

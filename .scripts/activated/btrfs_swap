@@ -1,0 +1,13 @@
+#!/bin/bash
+
+size="$1"
+
+
+truncate -s 0 /media/swap/swapfile
+chattr +C /media/swap/swapfile
+btrfs property set /media/swap/swapfile compression none
+fallocate -l $size /media/swap/swapfile
+chmod 600 /media/swap/swapfile
+lsattr /media/swap/swapfile
+mkswap /media/swap/swapfile
+swapon /media/swap/swapfile

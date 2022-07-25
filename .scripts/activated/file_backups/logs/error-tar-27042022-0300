@@ -1,0 +1,6 @@
+tar: Removing leading `/' from member names
+tar: Removing leading `/' from hard link targets
+tar: /home/karl/.config/BraveSoftware/Brave-Browser/Default: file changed as we read it
+tar: /home/karl/.config/BraveSoftware/Brave-Browser: file changed as we read it
+tar: /etc/autofs/autofs_ldap_auth.conf: Cannot open: Permission denied
+tar: Exiting with failure status due to previous errors

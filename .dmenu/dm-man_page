@@ -1,0 +1,9 @@
+#!/usr/bin/fish
+
+
+set choice ( man -k . | awk '{ print $1 }' | sed 's/[A-Z]/\L&/g' | rofi -dmenu -p "Choose MAN page: ")
+
+
+man -Tpdf $choice | zathura -
+
+#yad --text-info  --back=#1e1f28 --fore=#bd92f8 --geometry=1200x800 

@@ -1,0 +1,9 @@
+mkdir: cannot create directory ‘/mnt/backup/home/tarball’: No such file or directory
+tar: Removing leading `/' from member names
+tar (child): /mnt/backup/home/tarball/configfiles-26012022-0300.tgz: Cannot open: No such file or directory
+tar (child): Error is not recoverable: exiting now
+tar: Removing leading `/' from hard link targets
+tar: /mnt/backup/home/tarball/configfiles-26012022-0300.tgz: Cannot write: Broken pipe
+tar: Child returned status 2
+tar: Error is not recoverable: exiting now
+ls: cannot access '/mnt/backup/home/tarball/': No such file or directory

@@ -1,0 +1,31 @@
+kaip ten nusigauti,how do I get there
+kiek iki ten kilometru,how far is it
+tai toli nuo cia,its a long way from here
+kiek tai uztruks,how long will it take
+galiu nueiti pesciomis,can I get there on foot
+ar galite parodyti tai zemelapyje,can you show me where it is on the map
+koks adresas,what's the address
+kelias,road
+zemelapis,map
+ivaziuoti draudziama,no entry
+vienpusis eismas,one way street
+stoveti draudziama,no parking
+pirmas posukis i desine,first turning on the right
+pirmas posukis i kaire,first turning on the left
+antras posukis i kaire,second turning on the left
+antras posukis i desine,second turning on the right
+trecias posukis i desine,third turning on the right
+vaziuokite tiesiai,go straight ahead
+sukite i kaire,turn left
+sukite i desine,turn right
+kampe,on the corner
+prie sviesoforo,at the traffic lights
+prie pesciuju perejos,at the pedestrian crossing
+siaure,north
+pietus,south
+rytai,east
+vakarai,west
+iejimas,entrance
+isejimas,exit
+aukstyn,up
+zemyn,down

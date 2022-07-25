@@ -1,0 +1,25 @@
+#!/bin/bash
+USERNAME=karl
+HOSTS="10.1.0.15 10.1.0.25"
+SCRIPTCONTENT=$(cat /opt/scripts/docker_volumes_backup)
+SCRIPT="$SCRIPTCONTENT"  
+
+RESULT=$(for HOSTNAME in ${HOSTS} ; do
+    ssh -l ${USERNAME} ${HOSTNAME} "${SCRIPT}"
+
+
+done)
+
+
+    
+
+
+
+
+
+
+
+
+
+
+

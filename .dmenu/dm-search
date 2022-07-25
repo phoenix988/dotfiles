@@ -1,0 +1,67 @@
+#!/bin/bash
+
+
+browser="qutebrowser"
+full_browser="chromium"
+
+
+declare -a options=(
+
+"Google"
+"DuckDuckGo"
+"Arch_Wiki"
+"AUR"
+"Wikipedia"
+"YouTube"
+"GreenManGaming"
+"CDKeys"
+"ProtonDB"
+"GitHub"
+
+)
+
+
+
+choice=$( printf '%s\n' "${options[@]}" | rofi -dmenu -p "Choose Search Engine:")
+
+
+[ -z $choice  ] && exit 
+
+if [ $browser = "qutebrowser" ] ; then
+
+[ $choice = "Google" ] && choice=$(rofi -dmenu -p "Google:") && $browser "!g $choice"
+[ $choice = "DuckDuckGo" ] && choice=$(rofi -dmenu -p "DuckDuckGo:") && $browser "$choice"
+[ $choice = "Arch_Wiki" ] && choice=$(rofi -dmenu -p "Arch_Wiki:") && $browser "!aw $choice"
+[ $choice = "AUR" ] && choice=$(rofi -dmenu -p "AUR:") && $browser "!aur $choice"
+[ $choice = "Wikipedia" ] && choice=$(rofi -dmenu -p "Wikipedia:") && $browser "!w $choice"
+[ $choice = "YouTube" ] && choice=$(rofi -dmenu -p "YouTube:") && $full_browser --new-window --app="https://www.youtube.com/results?search_query=$choice"
+[ $choice = "GreenManGaming" ] && choice=$(rofi -dmenu -p "GMG:") && $browser "https://www.greenmangaming.com/search?query=$choice"
+[ $choice = "CDKeys" ] && choice=$(rofi -dmenu -p "CDKeys:") && $browser "https://www.cdkeys.com/?q=$choice"
+[ $choice = "ProtonDB" ] && choice=$(rofi -dmenu -p "ProtonDB:") && $browser "https://www.protondb.com/search?q=$choice"
+[ $choice = "GitHub" ] && choice=$(rofi -dmenu -p "GitHub:") && $browser "https://github.com/search?q=$choice"
+
+
+
+
+
+
+else
+
+[ $choice = "DuckDuckGo" ] && choice=$(rofi -dmenu -p "DuckDuckGo:") && $browser --new-window --app="https://duckduckgo.com/?q=$choice&t=h_&ia=web"
+[ $choice = "YouTube" ] && choice=$(rofi -dmenu -p "YouTube:") && $browser --new-window --app="https://www.youtube.com/results?search_query=$choice"
+[ $choice = "Google" ] && choice=$(rofi -dmenu -p "Google:") && $browser --new-window --app="https://www.google.com/search?q=$choice&sxsrf=AOaemvKtRfebj8eBmCWbIQAFyeRHUir_KA%3A1637602786126&source=hp&ei=4tWbYf_ABd7k2roPntifyAc&iflsig=ALs-wAMAAAAAYZvj8ge62gTjJ4BIRwCz9jCfO0SCwLBa&ved=0ahUKEwj_ueTiwaz0AhVeslYBHR7sB3kQ4dUDCAc&uact=5&oq=$choice&gs_lcp=Cgdnd3Mtd2l6EAMyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEOgQIIxAnOgsILhCABBDHARCjAjoLCC4QgAQQxwEQ0QNQAFj_AWDXA2gAcAB4AIABkwGIAaUEkgEDMC40mAEAoAEB&sclient=gws-wiz"
+[ $choice = "GreenManGaming" ] && choice=$(rofi -dmenu -p "GMG:") && $browser --new-window --app="https://www.greenmangaming.com/search?query=$choice"
+[ $choice = "CDKeys" ] && choice=$(rofi -dmenu -p "CDKeys:") && $browser --new-window --app="https://www.cdkeys.com/?q=$choice"
+[ $choice = "Arch_Wiki" ] && choice=$(rofi -dmenu -p "Arch_wiki:") && $browser --new-window --app="https://wiki.archlinux.org/index.php?search=$choice&title=Special%3ASearch&go=Go"
+[ $choice = "AUR" ] && choice=$(rofi -dmenu -p "AUR:") && $browser --new-window --app="https://aur.archlinux.org/packages/?O=0&K=$choice"
+[ $choice = "Wikipedia" ] && choice=$(rofi -dmenu -p "Wikipedia:") && $browser --new-window --app="https://en.wikipedia.org/w/index.php?search=$choice&title=Special%3ASearch&go=Go&ns0=1"
+[ $choice = "ProtonDB" ] && choice=$(rofi -dmenu -p "ProtonDB:") && $browser --new-window --app="https://www.protondb.com/search?q=$choice"
+[ $choice = "GitHub" ] && choice=$(rofi -dmenu -p "GitHub:") && $browser --new-window --app="https://github.com/search?q=$choice"
+
+fi
+
+
+
+
+
+
