@@ -7,7 +7,6 @@ autofs
 tmux
 openssh-server
 rsync
-docker.io
 kitty
 wget
 lightdm
