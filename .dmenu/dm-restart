@@ -1,0 +1,17 @@
+#!/bin/bash
+
+declare -a options=(
+
+"Restart"
+"Sleep"
+"Shutdown"
+
+
+)
+choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu -p "Choose your action")
+
+[ -z $choice ] && exit
+
+[ $choice = "Restart" ] && sudo reboot -ff
+[ $choice = "Shutdown" ] && sudo shutdown -ff
+[ $choice = "Sleep" ] && sudo systemctl suspend
