@@ -15,3 +15,5 @@ dnf-plugins-core
 kitty
 nmap
 lightdm
+chromium
+qutebrowser
