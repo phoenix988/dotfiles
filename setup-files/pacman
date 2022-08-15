@@ -1,6 +1,4 @@
-qutebrowser
 vifm
-brave-bin
 base-devel
 lxappearance     
 git
@@ -28,11 +26,9 @@ conky
 feh
 network-manager-applet
 volumeicon
-picom
 python-psutil
 ttf-iosevka-nerd
 psmisc
 pulseaudio
 neofetch
 btop
-chromium

@@ -6,7 +6,7 @@
 lxsession &
 
 #Compositor
-picom -b --config  $HOME/.config/qtile/picom-jona.conf
+picom -b --config  $HOME/.config/qtile/picom.conf
 #nitrogen --restore &
 
 #Set wallpaper

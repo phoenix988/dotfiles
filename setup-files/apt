@@ -1,5 +1,5 @@
 fish
-qutebrowser
+build-essential
 zsh
 nfs-common
 git
@@ -17,3 +17,5 @@ vifm
 feh
 rofi
 btop
+apt-transport-https 
+curl
