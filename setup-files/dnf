@@ -22,4 +22,4 @@ qtile
 rofi
 vifm
 feh
-
+dnf-utils
