@@ -10,9 +10,7 @@ openssh-server
 rsync
 kitty
 wget
-lightdm
 neomutt
-bat
 vifm
 feh
 rofi
