@@ -1,33 +1,33 @@
 #!/bin/bash
 
 
-listofbackgrounds=$(ls -d /var/pictures/Wallpapers/* )  
-dire=/var/pictures/Wallpapers
+listofbackgrounds=$(ls -d $HOME/Pictures/Wallpapers/* )  
+dire="$HOME/Pictures/Wallpapers"
 
 
 #Here you can add custom paths where you have some wallpapers
 declare -A morebackgrounds
 
-morebackgrounds[dracula_theme]="/home/karl/Pictures/dracula"
-morebackgrounds[kpopwp]="/home/karl/Pictures/kpop/kpopWP"
-morebackgrounds[hellovenus]="/home/karl/Pictures/kpop/hellovenus/hellovenus_wp"
-morebackgrounds[berrygood]="/home/karl/Pictures/kpop/berrygood/berrygood_wp"
-morebackgrounds[bts]="/home/karl/Pictures/kpop/bts/bts_wp"
-morebackgrounds[everglow]="/home/karl/Pictures/kpop/everglow/everglow_wp"
-morebackgrounds[itzy]="/home/karl/Pictures/kpop/itzy/itzy_wp"
-morebackgrounds[laysha]="/home/karl/Pictures/kpop/laysha/laysha_wp"
-morebackgrounds[mamamoo]="/home/karl/Pictures/kpop/mamamoo/mamamoo_wp"
-morebackgrounds[tri.be]="/home/karl/Pictures/kpop/tri.be/tri.be_wp"
-morebackgrounds[blackpink]="/home/karl/Pictures/kpop/blackpink/blackpink_wp"
-morebackgrounds[cignature]="/home/karl/Pictures/kpop/cignature/cignature_wp"
-morebackgrounds[hot-issue]="/home/karl/Pictures/kpop/hot-issue/hot-issue_wp"
-morebackgrounds[ive]="/home/karl/Pictures/kpop/ive/ive_wp"
-morebackgroundnds[kpopw]="/home/karl/Pictures/kpop/kpopw/kpopw_wp"
-morebackgrounds[lunarsolar]="/home/karl/Pictures/kpop/lunarsolar/lunarsolar_wp"
-morebackgrounds[stayc]="/home/karl/Pictures/kpop/stayc/stayc_wp"
-morebackgrounds[twice]="/home/karl/Pictures/kpop/twice/twice_wp"
-morebackgrounds[dreamcatcher]="/home/karl/Pictures/kpop/dreamcatcher/dreamcatcher_wp"
-morebackgrounds[others]="/home/karl/Pictures/kpop/others/others_wp"
+morebackgrounds[dracula_theme]="$HOME/Pictures/dracula"
+morebackgrounds[kpopwp]="$HOME/Pictures/kpop/kpopWP"
+morebackgrounds[hellovenus]="$HOME/Pictures/kpop/hellovenus/hellovenus_wp"
+morebackgrounds[berrygood]="$HOME/Pictures/kpop/berrygood/berrygood_wp"
+morebackgrounds[bts]="$HOME/Pictures/kpop/bts/bts_wp"
+morebackgrounds[everglow]="$HOME/Pictures/kpop/everglow/everglow_wp"
+morebackgrounds[itzy]="$HOME/Pictures/kpop/itzy/itzy_wp"
+morebackgrounds[laysha]="$HOME/Pictures/kpop/laysha/laysha_wp"
+morebackgrounds[mamamoo]="$HOME/Pictures/kpop/mamamoo/mamamoo_wp"
+morebackgrounds[tri.be]="$HOME/Pictures/kpop/tri.be/tri.be_wp"
+morebackgrounds[blackpink]="$HOME/Pictures/kpop/blackpink/blackpink_wp"
+morebackgrounds[cignature]="$HOME/Pictures/kpop/cignature/cignature_wp"
+morebackgrounds[hot-issue]="$HOME/Pictures/kpop/hot-issue/hot-issue_wp"
+morebackgrounds[ive]="$HOME/Pictures/kpop/ive/ive_wp"
+morebackgroundnds[kpopw]="$HOME/Pictures/kpop/kpopw/kpopw_wp"
+morebackgrounds[lunarsolar]="$HOME/Pictures/kpop/lunarsolar/lunarsolar_wp"
+morebackgrounds[stayc]="$HOME/Pictures/kpop/stayc/stayc_wp"
+morebackgrounds[twice]="$HOME/Pictures/kpop/twice/twice_wp"
+morebackgrounds[dreamcatcher]="$HOME/Pictures/kpop/dreamcatcher/dreamcatcher_wp"
+morebackgrounds[others]="$HOME/Pictures/kpop/others/others_wp"
 
 
 choice=$(printf '%s\n' "use_default" "choose_custom_path" "use_dual_wallpaper"  | awk -F / '{print $NF}' | rofi -dmenu -p "Choose your option:"  )
@@ -39,9 +39,9 @@ if [ $choice = "use_dual_wallpaper" ] ; then
 
 
 
-listofbackgrounds_left=$(ls -d /var/pictures/Wallpapers_dual/left/* )  
-listofbackgrounds_right=$(ls -d /var/pictures/Wallpapers_dual/right/* )  
-dire=/var/pictures/wallpapers_dual
+listofbackgrounds_left=$(ls -d $HOME/Pictures/Wallpapers_dual/left/* )  
+listofbackgrounds_right=$(ls -d $HOME/Pictures/Wallpapers_dual/right/* )  
+dire=$HOME/Pictures/Wallpapers_dual
 
 
 

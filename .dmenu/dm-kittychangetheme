@@ -1,8 +1,8 @@
 #!/bin/bash
 
-theme=$( cat /home/karl/.config/kitty/themelist )
+theme=$( cat $HOME/.config/kitty/themelist )
 
-export kittydir=/home/karl/.config/kitty
+export kittydir=$HOME/.config/kitty
 
 
 choice=$(printf '%s\n' "${theme[@]}" | rofi -dmenu -p "Choose Theme For Kitty:"   )
@@ -13,7 +13,7 @@ choice=$(printf '%s\n' "${theme[@]}" | rofi -dmenu -p "Choose Theme For Kitty:" 
 
 unlink $kittydir/theme.conf      
 
-ln -s /home/karl/.config/kitty/kitty-themes/themes/$choice /home/karl/.config/kitty/theme.conf
+ln -s $HOME/.config/kitty/kitty-themes/themes/$choice $HOME/.config/kitty/theme.conf
 
 
 
