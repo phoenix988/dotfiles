@@ -12,14 +12,14 @@ if [ $status != 0 ]
     tmux new-session -s $sessionname -n localhost -d 
     tmux new-window -t $sessionname -n Vim  
     tmux new-window -t $sessionname -n mutt  
-    tmux new-window -t $sessionname -n phoe01 
+    #tmux new-window -t $sessionname -n phoe01 
     tmux send-keys -t $sessionname:Vim 'vim'  C-m
     tmux send-keys -t $sessionname:mutt 'mutt'  C-m
-    tmux send-keys -t $sessionname:phoe01 'phoe01'  C-m
-    tmux new-window -t $sessionname -n phoe02 
+   # tmux send-keys -t $sessionname:phoe01 'phoe01'  C-m
+   # tmux new-window -t $sessionname -n phoe02 
     tmux send-keys -t $sessionname:phoe02 'phoe02'  C-m
-    tmux new-window -t $sessionname -n phoe04 
-    tmux send-keys -t $sessionname:phoe03 'phoe04'  C-m
+    #tmux new-window -t $sessionname -n phoe04 
+    #tmux send-keys -t $sessionname:phoe03 'phoe04'  C-m
     #tmux splitw -h -t localhost 
     tmux select-window -t $sessionname:localhost
 end 
