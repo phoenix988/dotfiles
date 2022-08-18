@@ -52,3 +52,6 @@ pass
 cargo
 picom
 libgtk-3-dev
+libxml2-utils
+libxml2
+libxmlcatalog-java
