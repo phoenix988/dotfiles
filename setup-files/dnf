@@ -1,4 +1,5 @@
 fish
+picom
 lsd
 zsh
 nfs-utils
@@ -14,6 +15,14 @@ NetworkManager-tui
 dnf-plugins-core
 kitty
 nmap
-lightdm
-chromium
-qutebrowser
+lightdm-webkit2-greeter
+qtile
+rofi
+vifm
+feh
+dnf-utils
+neofetch
+sddm
+materia-kde-sddm
+lxappearance     
+btop
