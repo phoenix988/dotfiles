@@ -4,8 +4,8 @@
 #Creates the array
 declare -a options=(
 
-"$HOME/Pictures/Wallpapers/"
-"$HOME/Pictures/Arch/"
+"$HOME/Pictures/Wallpapers"
+"$HOME/Pictures/Arch"
 
 
 )
