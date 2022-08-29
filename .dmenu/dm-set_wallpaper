@@ -1,118 +1,34 @@
 #!/bin/bash
 
 
-listofbackgrounds=$(ls -d $HOME/Pictures/Wallpapers/* )  
-dire="$HOME/Pictures/Wallpapers"
+#Creates the array
+declare -a options=(
+
+"$HOME/Pictures/Wallpapers/"
+"$HOME/Pictures/Arch/"
 
 
-#Here you can add custom paths where you have some wallpapers
-declare -A morebackgrounds
+)
 
-morebackgrounds[dracula_theme]="$HOME/Pictures/dracula"
-morebackgrounds[kpopwp]="$HOME/Pictures/kpop/kpopWP"
-morebackgrounds[hellovenus]="$HOME/Pictures/kpop/hellovenus/hellovenus_wp"
-morebackgrounds[berrygood]="$HOME/Pictures/kpop/berrygood/berrygood_wp"
-morebackgrounds[bts]="$HOME/Pictures/kpop/bts/bts_wp"
-morebackgrounds[everglow]="$HOME/Pictures/kpop/everglow/everglow_wp"
-morebackgrounds[itzy]="$HOME/Pictures/kpop/itzy/itzy_wp"
-morebackgrounds[laysha]="$HOME/Pictures/kpop/laysha/laysha_wp"
-morebackgrounds[mamamoo]="$HOME/Pictures/kpop/mamamoo/mamamoo_wp"
-morebackgrounds[tri.be]="$HOME/Pictures/kpop/tri.be/tri.be_wp"
-morebackgrounds[blackpink]="$HOME/Pictures/kpop/blackpink/blackpink_wp"
-morebackgrounds[cignature]="$HOME/Pictures/kpop/cignature/cignature_wp"
-morebackgrounds[hot-issue]="$HOME/Pictures/kpop/hot-issue/hot-issue_wp"
-morebackgrounds[ive]="$HOME/Pictures/kpop/ive/ive_wp"
-morebackgroundnds[kpopw]="$HOME/Pictures/kpop/kpopw/kpopw_wp"
-morebackgrounds[lunarsolar]="$HOME/Pictures/kpop/lunarsolar/lunarsolar_wp"
-morebackgrounds[stayc]="$HOME/Pictures/kpop/stayc/stayc_wp"
-morebackgrounds[twice]="$HOME/Pictures/kpop/twice/twice_wp"
-morebackgrounds[dreamcatcher]="$HOME/Pictures/kpop/dreamcatcher/dreamcatcher_wp"
-morebackgrounds[others]="$HOME/Pictures/kpop/others/others_wp"
+#Removes all the directories thats empty from the option
+for opt in "${options[@]}" ; do
 
-
-choice=$(printf '%s\n' "use_default" "choose_custom_path" "use_dual_wallpaper"  | awk -F / '{print $NF}' | rofi -dmenu -p "Choose your option:"  )
-
-
-[ -z $choice ] && exit
-
-if [ $choice = "use_dual_wallpaper" ] ; then
-
-
-
-listofbackgrounds_left=$(ls -d $HOME/Pictures/Wallpapers_dual/left/* )  
-listofbackgrounds_right=$(ls -d $HOME/Pictures/Wallpapers_dual/right/* )  
-dire=$HOME/Pictures/Wallpapers_dual
-
-
-
-
-choice1=$(printf '%s\n' "${listofbackgrounds_left[@]}" | awk -F / '{print $NF}' | rofi -dmenu -p "Choose your first wallpaper:"  )
-
-[ -z $choice1 ] && exit
-
-choice2=$(printf '%s\n' "${listofbackgrounds_right[@]}" | awk -F / '{print $NF}' | rofi -dmenu -p "Choose your second wallpaper:"  )
-
-[ -z $choice2 ] && exit
-
-make_path1="$dire/left/$choice1"
-make_path2="$dire/right/$choice2"
-
-
-
-feh --bg-fill "$make_path1" "$make_path2" 
-
-
-sudo cp $make_path1 /usr/share/backgrounds/arch/lockscreen.jpg
-else 
-
-    echo ""
-
-fi
-
-
-
-if [ $choice = "choose_custom_path" ] ; then
-
-
-for more_bg in "${morebackgrounds[@]}" ; do
-
-    empty_or_not=$(ls $more_bg)
-
-
-[ -z "$empty_or_not" ] || list_containing_wallpaper=$(echo $list_containing_wallpaper $more_bg)
+    check_empty=$(ls $opt/*) 
+     
+    [ -z "$check_empty" ] || wallpapers=$(echo $wallpapers $opt)
 
 done
 
 
-custom=$(printf '%s\n'  "${list_containing_wallpaper[@]}" | xargs -n1 | rofi -dmenu -p "Choose your path:"  )
+#Make your choice
+choice=$(printf '%s\n' "${wallpapers[@]}" | xargs -n1 |  rofi -dmenu -p "Choose your wallpaper" )
 
 
-[ -z $custom ] && exit
-
-listofbackgrounds=$(ls -d $custom/* )
-
-choice=""
-
-dire=$(echo $custom)
-
-choice="use_default"
-
-fi
 
 
-if [ $choice = "use_default" ] ; then
+listofbackgrounds=$(ls -d $choice/* )  
 
-choice=$(printf '%s\n' "${listofbackgrounds[@]}" | awk -F / '{print $NF}' | rofi -dmenu -p "Choose your wallpaper:"  )
+#Change background using sxiv
+ls $listofbackgrounds | sxiv -i
 
-[ -z $choice ] && exit
 
-make_path="$dire/$choice"
-
-feh --bg-fill "$make_path" 
-
-sudo cp $make_path /usr/share/backgrounds/arch/lockscreen.jpg
-else 
-
-    echo ""
-
-fi
