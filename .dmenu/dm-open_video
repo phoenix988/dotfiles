@@ -5,7 +5,7 @@ check=""
 
 while [ -z $check ] ; do
 
-path_group=$(ls -d /home/karl/mv/*/* | awk -F / '{print $5}' | sort -u )
+path_group=$(ls -d $HOME/mv/*/* | awk -F / '{print $5}' | sort -u )
 
 
 choice=$(printf '%s\n' "${path_group[@]}" | sed -e 's/^./\U&/g' | rofi -dmenu -p "Choose group:")
@@ -20,7 +20,7 @@ choice_song=$(printf '%s\n' "${path_ls[@]}" "Back" | rofi -dmenu -p "Choose song
 
 [ $choice_song != "Back" ] && check="1"
 
-[ -z "$choice_song"  ] && exit || mpv "/home/karl/mv/$choice/$choice_song"
+[ -z "$choice_song"  ] && exit || mpv "$HOME/mv/$choice/$choice_song"
 
 done
 

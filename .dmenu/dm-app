@@ -17,7 +17,7 @@ declare -a options=(
 )
 
 
-appimage=$(find /opt /home/karl/Applications -iname "*.Appimage")
+appimage=$(find /opt $HOME/Applications -iname "*.Appimage")
 
 
 choice=$(printf '%s\n' "${options[@]}" "${appimage[@]}" | rofi -dmenu  -p "Open App:"  )

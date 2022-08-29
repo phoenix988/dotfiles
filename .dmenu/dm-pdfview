@@ -1,7 +1,7 @@
 #!/usr/bin/fish
 
 
-set choice ( find /home/karl/Yandex.Disk/ /home/karl/.config  -iname "*.pdf"   | rofi -dmenu -p "PDF file: " )
+set choice ( find $HOME/Yandex.Disk/ $HOME/.config  -iname "*.pdf"   | rofi -dmenu -p "PDF file: " )
  [ -z $choice ] && exit
 
 zathura $choice

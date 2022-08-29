@@ -1,6 +1,6 @@
 #!/bin/bash
 
-theme=$( ls /home/karl/.config/urxvt/themes )
+theme=$( ls $HOME/.config/urxvt/themes )
 
 export urxvt_link_path=$HOME
 
@@ -16,7 +16,7 @@ else
 
 unlink $urxvt_link_path/.Xresources      
 
-ln -s /home/karl/.config/urxvt/themes/$choice $HOME/.Xresources 
+ln -s $HOME/.config/urxvt/themes/$choice $HOME/.Xresources 
 
 
 xrdb $HOME/.Xresources

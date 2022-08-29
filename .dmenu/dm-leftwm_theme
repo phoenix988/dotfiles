@@ -3,7 +3,7 @@
 
 
 
-files=$(ls /home/karl/.config/leftwm/themes | grep -v current)
+files=$(ls $HOME/.config/leftwm/themes | grep -v current)
 path="$HOME/.config/leftwm/themes"
 
 
