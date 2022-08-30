@@ -339,6 +339,13 @@ fileviewer {*.docx},
           \<application/
            \vnd.openxmlformats-officedocument.wordprocessingml.document>
          \ docx2txt.pl %f -
+fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
+"\ imgt %px %py %pw %ph %c
+"\ %pc
+"\ imgc %px %py %pw %ph
+ \ vifmimg draw %px %py %pw %ph %c
+ \ %pc
+ \ vifmimg clear
 
 " TuDu files
 filetype *.tudu tudu -f %c
@@ -500,10 +507,4 @@ nnoremap <c-u> <c-w>x
 " let $VIFM_SERVER_NAME = v:servername
 "
 "
-fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
-"\ imgt %px %py %pw %ph %c
-"\ %pc
-"\ imgc %px %py %pw %ph
- \ vifmimg draw %px %py %pw %ph %c
- \ %pc
- \ vifmimg clear
+
