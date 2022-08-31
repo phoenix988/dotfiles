@@ -59,3 +59,8 @@ xinit
 sxiv
 pcmanfm
 qt5ct
+imagemagick
+libimlib2
+libimlib2-dev
+poppler-utils
+djvulibre-bin

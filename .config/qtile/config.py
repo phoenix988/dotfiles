@@ -40,8 +40,7 @@ virtman = "virt-manager"   #For my main hypervisor
 
 backup = "sudo timeshift-gtk"   #Backup utility
 
-#lockscreen = "i3lock -i /home/karl/Pictures/Anime/qwe_download.jpg  -C -k --wrong-text='Stay Away!' --greeter-text='Please enter your password'"
-lockscreen =  "xfce4-screensaver-command -al"   #This is for my lockscreen
+lockscreen =  "slock"   #This is for my lockscreen
 
 dmenu_path = "/home/karl/.dmenu" #Path to my dmenu scripts
 
