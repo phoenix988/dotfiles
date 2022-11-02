@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#This script will create rsync backups
+#use main to run it
 
 backup_path="/mnt/backup/home/home-config/karl/ /media/cloud_storage/Backups/homefolder/karl/"
 

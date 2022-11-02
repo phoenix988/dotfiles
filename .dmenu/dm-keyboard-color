@@ -1,0 +1,39 @@
+#!/bin/bash
+
+declare -a options=(
+
+"rainbow_cycle"
+"red"
+"green"
+"blue"
+"yellow"
+"gold"
+"cyan"
+"magenta"
+"white"
+"black"
+
+)
+
+declare -a speed_options=(
+"1"
+"2"
+"3"
+)
+
+
+choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu -p "Choose color mode: ")
+
+if [ $choice = "rainbow_cycle" ] ; then    
+
+     speed=$(printf '%s\n' "${speed_options[@]}" | rofi -dmenu -p "Choose speed")
+     sudo rogauracore $choice $speed 
+
+else
+
+     sudo rogauracore $choice 
+fi
+
+
+
+

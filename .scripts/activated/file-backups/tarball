@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#This script is for making tarballs 
+#You can run this script with the main script in order to both make tar and rsync backups
+
 #DATE format
 date_for_backup=$(date +%d%m%Y-%H%M )  
 

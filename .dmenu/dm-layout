@@ -3,6 +3,7 @@
 declare -a options=(
 "se"
 "us"
+"az"
 )
 
 choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu  -p "Choose Layout:" )

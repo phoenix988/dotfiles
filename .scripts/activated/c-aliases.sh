@@ -1,7 +1,11 @@
 #!/bin/bash
 
-list="$HOME/Documents/alias.list"
+#Script that will update aliases for all your shells modifying just one file
 
+#This is the path to the alias file you should modify
+list="$HOME/Documents/lists/alias.list"
+
+#This is all the paths for the alias files for each shell 
 shell_alias_paths="$HOME/.config/oh-my-zsh/aliases.sh  $HOME/.config/bash/aliases.sh  $HOME/.config/fish/conf.d/aliases.fish"
 
 for sap in $shell_alias_paths ; do 

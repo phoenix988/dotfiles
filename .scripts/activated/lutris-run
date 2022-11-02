@@ -1,6 +1,6 @@
 #!/usr/bin/fish
 
-
+#This will link all custom proton versions to lutn folder
 
 set proton_path "$HOME/.steam/root/compatibilitytools.d/"
 set  lutris_path "$HOME/.local/share/lutris/runners/wine/"

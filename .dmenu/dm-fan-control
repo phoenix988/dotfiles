@@ -1,0 +1,18 @@
+#!/bin/bash
+
+declare -A fanmode
+
+fanmode[Turbo]="1"
+fanmode[Balance]="0"
+fanmode[Silent]="2"
+
+
+
+choice=$(printf '%s\n' "${!fanmode[@]}" | rofi -dmenu -p "Choose Fan Mode")
+selection=$(printf '%s\n' "${fanmode["${choice}"]}")
+
+cd /sys/devices/platform/asus-nb-wmi   
+
+
+sudo sh -c "echo $selection >> throttle_thermal_policy"    
+

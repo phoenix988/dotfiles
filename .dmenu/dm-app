@@ -2,16 +2,14 @@
 
 declare -a options=(
 "qutebrowser"
-"timeshift"
+"sudo timeshift-gtk"
 "spotify"
 "gimp"
-"bitwarden"
 "steam"
 "kdenlive"
 "celluloid"
-"vieb"
-"olive-editor"
 "kitty  htop"
+"neovide"
 
 
 )

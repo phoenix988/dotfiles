@@ -1,0 +1,13 @@
+#!/bin/bash
+
+microphone=$(arecord -l | awk '/Wireless/ {print $2}' | sed -e 's/://g')
+
+
+
+pulseaudio_file=$(ls /etc/pulse/defaults/ | grep $microphone )
+
+
+sudo cp /etc/pulse/defaults/$pulseaudio_file /etc/pulse/default.pa
+
+
+

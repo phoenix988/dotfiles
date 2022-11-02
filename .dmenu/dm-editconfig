@@ -50,6 +50,7 @@ files[xmobar2]="$HOME/.config/xmobar/xmobarrc1"
 files[xmobar]="$HOME/.config/xmobar/"
 files[xmonad]="$HOME/.xmonad/xmonad.hs"
 files[zsh]="$HOME/.zshrc"
+files[Yandex Disk]="$HOME/.config/yandex-disk/config.cfg"
 
 #This is for files that requires root permissions:
 declare -A rootoptions
@@ -67,8 +68,9 @@ rootoptions[lightdm webkit2]="/etc/lightdm/lightdm-webkit2-greeter.conf"
 rootoptions[lightdm]="/etc/lightdm/lightdm.conf"
 rootoptions[mutt wizard]="/usr/share/mutt-wizard/mutt-wizard.muttrc"
 rootoptions[pacman]="/etc/pacman.conf"
+rootoptions[sddm startup]="/usr/share/sddm/scripts/Xsetup"
 rootoptions[rofi themes]="/usr/share/rofi/themes"
-
+rootoptions[logind]="/etc/systemd/logind.conf"
 
 
 

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#script that creates snapshots of virtual machines running in KVM
 
 runningvm=$(virsh list | cut -d " " -f 5,6 | egrep -v '(^-|Name)' )
 
