@@ -1,5 +1,0 @@
-#!/bin/bash
-
-
-docker run --rm --volumes-from portainer -v ~/backup:/backup ubuntu bash -c "cd /data && tar cvf /backup/portainer-$(date +%d%m%Y-%H%M).tar ."
-
