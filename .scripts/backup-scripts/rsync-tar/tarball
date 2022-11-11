@@ -1,0 +1,61 @@
+#!/bin/bash
+
+#This script is for making tarballs 
+#You can run this script with the main script in order to both make tar and rsync backups
+
+#DATE format
+date_for_backup=$(date +%d%m%Y-%H%M )  
+
+#Reads my dmenu script and backup all config files from it
+conf_files=$( sed -n '/declare/,/)/p' ~/.dmenu/dm-editconfig | grep -v ^declare | sed -e 's/"//g' -e '/)/d' -e '/^$/d' | xargs -n1 | sed -e 's/$HOME/\/home\/karl/g' | sed '/&*path/d' | grep ^/)
+
+#location to store the backups
+backuplocation="/mnt/backup/home/tarball"
+
+
+declare -a options=(
+
+"$HOME/.config"
+"$HOME/.tmux"
+"$HOME/.tmux.conf.local"
+"$HOME/.xmonad"
+"/media/cloud_storage/home/karl/.dmenu"
+"/media/cloud_storage/home/karl/scripts/"
+"/etc/autofs"
+"/etc/lightdm"
+"/etc/fstab"
+"/etc/fish"
+"/etc/exports"
+"/etc/default/grub"
+"/boot/grub/themes"
+
+)
+
+
+files_to_backup=$(printf '%s\n' "${options[@]}")
+
+
+ 
+
+[ -d $backuplocation ] || mkdir $backuplocation
+
+tar -zcpvf $backuplocation/configfiles-$date_for_backup.tgz $files_to_backup
+
+
+#This will remove old tar backups
+#Modiy these variables to fit your needs
+
+backups=$( ls -A $backuplocation/ | wc -l )
+
+
+#Modify this if you want to save more or less backups
+#for example now it will delete the oldest backup if there is more than 7
+while [ $backups -gt "7" ] ; do
+
+   rmbak=$( ls -at $backuplocation/* | tail -n1 )
+
+   rm -f $rmbak  
+
+   backups=$( expr $backups - 1 )
+
+done
