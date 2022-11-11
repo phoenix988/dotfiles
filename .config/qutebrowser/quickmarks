@@ -21,12 +21,13 @@ organizr www.phoenixonline.club
 pdb https://www.protondb.com/
 pihole http://phoe02/admin
 plex plex.phoenixonline.club
-portainer pt.phoenixonline.club
+portainer lt.phoenixonline.club
 proton-ge https://github.com/GloriousEggroll/proton-ge-custom/releases
+proxmox https://192.168.1.30:8006
 pulse https://wiki.archlinux.org/title/PulseAudio/Troubleshooting#Microphone_not_detected_by_PulseAudio
 qlay http://docs.qtile.org/en/latest/manual/ref/layouts.html?highlight=layouts
 qtile http://docs.qtile.org/en/latest/
-router https://10.1.0.1:444
+router http://192.168.1.254
 set qute://settings
 skytech https://www.skytech.lt/
 starship https://starship.rs/
@@ -59,3 +60,5 @@ rawpixel https://www.rawpixel.com/
 cockpit localhost:9090
 wallpapers https://www.wallpaperflare.com/
 imgbb https://imgbb.com/
+whatsapp https://web.whatsapp.com/
+purple-hoodie https://www.tshirtstudio.com/personalised-hoodies/design-your-own-varsity-hoodie

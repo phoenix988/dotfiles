@@ -1,12 +1,12 @@
 #!/bin/bash
 
 
-
 #update aliases
-alias uali="bash /usr/bin/myscripts/c_aliases.sh"
+alias uali="bash /usr/bin/myscripts/c-aliases.sh"
 
 #show ip
 alias ipa="ifconfig | awk '/inet/ {print $2}' | head -n4"
+alias pubip="curl http://ifconfig.me/ip"
 
 #ls aliases
 alias ls='lsd --color=auto'
@@ -26,11 +26,11 @@ alias htop='btop'
 #fix obvious typo's
 alias cd..='cd ..'
 alias pdw="pwd"
-alias udpate='sudo pacman -Syyu'
-alias upate='sudo pacman -Syyu'
-alias updte='sudo pacman -Syyu'
-alias updqte='sudo pacman -Syyu'
-alias upqll="paru -Syu --noconfirm"
+#alias udpate='sudo pacman -Syyu'
+#alias upate='sudo pacman -Syyu'
+#alias updte='sudo pacman -Syyu'
+#alias updqte='sudo pacman -Syyu'
+#alias upqll="paru -Syu --noconfirm"
 
 ## Colorize the grep command output for ease of use (good for log files)##
 alias grep='grep --color=auto'
@@ -41,15 +41,8 @@ alias fgrep='fgrep --color=auto'
 alias df='df -h'
 alias fsp="df -h | grep -v /var"
 
-#pacman unlock
-alias unlock="sudo rm /var/lib/pacman/db.lck"
-alias rmpacmanlock="sudo rm /var/lib/pacman/db.lck"
-
 #free
 alias free="free -mt"
-
-#use all cores
-alias uac="sh ~/.bin/main/000*"
 
 #continue download
 alias wget="wget -c"
@@ -61,18 +54,13 @@ alias userlist="cut -d: -f1 /etc/passwd"
 alias merge="xrdb -merge ~/.Xresources"
 
 # Aliases for software managment
-# pacman or pm
-alias pacman='sudo pacman --color auto'
-alias update='sudo pacman -Syyu'
-alias remove="sudo pacman -Rns"
-
-# paru as aur helper - updates everything
-alias pksyua="paru -Syu --noconfirm"
-alias upall="paru -Syu --noconfirm"
-
-#Aliases for my AUR helper
-alias yay="paru"
-alias aur="paru"
+alias pacman='sudo nala'
+alias nala='sudo nala'
+alias search='nala search'
+alias apt='sudo nala'
+alias install='sudo nala install'
+alias update='sudo nala update && sudo nala upgrade'
+alias remove="sudo nala remove"
 
 #ps
 alias psa="ps auxf"
@@ -97,18 +85,8 @@ alias kc='killall conky'
 alias hw="hwinfo --short"
 alias temp="inxi -Fx | grep cpu"
 
-#skip integrity check
-alias paruskip='paru -S --mflags --skipinteg'
-
 #check vulnerabilities microcode
 alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
-
-#get fastest mirrors in your neighborhood
-alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
-alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist"
-alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
-alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
-
 
 #youtube-dl
 alias yta-aac="youtube-dl --extract-audio --audio-format aac "
@@ -128,12 +106,18 @@ alias riplong="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -3000 | n
 
 #get the error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
+alias checkerror="sudo journalctl -p 3 -xb"
 
 #gpg
 #verify signature for isos
 alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
+
 #receive the key of a developer
 alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
+
+#decrypt
+alias dec="gpg --decrypt"
+
 
 #maintenance
 alias big="expac -H M '%m\t%n' | sort -h | nl"
@@ -152,10 +136,10 @@ alias qm="cd /home/karl/.config/qtile/"
 alias xm="cd /home/karl/.xmonad/"
 alias xbm="cd /home/karl/.config/xmobar/"
 alias omfm="cd /home/karl/.config/fish/conf.d"
-alias movies="cd /mnt/autofs/movies"
+alias movies="cd /mnt/movies"
 alias dmove="cd ~/.dmenu"
-alias backup="cd /mnt/autofs/backup"
-alias backup-home="cd /mnt/autofs/backup/homefolder/karl"
+alias backup="cd /mnt/backup"
+alias backup-home="cd /mnt/backup/home"
 alias media="cd /mnt/autofs/music/videos/"
 alias cbak="cd ~/Yandex.Disk/Backups/homefolder/karl/"
 alias app="cd /usr/share/applications/"
@@ -167,14 +151,16 @@ alias mbas="cd ~/.config/bash"
 alias mqute="cd ~/.config/qutebrowser"
 alias mconky="cd ~/.config/conky"
 alias mpic="cd ~/Pictures"
+alias mvideo="cd ~/Videos"
+alias mraw="cd ~/Videos/raw"
 alias mzsh="cd ~/.config/oh-my-zsh/"
 alias mkitty="cd ~/.config/kitty/"
-alias mkpop="cd ~/.scripts/learnkpop/"
 alias vm="cd /media/vm"
-alias yandex="cd /media/cloud_storage/Yandex.Disk/"
-alias games="cd ~/Games"
-alias games2="cd /mnt/autofs/games2/"
+alias yandex="cd ~/Yandex.Disk/"
+alias steam1="cd /home/karl/.steam/debian-installation/steamapps/common"
+alias steam2="cd /mnt/ntfs/SteamLibrary/steamapps/"
 alias mwine="cd ~/wine"
+alias autofs="cd /mnt/autofs"
 alias mgit="cd ~/git-reps"
 alias mdmenu="cd ~/.dmenu"
 alias iso="cd ~/iso"
@@ -199,7 +185,7 @@ alias pp="sxiv /var/pictures/backgrounds/*"
 alias virsh="virsh -c qemu:///system"
 
 #Alias for vifm to add mor functionality
-alias vifm="vifmrun"
+#alias vifm="vifmrun"
 
 #Clear command
 alias cls="clear"
@@ -230,22 +216,21 @@ alias vgrub="sudo vim /etc/default/grub"
 alias vconfgrub="sudo vim /boot/grub/grub.cfg"
 alias vmkinitcpio="sudo vim /etc/mkinitcpio.conf"
 alias vmirrorlist="sudo vim /etc/pacman.d/mirrorlist"
-alias vali="vim ~/Documents/alias.list"
+alias vali="vim ~/Documents/lists/alias.list"
 alias vzrc="vim ~/.zshrc"
 alias vzsh="vim ~/.zshrc"
 alias vfis="vim ~/.config/fish/config.fish"
-
-#Gui editor
-alias nv="neovide"
 
 #SSH 
 alias proxyserver="ssh karl@proxy"
 alias dockerserver="ssh karl@10.1.0.15"
 alias phoe01="ssh karl@phoe01"  
 alias phoe02="ssh karl@phoe02"  
-alias phoe03="ssh karl@phoe03"  
-alias phoe04="ssh karl@10.1.0.20"  
-alias phoe05="ssh karl@10.1.0.40"  
+alias phoe03="ssh karl@10.1.0.55"  
+alias moxi="ssh root@moxi.home"  
+alias moxi-server="ssh karl@moxi-server01"
+alias phoe04="ssh karl@10.1.0.55"  
+alias phoe-server01="ssh karl@10.1.0.50"  
 alias kssh="kitty +kitten ssh"
 
 #git aliases
@@ -255,17 +240,19 @@ alias mgen="cd /media/vg_games/genshin-impact/drive_c/Program\ Files/Genshin\ Im
 #games legendary 
 alias gta="legendary launch 9d2d0eb64d5c44529cece33fe2a46482"     
 
-#gpg
-alias dec="gpg --decrypt"
-
 #default browser
 alias defaultbrowser="xdg-settings set default-web-browser"
 alias filetokrusader="xdg-mime default org.kde.krusader.desktop inode/directory application"
 alias filetopcmanfm="xdg-mime default pcmanfm.desktop inode/directory application"
 
 
-#Change the default xclip behaviour 
+
+#change the default xclip behaviour 
 alias xclip="xclip -selection clipboard"
+
+#hardware info
+alias cpu="cat /proc/cpuinfo | grep -i mhz"
+
 
 #Sets some Variables
 export EDITOR=vim
