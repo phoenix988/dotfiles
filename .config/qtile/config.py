@@ -22,7 +22,7 @@ from typing import List  # noqa: F401
 #BROWSER = chromium
 mod = "mod4"        # Sets mod key to SUPER/WINDOWS
 
-myTerm = "kitty -e /usr/bin/myscripts/create_tmux_session.sh"      # My terminal of choice
+myTerm = "kitty -e /usr/bin/myscripts/create-tmux-session.sh"      # My terminal of choice
 myterm = "kitty -e zsh"
 
 fileManager = "kitty -e vifmrun"              #My filemanagers both gui and terminal based
@@ -61,11 +61,11 @@ keys = [
              desc='Shutdown Qtile'
              ),
         Key([mod, ], "u", #Show all the keybindings
-             lazy.spawn("/home/karl/.config/qtile/qtile_keys.sh"),
+             lazy.spawn("/home/karl/.config/qtile/qtile-keys.sh"),
              desc='Run Help Menu'
              ),
         Key([mod, ], "y", #show kitty bindings
-             lazy.spawn("/home/karl/.config/kitty/kitty_keys.sh"),
+             lazy.spawn("/home/karl/.config/kitty/kitty-keys.sh"),
              desc='Run Help Menu for kitty'
              ),
         Key(["mod1", "control" ], "i", #Lock the computer
@@ -154,11 +154,11 @@ keys = [
 
          #KEYS_GROUP Some of my custom scripts
         Key([mod, ],"F12", #Set a Random wallpaper
-             lazy.spawn("/usr/bin/myscripts/set_random_bg"),
+             lazy.spawn("/usr/bin/myscripts/set-random-bg"),
              desc='Set a random wallpaper'
              ),
         Key([mod, ],"F11", #Mount all my noauto mountpoints from fstab
-             lazy.spawn("/usr/bin/myscripts/quick_mount_shortcut.sh"),
+             lazy.spawn("/usr/bin/myscripts/quick-mount-shortcut.sh"),
              desc='Mounts all my btrfs parent volumes with no auto'
              ),
 
@@ -311,7 +311,7 @@ keys = [
              lazy.layout.flip(),
              desc='Switch which side main pane occupies (XmonadTall)'
              ),
-         Key([mod], "space", #Switch window focus to other panes of stack
+         Key([mod, "control"], "space", #Switch window focus to other panes of stack
              lazy.layout.next(),
              desc='Switch window focus to other pane(s) of stack'
              ),
@@ -362,10 +362,10 @@ keys = [
              lazy.spawn("tmux splitw -v"),
              ),
          Key(["control", "mod1"], "h", #prev pane
-             lazy.spawn("/usr/bin/myscripts/next_tmux_pane.sh"),
+             lazy.spawn("/usr/bin/myscripts/next-tmux-pane.sh"),
              ),
          Key(["control", "mod1"], "l", #next pane
-             lazy.spawn("/usr/bin/myscripts/prev_tmux_pane.sh"),
+             lazy.spawn("/usr/bin/myscripts/prev-tmux-pane.sh"),
              ),
         #KEYS_GROUP Launch terminal based programs using the key chord CONTROL+e followed by 'key'
          KeyChord([mod], "z", [
@@ -412,7 +412,7 @@ keys = [
                  desc='Config a file that requires root'
                  ),
              Key([], "w", #Set wallpaper
-                 lazy.spawn(dmenu_path + "/dm-set_wallpaper"),
+                 lazy.spawn(dmenu_path + "/dm-set-wallpaper"),
                  desc='set a wallpaper'
                  ),
              Key([], "u", #Open a choosen program with dmenu
@@ -452,19 +452,19 @@ keys = [
             #     desc='displays the font on your system'
             #     ),
              Key([], "f", #opens my favorite websites in fullscreen mode with minimal UI 
-                 lazy.spawn(dmenu_path + "/dm-openweb_fullscreen"), 
+                 lazy.spawn(dmenu_path + "/dm-openweb-fullscreen"), 
                  desc='open a website in fullscreen'
                  ),
              Key([], "g", #opens my favorite websites in fullscreen mode with minimal UI 
-                 lazy.spawn(dmenu_path + "/dm-open_video"), 
+                 lazy.spawn(dmenu_path + "/dm-open-video"), 
                  desc='open a website in fullscreen'
                  ),
              Key([], "q", #Opens a VM of your choice in KVM 
-                 lazy.spawn(dmenu_path + "/dm-open_virt_cons"), 
+                 lazy.spawn(dmenu_path + "/dm-open-virt-cons"), 
                  desc='Opens a VM of your choice in KVM'
                  ),
              Key([], "p", #menu to control music
-                 lazy.spawn(dmenu_path + "/dm-play_pause"), 
+                 lazy.spawn(dmenu_path + "/dm-play-pause"), 
                  desc='menu to control music'
                  ),],
 
