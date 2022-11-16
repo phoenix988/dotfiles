@@ -105,11 +105,11 @@ source $ZSH/oh-my-zsh.sh
 #
 
 #Source the starship prompt
-eval "$(starship init zsh)"
+#eval "$(starship init zsh)"
 
 
 source $ZSH/aliases.sh
-uwufetch
+#uwufetch
 
 
 alias sou="source ~/.zshrc"
