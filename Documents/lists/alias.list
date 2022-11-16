@@ -22,6 +22,7 @@ alias hidden="ls -A | grep -v ^[A-Z] | grep -v ^[a-z]"
 
 #change cat to bat
 alias cat='bat'
+alias bat='batcat'
 alias htop='btop'
 
 #fix obvious typo's
