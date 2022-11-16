@@ -10,14 +10,14 @@ alias uali="bash /usr/bin/myscripts/c_aliases.sh"
 alias ipa="ifconfig | awk '/inet/ {print $2}' | head -n4"
 
 #ls aliases
-alias ls='lsd --color=auto'
-alias la='lsd -a'
-alias lA='lsd -A'
-alias ll='lsd -l'
-alias lla='lsd -la'
-alias ld='lsd -l | grep ^d'
-alias l='lsd'
-alias l.="lsd -A | egrep '^\.'"
+alias ls='ls --color=auto'
+alias la='ls -a'
+alias lA='ls -A'
+alias ll='ls -l'
+alias lla='ls -la'
+alias ld='ls -l | grep ^d'
+alias l='ls'
+alias l.="ls -A | egrep '^\.'"
 alias hidden="ls -A | grep -v ^[A-Z] | grep -v ^[a-z]"
 
 #change cat to bat
