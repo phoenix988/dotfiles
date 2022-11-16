@@ -1,0 +1,16 @@
+#!/bin/bash
+
+choice="/"
+
+while [ "$choice" != "." ] ; do
+
+choice=$(ls -da $choice/* | rofi -dmenu -p "Location:")
+
+[ $choice = "." ] && exit
+
+
+
+
+
+
+done

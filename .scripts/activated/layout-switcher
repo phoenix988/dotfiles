@@ -1,0 +1,9 @@
+#!/bin/bash
+
+
+
+
+layout=$(setxkbmap -query | grep layout | awk '{print $NF}')
+
+
+[ "$layout" = "us" ] && setxkbmap "se" || setxkbmap "us"  

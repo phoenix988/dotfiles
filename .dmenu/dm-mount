@@ -8,6 +8,14 @@ while [ $check_back = "Back" ] ; do
 
 mountpoints=$(cat /etc/fstab | egrep '(noauto)' | awk '$3 == "btrfs" { print $2}' ) 
 
+
+if [ -z $mountpoints ] ; then
+
+    echo "No drives that you can mount"
+    exit
+
+fi
+
 declare -a options=(
 
 "Mount_All"

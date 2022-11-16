@@ -90,7 +90,7 @@ choice=$(printf '%s\n' "${!rootoptions[@]}" |  rofi -dmenu -p "Edit config file 
 #This will fix the output so only the path to the file will get stored in the variable 
 selection=$(printf '%s\n' "${rootoptions["${choice}"]}" )
 
-[ \( $TERM = "xterm-color" \) -o \( $TERM = "xterm-256color" \) -o \( $TERM = "xterm-kitty" \) -o \( $TERM = "screen-256color" \) ] && vim $selection || exec $gui_editor $selection
+[ \( $TERM = "xterm-color" \) -o \( $TERM = "xterm-256color" \) -o \( $TERM = "xterm-kitty" \) -o \( $TERM = "tmux-256color" \) ] && vim $selection || exec $gui_editor $selection
 
 
       else
@@ -104,7 +104,7 @@ choice=$(printf '%s\n' "${!files[@]}" | sed -e 's/^\/*//g' -e '/-/d' -e '/^home/
 
 selection=$(printf '%s\n' "${files[${choice}]}" )
 
-[ \( $TERM = "xterm-color" \) -o \( $TERM = "xterm-256color" \) -o \( $TERM = "xterm-kitty" \)  -o \( $TERM = "screen-256color" \) ] && vim $selection || exec $gui_editor $selection
+[ \( $TERM = "xterm-color" \) -o \( $TERM = "xterm-256color" \) -o \( $TERM = "xterm-kitty" \)  -o \( $TERM = "tmux-256color" \) ] && vim $selection || exec $gui_editor $selection
 
 
 fi 

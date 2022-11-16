@@ -1,0 +1,17 @@
+#!/bin/bash
+
+
+
+dmenu_path="$HOME/.dmenu/"
+dmenu_scripts=$(ls $dmenu_path)
+
+echo $dmenu_scripts
+
+choice=$(printf '%s\n' "${dmenu_scripts[@]}" | rofi -dmenu -p "Which script do you  want to run?")
+
+
+bash $dmenu_path$choice
+
+
+
+

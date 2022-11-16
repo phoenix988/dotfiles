@@ -72,6 +72,11 @@ keys = [
              lazy.spawn(lockscreen),
              desc='Lock computer'
              ),
+        Key([mod, ], "space", #Toggle between keyboard layouts
+             lazy.spawn("/home/karl/.scripts/activated/layout-switcher"),
+             desc='Toggle between keyboard layouts'
+             ),
+
 
          #KEYS_GROUP Launch applications with super + key
          Key([mod, ], "r", #Run Rofi
@@ -826,7 +831,7 @@ def init_widgets_list():
                        ),
                
              widget.DF(
-                        partition = "/media/vm",
+                        partition = "/",
                         visible_on_warn = False,
                         foreground = colors[4],
                         background = colors[0]
