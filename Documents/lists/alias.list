@@ -4,7 +4,7 @@
 
 
 #update aliases
-alias uali="bash /usr/bin/myscripts/c_aliases.sh"
+alias uali="bash /usr/bin/myscripts/c-aliases.sh"
 
 #show ip
 alias ipa="ifconfig | awk '/inet/ {print $2}' | head -n4"
