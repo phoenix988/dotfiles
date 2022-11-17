@@ -376,10 +376,10 @@ tmux_conf_update_plugins_on_reload=true
 #set -g @plugin 'tmux-plugins/tmux-resurrect'
 #set -g @plugin 'tmux-plugins/tmux-continuum'
 #set -g @continuum-restore 'on'
-set -g @plugin 'dracula/tmux'
-set -g @dracula-plugins "cpu-usage gpu-usage ram-usage"
-set -g @dracula-show-powerline true
-set -g @dracula-show-left-icon session
+#set -g @plugin 'dracula/tmux'
+#set -g @dracula-plugins "cpu-usage gpu-usage ram-usage"
+#set -g @dracula-show-powerline true
+#set -g @dracula-show-left-icon session
 # -- custom variables ----------------------------------------------------------
 
 # to define a custom #{foo} variable, define a POSIX shell function between the
