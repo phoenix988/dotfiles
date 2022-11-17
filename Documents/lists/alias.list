@@ -1,8 +1,6 @@
 #!/bin/bash
 
 
-
-
 #update aliases
 alias uali="bash /usr/bin/myscripts/c-aliases.sh"
 
