@@ -19,19 +19,19 @@ from libqtile.lazy import lazy
 from typing import List  # noqa: F401
 
 #This is mainly for my dmenu script :)
-#BROWSER = chromium
+#BROWSER = qutebrowser
 mod = "mod4"        # Sets mod key to SUPER/WINDOWS
 
 myTerm = "kitty -e /usr/bin/myscripts/create-tmux-session.sh"      # My terminal of choice
 myterm = "kitty -e zsh"
 
-fileManager = "kitty -e vifmrun"              #My filemanagers both gui and terminal based
-guifileManager = "pcmanfm /home/karl/Pictures/"
+fileManager = "kitty -e vifm"              #My filemanagers both gui and terminal based
+guifileManager = "nautilus /home/karl/Pictures/"
 
 sysmon = "kitty -e btop" #This is for htop
 
-browser1 = "chromium"       #Choose whatever browsers you prefer primary and secondary
-browser2  = "chromium --new-window --app=https://duckduckgo.com"    
+browser1 = "brave-browser"       #Choose whatever browsers you prefer primary and secondary
+browser2  = "brave-browser --new-window --app=https://duckduckgo.com"    
 
 guieditor = "neovide"  #Choose your gui text editor
 editor = "kitty -e vim" #My terminal based editor
@@ -49,7 +49,6 @@ dmenu_path = "/home/karl/.dmenu" #Path to my dmenu scripts
 
 
 keys = [
-         
          
          #KEYS_GROUP Qtile
         Key([mod, "shift"], "r", #Restart  
@@ -73,21 +72,20 @@ keys = [
              desc='Lock computer'
              ),
         Key([mod, ], "space", #Toggle between keyboard layouts
-             lazy.spawn("/home/karl/.scripts/activated/layout-switcher"),
-             desc='Toggle between keyboard layouts'
+              lazy.spawn("/usr/bin/myscripts/layout-switcher"),
+              desc='switch between Keyboard layouts'
              ),
-
 
          #KEYS_GROUP Launch applications with super + key
          Key([mod, ], "r", #Run Rofi
-              lazy.spawn("rofi -show drun  -display-drun \"Run : \" -drun-display-format \"{name}\""),
+              lazy.spawn("rofi -show drun -show-icons -display-drun \"Run : \" -drun-display-format \"{name}\""),
               desc='Run rofi'
              ),
          Key([mod, ], "s", #Take Screenshot
              lazy.spawn("flameshot gui"),
              desc='flameshot'
              ),
-         Key([mod, ], "b", #Brave
+         Key([mod, ], "b", #Brave fullscreen
              lazy.spawn(browser2),
              desc='Launch browser2'
              ),
@@ -99,9 +97,13 @@ keys = [
              lazy.spawn("obs"),
              desc='OBS studio'
              ),
-         Key([mod, ], "t", #Launch kitty
+         Key([mod, ], "t", #Launch Kitty
              lazy.spawn( myterm ),
              desc='kitty terminal'
+             ),
+         Key([mod, ], "g", #Launch Gimp
+             lazy.spawn( "gimp" ),
+             desc='run gimp'
              ),
          Key([mod], "Return", #Run Terminal
              lazy.spawn( myTerm ),
@@ -112,7 +114,7 @@ keys = [
              lazy.spawn( guieditor ),
              desc='Launches My guieditor'
              ),
-         Key([mod, "shift"], "w", #Qutebrowser
+         Key([mod, "shift"], "w", #Brave
              lazy.spawn(browser1),
              desc='Launch browser1'
              ),
@@ -162,9 +164,13 @@ keys = [
              lazy.spawn("/usr/bin/myscripts/set-random-bg"),
              desc='Set a random wallpaper'
              ),
-        Key([mod, ],"F11", #Mount all my noauto mountpoints from fstab
-             lazy.spawn("/usr/bin/myscripts/quick-mount-shortcut.sh"),
-             desc='Mounts all my btrfs parent volumes with no auto'
+        Key([mod, ],"F11", #Kills and starts picom compositor
+             lazy.spawn("/usr/bin/myscripts/picom-control"),
+             desc='kills and start picom'
+             ),
+        Key([mod, ],"F10", #Change display layout,for my laptop when I connect external Screens
+             lazy.spawn("/usr/bin/myscripts/change-display-layout.sh"),
+             desc='Change Display layout, I use it when I connect external Screens to my laptop'
              ),
 
 
@@ -181,6 +187,18 @@ keys = [
              lazy.spawn("/usr/bin/myscripts/mediaprev"),
              desc='Previous'
              ),
+         Key([ ],"XF86AudioMute", #Mute Audio
+             lazy.spawn("/usr/bin/myscripts/mute-unmute.sh"),
+             desc='Previous'
+             ),
+         Key([ ],"XF86AudioLowerVolume", #Lower Volume
+             lazy.spawn("/usr/bin/myscripts/volume-down.sh"),
+             desc='Previous'
+             ),
+         Key([ ],"XF86AudioRaiseVolume", #Raise Volume``
+             lazy.spawn("/usr/bin/myscripts/volume-up.sh"),
+             desc='Previous'
+             ),
         #KEYS_GROUP Switch focus to specific monitor (out of two)
          Key([mod], "w", #Move focus to monitor 1
              lazy.to_screen(0),
@@ -190,11 +208,11 @@ keys = [
              lazy.to_screen(1),
              desc='Keyboard focus to monitor 2'
              ),
-        # Key([mod], "r",
-         #    lazy.to_screen(2),
-          #   desc='Keyboard focus to monitor 3'
-           #  ),
-         ### Switch focus of monitors
+         Key([mod, "control"], "r",
+             lazy.to_screen(2),
+             desc='Keyboard focus to monitor 3'
+             ),
+         #Switch focus of monitors
          Key([mod], "period", #Move focus to the next monitor
              lazy.next_screen(),
              desc='Move focus to next monitor'
@@ -404,8 +422,12 @@ keys = [
                  lazy.spawn(dmenu_path + "/dm-editconfig"),
                  desc='Choose a config file to edit'
                  ),
-             Key([], "m", #Mount your noauto mountpoints
-                 lazy.spawn(dmenu_path + "/dm-mount"),
+             Key([], "m", #Change the fan Mode of my laptop 
+                 lazy.spawn(dmenu_path + "/dm-fan-control"),
+                 desc='Mount some harddrives using dmenu'
+                 ),
+             Key([], "c", #Change RGB color on my asus laptop
+                 lazy.spawn(dmenu_path + "/dm-keyboard-color"),
                  desc='Mount some harddrives using dmenu'
                  ),
              Key([], "k", #Kill a process
@@ -444,7 +466,7 @@ keys = [
                  lazy.spawn(dmenu_path + "/dm-nordvpn"),
                  desc='Choose your VPN server for NordVPN'
                  ),
-             Key([], "s", #search the web 
+             Key([], "s", #search the web requires qutebrowser 
                  lazy.spawn(dmenu_path + "/dm-search"), 
                  desc='search the web'
                  ),
@@ -460,10 +482,14 @@ keys = [
                  lazy.spawn(dmenu_path + "/dm-openweb-fullscreen"), 
                  desc='open a website in fullscreen'
                  ),
-             Key([], "g", #opens my favorite websites in fullscreen mode with minimal UI 
-                 lazy.spawn(dmenu_path + "/dm-open-video"), 
-                 desc='open a website in fullscreen'
+             Key([], "b", #creates or remove timeshift backup
+                 lazy.spawn(dmenu_path + "/dm-timeshift"), 
+                 desc='creates or remove timeshift backup'
                  ),
+            # Key([], "g", #opens my favorite websites in fullscreen mode with minimal UI 
+            #     lazy.spawn(dmenu_path + "/dm-open-video"), 
+            #     desc='open a website in fullscreen'
+            #     ),
              Key([], "q", #Opens a VM of your choice in KVM 
                  lazy.spawn(dmenu_path + "/dm-open-virt-cons"), 
                  desc='Opens a VM of your choice in KVM'
@@ -666,7 +692,7 @@ def init_widgets_list():
                        background = colors[0]
                        ),
              widget.Image(
-                        filename = "~/.config/qtile/icons/arch1.png",
+                        filename = "~/.config/qtile/icons/pop-os.png",
                         scale = "False",
                         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myterm)},
                         padding = 10
@@ -764,8 +790,8 @@ def init_widgets_list():
                        urgent_border = colors[5]
                        ),
              widget.Sep(
-                       linewidth = 0,
-                       padding = 6,
+                       linewidth = 1,
+                       padding = 10,
                        foreground = colors[0],
                        background = colors[0]
                        ),
@@ -785,8 +811,13 @@ def init_widgets_list():
              widget.KeyboardLayout(
                        foreground = colors[0],
                        background = colors[5],
-                       configured_keyboards = ['us', 'se'],
+                       configured_keyboards = ['us', 'se', 'az'],
                         padding = 10,
+                       ),
+             widget.NvidiaSensors(
+                       foreground = colors[0],
+                       background = colors[5],
+                       threshold = 85,
                        ),
              widget.TextBox(
                        text = '',
@@ -795,10 +826,9 @@ def init_widgets_list():
                        padding = -1,
                        fontsize = 45
                        ),
-
              widget.Sep(
                        linewidth = 100,
-                       padding = 140,
+                       padding = 15,
                        foreground = colors[0],
                        background = colors[0]
                        ),
@@ -808,13 +838,12 @@ def init_widgets_list():
              #         foreground = colors[2],
              #         background = colors[4],
              #         padding = 5
-             #    ),
+             #         ),
              widget.Chord(
                        background = colors[0],
                        foreground = colors[5],
                        padding = 1
                        ), 
-
              widget.TextBox(
                        text = '',
                        background = colors[0],
@@ -862,23 +891,23 @@ def init_widgets_list():
                        padding = -1,
                        fontsize = 45
                        ),
-             # widget.TextBox(
-             #          text = " ⟳",
-             #          padding = 2,
-             #          foreground = colors[0],
-             #          background = colors[4],
-             #          fontsize = 14
-             #          ),
-             # widget.CheckUpdates(
-             #          update_interval = 1800,
-             #          distro = "Arch_checkupdates",
-             #          display_format = "{updates} Updates",
-             #          color_have_updates = colors[0],
-             #          color_no_updates = colors[0],
-             #          foreground = colors[0],
-             #          mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myterm + ' -e sudo pacman -Syu')},
-             #          background = colors[4]
-             #          ),
+            #widget.TextBox(
+            #         text = " ⟳",
+            #         padding = 2,
+            #         foreground = colors[0],
+            #         background = colors[4],
+            #         fontsize = 14
+            #         ),
+            #widget.CheckUpdates(
+            #         update_interval = 1800,
+            #         distro = "Arch_checkupdates",
+            #         display_format = "{updates} Updates",
+            #         color_have_updates = colors[0],
+            #         color_no_updates = colors[0],
+            #         foreground = colors[0],
+            #         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myterm + ' -e sudo pacman -Syu')},
+            #         background = colors[4]
+            #         ),
              widget.TextBox(
                          text = " 🌡",
                          padding = 6,
@@ -891,7 +920,7 @@ def init_widgets_list():
              widget.ThermalSensor(
                         background = colors[0],
                         foreground = colors[4],
-                        tag_sensor = "Core 0",
+                        tag_sensor = "Tctl",
                         threshold = 75,
                           ),
              widget.TextBox(
@@ -928,11 +957,11 @@ def init_widgets_list():
                        background = colors[0],
                        fontsize = 12
                        ),
-             #widget.BitcoinTicker(
-             #        foreground = colors[2],
-             #        background = colors[4],
-             #        padding = 5
-             #      ),
+            #widget.BitcoinTicker(
+            #        foreground = colors[2],
+            #        background = colors[4],
+            #        padding = 5
+            #      ),
              widget.TextBox(
                        text = '',
                        background = colors[0],
@@ -947,47 +976,58 @@ def init_widgets_list():
                       padding = 0,
                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("pavucontrol")}
                        ),
-              widget.Volume(
-                       foreground = colors[5],
-                       background = colors[0],
-                       padding = 5
-                       ),
-              widget.TextBox(
-                       text = '',
-                       background = colors[0],
-                       foreground = colors[0],
-                       padding = -1,
-                       fontsize = 45
-                       ),
-             # widget.CurrentLayoutIcon(
-             #          custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
-             #          foreground = colors[0],
-             #          background = colors[0],
-             #          padding = 0,
-             #          scale = 0.7
-             #          ),
-            widget.TextBox(
-                       text = '',
-                       background = colors[0],
-                       foreground = colors[0],
-                       padding = -1,
-                       fontsize = 45
-                       ),
-            
-            widget.TextBox(
-                       text = '',
+             widget.Volume(
+                      foreground = colors[5],
                       background = colors[0],
-                       foreground = colors[5],
-                       padding = 4,
-                       fontsize = 15
+                      padding = 5
+                      ),
+             widget.TextBox(
+                      text = '',
+                      background = colors[0],
+                      foreground = colors[0],
+                      padding = -1,
+                      fontsize = 45
+                      ),
+            #widget.CurrentLayoutIcon(
+            #         custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
+            #         foreground = colors[0],
+            #         background = colors[0],
+            #         padding = 0,
+            #         scale = 0.7
+            #         ),
+             widget.TextBox(
+                       text = '',
+                       background = colors[0],
+                       foreground = colors[0],
+                       padding = -1,
+                       fontsize = 45
                        ),
-            widget.Sep(
+             widget.Battery(
+                       foreground = colors[4], 
+                       background = colors[0],
+
+                       ),
+             widget.TextBox(
+                       text = '',
+                       background = colors[0],
+                       foreground = colors[0],
+                       padding = -1,
+                       fontsize = 45
+                       ),
+             widget.TextBox(
+                        text = '',
+                        background = colors[0],
+                        foreground = colors[5],
+                        padding = 4,
+                        fontsize = 15
+                        ),
+             widget.Sep(
                        linewidth = 0,
                        padding = 6,
                        foreground = colors[2],
                        background = colors[0]
                        ),
-            widget.Systray(
+             widget.Systray(
                       background = colors[0],
                       padding = 5
                       ),
@@ -1007,7 +1047,7 @@ def init_widgets_list():
 
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
-    del widgets_screen2[38:39]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
+    del widgets_screen2[42:43]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
     return widgets_screen2
 
 def init_widgets_screen1():
@@ -1017,7 +1057,7 @@ def init_widgets_screen1():
 def init_screens():
     return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=23, margin=3 )),
             Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=23, margin=3)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=23, margin=3))]
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=26, margin=3))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
