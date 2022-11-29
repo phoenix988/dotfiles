@@ -18,6 +18,9 @@ from libqtile import layout, bar, widget, hook
 from libqtile.lazy import lazy
 from typing import List  # noqa: F401
 
+from qtile_extras import widget
+from qtile_extras.widget.decorations import RectDecoration, PowerLineDecoration, BorderDecoration
+
 #This is mainly for my dmenu script :)
 #BROWSER = qutebrowser
 mod = "mod4"        # Sets mod key to SUPER/WINDOWS
@@ -586,10 +589,10 @@ keys = [
 group_names = [("WWW", {'layout': 'bsp' ,'matches':[Match(wm_class=["Brave-browser" , browser1  , "Brave-browser-nightly", "Chromium" , "librewolf"])]}),
                ("DEV", {'layout': 'bsp','matches':[Match(wm_class=["neo"])]}),
                ("SYS", {'layout': 'bsp', 'matches':[Match(wm_class=["lxappearance", "TeamViewer"])]}),
-               ("GAME", {'layout': 'max', 'matches':[Match(wm_class=["lutris" , "Steam" , "upc.exe" , "steam_proton" , "heroic"])]}),
-               ("DOCS", {'layout': 'bsp', 'matches':[Match(wm_class=["re.sonny.Tangram"])]}),
-               ("CHAT", {'layout': 'bsp', 'matches':[Match(wm_class=["discord" , "Franz" , "whatsapp-nativefier-d40211" , "altus" , "whatsdesk" , "whatsapp-for-linux"])]}),
-               ("MUS", {'layout': 'bsp', 'matches':[Match(wm_class=["Spotify"])]}),
+               ("GAM", {'layout': 'max', 'matches':[Match(wm_class=["lutris" , "Steam" , "upc.exe" , "steam_proton" , "heroic"])]}),
+               ("DOC", {'layout': 'bsp', 'matches':[Match(wm_class=["re.sonny.Tangram"])]}),
+               ("SOC", {'layout': 'bsp', 'matches':[Match(wm_class=["discord" , "Franz" , "whatsapp-nativefier-d40211" , "altus" , "whatsdesk" , "whatsapp-for-linux"])]}),
+               ("REC", {'layout': 'bsp', 'matches':[Match(wm_class=["Spotify"])]}),
                ("VID", {'layout': 'bsp', 'matches':[Match(wm_class=["nemo"  , "io.github.celluloid_player.Celluloid" , "urxvt" , "obs"])]}),
                ("GFX", {'layout': 'bsp', 'matches':[Match(wm_class=["gimp-2.10","Gimp" ,"Cinelerra","Olive", "kdenlive" , "resolve" ])]})]
 
@@ -666,11 +669,12 @@ layouts = [
 colors = [["#1e1f28", "#1e1f28"], 
           ["#3d3f4b", "#434758"], 
           ["#ff78c5", "#ff78c5"], 
+          ["#50fa7b", "#50fa7b"], 
           ["#bd92f8", "#bd92f8"], 
-          ["#bd92f8", "#bd92f8"], 
-          ["#ff78c5", "#ff78c5"], 
+          ["#f0fa8b", "#f0fa8b"], 
           ["#e1acff", "#e1acff"], 
-          ["#ecbbfb", "#ecbbfb"]] 
+          ["#ecbbfb", "#ecbbfb"],
+          ["#8ae9fc", "#8ae9fc"]] 
 
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
@@ -703,15 +707,6 @@ def init_widgets_list():
                        foreground = colors[2],
                        background = colors[0]
                        ),
-
-             #widget.TextBox(
-             #          text = '∖',
-             #          background = colors[0],
-             #          foreground = colors[5],
-             #          padding = 4,
-             #          fontsize = 30
-             #          ),
-
              widget.GroupBox(
                        font = "Ubuntu Bold",
                        fontsize = 10,
@@ -720,15 +715,17 @@ def init_widgets_list():
                        padding_y = 5,
                        padding_x = 3,
                        borderwidth = 3,
+                       hide_unused = "true",
                        active = colors[7],
                        inactive = colors[2],
-                       rounded = True,
+                       rounded = "true",
+                       disable_drag = "true", 
                        highlight_color = colors[1],
-                       highlight_method = "block",
-                       this_current_screen_border = "#545454",
-                       this_screen_border = "#44475a",
-                       other_current_screen_border = "#545454",
-                       other_screen_border = "#44475a",
+                       highlight_method = "line",
+                       this_current_screen_border = colors[5],
+                       this_screen_border = colors[4],
+                       other_current_screen_border = colors[5],
+                       other_screen_border = colors[4],
                        urgent_border = colors[0],
                        urgent_alert_method = "block",
                        foreground = colors[2],
@@ -750,19 +747,19 @@ def init_widgets_list():
              widget.TextBox(
                        text = '',
                        background = colors[0],
-                       foreground = colors[5],
+                       foreground = colors[4],
                        padding = -1,
                        fontsize = 45
                        ),
              widget.CurrentLayout(
                        foreground = colors[0],
-                       background = colors[5],
+                       background = colors[4],
                        padding = 8,
                        fontsize = 15
                        ), 
              widget.TextBox(
                        text = '',
-                       background = colors[5],
+                       background = colors[4],
                        foreground = colors[0],
                        padding = -1,
                        fontsize = 45
@@ -774,11 +771,6 @@ def init_widgets_list():
                        foreground = colors[2],
                        background = colors[0]
                        ),
-             #widget.WindowName(
-             #          foreground = colors[6],
-             #          background = colors[0],
-             #          padding = 0
-             #           ),
              widget.TaskList(
                        foreground = colors[6],
                        background = colors[0],
@@ -787,7 +779,7 @@ def init_widgets_list():
                        border = colors[4],
                        borderwidth = 1,
                        urgent_alert_method = "text",
-                       urgent_border = colors[5]
+                       urgent_border = colors[2]
                        ),
              widget.Sep(
                        linewidth = 1,
@@ -798,52 +790,63 @@ def init_widgets_list():
              widget.TextBox(
                        text = '',
                        background = colors[0],
-                       foreground = colors[5],
+                       foreground = colors[4],
                        padding = -1,
                        fontsize = 45
                        ),
              widget.Clock(
                        foreground = colors[0],
-                       background = colors[5],
+                       background = colors[4],
                        format = "  %A, %B %d/%Y - %H:%M ",
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("yad --calendar")},
                        ),
              widget.KeyboardLayout(
                        foreground = colors[0],
-                       background = colors[5],
+                       background = colors[4],
                        configured_keyboards = ['us', 'se', 'az'],
-                        padding = 10,
+                       padding = 10,
                        ),
              widget.NvidiaSensors(
                        foreground = colors[0],
-                       background = colors[5],
+                       background = colors[4],
                        threshold = 85,
                        ),
              widget.TextBox(
                        text = '',
-                       background = colors[5],
+                       background = colors[4],
                        foreground = colors[0],
                        padding = -1,
                        fontsize = 45
                        ),
              widget.Sep(
-                       linewidth = 100,
-                       padding = 15,
+                       linewidth = 15,
+                       padding = 1,
                        foreground = colors[0],
                        background = colors[0]
                        ),
-             #widget.Net(
-             #         interface = "enp4s0",
-             #         format = '{down} ↓↑ {up}',
-             #         foreground = colors[2],
-             #         background = colors[4],
-             #         padding = 5
-             #         ),
              widget.Chord(
                        background = colors[0],
-                       foreground = colors[5],
+                       foreground = colors[2],
                        padding = 1
                        ), 
+             widget.TextBox(
+                       text = '',
+                       background = colors[0],
+                       foreground = colors[1],
+                       padding = -1,
+                       fontsize = 45
+                       ),
+             widget.Systray(
+                      background = colors[1],
+                      padding = 1
+                      ),
+             widget.TextBox(
+                       text = '',
+                       background = colors[1],
+                       foreground = colors[0],
+                       padding = -1,
+                       fontsize = 45
+                       ),
              widget.TextBox(
                        text = '',
                        background = colors[0],
@@ -854,16 +857,29 @@ def init_widgets_list():
              widget.TextBox(
                        text = '🖴',
                        background = colors[0],
-                       foreground = colors[4],
+                       foreground = colors[8],
                        padding = 1,
-                       fontsize = 13
+                       fontsize = 13,
+                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("baobab")},
+                       decorations = [ 
+                            BorderDecoration ( 
+                            colour = colors[8],    
+                            border_width = [0, 0, 2, 0],    
+                            padding_x = 0, )    
+                        ],
                        ),
-               
              widget.DF(
                         partition = "/",
                         visible_on_warn = False,
-                        foreground = colors[4],
-                        background = colors[0]
+                        foreground = colors[8],
+                        background = colors[0],
+                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("baobab")},
+                        decorations = [ 
+                            BorderDecoration ( 
+                            colour = colors[8],    
+                            border_width = [0, 0, 2, 0],    
+                            padding_x = 0, )    
+                        ],
                         ),
              widget.TextBox(
                        text = '',
@@ -875,14 +891,26 @@ def init_widgets_list():
              widget.TextBox(
                        text = '★',
                        background = colors[0],
-                       foreground = colors[5],
+                       foreground = colors[2],
                        padding = -1,
+                       decorations = [ 
+                            BorderDecoration ( 
+                            colour = colors[2],    
+                            border_width = [0, 0, 2, 0],    
+                            padding_x = 0, )    
+                        ],
                        ),
              widget.CPU(
-                         foreground = colors[5],
+                         foreground = colors[2],
                          background = colors[0],
                          padding = 8,
-                         format = '{load_percent}%'
+                         format = '{load_percent}%',
+                         decorations = [ 
+                            BorderDecoration ( 
+                            colour = colors[2],    
+                            border_width = [0, 0, 2, 0],    
+                            padding_x = 0, )    
+                        ],
                           ),
              widget.TextBox(
                        text='',
@@ -891,38 +919,32 @@ def init_widgets_list():
                        padding = -1,
                        fontsize = 45
                        ),
-            #widget.TextBox(
-            #         text = " ⟳",
-            #         padding = 2,
-            #         foreground = colors[0],
-            #         background = colors[4],
-            #         fontsize = 14
-            #         ),
-            #widget.CheckUpdates(
-            #         update_interval = 1800,
-            #         distro = "Arch_checkupdates",
-            #         display_format = "{updates} Updates",
-            #         color_have_updates = colors[0],
-            #         color_no_updates = colors[0],
-            #         foreground = colors[0],
-            #         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myterm + ' -e sudo pacman -Syu')},
-            #         background = colors[4]
-            #         ),
-             widget.TextBox(
+                         widget.TextBox(
                          text = " 🌡",
                          padding = 6,
-                         foreground = colors[4],
+                         foreground = colors[6],
                          background = colors[0],
                          fontsize = 11,
-                         tag_sensor =  "temp1"
-                            ),
-
+                         tag_sensor =  "temp1",
+                         decorations = [ 
+                            BorderDecoration ( 
+                            colour = colors[6],    
+                            border_width = [0, 0, 2, 0],    
+                            padding_x = 0, )    
+                     ],
+                     ),
              widget.ThermalSensor(
                         background = colors[0],
-                        foreground = colors[4],
+                        foreground = colors[6],
                         tag_sensor = "Tctl",
                         threshold = 75,
-                          ),
+                        decorations = [ 
+                            BorderDecoration ( 
+                            colour = colors[6],    
+                            border_width = [0, 0, 2, 0],    
+                            padding_x = 0, )    
+                     ],
+                     ),
              widget.TextBox(
                        text = '',
                        background = colors[0],
@@ -932,16 +954,28 @@ def init_widgets_list():
                        ),
              widget.TextBox(
                        text = " 🖬",
-                       foreground = colors[5],
+                       foreground = colors[3],
                        background = colors[0],
                        padding = 0,
-                       fontsize = 14
+                       fontsize = 14,
+                       decorations = [ 
+                            BorderDecoration ( 
+                            colour = colors[3],    
+                            border_width = [0, 0, 2, 0],    
+                            padding_x = 0, )    
+                     ],
                        ),
              widget.Memory(
-                       foreground = colors[5],
+                       foreground = colors[3],
                        background = colors[0],
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(sysmon)},
-                       padding = 5
+                       padding = 5,
+                       decorations = [ 
+                            BorderDecoration ( 
+                            colour = colors[3],    
+                            border_width = [0, 0, 2, 0],    
+                            padding_x = 0, )    
+                       ],
                        ),
              widget.TextBox(
                        text='',
@@ -951,17 +985,47 @@ def init_widgets_list():
                        fontsize = 45
                        ),
              widget.TextBox(
-                       text = "♥  karl-x99 ",
-                       padding = 0,
-                       foreground = colors[4],
-                       background = colors[0],
-                       fontsize = 12
-                       ),
-            #widget.BitcoinTicker(
-            #        foreground = colors[2],
-            #        background = colors[4],
-            #        padding = 5
-            #      ),
+                     text = " ⟳",
+                     padding = 2,
+                     foreground = colors[5],
+                     background = colors[0],
+                     decorations = [ 
+                            BorderDecoration ( 
+                            colour = colors[5],    
+                            border_width = [0, 0, 2, 0],    
+                            padding_x = 0, )    
+                       ],
+                     fontsize = 14
+                     ),
+             widget.CheckUpdates(
+                     update_interval = 1800,
+                     distro = "Ubuntu",
+                     display_format = "{updates} Updates",
+                     colour_have_updates = colors[5],
+                     colour_no_updates = colors[5],
+                     foreground = colors[5],
+                     decorations = [ 
+                            BorderDecoration ( 
+                            colour = colors[5],    
+                            border_width = [0, 0, 2, 0],    
+                            padding_x = 0, )    
+                       ],
+                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myterm + ' -e sudo nala upgrade')},
+                     background = colors[0]
+                     ),
+            # widget.TextBox(
+            #           text = "♥  karl-x99 ",
+            #           padding = 0,
+            #           foreground = colors[5],
+            #           background = colors[0],
+            #           fontsize = 12,
+            #           decorations = [ 
+            #                BorderDecoration ( 
+            #                colour = colors[5],    
+            #                border_width = [0, 0, 2, 0],    
+            #                padding_x = 0, )    
+            #           ],
+            #           ),
              widget.TextBox(
                        text = '',
                        background = colors[0],
@@ -971,15 +1035,27 @@ def init_widgets_list():
                        ),
              widget.TextBox(
                       text = "♫  Vol:",
-                      foreground = colors[5],
+                      foreground = colors[4],
                       background = colors[0],
                       padding = 0,
-                      mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("pavucontrol")}
+                      mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("pavucontrol")},
+                      decorations = [ 
+                            BorderDecoration ( 
+                            colour = colors[4],    
+                            border_width = [0, 0, 2, 0],    
+                            padding_x = 0, )    
+                     ],
                        ),
              widget.Volume(
-                      foreground = colors[5],
+                      foreground = colors[4],
                       background = colors[0],
-                      padding = 5
+                      padding = 5,
+                       decorations = [ 
+                            BorderDecoration ( 
+                            colour = colors[4],    
+                            border_width = [0, 0, 2, 0],    
+                            padding_x = 0, )    
+                     ],
                       ),
              widget.TextBox(
                       text = '',
@@ -988,13 +1064,6 @@ def init_widgets_list():
                       padding = -1,
                       fontsize = 45
                       ),
-            #widget.CurrentLayoutIcon(
-            #         custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
-            #         foreground = colors[0],
-            #         background = colors[0],
-            #         padding = 0,
-            #         scale = 0.7
-            #         ),
              widget.TextBox(
                        text = '',
                        background = colors[0],
@@ -1003,9 +1072,16 @@ def init_widgets_list():
                        fontsize = 45
                        ),
              widget.Battery(
-                       foreground = colors[4], 
+                       foreground = colors[8], 
                        background = colors[0],
-
+                       padding = -8,
+                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("xfce4-power-manager-settings")},
+                       decorations = [ 
+                            BorderDecoration ( 
+                            colour = colors[8],    
+                            border_width = [0, 0, 2, 0],    
+                            padding_x = 0, )    
+                       ],
                        ),
              widget.TextBox(
                        text = '',
@@ -1017,9 +1093,15 @@ def init_widgets_list():
              widget.TextBox(
                         text = '',
                         background = colors[0],
-                        foreground = colors[5],
+                        foreground = colors[2],
                         padding = 4,
-                        fontsize = 15
+                        fontsize = 15,
+                        decorations = [ 
+                            BorderDecoration ( 
+                            colour = colors[2],    
+                            border_width = [0, 0, 2, 0],    
+                            padding_x = 0, )    
+                       ],
                         ),
              widget.Sep(
                        linewidth = 0,
@@ -1027,27 +1109,22 @@ def init_widgets_list():
                        foreground = colors[2],
                        background = colors[0]
                        ),
-             widget.Systray(
-                      background = colors[0],
-                      padding = 5
-                      ),
-             widget.Sep(
+                          widget.Sep(
                        linewidth = 0,
                        padding = 6,
                        foreground = colors[2],
                        background = colors[0]
                        ),
-
-
-            
               ]
-
 
     return widgets_list
 
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
-    del widgets_screen2[42:43]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
+    del widgets_screen2[22]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
+    del widgets_screen2[21]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
+    del widgets_screen2[20]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
+    del widgets_screen2[19]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
     return widgets_screen2
 
 def init_widgets_screen1():
