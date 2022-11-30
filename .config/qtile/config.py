@@ -504,39 +504,8 @@ keys = [
 
 
          ),
-                #KEYS_GROUP keychord  mod + z + key let you grow and shrink windows
-   #   KeyChord([mod], "z", [
-   #         Key([], "h", #Shrink window in tilling layout
-   #          lazy.layout.shrink(),
-   #          lazy.layout.decrease_nmaster(),
-   #          desc='Shrink window (MonadTall), decrease number in master pane (Tile)'
-   #          ),
-   #         Key([], "l", #Expand window in tilling layout
-   #          lazy.layout.grow(),
-   #          lazy.layout.increase_nmaster(),
-   #          desc='Expand window (MonadTall), increase number in master pane (Tile)'
-   #          ),
-   #         Key([], "k", #Move focus down a pane
-   #          lazy.layout.up(),
-   #          desc='Move focus down in current stack pane'
-   #          ),
-   #         Key([], "j", #Move focus up a pane
-   #          lazy.layout.down(),
-   #          desc='Move focus up in current stack pane'
-   #          ),
-   #         Key([], "g", #grow the window
-   #             lazy.layout.grow()),
-   #         Key([], "s", #shrink the window
-   #             lazy.layout.shrink()),
-   #         Key([], "n", #normalize the size of the window
-   #             lazy.layout.normalize()), 
-   #         Key([], "m", #maximize the size of the window
-   #             lazy.layout.maximize())], 
-   #         mode="Windows"
-   # ),
 
-
-                #KEYS_GROUP window modifier (mainly for bsp) launched using the key chord SUPER+shift+b followed by 'key'
+            #KEYS_GROUP window modifier (mainly for bsp) launched using the key chord SUPER+shift+b followed by 'key'
       KeyChord([mod, "shift"], "b", [
             Key([], "k", #Move focus down a pane
                 lazy.layout.up(),
@@ -583,17 +552,16 @@ keys = [
 
 ]
 
-
 #END_KEYS
 
-group_names = [("WWW", {'layout': 'bsp' ,'matches':[Match(wm_class=["Brave-browser" , browser1  , "Brave-browser-nightly", "Chromium" , "librewolf"])]}),
+group_names = [("WWW", {'layout': 'bsp' ,'matches':[Match(wm_class=["Brave-browser-nightly", "Chromium" , "librewolf"])]}),
                ("DEV", {'layout': 'bsp','matches':[Match(wm_class=["neo"])]}),
                ("SYS", {'layout': 'bsp', 'matches':[Match(wm_class=["lxappearance", "TeamViewer"])]}),
                ("GAM", {'layout': 'max', 'matches':[Match(wm_class=["lutris" , "Steam" , "upc.exe" , "steam_proton" , "heroic"])]}),
-               ("DOC", {'layout': 'bsp', 'matches':[Match(wm_class=["re.sonny.Tangram"])]}),
-               ("SOC", {'layout': 'bsp', 'matches':[Match(wm_class=["discord" , "Franz" , "whatsapp-nativefier-d40211" , "altus" , "whatsdesk" , "whatsapp-for-linux"])]}),
+               ("DOC", {'layout': 'bsp', 'matches':[Match(wm_class=["re.sonny.Tangram", "crx_cifhbcnohmdccbgoicgdjpfamggdegmo"])]}),
+               ("SOC", {'layout': 'bsp', 'matches':[Match(wm_class=["discord" , "Franz" , "whatsapp-nativefier-d40211" , "altus" , "whatsdesk" , "whatsapp-for-linux", "web.whatsapp.com"])]}),
                ("REC", {'layout': 'bsp', 'matches':[Match(wm_class=["Spotify"])]}),
-               ("VID", {'layout': 'bsp', 'matches':[Match(wm_class=["nemo"  , "io.github.celluloid_player.Celluloid" , "urxvt" , "obs"])]}),
+               ("VID", {'layout': 'treetab', 'matches':[Match(wm_class=["nemo"  , "io.github.celluloid_player.Celluloid" , "urxvt" , "obs", "youtube.com", "netflix.com"])]}),
                ("GFX", {'layout': 'bsp', 'matches':[Match(wm_class=["gimp-2.10","Gimp" ,"Cinelerra","Olive", "kdenlive" , "resolve" ])]})]
 
 
@@ -615,7 +583,6 @@ layouts = [
     layout.Bsp(**layout_theme,
                  lower_right = True,
                   fair = False  ),
-                   
     #layout.Stack(stacks=2, **layout_theme),
     #layout.Columns(**layout_theme),
     layout.RatioTile(border_width = 2,
@@ -623,9 +590,7 @@ layouts = [
                      ratio_increment = 0.2,
                      border_focus ="ff78c5",  
                      border_normal = "1e1f28", 
-
                       ),
-                                               
     #layout.Tile(shift_windows=True,
     #ratio = "0,5",  **layout_theme),
     #layout.VerticalTile(**layout_theme),
@@ -638,28 +603,29 @@ layouts = [
                 border_normal = "1e1f28",
                 autosplit = False,
                 fair = True ),
-    #layout.RatioTile(**layout_theme),
-    #  layout.TreeTab(
-    #       font = "Ubuntu",
-    #       fontsize = 10,
-    #       sections = [""],
-    #       section_fontsize = 10,
-    #       border_width = 2,
-    #       bg_color = "1e1f28",
-    #       active_bg = "bd92f8",
-    #       active_fg = "000000",
-    #       inactive_bg = "ff78c5",
-    #       inactive_fg = "1e1f28",
-    #       padding_left = 6,
-    #       padding_x = 0,
-    #       padding_y = 5,
-    #       section_top = 10,
-    #       section_bottom = 15,
-    #       level_shift = 8,
-    #       vspace = 0,
-    #       margin_y = 20,
-    #       panel_width = 100
-    #       ),
+    layout.RatioTile(**layout_theme),
+      layout.TreeTab(
+           font = "Ubuntu Mono",
+           fontsize = 10,
+           sections = [""],
+           section_fontsize = 10,
+           border_width = 2,
+           bg_color = "1e1f28",
+           active_bg = "bd92f8",
+           active_fg = "000000",
+           inactive_bg = "ff78c5",
+           inactive_fg = "1e1f28",
+           padding_left = 0,
+           padding_right = 10,
+           padding_x = 8,
+           padding_y = 8,
+           section_top = 10,
+           section_bottom = 15,
+           level_shift = 8,
+           vspace = 10,
+           margin_y = 20,
+           panel_width = 150
+           ),
     layout.Floating(**layout_theme,
                       fullscreen_border_width = 1,
                       max_border_width = 1),
@@ -715,17 +681,16 @@ def init_widgets_list():
                        padding_y = 5,
                        padding_x = 3,
                        borderwidth = 3,
-                       hide_unused = "true",
                        active = colors[7],
                        inactive = colors[2],
                        rounded = "true",
                        disable_drag = "true", 
                        highlight_color = colors[1],
                        highlight_method = "line",
-                       this_current_screen_border = colors[5],
-                       this_screen_border = colors[4],
-                       other_current_screen_border = colors[5],
-                       other_screen_border = colors[4],
+                       this_current_screen_border = colors[4],
+                       this_screen_border = colors[2],
+                       other_current_screen_border = colors[4],
+                       other_screen_border = colors[2],
                        urgent_border = colors[0],
                        urgent_alert_method = "block",
                        foreground = colors[2],
@@ -1013,19 +978,6 @@ def init_widgets_list():
                      mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myterm + ' -e sudo nala upgrade')},
                      background = colors[0]
                      ),
-            # widget.TextBox(
-            #           text = "♥  karl-x99 ",
-            #           padding = 0,
-            #           foreground = colors[5],
-            #           background = colors[0],
-            #           fontsize = 12,
-            #           decorations = [ 
-            #                BorderDecoration ( 
-            #                colour = colors[5],    
-            #                border_width = [0, 0, 2, 0],    
-            #                padding_x = 0, )    
-            #           ],
-            #           ),
              widget.TextBox(
                        text = '',
                        background = colors[0],
@@ -1121,14 +1073,12 @@ def init_widgets_list():
 
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
-    del widgets_screen2[22]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
-    del widgets_screen2[21]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
-    del widgets_screen2[20]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
-    del widgets_screen2[19]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
+    del widgets_screen2[17:22]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
     return widgets_screen2
 
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
+    del widgets_screen1[17]               # Slicing removes unwanted widgets on Monitors 1
     return widgets_screen1                 # Monitor 1 will display all widgets in widgets_list
 
 def init_screens():

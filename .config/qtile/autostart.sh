@@ -6,7 +6,6 @@
 
 #Compositor
 picom -b --config  $HOME/.config/qtile/picom-jona.conf
-#nitrogen --restore &
 
 #Set Display layout
 #$HOME/.screenlayout/layout.sh &
@@ -16,21 +15,20 @@ picom -b --config  $HOME/.config/qtile/picom-jona.conf
 #feh --randomize --bg-fill /home/karl/Pictures/Wallpapers/* &
 
 #urxvtd -q -o -f &
-#/usr/bin/emacs --daemon &
 nm-applet &
-#mailspring -b &
-#xrandr --output DP-4 --mode 2560x1440 --rate 143.91
 #pamac-tray &
+
 ckb-next -b &
 #xfce4-screensaver &
 xfce4-power-manager &
 volumeicon &
-conky -c /home/karl/.config/conky/main &
+conky -c $HOME/.config/conky/main &
 flameshot &
 steam &
 discord &
 lutris &
 blueman-manager &
+#$HOME/.config/qtile/close-blueman.sh &
 
 
 
