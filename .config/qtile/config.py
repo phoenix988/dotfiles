@@ -1,5 +1,3 @@
-#
-#
 ##____  _                      _      
 #|  _ \| |__   ___   ___ _ __ (_)_  __
 #| |_) | '_ \ / _ \ / _ \ '_ \| \ \/ /
@@ -49,7 +47,6 @@ dmenu_path = "/home/karl/.dmenu" #Path to my dmenu scripts
 
 
 #START_KEYS
-
 
 keys = [
          
@@ -619,10 +616,11 @@ layouts = [
            padding_right = 10,
            padding_x = 8,
            padding_y = 8,
-           section_top = 10,
+           section_top = 5,
            section_bottom = 15,
+           section_padding = 10,
            level_shift = 8,
-           vspace = 10,
+           vspace = 5,
            margin_y = 20,
            panel_width = 150
            ),
@@ -657,7 +655,7 @@ def init_widgets_list():
     widgets_list = [
              widget.Sep(
                        linewidth = 0,
-                       padding = 6,
+                       padding = 0,
                        foreground = colors[2],
                        background = colors[0]
                        ),
@@ -669,7 +667,7 @@ def init_widgets_list():
                         ), 
              widget.Sep(
                        linewidth = 0,
-                       padding = 6,
+                       padding = 0,
                        foreground = colors[2],
                        background = colors[0]
                        ),
@@ -681,18 +679,18 @@ def init_widgets_list():
                        padding_y = 5,
                        padding_x = 3,
                        borderwidth = 3,
-                       active = colors[7],
-                       inactive = colors[2],
+                       active = colors[5],
+                       inactive = colors[1],
                        rounded = "true",
                        disable_drag = "true", 
-                       highlight_color = colors[1],
+                       highlight_color = colors[4],
                        highlight_method = "line",
                        this_current_screen_border = colors[4],
-                       this_screen_border = colors[2],
+                       this_screen_border = colors[4],
                        other_current_screen_border = colors[4],
-                       other_screen_border = colors[2],
-                       urgent_border = colors[0],
-                       urgent_alert_method = "block",
+                       other_screen_border = colors[4],
+                       urgent_border = colors[5],
+                       urgent_alert_method = "line",
                        foreground = colors[2],
                        background = colors[0]
                        ),
@@ -722,6 +720,13 @@ def init_widgets_list():
                        padding = 8,
                        fontsize = 15
                        ), 
+             widget.CurrentLayoutIcon(
+                       background = colors[4],
+                       use_mask = "true",
+                       foreground = colors[0],
+                       scale = 0.8,
+                       padding = 10
+                       ),
              widget.TextBox(
                        text = '',
                        background = colors[4],
@@ -729,10 +734,9 @@ def init_widgets_list():
                        padding = -1,
                        fontsize = 45
                        ),
-
              widget.Sep(
                        linewidth = 0,
-                       padding = 20,
+                       padding = 4,
                        foreground = colors[2],
                        background = colors[0]
                        ),
@@ -1010,13 +1014,6 @@ def init_widgets_list():
                      ],
                       ),
              widget.TextBox(
-                      text = '',
-                      background = colors[0],
-                      foreground = colors[0],
-                      padding = -1,
-                      fontsize = 45
-                      ),
-             widget.TextBox(
                        text = '',
                        background = colors[0],
                        foreground = colors[0],
@@ -1061,24 +1058,18 @@ def init_widgets_list():
                        foreground = colors[2],
                        background = colors[0]
                        ),
-                          widget.Sep(
-                       linewidth = 0,
-                       padding = 6,
-                       foreground = colors[2],
-                       background = colors[0]
-                       ),
-              ]
+                       ]
 
     return widgets_list
 
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
-    del widgets_screen2[17:22]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
+    del widgets_screen2[18:23]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
     return widgets_screen2
 
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
-    del widgets_screen1[17]               # Slicing removes unwanted widgets on Monitors 1
+    del widgets_screen1[18]               # Slicing removes unwanted widgets on Monitors 1
     return widgets_screen1                 # Monitor 1 will display all widgets in widgets_list
 
 def init_screens():
