@@ -23,6 +23,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     
     " themes
     Plug 'dracula/vim' 
+    Plug 'arcticicestudio/nord-vim'
+    Plug 'cocopon/iceberg.vim' 
     
      " AutoCompletion "
     Plug 'vim-scripts/AutoComplPop'
@@ -40,8 +42,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
    call plug#end()
 
-    
    " set your colorscheme
-     colorscheme dracula
+     colorscheme iceberg
 
      hi Normal  ctermbg=NONE

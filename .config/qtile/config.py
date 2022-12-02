@@ -10,11 +10,14 @@ import re
 import socket
 import subprocess
 from libqtile import qtile
-from libqtile.config import Click, Drag, Group, KeyChord, Key, Match, Screen 
+from libqtile.config import Click, Drag, Group, KeyChord, Key, Match, Screen
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
 from libqtile.lazy import lazy
 from typing import List  # noqa: F401
+
+#Change your theme here
+from iceberg  import colors
 
 from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration, PowerLineDecoration, BorderDecoration
@@ -32,15 +35,13 @@ guifileManager = "nautilus /home/karl/Pictures/"
 sysmon = "kitty -e btop" #This is for htop
 
 browser1 = "brave-browser"       #Choose whatever browsers you prefer primary and secondary
-browser2  = "brave-browser --new-window --app=https://duckduckgo.com"    
+browser2  = "brave-browser --new-window --app=https://duckduckgo.com"
 
 guieditor = "neovide"  #Choose your gui text editor
 editor = "kitty -e vim" #My terminal based editor
 
 virtman = "virt-manager"   #For my main hypervisor
-
 backup = "sudo timeshift-gtk"   #Backup utility
-
 lockscreen =  "slock"   #This is for my lockscreen
 
 dmenu_path = "/home/karl/.dmenu" #Path to my dmenu scripts
@@ -49,7 +50,6 @@ dmenu_path = "/home/karl/.dmenu" #Path to my dmenu scripts
 #START_KEYS
 
 keys = [
-         
          #KEYS_GROUP Qtile
         Key([mod, "shift"], "r", #Restart  
              lazy.restart(),
@@ -109,7 +109,8 @@ keys = [
              lazy.spawn( myTerm ),
              desc='Launches My Terminal'
               ),
-       #KEYS_GROUP Launch applications with super + shift + key
+
+         #KEYS_GROUP Launch applications with super + shift + key
          Key([mod, "shift"], "y", #Run GUIEditor
              lazy.spawn( guieditor ),
              desc='Launches My guieditor'
@@ -134,8 +135,8 @@ keys = [
              lazy.spawn("kdenlive"),
              desc='kdenlive'
              ),
-         
-      #KEYS_GROUP Launch application with alt + control + key
+
+         #KEYS_GROUP Launch application with alt + control + key
          Key(["mod1", "control"], "t", #Launch TaskManager
              lazy.spawn("lxtask"),
              desc='TaskManager'
@@ -156,25 +157,21 @@ keys = [
              lazy.spawn("bitwarden-desktop"),
              desc='Bitwarden'
              ),
-
-        
-
          #KEYS_GROUP Some of my custom scripts
-        Key([mod, ],"F12", #Set a Random wallpaper
+         Key([mod, ],"F12", #Set a Random wallpaper
              lazy.spawn("/usr/bin/myscripts/set-random-bg"),
              desc='Set a random wallpaper'
              ),
-        Key([mod, ],"F11", #Kills and starts picom compositor
+         Key([mod, ],"F11", #Kills and starts picom compositor
              lazy.spawn("/usr/bin/myscripts/picom-control"),
              desc='kills and start picom'
              ),
-        Key([mod, ],"F10", #Change display layout,for my laptop when I connect external Screens
+         Key([mod, ],"F10", #Change display layout,for my laptop when I connect external Screens
              lazy.spawn("/usr/bin/myscripts/change-display-layout.sh"),
              desc='Change Display layout, I use it when I connect external Screens to my laptop'
              ),
 
-
-        #KEYS_GROUP Media control
+         #KEYS_GROUP Media control
          Key([ ],"XF86AudioPlay", #Resume/Stop
              lazy.spawn("/usr/bin/myscripts/mediaplay"),
              desc='Pause'
@@ -199,7 +196,7 @@ keys = [
              lazy.spawn("/usr/bin/myscripts/volume-up.sh"),
              desc='Previous'
              ),
-        #KEYS_GROUP Switch focus to specific monitor (out of two)
+         #KEYS_GROUP Switch focus to specific monitor (out of two)
          Key([mod], "w", #Move focus to monitor 1
              lazy.to_screen(0),
              desc='Keyboard focus to monitor 1'
@@ -302,7 +299,7 @@ keys = [
          Key([mod, "mod1"], "h", #change the position of the window to the left
              lazy.layout.flip_left(),
              desc='change the position of the window to the left'
-             ),  
+             ),
          Key([mod, "mod1"], "j", #change the position of the window down
              lazy.layout.flip_down(),
              desc='change the position of the window down'
@@ -310,7 +307,7 @@ keys = [
          Key([mod, "mod1"], "k", #change the position of the window up
              lazy.layout.flip_up(),
              desc='change the position of the window up'
-             ), 
+             ),
          Key([mod, "control"], "h", #increase the size of the window to the left
              lazy.layout.grow_left(),
              desc='increase the size of the window to the left'
@@ -343,7 +340,7 @@ keys = [
              desc='Toggle between split and unsplit sides of stack'
              ),
 
-         
+
         #KEYS_GROUP keybindings to control tmux without keychords
          Key(["control", "mod1"], "1", #Move to tmux window 1
              lazy.spawn("tmux select-window -t karl:1"),
@@ -390,11 +387,11 @@ keys = [
          Key(["control", "mod1"], "l", #next pane
              lazy.spawn("/usr/bin/myscripts/prev-tmux-pane.sh"),
              ),
-        #KEYS_GROUP Launch terminal based programs using the key chord CONTROL+e followed by 'key'
+         #KEYS_GROUP Launch terminal based programs using the key chord CONTROL+e followed by 'key'
          KeyChord([mod], "z", [
                  Key([], "e", #Launch vifm
                      lazy.spawn(fileManager),
-                desc='Open vifm file manager'
+                 desc='Open vifm file manager'
                  ),
                  Key([], "h", #Launch htop
                      lazy.spawn(sysmon),
@@ -413,10 +410,9 @@ keys = [
                  desc='change rofi theme'
                  ),
          ]),
-          
 
 
-                #KEYS_GROUP Dmenu scripts launched using the key chord SUPER+p followed by 'key'
+         #KEYS_GROUP Dmenu scripts launched using the key chord SUPER+p followed by 'key'
          KeyChord([mod], "p", [
              Key([], "e", #Choose config file to edit
                  lazy.spawn(dmenu_path + "/dm-editconfig"),
@@ -462,8 +458,8 @@ keys = [
                  lazy.spawn(dmenu_path + "/dm-layout"),
                  desc='Choose your keyboardlayout'
                  ),
-             Key([], "v", #Connect to a vpn server using nordvpn
-                 lazy.spawn(dmenu_path + "/dm-nordvpn"),
+             Key([], "v", #Connect to a vpn server using vpn
+                 lazy.spawn(dmenu_path + "/dm-vpn"),
                  desc='Choose your VPN server for NordVPN'
                  ),
              Key([], "s", #search the web requires qutebrowser 
@@ -474,10 +470,10 @@ keys = [
                  lazy.spawn(dmenu_path + "/dm-emojis"), 
                  desc='print an emoji to the clipboard'
                  ),
-            # Key([], "f", #Displays the font on your system 
-            #     lazy.spawn(dmenu_path + "/display_font"), 
-            #     desc='displays the font on your system'
-            #     ),
+            #Key([], "f", #Displays the font on your system 
+            #    lazy.spawn(dmenu_path + "/display_font"), 
+            #    desc='displays the font on your system'
+            #    ),
              Key([], "f", #opens my favorite websites in fullscreen mode with minimal UI 
                  lazy.spawn(dmenu_path + "/dm-openweb-fullscreen"), 
                  desc='open a website in fullscreen'
@@ -486,10 +482,10 @@ keys = [
                  lazy.spawn(dmenu_path + "/dm-timeshift"), 
                  desc='creates or remove timeshift backup'
                  ),
-            # Key([], "g", #opens my favorite websites in fullscreen mode with minimal UI 
-            #     lazy.spawn(dmenu_path + "/dm-open-video"), 
-            #     desc='open a website in fullscreen'
-            #     ),
+            #Key([], "g", #opens my favorite websites in fullscreen mode with minimal UI 
+            #    lazy.spawn(dmenu_path + "/dm-open-video"), 
+            #    desc='open a website in fullscreen'
+            #    ),
              Key([], "q", #Opens a VM of your choice in KVM 
                  lazy.spawn(dmenu_path + "/dm-open-virt-cons"), 
                  desc='Opens a VM of your choice in KVM'
@@ -502,48 +498,48 @@ keys = [
 
          ),
 
-            #KEYS_GROUP window modifier (mainly for bsp) launched using the key chord SUPER+shift+b followed by 'key'
-      KeyChord([mod, "shift"], "b", [
-            Key([], "k", #Move focus down a pane
-                lazy.layout.up(),
-             ),
-            Key([], "j", #Move focus up a pane
-                lazy.layout.down(),
-             ),
-            Key([], "h", #Move focus to the left
-                lazy.layout.left(),
-             ),
-            Key([], "l", #Move focus to the right
-                lazy.layout.right(),
-             ),
-            Key([], "d", #flip to the right
-                lazy.layout.flip_right()),
-            Key([], "a", #flip to the left
-                lazy.layout.flip_left()),
-            Key([], "w", #flip up
-                lazy.layout.flip_up()), 
-            Key([], "s", #flip down
-                lazy.layout.flip_down()),
-            Key([], "n", #normalize the size of the window
-                lazy.layout.normalize()),
-            Key(["shift"], "l", #move to the right
-                lazy.layout.shuffle_right()),
-            Key(["shift"], "h", #move to the left
-                lazy.layout.shuffle_left()),
-            Key(["shift"], "k", #move up
-                lazy.layout.shuffle_up()), 
-            Key(["shift"], "j", #move down
-                lazy.layout.shuffle_down()),
-            Key(["control"], "l", #grow the window to the right
-                lazy.layout.grow_right()),
-            Key(["control"], "h", #grow the window to the left
-                lazy.layout.grow_left()),
-            Key(["control"], "k", #grow the window up
-                lazy.layout.grow_up()), 
-            Key(["control"], "j", #grow the window down
-                lazy.layout.grow_down())], 
+         #KEYS_GROUP window modifier (mainly for bsp) launched using the key chord SUPER+shift+b followed by 'key'
+         KeyChord([mod, "shift"], "b", [
+             Key([], "k", #Move focus down a pane
+                 lazy.layout.up(),
+              ),
+             Key([], "j", #Move focus up a pane
+                 lazy.layout.down(),
+              ),
+             Key([], "h", #Move focus to the left
+                 lazy.layout.left(),
+              ),
+             Key([], "l", #Move focus to the right
+                 lazy.layout.right(),
+              ),
+             Key([], "d", #flip to the right
+                 lazy.layout.flip_right()),
+             Key([], "a", #flip to the left
+                 lazy.layout.flip_left()),
+             Key([], "w", #flip up
+                 lazy.layout.flip_up()), 
+             Key([], "s", #flip down
+                 lazy.layout.flip_down()),
+             Key([], "n", #normalize the size of the window
+                 lazy.layout.normalize()),
+             Key(["shift"], "l", #move to the right
+                 lazy.layout.shuffle_right()),
+             Key(["shift"], "h", #move to the left
+                 lazy.layout.shuffle_left()),
+             Key(["shift"], "k", #move up
+                 lazy.layout.shuffle_up()), 
+             Key(["shift"], "j", #move down
+                 lazy.layout.shuffle_down()),
+             Key(["control"], "l", #grow the window to the right
+                 lazy.layout.grow_right()),
+             Key(["control"], "h", #grow the window to the left
+                 lazy.layout.grow_left()),
+             Key(["control"], "k", #grow the window up
+                 lazy.layout.grow_up()), 
+             Key(["control"], "j", #grow the window down
+                 lazy.layout.grow_down())], 
 
-            mode="BSP Window"
+             mode="BSP Window"
     ),
 
 
@@ -553,10 +549,10 @@ keys = [
 
 group_names = [("WWW", {'layout': 'bsp' ,'matches':[Match(wm_class=["Brave-browser-nightly", "Chromium" , "librewolf"])]}),
                ("DEV", {'layout': 'bsp','matches':[Match(wm_class=["neo"])]}),
-               ("SYS", {'layout': 'bsp', 'matches':[Match(wm_class=["lxappearance", "TeamViewer"])]}),
+               ("SYS", {'layout': 'bsp', 'matches':[Match(wm_class=["TeamViewer"])]}),
                ("GAM", {'layout': 'max', 'matches':[Match(wm_class=["lutris" , "Steam" , "upc.exe" , "steam_proton" , "heroic"])]}),
                ("DOC", {'layout': 'bsp', 'matches':[Match(wm_class=["re.sonny.Tangram", "crx_cifhbcnohmdccbgoicgdjpfamggdegmo"])]}),
-               ("SOC", {'layout': 'bsp', 'matches':[Match(wm_class=["discord" , "Franz" , "whatsapp-nativefier-d40211" , "altus" , "whatsdesk" , "whatsapp-for-linux", "web.whatsapp.com"])]}),
+               ("SOC", {'layout': 'max', 'matches':[Match(wm_class=["discord" , "Franz" , "whatsapp-nativefier-d40211" , "altus" , "whatsdesk" , "whatsapp-for-linux", "web.whatsapp.com"])]}),
                ("REC", {'layout': 'bsp', 'matches':[Match(wm_class=["Spotify"])]}),
                ("VID", {'layout': 'treetab', 'matches':[Match(wm_class=["nemo"  , "io.github.celluloid_player.Celluloid" , "urxvt" , "obs", "youtube.com", "netflix.com"])]}),
                ("GFX", {'layout': 'bsp', 'matches':[Match(wm_class=["gimp-2.10","Gimp" ,"Cinelerra","Olive", "kdenlive" , "resolve" ])]})]
@@ -571,8 +567,8 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 layout_theme = {"border_width": 2,
                 "margin": 5,
-                "border_focus": "ff78c5",
-                "border_normal": "1e1f28"
+                "border_focus": "88C0D0",
+                "border_normal": "2e3440"
                 }
 
 layouts = [
@@ -585,8 +581,8 @@ layouts = [
     layout.RatioTile(border_width = 2,
                      margin = 0,
                      ratio_increment = 0.2,
-                     border_focus ="ff78c5",  
-                     border_normal = "1e1f28", 
+                     border_focus ="88C0D0",  
+                     border_normal = "2e3440", 
                       ),
     #layout.Tile(shift_windows=True,
     #ratio = "0,5",  **layout_theme),
@@ -596,8 +592,8 @@ layouts = [
     layout.MonadTall(**layout_theme),
     layout.Max(**layout_theme),
     layout.Stack(num_stacks=2,
-                border_focus = "ff78c5",
-                border_normal = "1e1f28",
+                border_focus = "88C0D0",
+                border_normal = "2e3440",
                 autosplit = False,
                 fair = True ),
     layout.RatioTile(**layout_theme),
@@ -607,11 +603,11 @@ layouts = [
            sections = [""],
            section_fontsize = 10,
            border_width = 2,
-           bg_color = "1e1f28",
-           active_bg = "bd92f8",
+           bg_color = "161821",
+           active_bg = "88C0D0",
            active_fg = "000000",
-           inactive_bg = "ff78c5",
-           inactive_fg = "1e1f28",
+           inactive_bg = "6b7089",
+           inactive_fg = "000000",
            padding_left = 0,
            padding_right = 10,
            padding_x = 8,
@@ -629,16 +625,6 @@ layouts = [
                       max_border_width = 1),
     #layout.Slice(**layout_theme)
 ]
-
-colors = [["#1e1f28", "#1e1f28"], 
-          ["#3d3f4b", "#434758"], 
-          ["#ff78c5", "#ff78c5"], 
-          ["#50fa7b", "#50fa7b"], 
-          ["#bd92f8", "#bd92f8"], 
-          ["#f0fa8b", "#f0fa8b"], 
-          ["#e1acff", "#e1acff"], 
-          ["#ecbbfb", "#ecbbfb"],
-          ["#8ae9fc", "#8ae9fc"]] 
 
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
@@ -660,7 +646,7 @@ def init_widgets_list():
                        background = colors[0]
                        ),
              widget.Image(
-                        filename = "~/.config/qtile/icons/pop-os.png",
+                        filename = "~/.config/qtile/icons/pop-os-iceberg.png",
                         scale = "False",
                         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myterm)},
                         padding = 10
@@ -830,11 +816,11 @@ def init_widgets_list():
                        padding = 1,
                        fontsize = 13,
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("baobab")},
-                       decorations = [ 
-                            BorderDecoration ( 
-                            colour = colors[8],    
-                            border_width = [0, 0, 2, 0],    
-                            padding_x = 0, )    
+                       decorations = [
+                            BorderDecoration (
+                            colour = colors[8],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
                         ],
                        ),
              widget.DF(
@@ -843,11 +829,11 @@ def init_widgets_list():
                         foreground = colors[8],
                         background = colors[0],
                         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("baobab")},
-                        decorations = [ 
-                            BorderDecoration ( 
-                            colour = colors[8],    
-                            border_width = [0, 0, 2, 0],    
-                            padding_x = 0, )    
+                        decorations = [
+                            BorderDecoration (
+                            colour = colors[8],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
                         ],
                         ),
              widget.TextBox(

@@ -59,7 +59,7 @@ let g:rehash256 = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " The lightline.vim theme
 let g:lightline = {
-      \ 'colorscheme': 'darcula',
+      \ 'colorscheme': 'iceberg',
       \ }
 
 " Always show statusline
@@ -216,7 +216,7 @@ set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
-set guifont=SauceCodePro\ Nerd\ Font:h19
+set guifont=SauceCodePro\ Nerd\ Font:h14
 "set guifont=Mononoki\ Nerd\ Font:h15
 "set guifont=JetBrains\ Mono:h15
 

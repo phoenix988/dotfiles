@@ -2,4 +2,5 @@ configuration {
   show-icons:         true;
   icon-theme:         "Papirus";
 }
-@theme "/usr/share/rofi/themes/sidebar.rasi"
+//@theme "/usr/share/rofi/themes/sidebar.rasi"
+@theme "/home/karl/.config/rofi/themes/sidebar-iceberg.rasi"
