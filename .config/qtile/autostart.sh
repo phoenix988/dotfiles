@@ -28,7 +28,6 @@ steam &
 discord &
 lutris &
 blueman-manager &
-#$HOME/.config/qtile/close-blueman.sh &
 
 
 

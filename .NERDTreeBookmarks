@@ -1,0 +1,5 @@
+setans ~/Myrepos/setup/playbooks
+setup ~/Myrepos/setup
+h ~/
+.ansible ~/.ansible
+
