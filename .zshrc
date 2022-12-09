@@ -4,7 +4,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/home/karl/.config/oh-my-zsh"
 
-ZSH_THEME="af-magic"
+ZSH_THEME="nord"
 
 export HISTCONTROL=ignoreboth:erasedups
 

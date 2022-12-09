@@ -43,6 +43,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
    call plug#end()
 
    " set your colorscheme
-     colorscheme iceberg
+     colorscheme nord
 
      hi Normal  ctermbg=NONE
