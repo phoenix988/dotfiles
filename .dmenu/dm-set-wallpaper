@@ -6,6 +6,8 @@ declare -a options=(
 
 "$HOME/Pictures/Wallpapers"
 "$HOME/Pictures/Arch"
+"$HOME/Pictures/Nature/"
+"$HOME/Pictures/nord/"
 
 
 )

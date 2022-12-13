@@ -1,6 +1,6 @@
 #!/bin/bash
 
-theme=$( cat $HOME/.config/kitty/themelist )
+theme=$( ls $HOME/.config/kitty/kitty-themes/themes )
 
 export kittydir=$HOME/.config/kitty
 
