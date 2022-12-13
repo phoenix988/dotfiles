@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+
+current=$(cat /sys/class/leds/asus::kbd_backlight/brightness )
+
+
+increase=$( expr $current + 1 )
+
+[ $current -lt "3" ] && echo $increase > /sys/class/leds/asus::kbd_backlight/brightness   

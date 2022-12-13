@@ -1,0 +1,34 @@
+#!/bin/bash
+
+
+#script to change priority of processes
+ps=$( ps ch -eo pid,comm,user,ni | grep $USER )
+
+
+nice_options=$(seq -19 20)
+
+
+declare -a options=(
+
+"$nice_options"
+
+)
+
+
+choice=$(printf '%s\n' "${ps[@]}" | awk '{print $2 " " $NF}' | rofi -dmenu  -p "Renice:")
+
+[ -z "$choice" ] && exit
+
+choice_nice=$(printf '%s\n' "${options[@]}" | rofi -dmenu  -p "choose priority:")
+
+
+[ -z "$choice_nice" ] && exit
+
+
+choice=$(echo $choice | awk '{print $1}')
+
+ps=$( ps ch -eo pid,comm,user,pgrp | grep $choice | awk '{print $NF}' )
+
+
+sudo renice -n $choice_nice -p $ps 2> /dev/null
+
