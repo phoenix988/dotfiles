@@ -20,7 +20,7 @@ alias hidden="ls -A | grep -v ^[A-Z] | grep -v ^[a-z]"
 
 #change cat to bat
 alias cat='bat'
-alias bat='batcat'
+#alias bat='batcat'
 alias htop='btop'
 
 #fix obvious typo's
@@ -62,9 +62,12 @@ alias merge="xrdb -merge ~/.Xresources"
 
 # Aliases for software managment
 # pacman or pm
-alias pacman='sudo pacman --color auto'
-alias update='sudo pacman -Syyu'
-alias remove="sudo pacman -Rns"
+alias apt='sudo nala'
+alias update='sudo nala update && sudo nala upgrade'
+alias remove="sudo nala remove"
+alias nala="sudo nala"
+alias search="sudo nala search"
+alias install="sudo nala install"
 
 # paru as aur helper - updates everything
 alias pksyua="paru -Syu --noconfirm"
@@ -136,8 +139,10 @@ alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
 #receive the key of a developer
 alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 
-#decrypt
+#common gpg commands
 alias dec="gpg --decrypt"
+alias enc="gpg --encrypt -r karlfredin@gmail.com"
+alias gpgk="gpg --list-secret-keys --keyid-format LONG"
 
 
 #maintenance
@@ -206,7 +211,7 @@ alias pp="sxiv /var/pictures/backgrounds/*"
 #KVM 
 alias virsh="virsh -c qemu:///system"
 
-#Alias for vifm to add mor functionality
+#Alias for vifm to add more functionality
 #alias vifm="vifmrun"
 
 #Clear command
