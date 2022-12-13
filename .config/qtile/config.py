@@ -10,15 +10,16 @@ import re
 import socket
 import subprocess
 from libqtile import qtile
-from libqtile.config import Click, Drag, Group, KeyChord, Key, Match, Screen
+from libqtile.config import Click, Drag, Group, ScratchPad, DropDown, KeyChord, Key, Match, Screen
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
 from libqtile.lazy import lazy
 from typing import List  # noqa: F401
 
 #Change your theme here
-from iceberg  import colors, layout_colors
+from nord  import colors, layout_colors
 
+#Importing qtile_extras libaries
 from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration, PowerLineDecoration, BorderDecoration
 
@@ -26,28 +27,41 @@ from qtile_extras.widget.decorations import RectDecoration, PowerLineDecoration,
 #Choose browser you wanna use for my script dm-openweb
 #BROWSER = qutebrowser
 
+#Define variables
 mod = "mod4"        # Sets mod key to SUPER/WINDOWS
-
+#Terminals
 myTerm = "kitty -e /usr/bin/myscripts/create-tmux-session.sh"      # My terminal of choice
 myterm = "kitty -e zsh"
+sysmon = "kitty --class=btop -e btop" #System monitor utility
 
-fileManager = "kitty -e vifm"              #My filemanagers both gui and terminal based
-guifileManager = "nautilus /home/karl/Pictures/"
+#Filemanagers
+fileManager = "kitty --class=vifm -e vifm"              #My terminal filemanager of choice
+guifileManager = "nautilus /home/karl/Pictures/"        #My gui terminal of choice
 
-sysmon = "kitty -e btop" #This is for htop
-
+#Browsers
 browser1 = "brave-browser"       #My browser of choice
-browser2  = "brave-browser --new-window --app=https://duckduckgo.com"
+browser2  = "brave-browser --new-window --app=https://duckduckgo.com" #Browser of choice in fullscreen
 
-guieditor = "neovide"  #My GUI text editor
-editor = "kitty -e vim" #My terminal based editor
+#Text editors
+guieditor = "neovide"  #My GUI text editor of choice
+editor = "kitty --class vim -e vim" #My terminal based editor of choice
 
+#Utilities
 virtman = "virt-manager"   #Hypervisor of choice
 backup = "sudo timeshift-gtk"   #Backup utility
 lockscreen =  "slock"   #My lockscreen of choice
 
+#My custom scripts
 dmenu_path = "/home/karl/.dmenu" #Path to my dmenu scripts
+script_path = "/home/karl/.scripts/activated" #Path to my scripts
 
+# Define scratchpads
+groups = [
+    ScratchPad("scratchpad", [
+       DropDown("vifm", "kitty --class=vifm -e vifm", width=0.8, height=0.8, x=0.1, y=0.1, opacity=0.9), ]),
+
+    Group("a"),
+]
 
 #START_KEYS
 keys = [
@@ -68,14 +82,27 @@ keys = [
               lazy.spawn("/home/karl/.config/kitty/kitty-keys.sh"),
               desc='Run Help Menu for kitty'
               ),
-         Key(["mod1", "control" ], "i", #Lock the computer
+         Key([mod, "control" ], "i", #Lock the computer
               lazy.spawn(lockscreen),
               desc='Lock computer'
               ),
          Key([mod, ], "space", #Toggle between keyboard layouts
-              lazy.spawn("/usr/bin/myscripts/layout-switcher"),
+              lazy.spawn(script_path + "/layout-switcher"),
               desc='switch between Keyboard layouts'
              ),
+
+         #KEYS_GROUP Keybindings for scratchpads
+         Key(["mod1", ], "o", #show scratchpad vifm
+              lazy.group['scratchpad'].dropdown_toggle('vifm'),
+              desc='show scratchpad vifm'
+             ),
+
+         #KEYS_GROUP keybinding for Minimizing windows
+         Key(["mod1", ], "m", #Minimize window
+              lazy.spawn("Qminimize -m"),
+              desc='Minimize window'
+             ),
+
          #KEYS_GROUP Launch applications with super + key
          Key([mod, ], "r", #Run Rofi
               lazy.spawn("rofi -show drun -show-icons -display-drun \"Run : \" -drun-display-format \"{name}\""),
@@ -160,41 +187,41 @@ keys = [
 
          #KEYS_GROUP Some of my custom scripts
          Key([mod, ],"F12", #Set a Random wallpaper
-             lazy.spawn("/usr/bin/myscripts/set-random-bg"),
+             lazy.spawn(script_path + "/set-random-bg"),
              desc='Set a random wallpaper'
              ),
          Key([mod, ],"F11", #Kills and starts picom compositor
-             lazy.spawn("/usr/bin/myscripts/picom-control"),
+             lazy.spawn(script_path + "/picom-control"),
              desc='kills and start picom'
              ),
          Key([mod, ],"F10", #Change display layout,for my laptop when I connect external Screens
-             lazy.spawn("/usr/bin/myscripts/change-display-layout.sh"),
+             lazy.spawn(script_path + "/change-display-layout.sh"),
              desc='Change Display layout, I use it when I connect external Screens to my laptop'
              ),
 
          #KEYS_GROUP Media control
          Key([ ],"XF86AudioPlay", #Resume/Stop
-             lazy.spawn("/usr/bin/myscripts/mediaplay"),
+             lazy.spawn(script_path + "/mediaplay"),
              desc='Pause'
              ),
          Key([ ],"XF86AudioNext", #Next
-             lazy.spawn("/usr/bin/myscripts/medianext"),
+             lazy.spawn(script_path + "/medianext"),
              desc='Next'
              ),
          Key([ ],"XF86AudioPrev", #Prev
-             lazy.spawn("/usr/bin/myscripts/mediaprev"),
+             lazy.spawn(script_path + "/mediaprev"),
              desc='Previous'
              ),
          Key([ ],"XF86AudioMute", #Mute Audio
-             lazy.spawn("/usr/bin/myscripts/mute-unmute.sh"),
+             lazy.spawn(script_path + "/mute-unmute.sh"),
              desc='Previous'
              ),
          Key([ ],"XF86AudioLowerVolume", #Lower Volume
-             lazy.spawn("/usr/bin/myscripts/volume-down.sh"),
+             lazy.spawn(script_path + "/volume-down.sh"),
              desc='Previous'
              ),
          Key([ ],"XF86AudioRaiseVolume", #Raise Volume``
-             lazy.spawn("/usr/bin/myscripts/volume-up.sh"),
+             lazy.spawn(script_path + "/volume-up.sh"),
              desc='Previous'
              ),
 
@@ -387,10 +414,10 @@ keys = [
              lazy.spawn("tmux splitw -v"),
              ),
          Key(["control", "mod1"], "h", #prev pane
-             lazy.spawn("/usr/bin/myscripts/next-tmux-pane.sh"),
+             lazy.spawn(script_path + "/next-tmux-pane.sh"),
              ),
          Key(["control", "mod1"], "l", #next pane
-             lazy.spawn("/usr/bin/myscripts/prev-tmux-pane.sh"),
+             lazy.spawn(script_path + "/prev-tmux-pane.sh"),
              ),
 
          #KEYS_GROUP Launch terminal based programs using the key chord CONTROL+e followed by 'key'
@@ -404,7 +431,7 @@ keys = [
              desc='Open HTOP'
              ),
              Key([], "r", #Launch ranger
-                 lazy.spawn("kitty  ranger"),
+                 lazy.spawn("kitty --class=ranger -e ranger"),
              desc='Open RANGER'
              ),
              Key([], "v", #Launch your terminal editor
@@ -414,8 +441,9 @@ keys = [
              Key([], "t", #change rofi theme
                  lazy.spawn("rofi-theme-selector"),
              desc='change rofi theme'
-             ),
-         ]),
+             ),],
+
+                  name="Action: "),
 
          #KEYS_GROUP Dmenu scripts launched using the key chord SUPER+p followed by 'key'
          KeyChord([mod], "p", [
@@ -464,37 +492,42 @@ keys = [
                  desc='Choose your keyboardlayout'
                  ),
              Key([], "v", #Connect to a vpn server using vpn
-                 lazy.spawn(dmenu_path + "/dm-vpn"),
+                 lazy.spawn(dmenu_path + "/dm-nordvpn"),
                  desc='Choose your VPN server for NordVPN'
                  ),
              Key([], "s", #search the web requires qutebrowser 
-                 lazy.spawn(dmenu_path + "/dm-search"), 
+                 lazy.spawn(dmenu_path + "/dm-search"),
                  desc='search the web'
                  ),
              Key([], "y", #print an emoji to the clipboard 
-                 lazy.spawn(dmenu_path + "/dm-emojis"), 
+                 lazy.spawn(dmenu_path + "/dm-emojis"),
                  desc='print an emoji to the clipboard'
                  ),
              Key([], "g", #Change the overall system theme
-                lazy.spawn(dmenu_path + "/change-theme"), 
+                lazy.spawn(dmenu_path + "/change-theme"),
                 desc='Change the overall system theme'
                 ),
              Key([], "f", #opens my favorite websites in fullscreen mode with minimal UI 
-                 lazy.spawn(dmenu_path + "/dm-openweb-fullscreen"), 
+                 lazy.spawn(dmenu_path + "/dm-openweb-fullscreen"),
                  desc='open a website in fullscreen'
                  ),
              Key([], "b", #creates or remove timeshift backup
-                 lazy.spawn(dmenu_path + "/dm-timeshift"), 
+                 lazy.spawn(dmenu_path + "/dm-timeshift"),
                  desc='creates or remove timeshift backup'
                  ),
              Key([], "q", #Opens a VM of your choice in KVM 
-                 lazy.spawn(dmenu_path + "/dm-open-virt-cons"), 
+                 lazy.spawn(dmenu_path + "/dm-open-virt-cons"),
                  desc='Opens a VM of your choice in KVM'
                  ),
+             Key([], "j", #Script for pass
+                 lazy.spawn(dmenu_path + "/dm-pass"),
+                 desc='Script for pass'
+                 ),
              Key([], "p", #menu to control music
-                 lazy.spawn(dmenu_path + "/dm-play-pause"), 
+                 lazy.spawn(dmenu_path + "/dm-play-pause"),
                  desc='menu to control music'
                  ),],
+             name="Rofi Script"
          ),
 
          #KEYS_GROUP window modifier (mainly for bsp) launched using the key chord SUPER+shift+b followed by 'key'
@@ -516,7 +549,7 @@ keys = [
              Key([], "a", #flip to the left
                  lazy.layout.flip_left()),
              Key([], "w", #flip up
-                 lazy.layout.flip_up()), 
+                 lazy.layout.flip_up()),
              Key([], "s", #flip down
                  lazy.layout.flip_down()),
              Key([], "n", #normalize the size of the window
@@ -526,7 +559,7 @@ keys = [
              Key(["shift"], "h", #move to the left
                  lazy.layout.shuffle_left()),
              Key(["shift"], "k", #move up
-                 lazy.layout.shuffle_up()), 
+                 lazy.layout.shuffle_up()),
              Key(["shift"], "j", #move down
                  lazy.layout.shuffle_down()),
              Key(["control"], "l", #grow the window to the right
@@ -534,11 +567,11 @@ keys = [
              Key(["control"], "h", #grow the window to the left
                  lazy.layout.grow_left()),
              Key(["control"], "k", #grow the window up
-                 lazy.layout.grow_up()), 
+                 lazy.layout.grow_up()),
              Key(["control"], "j", #grow the window down
-                 lazy.layout.grow_down())], 
+                 lazy.layout.grow_down())],
 
-             mode="BSP Window"
+            name="BSP Window"
          ),
 
 
@@ -546,11 +579,21 @@ keys = [
 
 #END_KEYS
 
+
+#keys.extend([
+#     Key([mod], "o", lazy.group['scratchpad'].dropdown_toggle('vifm')),
+#
+#])
+
+
+
+
+
 group_names = [("WWW", {'layout': 'bsp' ,'matches':[Match(wm_class=["Brave-browser-nightly", "Chromium" , "librewolf"])]}),
                ("DEV", {'layout': 'bsp','matches':[Match(wm_class=["neo"])]}),
                ("SYS", {'layout': 'bsp', 'matches':[Match(wm_class=["TeamViewer"])]}),
                ("GAM", {'layout': 'max', 'matches':[Match(wm_class=["lutris" , "Steam" , "upc.exe" , "steam_proton" , "heroic"])]}),
-               ("DOC", {'layout': 'bsp', 'matches':[Match(wm_class=["re.sonny.Tangram", "crx_cifhbcnohmdccbgoicgdjpfamggdegmo"])]}),
+               ("DOC", {'layout': 'bsp', 'matches':[Match(wm_class=["re.sonny.Tangram", "crx_cifhbcnohmdccbgoicgdjpfamggdegmo", "disk.yandex.com__client_disk"])]}),
                ("SOC", {'layout': 'max', 'matches':[Match(wm_class=["discord" , "Franz" , "whatsapp-nativefier-d40211" , "altus" , "whatsdesk" , "whatsapp-for-linux", "web.whatsapp.com"])]}),
                ("REC", {'layout': 'bsp', 'matches':[Match(wm_class=["Spotify"])]}),
                ("VID", {'layout': 'treetab', 'matches':[Match(wm_class=["nemo"  , "io.github.celluloid_player.Celluloid" , "urxvt" , "obs", "youtube.com", "netflix.com"])]}),
@@ -581,8 +624,8 @@ layouts = [
     layout.RatioTile(border_width = 2,
                      margin = 0,
                      ratio_increment = 0.2,
-                     border_focus = layout_colors[0],  
-                     border_normal = layout_colors[1], 
+                     border_focus = layout_colors[0],
+                     border_normal = layout_colors[1],
                       ),
     #layout.Tile(shift_windows=True,
     #ratio = "0,5",  **layout_theme),
@@ -646,7 +689,7 @@ def init_widgets_list():
                        background = colors[0]
                        ),
              widget.Image(
-                        filename = "~/.config/qtile/icons/pop-os-iceberg.png",
+                        filename = "~/.config/qtile/icons/pop-os-nord.png",
                         scale = "False",
                         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myterm)},
                         padding = 10
@@ -668,7 +711,7 @@ def init_widgets_list():
                        active = colors[5],
                        inactive = colors[1],
                        rounded = "true",
-                       disable_drag = "true", 
+                       disable_drag = "true",
                        highlight_color = colors[4],
                        highlight_method = "line",
                        this_current_screen_border = colors[4],
@@ -705,7 +748,7 @@ def init_widgets_list():
                        background = colors[4],
                        padding = 8,
                        fontsize = 15
-                       ), 
+                       ),
              widget.CurrentLayoutIcon(
                        background = colors[4],
                        use_mask = "true",
@@ -738,7 +781,7 @@ def init_widgets_list():
                        ),
              widget.Sep(
                        linewidth = 1,
-                       padding = 10,
+                       padding = 0,
                        foreground = colors[0],
                        background = colors[0]
                        ),
@@ -783,7 +826,7 @@ def init_widgets_list():
                        background = colors[0],
                        foreground = colors[2],
                        padding = 1
-                       ), 
+                       ),
              widget.TextBox(
                        text = '',
                        background = colors[0],
@@ -848,11 +891,11 @@ def init_widgets_list():
                        background = colors[0],
                        foreground = colors[2],
                        padding = -1,
-                       decorations = [ 
-                            BorderDecoration ( 
-                            colour = colors[2],    
-                            border_width = [0, 0, 2, 0],    
-                            padding_x = 0, )    
+                       decorations = [
+                            BorderDecoration (
+                            colour = colors[2],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
                             ],
                         ),
              widget.CPU(
@@ -860,11 +903,11 @@ def init_widgets_list():
                          background = colors[0],
                          padding = 8,
                          format = '{load_percent}%',
-                         decorations = [ 
-                            BorderDecoration ( 
-                            colour = colors[2],    
-                            border_width = [0, 0, 2, 0],    
-                            padding_x = 0, )    
+                         decorations = [
+                            BorderDecoration (
+                            colour = colors[2],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
                             ],
                         ),
              widget.TextBox(
@@ -881,11 +924,11 @@ def init_widgets_list():
                          background = colors[0],
                          fontsize = 11,
                          tag_sensor =  "temp1",
-                         decorations = [ 
-                            BorderDecoration ( 
-                            colour = colors[6],    
-                            border_width = [0, 0, 2, 0],    
-                            padding_x = 0, )    
+                         decorations = [
+                            BorderDecoration (
+                            colour = colors[6],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
                             ],
                        ),
              widget.ThermalSensor(
@@ -893,11 +936,11 @@ def init_widgets_list():
                         foreground = colors[6],
                         tag_sensor = "Tctl",
                         threshold = 75,
-                        decorations = [ 
-                            BorderDecoration ( 
-                            colour = colors[6],    
-                            border_width = [0, 0, 2, 0],    
-                            padding_x = 0, )    
+                        decorations = [
+                            BorderDecoration (
+                            colour = colors[6],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
                      ],
                      ),
              widget.TextBox(
@@ -913,11 +956,11 @@ def init_widgets_list():
                        background = colors[0],
                        padding = 0,
                        fontsize = 14,
-                       decorations = [ 
-                            BorderDecoration ( 
-                            colour = colors[3],    
-                            border_width = [0, 0, 2, 0],    
-                            padding_x = 0, )    
+                       decorations = [
+                            BorderDecoration (
+                            colour = colors[3],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
                             ],
                        ),
              widget.Memory(
@@ -925,11 +968,11 @@ def init_widgets_list():
                        background = colors[0],
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(sysmon)},
                        padding = 5,
-                       decorations = [ 
-                            BorderDecoration ( 
-                            colour = colors[3],    
-                            border_width = [0, 0, 2, 0],    
-                            padding_x = 0, )    
+                       decorations = [
+                            BorderDecoration (
+                            colour = colors[3],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
                             ],
                        ),
              widget.TextBox(
@@ -944,11 +987,11 @@ def init_widgets_list():
                      padding = 2,
                      foreground = colors[5],
                      background = colors[0],
-                     decorations = [ 
-                            BorderDecoration ( 
-                            colour = colors[5],    
-                            border_width = [0, 0, 2, 0],    
-                            padding_x = 0, )    
+                     decorations = [
+                            BorderDecoration (
+                            colour = colors[5],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
                              ],
                      fontsize = 14
                       ),
@@ -959,11 +1002,11 @@ def init_widgets_list():
                      colour_have_updates = colors[5],
                      colour_no_updates = colors[5],
                      foreground = colors[5],
-                     decorations = [ 
-                            BorderDecoration ( 
-                            colour = colors[5],    
-                            border_width = [0, 0, 2, 0],    
-                            padding_x = 0, )    
+                     decorations = [
+                            BorderDecoration (
+                            colour = colors[5],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
                        ],
                      mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myterm + ' -e sudo nala upgrade')},
                      background = colors[0]
@@ -981,22 +1024,22 @@ def init_widgets_list():
                       background = colors[0],
                       padding = 0,
                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("pavucontrol")},
-                      decorations = [ 
-                            BorderDecoration ( 
-                            colour = colors[4],    
-                            border_width = [0, 0, 2, 0],    
-                            padding_x = 0, )    
+                      decorations = [
+                            BorderDecoration (
+                            colour = colors[4],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
                      ],
                        ),
              widget.Volume(
                       foreground = colors[4],
                       background = colors[0],
                       padding = 5,
-                       decorations = [ 
-                            BorderDecoration ( 
-                            colour = colors[4],    
-                            border_width = [0, 0, 2, 0],    
-                            padding_x = 0, )    
+                       decorations = [
+                            BorderDecoration (
+                            colour = colors[4],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
                      ],
                       ),
              widget.TextBox(
@@ -1007,15 +1050,15 @@ def init_widgets_list():
                        fontsize = 45
                        ),
              widget.Battery(
-                       foreground = colors[8], 
+                       foreground = colors[8],
                        background = colors[0],
                        padding = -8,
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("xfce4-power-manager-settings")},
-                       decorations = [ 
-                            BorderDecoration ( 
-                            colour = colors[8],    
-                            border_width = [0, 0, 2, 0],    
-                            padding_x = 0, )    
+                       decorations = [
+                            BorderDecoration (
+                            colour = colors[8],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
                        ],
                        ),
              widget.TextBox(
@@ -1031,11 +1074,11 @@ def init_widgets_list():
                         foreground = colors[2],
                         padding = 4,
                         fontsize = 15,
-                        decorations = [ 
-                            BorderDecoration ( 
-                            colour = colors[2],    
-                            border_width = [0, 0, 2, 0],    
-                            padding_x = 0, )    
+                        decorations = [
+                            BorderDecoration (
+                            colour = colors[2],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
                        ],
                         ),
              widget.Sep(
@@ -1145,7 +1188,6 @@ focus_on_window_activation = "smart"
 def start_once():
     home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/autostart.sh'])
-   
 
 
 
@@ -1158,4 +1200,5 @@ def start_once():
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
+
 

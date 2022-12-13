@@ -1,9 +1,7 @@
 #!/bin/bash
 
 back=$(cat ~/.config/kitty/theme.conf | grep background | awk '{print $NF}')
-fore=$(cat ~/.config/kitty/theme.conf | grep color5 | awk '{print $NF}')
-
-
+fore=$(cat ~/.config/kitty/theme.conf | grep selection_background | awk '{print $NF}')
 
 sed -n '/START_KEYS/,/END_KEYS/p' ~/.config/qtile/config.py | \
          grep  -e 'Key'  \

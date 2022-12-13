@@ -3,4 +3,6 @@ configuration {
   icon-theme:         "Papirus";
 }
 //@theme "/usr/share/rofi/themes/sidebar.rasi"
-@theme "/home/karl/.config/rofi/themes/sidebar-iceberg.rasi"
+//@theme "/home/karl/.config/rofi/themes/sidebar-iceberg.rasi"
+//@theme "/home/karl/.config/rofi/themes/sidebar-nord.rasi"
+@theme "/home/karl/.config/rofi/themes/sidebar-nord.rasi"
