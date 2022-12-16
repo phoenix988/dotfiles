@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=Service now
+Exec=/opt/brave.com/brave/brave-browser "--profile-directory=Profile 2" --app=https://statkraft.service-now.com/now/nav/ui/classic/params/target/%24vtb.do%3Fsysparm_board%3D85806a1b9734dd505277f7efe153af0f%26sysparm_use_polaris%3Dfalse
+Icon=brave
+StartupWMClass=crx_service_now
