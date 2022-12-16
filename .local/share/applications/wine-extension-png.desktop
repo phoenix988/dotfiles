@@ -2,7 +2,7 @@
 Type=Application
 Name=Wine Internet Explorer
 MimeType=image/png;
-Exec=env WINEPREFIX="/home/karl/Games/watch-dogs" wine start /ProgIDOpen pngfile %f
+Exec=env WINEPREFIX="/home/karl/Games/assassins-creed-valhalla" wine start /ProgIDOpen pngfile %f
 NoDisplay=true
 StartupNotify=true
 Icon=ECB7_iexplore.0

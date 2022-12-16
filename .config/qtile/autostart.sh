@@ -5,7 +5,7 @@
 #lxsession &
 
 #Compositor
-picom -b --config  $HOME/.config/qtile/picom-jona.conf
+picom -b --config  $HOME/.config/picom/picom-jona.conf
 
 #Set Display layout
 #$HOME/.screenlayout/layout.sh &
@@ -28,6 +28,4 @@ steam &
 discord &
 lutris &
 blueman-manager &
-
-
-
+redshift -l 54.9038:23.8924 &

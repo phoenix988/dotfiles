@@ -61,14 +61,13 @@ alias userlist="cut -d: -f1 /etc/passwd"
 alias merge="xrdb -merge ~/.Xresources"
 
 # Aliases for software managment
+# pacman or pm
 alias apt='sudo nala'
 alias update='sudo nala update && sudo nala upgrade'
 alias remove="sudo nala remove"
 alias nala="sudo nala"
 alias search="sudo nala search"
 alias install="sudo nala install"
-alias pacman="sudo pacman"
-alias i="sudo pacman -S"
 
 # paru as aur helper - updates everything
 alias pksyua="paru -Syu --noconfirm"
@@ -187,6 +186,8 @@ alias vm="cd /media/vm"
 alias yandex="cd /media/cloud_storage/Yandex.Disk/"
 alias games="cd /media/games_1"
 alias games2="cd /media/games_/"
+alias steam1="cd ~/Games/Steam/steamapps/"
+alias steam2="/mnt/ntfs/SteamLibrary/steamapps/"
 alias mwine="cd ~/wine"
 alias autofs="cd /mnt/autofs"
 alias mgit="cd ~/git-reps"

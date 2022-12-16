@@ -16,8 +16,7 @@ from libqtile import layout, bar, widget, hook
 from libqtile.lazy import lazy
 from typing import List  # noqa: F401
 
-#Change your theme here
-from nord  import colors, layout_colors
+from color import colors, layout_colors
 
 #Importing qtile_extras libaries
 from qtile_extras import widget
@@ -55,14 +54,6 @@ lockscreen =  "slock"   #My lockscreen of choice
 dmenu_path = "/home/karl/.dmenu" #Path to my dmenu scripts
 script_path = "/home/karl/.scripts/activated" #Path to my scripts
 
-# Define scratchpads
-groups = [
-    ScratchPad("scratchpad", [
-       DropDown("vifm", "kitty --class=vifm -e vifm", width=0.8, height=0.8, x=0.1, y=0.1, opacity=0.9), ]),
-
-    Group("a"),
-]
-
 #START_KEYS
 keys = [
          #KEYS_GROUP Qtile
@@ -92,16 +83,11 @@ keys = [
              ),
 
          #KEYS_GROUP Keybindings for scratchpads
-         Key(["mod1", ], "o", #show scratchpad vifm
-              lazy.group['scratchpad'].dropdown_toggle('vifm'),
-              desc='show scratchpad vifm'
-             ),
+         # Key(["mod1", ], "o", #show scratchpad vifm
+         #      lazy.group['scratchpad'].dropdown_toggle('vifm'),
+         #      desc='show scratchpad vifm'
+         #     ),
 
-         #KEYS_GROUP keybinding for Minimizing windows
-         Key(["mod1", ], "m", #Minimize window
-              lazy.spawn("Qminimize -m"),
-              desc='Minimize window'
-             ),
 
          #KEYS_GROUP Launch applications with super + key
          Key([mod, ], "r", #Run Rofi
@@ -356,6 +342,10 @@ keys = [
              lazy.layout.grow_up(),
              desc='increase the size of the window upwards'
              ),
+         Key(["mod1", ], "m", #Minimize window
+              lazy.spawn("Qminimize -m"),
+              desc='Minimize window'
+             ),
 
          #KEYS_GROUP Stack controls
          Key([mod, "shift"], "Tab", #Switch which side main pane occupies, XmonadTall
@@ -580,11 +570,6 @@ keys = [
 #END_KEYS
 
 
-#keys.extend([
-#     Key([mod], "o", lazy.group['scratchpad'].dropdown_toggle('vifm')),
-#
-#])
-
 
 
 
@@ -602,6 +587,7 @@ group_names = [("WWW", {'layout': 'bsp' ,'matches':[Match(wm_class=["Brave-brows
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
+
 for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod], str(i), lazy.group[name].toscreen()))        # Switch to another group
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
@@ -618,7 +604,8 @@ layouts = [
     #layout.MonadWide(**layout_theme),
     layout.Bsp(**layout_theme,
                  lower_right = True,
-                  fair = False  ),
+                 border_on_single = True,
+                 fair = False  ),
     #layout.Stack(stacks=2, **layout_theme),
     #layout.Columns(**layout_theme),
     layout.RatioTile(border_width = 2,
@@ -1179,8 +1166,6 @@ floating_layout = layout.Floating(float_rules=[
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
-
-
 
 
 

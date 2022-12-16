@@ -2,7 +2,7 @@
 Type=Application
 Name=notepad
 MimeType=text/plain;
-Exec=env WINEPREFIX="/home/karl/Games/watch-dogs" wine start /ProgIDOpen txtfile %f
+Exec=env WINEPREFIX="/home/karl/Games/assassins-creed-valhalla" wine start /ProgIDOpen txtfile %f
 NoDisplay=true
 StartupNotify=true
 Icon=2E40_notepad.0

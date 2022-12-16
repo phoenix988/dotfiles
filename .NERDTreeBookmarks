@@ -2,4 +2,7 @@ setans ~/Myrepos/setup/playbooks
 setup ~/Myrepos/setup
 h ~/
 .ansible ~/.ansible
+nvim ~/.config/nvim
+qtile ~/.config/qtile
+kitty ~/.config/kitty
 

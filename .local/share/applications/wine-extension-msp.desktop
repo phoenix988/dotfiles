@@ -2,7 +2,7 @@
 Type=Application
 Name=Wine Installer
 MimeType=application/x-wine-extension-msp;
-Exec=env WINEPREFIX="/home/karl/Games/watch-dogs" wine start /ProgIDOpen Msi.Patch %f
+Exec=env WINEPREFIX="/home/karl/Games/assassins-creed-valhalla" wine start /ProgIDOpen Msi.Patch %f
 NoDisplay=true
 StartupNotify=true
 Icon=D23E_msiexec.0

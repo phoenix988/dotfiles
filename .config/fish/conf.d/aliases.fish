@@ -2,24 +2,25 @@
 
 
 #update aliases
-alias uali="bash /usr/bin/myscripts/c_aliases.sh"
+alias uali="bash /usr/bin/myscripts/c-aliases.sh"
 
 #show ip
 alias ipa="ifconfig | awk '/inet/ {print $2}' | head -n4"
 
 #ls aliases
-alias ls='lsd --color=auto'
-alias la='lsd -a'
-alias lA='lsd -A'
-alias ll='lsd -l'
-alias lla='lsd -la'
-alias ld='lsd -l | grep ^d'
-alias l='lsd'
-alias l.="lsd -A | egrep '^\.'"
+alias ls='ls --color=auto'
+alias la='ls -a'
+alias lA='ls -A'
+alias ll='ls -l'
+alias lla='ls -la'
+alias ld='ls -l | grep ^d'
+alias l='ls'
+alias l.="ls -A | egrep '^\.'"
 alias hidden="ls -A | grep -v ^[A-Z] | grep -v ^[a-z]"
 
 #change cat to bat
 alias cat='bat'
+#alias bat='batcat'
 alias htop='btop'
 
 #fix obvious typo's
@@ -61,9 +62,12 @@ alias merge="xrdb -merge ~/.Xresources"
 
 # Aliases for software managment
 # pacman or pm
-alias pacman='sudo pacman --color auto'
-alias update='sudo pacman -Syyu'
-alias remove="sudo pacman -Rns"
+alias apt='sudo nala'
+alias update='sudo nala update && sudo nala upgrade'
+alias remove="sudo nala remove"
+alias nala="sudo nala"
+alias search="sudo nala search"
+alias install="sudo nala install"
 
 # paru as aur helper - updates everything
 alias pksyua="paru -Syu --noconfirm"
@@ -127,12 +131,19 @@ alias riplong="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -3000 | n
 
 #get the error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
+alias checkerror="sudo journalctl -p 3 -xb"
 
 #gpg
 #verify signature for isos
 alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
 #receive the key of a developer
 alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
+
+#common gpg commands
+alias dec="gpg --decrypt"
+alias enc="gpg --encrypt -r karlfredin@gmail.com"
+alias gpgk="gpg --list-secret-keys --keyid-format LONG"
+
 
 #maintenance
 alias big="expac -H M '%m\t%n' | sort -h | nl"
@@ -151,10 +162,10 @@ alias qm="cd /home/karl/.config/qtile/"
 alias xm="cd /home/karl/.xmonad/"
 alias xbm="cd /home/karl/.config/xmobar/"
 alias omfm="cd /home/karl/.config/fish/conf.d"
-alias movies="cd /mnt/autofs/movies"
+alias movies="cd /mnt/movies"
 alias dmove="cd ~/.dmenu"
-alias backup="cd /mnt/autofs/backup"
-alias backup-home="cd /mnt/autofs/backup/homefolder/karl"
+alias backup="cd /mnt/backup"
+alias backup-home="cd /mnt/backup/home"
 alias media="cd /mnt/autofs/music/videos/"
 alias cbak="cd ~/Yandex.Disk/Backups/homefolder/karl/"
 alias app="cd /usr/share/applications/"
@@ -166,14 +177,19 @@ alias mbas="cd ~/.config/bash"
 alias mqute="cd ~/.config/qutebrowser"
 alias mconky="cd ~/.config/conky"
 alias mpic="cd ~/Pictures"
+alias mvideo="cd ~/Videos"
+alias mraw="cd ~/Videos/raw"
 alias mzsh="cd ~/.config/oh-my-zsh/"
 alias mkitty="cd ~/.config/kitty/"
 alias mkpop="cd ~/.scripts/learnkpop/"
 alias vm="cd /media/vm"
 alias yandex="cd /media/cloud_storage/Yandex.Disk/"
-alias games="cd ~/Games"
-alias games2="cd /mnt/autofs/games2/"
+alias games="cd /media/games_1"
+alias games2="cd /media/games_/"
+alias steam1="cd ~/Games/Steam/steamapps/"
+alias steam2="/mnt/ntfs/SteamLibrary/steamapps/"
 alias mwine="cd ~/wine"
+alias autofs="cd /mnt/autofs"
 alias mgit="cd ~/git-reps"
 alias mdmenu="cd ~/.dmenu"
 alias iso="cd ~/iso"
@@ -197,8 +213,8 @@ alias pp="sxiv /var/pictures/backgrounds/*"
 #KVM 
 alias virsh="virsh -c qemu:///system"
 
-#Alias for vifm to add mor functionality
-alias vifm="vifmrun"
+#Alias for vifm to add more functionality
+#alias vifm="vifmrun"
 
 #Clear command
 alias cls="clear"
@@ -229,7 +245,7 @@ alias vgrub="sudo vim /etc/default/grub"
 alias vconfgrub="sudo vim /boot/grub/grub.cfg"
 alias vmkinitcpio="sudo vim /etc/mkinitcpio.conf"
 alias vmirrorlist="sudo vim /etc/pacman.d/mirrorlist"
-alias vali="vim ~/Documents/alias.list"
+alias vali="vim ~/Documents/lists/alias.list"
 alias vzrc="vim ~/.zshrc"
 alias vzsh="vim ~/.zshrc"
 alias vfis="vim ~/.config/fish/config.fish"
@@ -242,9 +258,11 @@ alias proxyserver="ssh karl@proxy"
 alias dockerserver="ssh karl@10.1.0.15"
 alias phoe01="ssh karl@phoe01"  
 alias phoe02="ssh karl@phoe02"  
-alias phoe03="ssh karl@phoe03"  
-alias phoe04="ssh karl@10.1.0.20"  
-alias phoe05="ssh karl@10.1.0.40"  
+alias phoe03="ssh karl@10.1.0.55"  
+alias moxi="ssh root@moxi.home"  
+alias moxi-server="ssh karl@moxi-server01"
+alias phoe04="ssh karl@10.1.0.55"  
+alias phoe-server01="ssh karl@10.1.0.50"  
 alias kssh="kitty +kitten ssh"
 
 #git aliases
@@ -254,13 +272,11 @@ alias mgen="cd /media/vg_games/genshin-impact/drive_c/Program\ Files/Genshin\ Im
 #games legendary 
 alias gta="legendary launch 9d2d0eb64d5c44529cece33fe2a46482"     
 
-#gpg
-alias dec="gpg --decrypt"
-
 #default browser
 alias defaultbrowser="xdg-settings set default-web-browser"
 alias filetokrusader="xdg-mime default org.kde.krusader.desktop inode/directory application"
 alias filetopcmanfm="xdg-mime default pcmanfm.desktop inode/directory application"
+
 
 
 #Change the default xclip behaviour 

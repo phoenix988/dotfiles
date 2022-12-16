@@ -2,27 +2,26 @@
 
 
 
-
-
 #update aliases
-alias uali="bash /usr/bin/myscripts/c_aliases.sh"
+alias uali="bash /usr/bin/myscripts/c-aliases.sh"
 
 #show ip
 alias ipa="ifconfig | awk '/inet/ {print $2}' | head -n4"
 
 #ls aliases
-alias ls='lsd --color=auto'
-alias la='lsd -a'
-alias lA='lsd -A'
-alias ll='lsd -l'
-alias lla='lsd -la'
-alias ld='lsd -l | grep ^d'
-alias l='lsd'
-alias l.="lsd -A | egrep '^\.'"
+alias ls='ls --color=auto'
+alias la='ls -a'
+alias lA='ls -A'
+alias ll='ls -l'
+alias lla='ls -la'
+alias ld='ls -l | grep ^d'
+alias l='ls'
+alias l.="ls -A | egrep '^\.'"
 alias hidden="ls -A | grep -v ^[A-Z] | grep -v ^[a-z]"
 
 #change cat to bat
 alias cat='bat'
+#alias bat='batcat'
 alias htop='btop'
 
 #fix obvious typo's
@@ -64,9 +63,12 @@ alias merge="xrdb -merge ~/.Xresources"
 
 # Aliases for software managment
 # pacman or pm
-alias pacman='sudo pacman --color auto'
-alias update='sudo pacman -Syyu'
-alias remove="sudo pacman -Rns"
+alias apt='sudo nala'
+alias update='sudo nala update && sudo nala upgrade'
+alias remove="sudo nala remove"
+alias nala="sudo nala"
+alias search="sudo nala search"
+alias install="sudo nala install"
 
 # paru as aur helper - updates everything
 alias pksyua="paru -Syu --noconfirm"
@@ -138,8 +140,10 @@ alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
 #receive the key of a developer
 alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 
-#decrypt
+#common gpg commands
 alias dec="gpg --decrypt"
+alias enc="gpg --encrypt -r karlfredin@gmail.com"
+alias gpgk="gpg --list-secret-keys --keyid-format LONG"
 
 
 #maintenance
@@ -183,6 +187,8 @@ alias vm="cd /media/vm"
 alias yandex="cd /media/cloud_storage/Yandex.Disk/"
 alias games="cd /media/games_1"
 alias games2="cd /media/games_/"
+alias steam1="cd ~/Games/Steam/steamapps/"
+alias steam2="/mnt/ntfs/SteamLibrary/steamapps/"
 alias mwine="cd ~/wine"
 alias autofs="cd /mnt/autofs"
 alias mgit="cd ~/git-reps"
@@ -208,8 +214,8 @@ alias pp="sxiv /var/pictures/backgrounds/*"
 #KVM 
 alias virsh="virsh -c qemu:///system"
 
-#Alias for vifm to add mor functionality
-alias vifm="vifmrun"
+#Alias for vifm to add more functionality
+#alias vifm="vifmrun"
 
 #Clear command
 alias cls="clear"
@@ -240,7 +246,7 @@ alias vgrub="sudo vim /etc/default/grub"
 alias vconfgrub="sudo vim /boot/grub/grub.cfg"
 alias vmkinitcpio="sudo vim /etc/mkinitcpio.conf"
 alias vmirrorlist="sudo vim /etc/pacman.d/mirrorlist"
-alias vali="vim ~/Documents/alias.list"
+alias vali="vim ~/Documents/lists/alias.list"
 alias vzrc="vim ~/.zshrc"
 alias vzsh="vim ~/.zshrc"
 alias vfis="vim ~/.config/fish/config.fish"

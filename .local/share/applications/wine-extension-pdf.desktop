@@ -2,7 +2,7 @@
 Type=Application
 Name=winebrowser
 MimeType=application/pdf;
-Exec=env WINEPREFIX="/home/karl/Games/watch-dogs" wine start /ProgIDOpen pdffile %f
+Exec=env WINEPREFIX="/home/karl/Games/assassins-creed-valhalla" wine start /ProgIDOpen pdffile %f
 NoDisplay=true
 StartupNotify=true
 Icon=81F5_winebrowser.0
