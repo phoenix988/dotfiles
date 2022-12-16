@@ -1,0 +1,18 @@
+#!/bin/bash
+
+
+declare -A path
+
+$HOME/Yandex.Disk/home
+$HOME/Yandex.Disk/home/.config
+$HOME/dotfiles-repo/.config
+$HOME/dotfiles-repo/
+
+
+
+for diffrent in $(printf '%s\n' "${path[@]}") ; do
+
+echo $diffrent
+
+
+done
