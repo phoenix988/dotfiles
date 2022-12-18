@@ -1,7 +1,7 @@
 #!/usr/bin/fish
 
 #Sets the directory the script will look in
-set lithuaniandir /home/karl/.scripts/learnlithuanian
+set lithuaniandir $HOME/.scripts/learnlithuanian
 
 
 #This will check all the language files you have in $lithuaniandir

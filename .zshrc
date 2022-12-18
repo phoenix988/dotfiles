@@ -107,14 +107,14 @@ source $ZSH/oh-my-zsh.sh
 #Source the starship prompt
 #eval "$(starship init zsh)"
 
-
 source $ZSH/aliases.sh
-#uwufetch
+
+pfetch
 
 
 alias sou="source ~/.zshrc"
 
-add_myscripts="/usr/bin/myscripts"
+add_myscripts="$HOME/.scripts/activated"
 myscripts_exist=$(echo $PATH | sed 's/:/\n/g' | grep $add_myscripts)
 [ -z "$myscripts_exist" ] &&  PATH="$PATH:$add_myscripts"
 
@@ -125,9 +125,6 @@ dmenu_exist=$(echo $PATH | sed 's/:/\n/g' | grep $add_dmenu)
 
 
 [ "$TERM" = "xterm-color" ] && export TERM=xterm-256color
-
-
-
 
 source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH/zsh-autosuggestions/zsh-autosuggestions.zsh

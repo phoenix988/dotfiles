@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dir="/home/karl/nextcloud/Pictures"
+dir="$HOME/nextcloud/Pictures"
 top_dir=$(ls $dir)
 
 

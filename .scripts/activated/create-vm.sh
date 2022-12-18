@@ -17,7 +17,7 @@ sudo virt-install \
      --network network=eth-nat \
      --graphics=none \
      --unattended \
-      user-password-file="/home/karl/.password"
+      user-password-file="$HOME/.password"
      #--console pty,target_type=serial \
-     #--initrd-inject /home/karl/Documents/kickstart/pressed.cfg --extra-args="inst.ks=file:/pressed.cfg console=tty0 console=ttyS0,115200n8"
+     #--initrd-inject $HOME/Documents/kickstart/pressed.cfg --extra-args="inst.ks=file:/pressed.cfg console=tty0 console=ttyS0,115200n8"
      #--extra-args="ks=http://192.168.122.1/ks.cfg console=tty0 console=ttyS0,115200n8"

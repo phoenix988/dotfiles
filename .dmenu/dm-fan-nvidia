@@ -6,5 +6,5 @@ choice=$(printf '%s\n' "${number[@]}" | rofi -dmenu -p "Fan Speed")
 
 [ -z $choice ] && exit
 
-/usr/bin/myscripts/fan-control.sh set $choice
+$HOME/.scripts/activated/fan-control.sh set $choice
 

@@ -5,8 +5,8 @@
 
 
 
-full_path="/home/karl/Documents/payslip"
-path=$( ls -d /home/karl/Documents/payslip/*/*)
+full_path="$HOME/Documents/payslip"
+path=$( ls -d $HOME/Documents/payslip/*/*)
 
 
 for p in $path ; do

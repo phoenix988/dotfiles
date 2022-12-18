@@ -29,7 +29,7 @@ from qtile_extras.widget.decorations import RectDecoration, PowerLineDecoration,
 #Define variables
 mod = "mod4"        # Sets mod key to SUPER/WINDOWS
 #Terminals
-myTerm = "kitty -e /usr/bin/myscripts/create-tmux-session.sh"      # My terminal of choice
+myTerm = "kitty -e /home/karl/.scripts/activated/create-tmux-session.sh"      # My terminal of choice
 myterm = "kitty -e zsh"
 sysmon = "kitty --class=btop -e btop" #System monitor utility
 
@@ -506,7 +506,7 @@ keys = [
                  desc='creates or remove timeshift backup'
                  ),
              Key([], "q", #Opens a VM of your choice in KVM 
-                 lazy.spawn(dmenu_path + "/dm-open-virt-cons"),
+                 lazy.spawn(dmenu_path + "/dm-virt-manager"),
                  desc='Opens a VM of your choice in KVM'
                  ),
              Key([], "j", #Script for pass
@@ -680,7 +680,7 @@ def init_widgets_list():
                         scale = "False",
                         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myterm)},
                         padding = 10
-                        ), 
+                        ),
              widget.Sep(
                        linewidth = 0,
                        padding = 0,

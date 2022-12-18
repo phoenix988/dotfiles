@@ -55,7 +55,7 @@ kitty/
 kitty/fonts.kitty
 kitty/kitty.conf
 kitty/kitty_keys.sh
-kitty/theme.conf -> /home/karl/.config/kitty/kitty-themes/themes/Mydracula.conf
+kitty/theme.conf -> $HOME/.config/kitty/kitty-themes/themes/Mydracula.conf
 kitty/themelist
 kitty/kitty-themes/
 kitty/kitty-themes/.all-contributorsrc
@@ -7836,7 +7836,7 @@ setup/config/kitty/
 setup/config/kitty/fonts.kitty
 setup/config/kitty/kitty.conf
 setup/config/kitty/kitty_keys.sh
-setup/config/kitty/theme.conf -> /home/karl/.config/kitty/kitty-themes/themes/Mydracula.conf
+setup/config/kitty/theme.conf -> $HOME/.config/kitty/kitty-themes/themes/Mydracula.conf
 setup/config/kitty/themelist
 setup/config/kitty/kitty-themes/
 setup/config/myzsh/

@@ -8,7 +8,7 @@ for c_with in $compare_with ; do
 for c_to in $compare_to ; do
 
 
-/usr/bin/myscripts/custom-diff.sh $c_with $c_to
+$HOME/.scripts/activated/custom-diff.sh $c_with $c_to
 
 done
 done

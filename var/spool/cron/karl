@@ -1,10 +1,10 @@
 
 #Backups
-0 3 * * * /usr/bin/myscripts/file_backups/main 
+0 3 * * * $HOME/.scripts/activated/file_backups/main 
 
 
 #RSYNC 
-0 8 * * * /usr/bin/myscripts/file_backups/rsync &> /dev/null
+0 8 * * * $HOME/.scripts/activated/file_backups/rsync &> /dev/null
 
 
 #Backup most of my homefolder except all my symlinks that points to the cloud

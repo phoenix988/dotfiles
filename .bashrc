@@ -63,8 +63,7 @@ ex ()
 
 [[ -f ~/.bashrc-personal ]] && . ~/.bashrc-personal
 
-neofetch
- 
+pfetch
 
 eval "$(starship init bash)"
 

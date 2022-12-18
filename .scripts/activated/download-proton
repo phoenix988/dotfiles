@@ -3,7 +3,7 @@
 
 proton_ver="$1"
 
-steam_path="/home/karl/.steam/root/compatibilitytools.d"
+steam_path="$HOME/.steam/root/compatibilitytools.d"
 
 
 

@@ -4,7 +4,7 @@ date_for_backup=$(date +%d-%h-%Y-%H-%M )
 
 declare -A games_backup
 
-games_backup[cyberpunk2077]="/home/karl/.steam/debian-installation/steamapps/compatdata/4124252510/pfx/drive_c/users/steamuser/"
+games_backup[cyberpunk2077]="$HOME/.steam/debian-installation/steamapps/compatdata/4124252510/pfx/drive_c/users/steamuser/"
 
 game_name=$(printf '%s\n' "${!games_backup[@]}")
 

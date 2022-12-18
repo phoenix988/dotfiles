@@ -1,26 +1,26 @@
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.config/qtile: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.config/qtile: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.config/kitty: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.config/kitty: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.config/fish: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.config/fish: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.config/nvim: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.config/nvim: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.config/mutt: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.config/mutt: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.config/qutebrowser: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.config/qutebrowser: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.config/awesome: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.config/awesome: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.config/chromium: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.config/chromium: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.tmux: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.tmux: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.zshrc: Permission denied
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.zshrc: Permission denied
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.bashrc: Permission denied
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.bashrc: Permission denied
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.tmux.conf.local: Permission denied
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.tmux.conf.local: Permission denied
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.gnupg: Is a directory
-/home/karl/.scripts/activated/file_backups/rsync: line 44: /home/karl/.gnupg: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.config/qtile: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.config/qtile: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.config/kitty: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.config/kitty: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.config/fish: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.config/fish: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.config/nvim: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.config/nvim: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.config/mutt: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.config/mutt: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.config/qutebrowser: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.config/qutebrowser: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.config/awesome: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.config/awesome: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.config/chromium: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.config/chromium: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.tmux: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.tmux: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.zshrc: Permission denied
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.zshrc: Permission denied
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.bashrc: Permission denied
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.bashrc: Permission denied
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.tmux.conf.local: Permission denied
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.tmux.conf.local: Permission denied
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.gnupg: Is a directory
+$HOME/.scripts/activated/file_backups/rsync: line 44: $HOME/.gnupg: Is a directory

@@ -12,8 +12,8 @@ tar_error_log="error-tar-$date_log"
 [ -d $path_log ] || mkdir -p $path_log
 
 #creates the backups
-/home/karl/.scripts/activated/file-backups/tarball > $path-log/$tar-name-log 2> $path-log/$tar-error-log & /home/karl/.scripts/activated/file-backups/rsync &> $path-log/$rsync-name-log 2> $path-log/$rsync-error-log
+$HOME/.scripts/activated/file-backups/tarball > $path-log/$tar-name-log 2> $path-log/$tar-error-log & $HOME/.scripts/activated/file-backups/rsync &> $path-log/$rsync-name-log 2> $path-log/$rsync-error-log
 
 #clear all the log files thats older than 1 month
-/home/karl/.scripts/activated/file-backups/clear-log
+$HOME/.scripts/activated/file-backups/clear-log
 

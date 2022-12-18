@@ -2,7 +2,7 @@
 
 
 #update aliases
-alias uali="bash /usr/bin/myscripts/c-aliases.sh"
+alias uali="bash $HOME/.scripts/activated/c-aliases.sh"
 
 #show ip
 alias ipa="ifconfig | awk '/inet/ {print $2}' | head -n4"
@@ -20,6 +20,7 @@ alias hidden="ls -A | grep -v ^[A-Z] | grep -v ^[a-z]"
 
 #change cat to bat
 alias cat='bat'
+alias ncat='/usr/bin/cat'
 #alias bat='batcat'
 alias htop='btop'
 
@@ -289,5 +290,6 @@ export omf=/home/karl/.config/fish/conf.d/omf.fish
 export awe=/home/karl/.config/awesome/rc.lua
 export qt=/home/karl/.config/qtile/config.py
 export github='https://github.com'
+export date_for_backup=$(date +%d-%h-%Y-%H-%M )  
 
 

@@ -1,0 +1,51 @@
+#!/bin/bash
+
+#script to get all my config files
+dotfiles_repo_path="$HOME/.dotfiles"
+
+declare -A config_mv
+
+config_sync[$HOME/.config/qtile]="$dotfiles_repo_path/.config"
+config_sync[$HOME/.config/nvim]="$dotfiles_repo_path/.config"
+config_sync[$HOME/.config/kitty]="$dotfiles_repo_path/.config"
+config_sync[$HOME/.config/bash]="$dotfiles_repo_path/.config"
+config_sync[$HOME/.config/fish]="$dotfiles_repo_path/.config"
+config_sync[$HOME/.config/dunst]="$dotfiles_repo_path/.config"
+config_sync[$HOME/.config/rofi]="$dotfiles_repo_path/.config"
+config_sync[$HOME/.config/vifm]="$dotfiles_repo_path/.config"
+config_sync[$HOME/.config/starship.toml]="$dotfiles_repo_path/.config"
+config_sync[$HOME/.config/picom]="$dotfiles_repo_path/.config"
+config_sync[$HOME/.config/conky]="$dotfiles_repo_path/.config"
+config_sync[$HOME/.config/qutebrowser]="$dotfiles_repo_path/.config"
+config_sync[$HOME/.config/sxiv]="$dotfiles_repo_path/.config"
+config_sync[$HOME/.config/urxvt]="$dotfiles_repo_path/.config"
+config_sync[$HOME/.config/alacritty]="$dotfiles_repo_path/.config"
+config_sync[$HOME/.config/gtk-3.0]="$dotfiles_repo_path/.config"
+config_sync[$HOME/.config/oh-my-zsh/themes]="$dotfiles_repo_path/.config/oh-my-zsh/"
+config_sync[$HOME/.zshrc]="$dotfiles_repo_path/"
+config_sync[$HOME/.bashrc]="$dotfiles_repo_path/"
+config_sync[$HOME/.fehbg]="$dotfiles_repo_path/"
+config_sync[$HOME/.NERDTreeBookmarks]="$dotfiles_repo_path/"
+config_sync[$HOME/.gtkrc-2.0]="$dotfiles_repo_path/"
+config_sync[$HOME/.xmonad]="$dotfiles_repo_path/"
+config_sync[$HOME/.spectrwm.conf]="$dotfiles_repo_path/"
+config_sync[$HOME/.Xresources]="$dotfiles_repo_path/"
+config_sync[$HOME/.tmux.conf.local]="$dotfiles_repo_path/"
+config_sync[$HOME/.scripts]="$dotfiles_repo_path/"
+config_sync[$HOME/.dmenu]="$dotfiles_repo_path/"
+config_sync[$HOME/Documents/lists]="$dotfiles_repo_path/Documents/"
+config_sync[$HOME/.local/share/applications]="$dotfiles_repo_path/.local/share/"
+
+
+
+
+
+for mv in $(printf '%s\n' "${!config_mv}") ; do
+
+
+       path_to_copy_from=$(printf '%s\n' "${config_sync["${mv}"]}")
+      echo $path_to_copy_from
+
+
+
+done

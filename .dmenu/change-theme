@@ -13,6 +13,7 @@ declare -a options=(
 "iceberg"
 "nord"
 "dracula"
+"darkaneon"
 )
 
 #Declares some path variables
@@ -20,8 +21,8 @@ qtile_path="$HOME/.config/qtile"
 kitty_path="$HOME/.config/kitty"
 rofi_path="$HOME/.config/rofi"
 conky_path="$HOME/.config/conky"
-nvim_path="/home/karl/.config/nvim/vim-plug"
-nvim_path_init="/home/karl/.config/nvim"
+nvim_path="$HOME/.config/nvim/vim-plug"
+nvim_path_init="$HOME/.config/nvim"
 gtk3_path="$HOME/.config/gtk-3.0"
 vifm_path="$HOME/.config/vifm"
 
@@ -98,6 +99,7 @@ sed -i "$current_nvim_theme_line|$current_nvim_theme|$choice|g" $nvim_path/plugi
 #Unlinks current kitty and conky theme
 unlink $kitty_path/theme.conf
 unlink $conky_path/main
+unlink $qtile_path/color.py
 
 #Kills current conky
 killall conky
@@ -112,7 +114,8 @@ conky -c $conky_path/main
 ln -s $kitty_path/kitty-themes/themes/$make_capital.conf $kitty_path/theme.conf 
 
 #Update my qtile colorscheme 
-sed -i "s|$current_qtile_theme|$choice|g" $qtile_path/config.py
+#sed -i "s|$current_qtile_theme|$choice|g" $qtile_path/config.py
+ln -s $qtile_path/themes/$choice.py $qtile_path/color.py
 
 
 

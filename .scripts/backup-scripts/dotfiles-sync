@@ -14,9 +14,10 @@ config_sync[$HOME/.config/kitty]="$dotfiles_repo_path/.config"
 config_sync[$HOME/.config/bash]="$dotfiles_repo_path/.config"
 config_sync[$HOME/.config/fish]="$dotfiles_repo_path/.config"
 config_sync[$HOME/.config/dunst]="$dotfiles_repo_path/.config"
+config_sync[$HOME/.config/rofi]="$dotfiles_repo_path/.config"
 config_sync[$HOME/.config/vifm]="$dotfiles_repo_path/.config"
 config_sync[$HOME/.config/starship.toml]="$dotfiles_repo_path/.config"
-config_sync[$HOME/.config/rofi]="$dotfiles_repo_path/.config"
+config_sync[$HOME/.config/picom]="$dotfiles_repo_path/.config"
 config_sync[$HOME/.config/conky]="$dotfiles_repo_path/.config"
 config_sync[$HOME/.config/qutebrowser]="$dotfiles_repo_path/.config"
 config_sync[$HOME/.config/sxiv]="$dotfiles_repo_path/.config"
@@ -39,9 +40,54 @@ config_sync[$HOME/Documents/lists]="$dotfiles_repo_path/Documents/"
 config_sync[$HOME/.local/share/applications]="$dotfiles_repo_path/.local/share/"
 
 
+declare -A cloud_sync
+
+cloud_sync[$HOME/.config/qtile]="$cloud_path/.config"
+cloud_sync[$HOME/.config/nvim]="$cloud_path/.config"
+cloud_sync[$HOME/.config/kitty]="$cloud_path/.config"
+cloud_sync[$HOME/.config/bash]="$cloud_path/.config"
+cloud_sync[$HOME/.config/fish]="$cloud_path/.config"
+cloud_sync[$HOME/.config/dunst]="$cloud_path/.config"
+cloud_sync[$HOME/.config/picom]="$cloud_path/.config"
+cloud_sync[$HOME/.config/vifm]="$cloud_path/.config"
+cloud_sync[$HOME/.config/starship.toml]="$cloud_path/.config"
+cloud_sync[$HOME/.config/rofi]="$cloud_path/.config"
+cloud_sync[$HOME/.config/conky]="$cloud_path/.config"
+cloud_sync[$HOME/.config/qutebrowser]="$cloud_path/.config"
+cloud_sync[$HOME/.config/sxiv]="$cloud_path/.config"
+cloud_sync[$HOME/.config/urxvt]="$cloud_path/.config"
+cloud_sync[$HOME/.config/alacritty]="$cloud_path/.config"
+cloud_sync[$HOME/.config/gtk-3.0]="$cloud_path/.config"
+cloud_sync[$HOME/.config/oh-my-zsh/themes]="$cloud_path/.config/oh-my-zsh/"
+cloud_sync[$HOME/.zshrc]="$cloud_path/"
+cloud_sync[$HOME/.zsh_history]="$cloud_path/"
+cloud_sync[$HOME/.bashrc]="$cloud_path/"
+cloud_sync[$HOME/.fehbg]="$cloud_path/"
+cloud_sync[$HOME/.NERDTreeBookmarks]="$cloud_path/"
+cloud_sync[$HOME/.gtkrc-2.0]="$cloud_path/"
+cloud_sync[$HOME/.xmonad]="$cloud_path/"
+cloud_sync[$HOME/.spectrwm.conf]="$cloud_path/"
+cloud_sync[$HOME/.Xresources]="$cloud_path/"
+cloud_sync[$HOME/.tmux.conf.local]="$cloud_path/"
+cloud_sync[$HOME/.scripts]="$cloud_path/"
+cloud_sync[$HOME/.password-store]="$cloud_path/"
+cloud_sync[$HOME/.dmenu]="$cloud_path/"
+cloud_sync[$HOME/Documents/lists]="$cloud_path/Documents/"
+cloud_sync[$HOME/.local/share/applications]="$cloud_path/.local/share/"
+
+
+
 for sync in $(printf '%s\n' "${!config_sync[@]}") ; do
 
     path=$(printf '%s\n' "${config_sync["${sync}"]}")
+
+    rsync -avh --delete $sync $path 
+
+done
+
+for sync in $(printf '%s\n' "${!cloud_sync[@]}") ; do
+
+    path=$(printf '%s\n' "${cloud_sync["${sync}"]}")
 
     rsync -avh --delete $sync $path 
 

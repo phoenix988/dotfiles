@@ -108,24 +108,24 @@ ${color1}[S]+[SHIFT]+hjkl${alignr}${color2}move window${color}
 ${color1}[S]+[0-9]${alignr}${color2}switch workspace${color}
 ${color1}[S]+[SHIFT]+[0-9]${alignr}${color2}send window${color}
 ${color1}${hr}${color}
-${color1}[CTRL]+t, e${alignr}${color2}VIFM${color}
-${color1}[CTRL]+t, h${alignr}${color2}htop${color}
-${color1}[CTRL]+t, r${alignr}${color2}Ranger${color}
-${color1}[CTRL]+t, v${alignr}${color2}VIM${color}
-${color1}[CTRL]+t, r${alignr}${color2}rofi theme${color}
+${color1}[MOD]+z, e${alignr}${color2}VIFM${color}
+${color1}[MOD]+z, h${alignr}${color2}htop${color}
+${color1}[MOD]+z, r${alignr}${color2}Ranger${color}
+${color1}[MOD]+z, v${alignr}${color2}VIM${color}
+${color1}[MOD]+z, t${alignr}${color2}rofi theme${color}
 ${color1}${hr}${color}
 ${color1}[S]+p, e${alignr}${color2}dm-confedit${color}
-${color1}[S]+p, r${alignr}${color2}dm-root_confedit${color}
-${color1}[S]+p, q${alignr}${color2}dm-virt${color}
+${color1}[S]+p, r${alignr}${color2}dm-root-confedit${color}
+${color1}[S]+p, q${alignr}${color2}dm-virt-manager${color}
 ${color1}[S]+p, k${alignr}${color2}dm-kill${color}
-${color1}[S]+p, v${alignr}${color2}dm-vpn${color}
+${color1}[S]+p, v${alignr}${color2}dm-nordvpn${color}
 ${color1}[S]+p, o${alignr}${color2}dm-openweb${color}
 ${color1}[S]+p, w${alignr}${color2}dm-wallpaper${color}
 ${color1}[S]+p, f${alignr}${color2}dm-fullscreen${color}
 ${color1}[S]+p, s${alignr}${color2}dm-search${color}
 ${color1}[S]+p, m${alignr}${color2}dm-mount${color}
 ${color1}[S]+p, t${alignr}${color2}dm-kittytheme${color}
-${color1}[S]+p, a${alignr}${color2}dm-audiosource${color}
+${color1}[S]+p, a${alignr}${color2}dm-audioset${color}
 ${color1}${hr}${color}
 ${color1}[S]+[SHIFT]+r${alignr}${color2}restart qtile${color}
 ${color1}[S]+[SHIFT]+q${alignr}${color2}quit qtile${color}

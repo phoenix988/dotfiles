@@ -22,19 +22,19 @@ curve7="90"
 
 
 
-[ $temp_card -gt "$temp1" ] && /usr/bin/myscripts/fan-control.sh set $curve1 &> /dev/null
+[ $temp_card -gt "$temp1" ] && $HOME/.scripts/activated/fan-control.sh set $curve1 &> /dev/null
 
-[ $temp_card -gt "$temp2" ] && /usr/bin/myscripts/fan-control.sh set $curve2 &> /dev/null
+[ $temp_card -gt "$temp2" ] && $HOME/.scripts/activated/fan-control.sh set $curve2 &> /dev/null
 
-[ $temp_card -gt "$temp3" ] && /usr/bin/myscripts/fan-control.sh set $curve3 &> /dev/null
+[ $temp_card -gt "$temp3" ] && $HOME/.scripts/activated/fan-control.sh set $curve3 &> /dev/null
 
-[ $temp_card -gt "$temp4" ] && /usr/bin/myscripts/fan-control.sh set $curve4 &> /dev/null
+[ $temp_card -gt "$temp4" ] && $HOME/.scripts/activated/fan-control.sh set $curve4 &> /dev/null
 
-[ $temp_card -gt "$temp5" ] && /usr/bin/myscripts/fan-control.sh set $curve5 &> /dev/null
+[ $temp_card -gt "$temp5" ] && $HOME/.scripts/activated/fan-control.sh set $curve5 &> /dev/null
 
-[ $temp_card -gt "$temp6" ] && /usr/bin/myscripts/fan-control.sh set $curve6 &> /dev/null
+[ $temp_card -gt "$temp6" ] && $HOME/.scripts/activated/fan-control.sh set $curve6 &> /dev/null
 
-[ $temp_card -gt "$temp7" ] && /usr/bin/myscripts/fan-control.sh set $curve7 &> /dev/null
+[ $temp_card -gt "$temp7" ] && $HOME/.scripts/activated/fan-control.sh set $curve7 &> /dev/null
 
 
 done
