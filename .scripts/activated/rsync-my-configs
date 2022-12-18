@@ -1,51 +1,52 @@
 #!/bin/bash
 
 #script to get all my config files
-dotfiles_repo_path="$HOME/.dotfiles"
+dotfiles_repo_path="$HOME/dotfiles"
 
 declare -A config_mv
 
-config_sync[$HOME/.config/qtile]="$dotfiles_repo_path/.config"
-config_sync[$HOME/.config/nvim]="$dotfiles_repo_path/.config"
-config_sync[$HOME/.config/kitty]="$dotfiles_repo_path/.config"
-config_sync[$HOME/.config/bash]="$dotfiles_repo_path/.config"
-config_sync[$HOME/.config/fish]="$dotfiles_repo_path/.config"
-config_sync[$HOME/.config/dunst]="$dotfiles_repo_path/.config"
-config_sync[$HOME/.config/rofi]="$dotfiles_repo_path/.config"
-config_sync[$HOME/.config/vifm]="$dotfiles_repo_path/.config"
-config_sync[$HOME/.config/starship.toml]="$dotfiles_repo_path/.config"
-config_sync[$HOME/.config/picom]="$dotfiles_repo_path/.config"
-config_sync[$HOME/.config/conky]="$dotfiles_repo_path/.config"
-config_sync[$HOME/.config/qutebrowser]="$dotfiles_repo_path/.config"
-config_sync[$HOME/.config/sxiv]="$dotfiles_repo_path/.config"
-config_sync[$HOME/.config/urxvt]="$dotfiles_repo_path/.config"
-config_sync[$HOME/.config/alacritty]="$dotfiles_repo_path/.config"
-config_sync[$HOME/.config/gtk-3.0]="$dotfiles_repo_path/.config"
-config_sync[$HOME/.config/oh-my-zsh/themes]="$dotfiles_repo_path/.config/oh-my-zsh/"
-config_sync[$HOME/.zshrc]="$dotfiles_repo_path/"
-config_sync[$HOME/.bashrc]="$dotfiles_repo_path/"
-config_sync[$HOME/.fehbg]="$dotfiles_repo_path/"
-config_sync[$HOME/.NERDTreeBookmarks]="$dotfiles_repo_path/"
-config_sync[$HOME/.gtkrc-2.0]="$dotfiles_repo_path/"
-config_sync[$HOME/.xmonad]="$dotfiles_repo_path/"
-config_sync[$HOME/.spectrwm.conf]="$dotfiles_repo_path/"
-config_sync[$HOME/.Xresources]="$dotfiles_repo_path/"
-config_sync[$HOME/.tmux.conf.local]="$dotfiles_repo_path/"
-config_sync[$HOME/.scripts]="$dotfiles_repo_path/"
-config_sync[$HOME/.dmenu]="$dotfiles_repo_path/"
-config_sync[$HOME/Documents/lists]="$dotfiles_repo_path/Documents/"
-config_sync[$HOME/.local/share/applications]="$dotfiles_repo_path/.local/share/"
+config_mv[$HOME/.config/qtile]="$dotfiles_repo_path/.config"
+config_mv[$HOME/.config/nvim]="$dotfiles_repo_path/.config"
+config_mv[$HOME/.config/kitty]="$dotfiles_repo_path/.config"
+config_mv[$HOME/.config/bash]="$dotfiles_repo_path/.config"
+config_mv[$HOME/.config/fish]="$dotfiles_repo_path/.config"
+config_mv[$HOME/.config/dunst]="$dotfiles_repo_path/.config"
+config_mv[$HOME/.config/rofi]="$dotfiles_repo_path/.config"
+config_mv[$HOME/.config/vifm]="$dotfiles_repo_path/.config"
+config_mv[$HOME/.config/starship.toml]="$dotfiles_repo_path/.config"
+config_mv[$HOME/.config/picom]="$dotfiles_repo_path/.config"
+config_mv[$HOME/.config/conky]="$dotfiles_repo_path/.config"
+config_mv[$HOME/.config/qutebrowser]="$dotfiles_repo_path/.config"
+config_mv[$HOME/.config/sxiv]="$dotfiles_repo_path/.config"
+config_mv[$HOME/.config/urxvt]="$dotfiles_repo_path/.config"
+config_mv[$HOME/.config/alacritty]="$dotfiles_repo_path/.config"
+config_mv[$HOME/.config/gtk-3.0]="$dotfiles_repo_path/.config"
+config_mv[$HOME/.config/oh-my-zsh/themes]="$dotfiles_repo_path/.config/oh-my-zsh"
+config_mv[$HOME/.zshrc]="$dotfiles_repo_path"
+config_mv[$HOME/.bashrc]="$dotfiles_repo_path"
+config_mv[$HOME/.fehbg]="$dotfiles_repo_path"
+config_mv[$HOME/.NERDTreeBookmarks]="$dotfiles_repo_path"
+config_mv[$HOME/.gtkrc-2.0]="$dotfiles_repo_path"
+config_mv[$HOME/.xmonad]="$dotfiles_repo_path"
+config_mv[$HOME/.spectrwm.conf]="$dotfiles_repo_path"
+config_mv[$HOME/.Xresources]="$dotfiles_repo_path"
+config_mv[$HOME/.tmux.conf.local]="$dotfiles_repo_path"
+config_mv[$HOME/.scripts]="$dotfiles_repo_path"
+config_mv[$HOME/.dmenu]="$dotfiles_repo_path"
+config_mv[$HOME/Documents/lists]="$dotfiles_repo_path/Documents"
+config_mv[$HOME/.local/share/applications]="$dotfiles_repo_path/.local/share"
 
 
 
 
 
-for mv in $(printf '%s\n' "${!config_mv}") ; do
+for mv in $(printf '%s\n' "${!config_mv[@]}") ; do
 
+       config=$(printf $mv | awk -F "/" '{print $NF}')  
 
-       path_to_copy_from=$(printf '%s\n' "${config_sync["${mv}"]}")
-      echo $path_to_copy_from
+       config_dotfile=$(printf '%s\n' "${config_mv["${mv}"]}" | sed "s|$dotfiles_repo_path|$HOME|g" | awk -v conf=$config '{print $0 "/"}')
 
-
-
+       path_to_copy_from=$(printf '%s\n' "${config_mv["${mv}"]}" | awk -v conf=$config '{print $0  "/" conf}' )
+       
+       rsync -avh --delete $path_to_copy_from $config_dotfile
 done
