@@ -40,7 +40,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
    "hex colors
    Plug 'chrisbra/Colorizer'
 
-   call plug#end()
+   "Terminal
+   Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+   
+  call plug#end()
 
    " set your colorscheme
      colorscheme nord

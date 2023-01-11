@@ -126,8 +126,11 @@ dmenu_exist=$(echo $PATH | sed 's/:/\n/g' | grep $add_dmenu)
 
 [ "$TERM" = "xterm-color" ] && export TERM=xterm-256color
 
-source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 source $ZSH/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZSH/zsh-vim-mode/zsh-vim-mode.plugin.zsh
+
 
 
 bindkey '^ ' autosuggest-accept
@@ -169,3 +172,4 @@ ex ()
 export GPG_TTY=$(tty)
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
+

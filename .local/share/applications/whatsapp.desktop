@@ -4,6 +4,6 @@ Version=1.0
 Terminal=false
 Type=Application
 Name=Whatsapp
-Exec=/opt/brave.com/brave/brave-browser --profile-directory=Default --app=https:/web.whatsapp.com
+Exec=/snap/bin/whatsapp-app
 Icon=whatsapp
 StartupWMClass=crx_whatsapp

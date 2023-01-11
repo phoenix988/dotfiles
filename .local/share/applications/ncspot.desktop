@@ -1,0 +1,9 @@
+[Desktop Entry]
+Categories=Utility;
+Comment=Simple spotify ncursed client
+Exec=kitty -e ncspot
+Icon=ncspot
+Name=ncspot
+NoDisplay=false
+Terminal=true
+Type=Application

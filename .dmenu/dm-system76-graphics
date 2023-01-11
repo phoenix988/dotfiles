@@ -1,0 +1,9 @@
+#!/bin/bash
+
+declare -a options=(nvidia integrated compute hybrid)
+
+choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu -p "Choose your graphics mode (Restart required): ")
+
+[ -z $choice ] && exit
+
+system76-power graphics $choice
