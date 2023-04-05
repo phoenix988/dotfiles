@@ -13,6 +13,7 @@ fi
 #Readssites from qutebrowsers quickmark tab
 doc_path=$(ls -a /usr/share/doc/arch-wiki/html/en )
 
+[ -z $doc_path ] && exit
 
 choice=$(printf '%s\n' $doc_path | cut -d. -f1 | rofi -dmenu -p "Search the arch wiki:")
 

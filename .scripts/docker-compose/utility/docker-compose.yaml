@@ -1,0 +1,51 @@
+version: "2.1"
+services:
+  plex:
+    image: ghcr.io/linuxserver/plex
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Vilnius
+      - PLEX_CLAIM=claim-jWtx5mn5AtHwLhz3eDiy
+      - VERSION=docker
+    volumes:
+      - /mnt/docker-volumes/plex/_data:/config
+      - /media/movies/shows:/movies
+      - /media/movies/films:/tv
+    restart: unless-stopped
+  transmission:
+    image: ghcr.io/linuxserver/transmission
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Vilnius
+      - USER=karl  
+      - PASS=Konul.karl
+      - TRANSMISSION_WEB_HOME=/flood-for-transmission/
+    volumes:
+      - /mnt/docker-volumes/transmission/_data:/config
+      - /media/downloads:/downloads
+      - /media/movies:/movies
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped
+  heimdall:    
+    image: ghcr.io/linuxserver/heimdall
+    container_name: heimdall
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Vilnius
+    volumes:
+      - /mnt/docker-volumes/heimdal/_data:/config
+    ports:
+      - 7443:443
+      - 90:80
+    restart: unless-stopped
+
+      

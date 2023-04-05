@@ -1,0 +1,5 @@
+#!/bin/bash
+
+image=$(cat ~/.fehbg | grep feh | awk '{print $NF}')
+
+swaylock -i $image
