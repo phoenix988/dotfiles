@@ -1,0 +1,36 @@
+#!/bin/bash
+
+
+#Creates the array
+declare -a options=(
+
+"$HOME/Pictures/Wallpapers"
+"$HOME/Pictures/Arch"
+"$HOME/Pictures/Nature/"
+"$HOME/Pictures/nord/"
+
+
+)
+
+#Removes all the directories thats empty from the option
+for opt in "${options[@]}" ; do
+
+    check_empty=$(ls $opt/*) 
+     
+    [ -z "$check_empty" ] || wallpapers=$(echo $wallpapers $opt)
+
+done
+
+
+#Make your choice
+choice=$(printf '%s\n' "${wallpapers[@]}" | xargs -n1 |  wofi --show dmenu -p "Choose your wallpaper" )
+
+
+
+
+listofbackgrounds=$(ls -d $choice/* )  
+
+#Change background using sxiv
+ls $listofbackgrounds | sxiv -i
+
+

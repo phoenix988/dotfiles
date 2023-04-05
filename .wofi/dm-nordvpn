@@ -1,0 +1,25 @@
+#!/bin/bash
+
+connect=$(echo "Disconnect" "Quick_Connect" "Random" "Country" | xargs -n1)
+countries=$(nordvpn countries | xargs -n1 | sed -e '/^-/d' -e 's/,//')  
+countries=$(echo $countries  | xargs -n1)
+random_list=$(nordvpn countries | xargs -n1 | sed -e '/^-/d' -e 's/,//' | sort -R | head -n1)  
+
+choice=$(printf '%s\n' "${connect[@]}" | wofi --show dmenu  -p "Option:" )
+
+
+[ -z $choice ] &&  exit 
+[ "$choice" = "Disconnect" ] &&  nordvpn disconnect 
+[ "$choice" = "Quick_Connect" ] &&  nordvpn connect 
+[ "$choice" = "Random" ] &&  nordvpn connect $random_list
+
+   
+[ $choice = "Country" ] && choice=$(printf '%s\n' "${countries[@]}" | wofi --show dmenu  -p "Country to connect to:" ) && nordvpn connect $choice
+
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+choice_bg=$( ls $HOME/Pictures/backgrounds )
+
+
+echo $choice_bg
+
+
+declare -a options=(
+
+$choice_bg
+
+
+
+)
+    
+
+choice=$(printf '%s\n' "${options[@]}" | wofi --show dmenu -p "Choose background for your lockscreen:"  )
+
+
+ls /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg && sudo unlink /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg
+
+
+sudo ln -s $HOME/Pictures/backgrounds/$choice /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg

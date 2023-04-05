@@ -1,0 +1,9 @@
+#!/usr/bin/fish
+
+
+set choice ( find $HOME/Yandex.Disk/ $HOME/.config  -iname "*.pdf"   | wofi --show dmenu -p "PDF file: " )
+ [ -z $choice ] && exit
+
+zathura $choice
+
+

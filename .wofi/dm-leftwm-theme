@@ -1,0 +1,16 @@
+#!/bin/bash
+
+
+
+
+files=$(ls $HOME/.config/leftwm/themes | grep -v current)
+path="$HOME/.config/leftwm/themes"
+
+
+choice=$(echo "$files" | xargs -n1 | wofi --show dmenu -p "select theme: " )
+
+
+unlink $path/current
+
+
+ln -s $path/$choice $path/current 

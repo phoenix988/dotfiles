@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+emojis=$(cat $HOME/Documents/emojis)
+
+
+choice=$(printf '%s\n' ${emojis[@]} | wofi --show dmenu -p "emoji " )
+
+
+[ -z $choice ] && exit
+
+
+echo $choice | xclip -selection clipboard
+
+

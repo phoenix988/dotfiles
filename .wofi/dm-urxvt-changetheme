@@ -1,0 +1,27 @@
+#!/bin/bash
+
+theme=$( ls $HOME/.config/urxvt/themes )
+
+export urxvt_link_path=$HOME
+
+choice=$(printf '%s\n' "${theme[@]}" | wofi --show dmenu -p "Choose Theme:"   )
+
+
+if [ -z $choice ] ; then 
+
+echo " "
+
+
+else
+
+unlink $urxvt_link_path/.Xresources      
+
+ln -s $HOME/.config/urxvt/themes/$choice $HOME/.Xresources 
+
+
+xrdb $HOME/.Xresources
+
+
+fi 
+
+

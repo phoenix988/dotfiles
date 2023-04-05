@@ -1,0 +1,29 @@
+#!/usr/bin/fish
+#
+#
+set my_vms (virsh  list --all | awk '{print $2}' | sed -e 's/Name//g' -e '/^$/d' )
+
+set choice (echo "New-VM" $my_vms | xargs -n1 | wofi --show dmenu -p 'Choose VM: ')
+
+[ -z $choice ] && exit
+
+[ $choice = "New-VM" ] && virt-manager --show-domain-creator --connect qemu:///system && exit 
+
+set state (virsh list --all | grep $choice | awk '{print $3}') 
+
+
+if [ "$state" = "shut" ]  
+    
+    set start_choice (echo "yes" "no" | xargs -n1 | wofi --show dmenu -p 'VM not running, Do you want to start it ? :')
+
+[ -z $start_choice ] && exit
+
+end
+
+[ "$start_choice" = "yes" ]  && virsh start $choice 
+
+
+virt-manager --show-domain-console $choice --connect qemu:///system     
+
+
+

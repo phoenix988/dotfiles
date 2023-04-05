@@ -1,0 +1,29 @@
+#!/bin/bash
+
+
+
+sinks=$(pactl list sinks | grep -i source | awk '{print $NF}' | sed 's/.monitor//g' ) 
+
+declare -a options=(
+
+$sinks
+
+
+)
+
+choice=$(printf '%s\n' "${options[@]}" | sed -e 's/alsa_output.//g' | wofi --show dmenu -p "Choose Source:"  )
+
+
+
+[ -z $choice  ] && exit 
+
+
+fix_choice=$(echo $choice | sed -e 's/^/alsa_output./g')
+
+pactl set-default-sink $fix_choice
+
+
+
+
+
+
