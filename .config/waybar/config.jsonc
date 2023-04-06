@@ -8,8 +8,8 @@
     "height": 0,
     "modules-left": [
         "clock",
-        // "cpu",
-        // "memory",
+        "cpu",
+        "memory",
         "custom/weather",
         "wlr/workspaces"
     ],
@@ -17,6 +17,7 @@
     "modules-right": [
         "tray",
         "custom/updates",
+        "temperature",
         "hyprland/language",
         "pulseaudio",
         "pulseaudio#microphone"
@@ -28,9 +29,9 @@
     "wlr/workspaces": {
         "on-scroll-up": "hyprctl dispatch workspace e+1",
         "on-scroll-down": "hyprctl dispatch workspace e-1",
-        "all-outputs": true,
+        "all-outputs": false,
         "on-click": "activate",
-        "format": "{icon}",
+        // "format": "{icon}",
         "format-icons": {
             "1": "",
             "2": "",
@@ -43,7 +44,7 @@
           }
     },
      "cpu": {
-         "interval": 10,
+         "interval": 3,
          "format": " {}%",
          "max-length": 10,
          "on-click": ""
@@ -59,6 +60,14 @@
         "interval": 7200,
         "format": " {}"
     },
+        "temperature": {
+        // "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
+        "interval": 2,
+        // "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C ",
+        "format": "{temperatureC}°C "
+     },
      "custom/language": {
          "exec": "cat /tmp/kb_layout",
          "interval": 3,
