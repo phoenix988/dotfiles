@@ -129,7 +129,7 @@ dmenu_exist=$(echo $PATH | sed 's/:/\n/g' | grep $add_dmenu)
 
 source $ZSH/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $ZSH/zsh-vim-mode/zsh-vim-mode.plugin.zsh
+#source $ZSH/zsh-vim-mode/zsh-vim-mode.plugin.zsh
 
 
 
