@@ -1,5 +1,5 @@
 #!/bin/bash
-
+source $HOME/.dmenu/.config/dm-script.conf
 
 #script to kill processes
 
@@ -9,8 +9,9 @@ ps=$( ps ch -eo pid,comm,user | grep $USER )
 
 
 
-choice=$(printf '%s\n' "${ps[@]}" | awk '{print $2}' | rofi -dmenu  -p "Kill:")
+choice=$(printf '%s\n' "${ps[@]}" | awk '{print $2}' | run  -p "Kill:")
 
+[ -z $choice ] && exit
 
 
 ps=$( ps ch -eo pid,comm,user | grep $choice | awk '{print $1}' )

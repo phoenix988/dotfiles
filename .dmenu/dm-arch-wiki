@@ -1,5 +1,5 @@
 #!/bin/bash
-
+source $HOME/.dmenu/.config/dm-script.conf
 
 
 #This script will only work for qtile rightnow unless you modify it
@@ -15,7 +15,7 @@ doc_path=$(ls -a /usr/share/doc/arch-wiki/html/en )
 
 [ -z $doc_path ] && exit
 
-choice=$(printf '%s\n' $doc_path | cut -d. -f1 | rofi -dmenu -p "Search the arch wiki:")
+choice=$(printf '%s\n' $doc_path | cut -d. -f1 | run -p "Search the arch wiki:")
 
 [ -z $choice  ] && exit 
 

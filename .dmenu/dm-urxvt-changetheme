@@ -1,10 +1,10 @@
 #!/bin/bash
-
+source $HOME/.dmenu/.config/dm-script.conf
 theme=$( ls $HOME/.config/urxvt/themes )
 
 export urxvt_link_path=$HOME
 
-choice=$(printf '%s\n' "${theme[@]}" | rofi -dmenu -p "Choose Theme:"   )
+choice=$(printf '%s\n' "${theme[@]}" | run -p "Choose Theme:"   )
 
 
 if [ -z $choice ] ; then 

@@ -1,5 +1,5 @@
 #!/bin/bash
-
+source $HOME/.dmenu/.config/dm-script.conf
 declare -A fanmode
 
 fanmode[Turbo]="1"
@@ -8,7 +8,10 @@ fanmode[Silent]="2"
 
 
 
-choice=$(printf '%s\n' "${!fanmode[@]}" | wofi --show dmenu -p "Choose Fan Mode:")
+choice=$(printf '%s\n' "${!fanmode[@]}" | run -p "Choose Fan Mode")
+
+[ -z $choice ] && exit
+
 selection=$(printf '%s\n' "${fanmode["${choice}"]}")
 
 cd /sys/devices/platform/asus-nb-wmi   

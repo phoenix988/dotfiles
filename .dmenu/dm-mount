@@ -1,5 +1,5 @@
 #!/bin/bash 
-
+source $HOME/.dmenu/.config/dm-script.conf
 
 check_back="Back"
 
@@ -29,7 +29,7 @@ declare -a options=(
       
 
 
-    choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu -p "Choose Mountpoint or Mount/Umount All ?:" )
+    choice=$(printf '%s\n' "${options[@]}" | run -p "Choose Mountpoint or Mount/Umount All ?:" )
 
 if [  "$choice" = "Exit" ] ; then
 
@@ -86,7 +86,7 @@ check_choice=""
 while [ "$check_choice" != "Back" ] ; do
 
 
-new_choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu -p  "Choose Mountpoint or Mount/Umount All ?:" )
+new_choice=$(printf '%s\n' "${options[@]}" | run -p  "Choose Mountpoint or Mount/Umount All ?:" )
 
 [ $new_choice = "Exit" ] && exit
 

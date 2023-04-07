@@ -1,8 +1,8 @@
 #!/bin/bash
-
+source $HOME/.dmenu/.config/dm-script.conf
 declare -a options=(nvidia integrated compute hybrid)
 
-choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu -p "Choose your graphics mode (Restart required): ")
+choice=$(printf '%s\n' "${options[@]}" | run -p "Choose your graphics mode (Restart required): ")
 
 [ -z $choice ] && exit
 

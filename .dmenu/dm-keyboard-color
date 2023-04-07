@@ -1,5 +1,5 @@
 #!/bin/bash
-
+source $HOME/.dmenu/.config/dm-script.conf
 declare -a options=(
 
 "rainbow_cycle"
@@ -22,11 +22,11 @@ declare -a speed_options=(
 )
 
 
-choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu -p "Choose color mode: ")
+choice=$(printf '%s\n' "${options[@]}" | run -p "Choose color mode: ")
 
 if [ $choice = "rainbow_cycle" ] ; then    
 
-     speed=$(printf '%s\n' "${speed_options[@]}" | rofi -dmenu -p "Choose speed")
+     speed=$(printf '%s\n' "${speed_options[@]}" | run -p "Choose speed")
      sudo rogauracore $choice $speed 
 
 else

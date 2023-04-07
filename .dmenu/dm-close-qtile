@@ -1,5 +1,5 @@
 #!/bin/bash
-
+source $HOME/.dmenu/.config/dm-script.conf
 declare -a options=(
 
  "yes" 
@@ -8,7 +8,7 @@ declare -a options=(
 )
 
 
-choice=$(printf '%s\n' ${options[@]} | rofi -dmenu  -p "You Sure you wanna logout?" )
+choice=$(printf '%s\n' ${options[@]} | run  -p "You Sure you wanna logout?" )
 
 
 kill_this=$( ps aux | grep qtile  | grep python | awk '{print $2}'   )

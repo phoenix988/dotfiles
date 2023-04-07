@@ -1,5 +1,5 @@
 #!/bin/bash 
-
+source $HOME/.dmenu/.config/dm-script.conf
 
 
 list=$(ls -d /usr/share/fonts/*/* | grep -v fonts.dir | grep -v fonts.scale)
@@ -8,7 +8,7 @@ list=$(ls -d /usr/share/fonts/*/* | grep -v fonts.dir | grep -v fonts.scale)
 
 
 
-choice=$(printf '%s\n' "${list[@]}" | cut -d '/' -f 5,6 | rofi -dmenu -p "Font:" )
+choice=$(printf '%s\n' "${list[@]}" | cut -d '/' -f 5,6 | run -p "Font:" )
 
 [ -z $choice ] && exit
 

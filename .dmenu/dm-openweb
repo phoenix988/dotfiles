@@ -1,16 +1,16 @@
 #!/bin/bash
 
-
-    browser=$(cat $HOME/.config/qtile/config.py | grep BROWSER | awk '{print $3}'  )
-
-
-
-#Readssites from qutebrowsers quickmark tab
-list=$(cat ~/.config/qutebrowser/quickmarks | sed -e "s/^/(/g" -e "s/ /) /g" )
+#Source the dm-script config
+source $HOME/.dmenu/.config/dm-script.conf
 
 
+#Reads websites from my URL variable
+##Configure this in the dm-script config file
+LIST=$(cat $URL | sed -e "s/^/(/g" -e "s/ /) /g" )
 
-choice=$(printf '%s\n' $list | xargs -n2 | rofi -dmenu -p "Open Website:")
+
+
+choice=$(printf '%s\n' $LIST | xargs -n2 | run -p "Open Website:")
 
 
 
@@ -18,11 +18,11 @@ choice=$(printf '%s\n' $list | xargs -n2 | rofi -dmenu -p "Open Website:")
 
 
 
-list=$(echo $choice | awk '{print $NF}') 
+LIST=$(echo $choice | awk '{print $NF}') 
 
 
 #Opening website
-$browser $list
+$BROWSER $LIST
 
 
 

@@ -1,9 +1,9 @@
-#!/usr/bin/fish
+#!/usr/bin/bash
+source $HOME/.dmenu/.config/dm-script.conf
+
+choice=$( man -k . | awk '{ print $1 }' | sed 's/[A-Z]/\L&/g' | run -p "Choose MAN page: ")
 
 
-set choice ( man -k . | awk '{ print $1 }' | sed 's/[A-Z]/\L&/g' | rofi -dmenu -p "Choose MAN page: ")
-
-
-man -Tpdf $choice | zathura -
+man -Tpdf $choice | $PDF_VIEWER -
 
 #yad --text-info  --back=#1e1f28 --fore=#bd92f8 --geometry=1200x800 

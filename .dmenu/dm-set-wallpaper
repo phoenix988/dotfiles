@@ -1,5 +1,5 @@
 #!/bin/bash
-
+source $HOME/.dmenu/.config/dm-script.conf
 
 #Creates the array
 declare -a options=(
@@ -15,7 +15,7 @@ declare -a options=(
 #Removes all the directories thats empty from the option
 for opt in "${options[@]}" ; do
 
-    check_empty=$(ls $opt/*) 
+    check_empty=$(ls $opt/* 2> /dev/null ) 
      
     [ -z "$check_empty" ] || wallpapers=$(echo $wallpapers $opt)
 
@@ -23,9 +23,9 @@ done
 
 
 #Make your choice
-choice=$(printf '%s\n' "${wallpapers[@]}" | xargs -n1 |  rofi -dmenu -p "Choose your wallpaper" )
+choice=$(printf '%s\n' "${wallpapers[@]}" | xargs -n1 |  run -p "Choose your wallpaper" )
 
-
+[ -z $choice ] && exit
 
 
 listofbackgrounds=$(ls -d $choice/* )  

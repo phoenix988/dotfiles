@@ -1,5 +1,5 @@
 #!/bin/bash
-
+source $HOME/.dmenu/.config/dm-script.conf
 
 declare -A countires
 
@@ -66,7 +66,7 @@ countires[Lithuania]="lt"
 countires[Costa Rica]="cr"
 
 
-selection=$(printf '%s\n' "${!countires[@]}" | rofi -dmenu -p "Choose country")
+selection=$(printf '%s\n' "${!countires[@]}" | run -p "Choose country")
 
 if [ -z "$selection" ] ; then
      

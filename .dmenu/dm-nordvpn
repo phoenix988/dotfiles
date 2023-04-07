@@ -1,11 +1,11 @@
 #!/bin/bash
-
+source $HOME/.dmenu/.config/dm-script.conf
 connect=$(echo "Disconnect" "Quick_Connect" "Random" "Country" | xargs -n1)
 countries=$(nordvpn countries | xargs -n1 | sed -e '/^-/d' -e 's/,//')  
 countries=$(echo $countries  | xargs -n1)
 random_list=$(nordvpn countries | xargs -n1 | sed -e '/^-/d' -e 's/,//' | sort -R | head -n1)  
 
-choice=$(printf '%s\n' "${connect[@]}" | rofi -dmenu  -p "Option:" )
+choice=$(printf '%s\n' "${connect[@]}" | run  -p "Option:" )
 
 
 [ -z $choice ] &&  exit 
@@ -14,7 +14,7 @@ choice=$(printf '%s\n' "${connect[@]}" | rofi -dmenu  -p "Option:" )
 [ "$choice" = "Random" ] &&  nordvpn connect $random_list
 
    
-[ $choice = "Country" ] && choice=$(printf '%s\n' "${countries[@]}" | rofi -dmenu  -p "Country to connect to:" ) && nordvpn connect $choice
+[ $choice = "Country" ] && choice=$(printf '%s\n' "${countries[@]}" | run  -p "Country to connect to:" ) && nordvpn connect $choice
 
 
 

@@ -1,0 +1,12 @@
+#!/bin/bash
+source $HOME/.dmenu/.config/dm-script.conf
+declare -a options=(
+"se"
+"us"
+"az"
+)
+
+choice=$(printf '%s\n' "${options[@]}" | run  -p "Choose Layout:" )
+
+
+setxkbmap $choice

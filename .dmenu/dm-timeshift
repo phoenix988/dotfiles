@@ -6,12 +6,18 @@
 #|_|   |_| |_|\___/ \___|_| |_|_/_/\_\
 #                                     
 # -*- coding: utf-8 -*-
+
+
+
 #dmenu script to delete or create snapshots using timeshift
+
+source $HOME/.dmenu/.config/dm-script.conf
+
 declare -a options=(
 "New-snapshot"
 "Remove-snapshot")
 
-choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu -p "Timeshift Action:")
+choice=$(printf '%s\n' "${options[@]}" | run -p "Timeshift Action:")
 
 [ -z $choice ] && exit
 
@@ -27,7 +33,7 @@ if [ $choice = "Remove-snapshot" ] ; then
 
     snapshots=$(sudo timeshift --list | grep "^[0-9]" | grep -v snapshot)
     
-    choice_snapshot=$(printf '%s\n' "${snapshots[@]}" | rofi -dmenu -p "Snapshot to remove" )
+    choice_snapshot=$(printf '%s\n' "${snapshots[@]}" | run -p "Snapshot to remove" )
     
     [ -z $choice_snapshot ] && exit
     

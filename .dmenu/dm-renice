@@ -1,5 +1,5 @@
 #!/bin/bash
-
+source $HOME/.dmenu/.config/dm-script.conf
 
 #script to change priority of processes
 ps=$( ps ch -eo pid,comm,user,ni | grep $USER )
@@ -15,11 +15,11 @@ declare -a options=(
 )
 
 
-choice=$(printf '%s\n' "${ps[@]}" | awk '{print $2 " " $NF}' | rofi -dmenu  -p "Renice:")
+choice=$(printf '%s\n' "${ps[@]}" | awk '{print $2 " " $NF}' | run  -p "Renice:")
 
 [ -z "$choice" ] && exit
 
-choice_nice=$(printf '%s\n' "${options[@]}" | rofi -dmenu  -p "choose priority:")
+choice_nice=$(printf '%s\n' "${options[@]}" | run  -p "choose priority:")
 
 
 [ -z "$choice_nice" ] && exit

@@ -1,5 +1,5 @@
 #!/bin/bash
-
+source $HOME/.dmenu/.config/dm-script.conf
 
 
 sinks=$(pactl list sinks | grep -i source | awk '{print $NF}' | sed 's/.monitor//g' ) 
@@ -11,7 +11,7 @@ $sinks
 
 )
 
-choice=$(printf '%s\n' "${options[@]}" | sed -e 's/alsa_output.//g' | rofi -dmenu -p "Choose Source:"  )
+choice=$(printf '%s\n' "${options[@]}" | sed -e 's/alsa_output.//g' | run -p "Choose Source:"  )
 
 
 

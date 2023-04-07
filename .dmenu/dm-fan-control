@@ -8,7 +8,7 @@ fanmode[Silent]="2"
 
 
 
-choice=$(printf '%s\n' "${!fanmode[@]}" | rofi -dmenu -p "Choose Fan Mode")
+choice=$(printf '%s\n' "${!fanmode[@]}" | wofi --show dmenu -p "Choose Fan Mode:")
 selection=$(printf '%s\n' "${fanmode["${choice}"]}")
 
 cd /sys/devices/platform/asus-nb-wmi   

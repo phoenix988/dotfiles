@@ -1,8 +1,8 @@
 #!/bin/bash
-
+source $HOME/.dmenu/.config/dm-script.conf
 number=$(seq 1 100)
 
-choice=$(printf '%s\n' "${number[@]}" | rofi -dmenu -p "Fan Speed")
+choice=$(printf '%s\n' "${number[@]}" | run -p "Fan Speed")
 
 [ -z $choice ] && exit
 

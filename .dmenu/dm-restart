@@ -1,5 +1,5 @@
 #!/bin/bash
-
+source $HOME/.dmenu/.config/dm-script.conf
 declare -a options=(
 
 "Restart"
@@ -8,7 +8,7 @@ declare -a options=(
 
 
 )
-choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu -p "Choose your action")
+choice=$(printf '%s\n' "${options[@]}" | run -p "Choose your action")
 
 [ -z $choice ] && exit
 

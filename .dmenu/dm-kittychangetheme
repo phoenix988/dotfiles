@@ -1,11 +1,11 @@
 #!/bin/bash
-
+source $HOME/.dmenu/.config/dm-script.conf
 theme=$( ls $HOME/.config/kitty/kitty-themes/themes )
 
 export kittydir=$HOME/.config/kitty
 
 
-choice=$(printf '%s\n' "${theme[@]}" | rofi -dmenu -p "Choose Theme For Kitty:"   )
+choice=$(printf '%s\n' "${theme[@]}" | run -p "Choose Theme For Kitty:"   )
 
 
  [ -z $choice ]  && exit

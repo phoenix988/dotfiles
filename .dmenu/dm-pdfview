@@ -1,9 +1,9 @@
-#!/usr/bin/fish
+#!/usr/bin/bash
+source $HOME/.dmenu/.config/dm-script.conf
 
-
-set choice ( find $HOME/Yandex.Disk/ $HOME/.config  -iname "*.pdf"   | rofi -dmenu -p "PDF file: " )
+choice=$( find $HOME/Yandex.Disk/ $HOME/.config  -iname "*.pdf"   | run -p "PDF file: " )
  [ -z $choice ] && exit
 
-zathura $choice
+$PDF_VIEWER $choice
 
 

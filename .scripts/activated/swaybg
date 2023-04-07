@@ -6,8 +6,8 @@
 #|_|   |_| |_|\___/ \___|_| |_|_/_/\_\
 #                                     
 # -*- coding: utf-8 -*-
+#Script to set the background for hyprland
+PICTURE=$(cat $HOME/.fehbg | grep feh | awk '{print $NF}')
 
-#Script that will lock a wayland session using swaylock
-image=$(cat ~/.fehbg | grep feh | awk '{print $NF}')
 
-swaylock -i $image
+swaybg -i $PICTURE

@@ -1,6 +1,6 @@
 #!/bin/bash
-
-choice_bg=$( ls $HOME/Pictures/backgrounds )
+source $HOME/.dmenu/.config/dm-script.conf
+choice_bg=$( ls $HOME/Pictures/Wallpapers/ )
 
 
 echo $choice_bg
@@ -11,12 +11,11 @@ declare -a options=(
 $choice_bg
 
 
-
 )
     
 
-choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu -p "Choose background for your lockscreen:"  )
-
+choice=$(printf '%s\n' "${options[@]}" | run -p "Choose background for your lockscreen:"  )
+ [ -z $choice ] && exit
 
 ls /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg && sudo unlink /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg
 

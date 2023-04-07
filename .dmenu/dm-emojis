@@ -1,10 +1,10 @@
 #!/bin/bash
-
+source $HOME/.dmenu/.config/dm-script.conf
 
 emojis=$(cat $HOME/Documents/emojis)
 
 
-choice=$(printf '%s\n' ${emojis[@]} | rofi -dmenu -p "emoji " )
+choice=$(printf '%s\n' ${emojis[@]} | run -p "emoji " )
 
 
 [ -z $choice ] && exit

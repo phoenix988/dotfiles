@@ -6,7 +6,7 @@ declare -a options=(
 "az"
 )
 
-choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu  -p "Choose Layout:" )
+choice=$(printf '%s\n' "${options[@]}" | wofi --show dmenu  -p "Choose Layout:" )
 
 
 setxkbmap $choice

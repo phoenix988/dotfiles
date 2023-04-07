@@ -1,5 +1,5 @@
 #!/bin/bash
-
+source $HOME/.dmenu/.config/dm-script.conf
 declare -a options=(
 "qutebrowser"
 "sudo timeshift-gtk"
@@ -18,10 +18,10 @@ declare -a options=(
 appimage=$(find /opt $HOME/Applications -iname "*.Appimage")
 
 
-choice=$(printf '%s\n' "${options[@]}" "${appimage[@]}" | rofi -dmenu  -p "Open App:"  )
+choice=$(printf '%s\n' "${options[@]}" "${appimage[@]}" | run  -p "Open App:"  )
 
 
- [ -z $choice ] && exitt
+ [ -z $choice ] && exit
 
 
 

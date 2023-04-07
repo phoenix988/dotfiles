@@ -8,6 +8,8 @@
 #This script will make it easy to change the theme of your system when using a standalone windowmanager. something like qtile for example
 #It supports rofi, kitty, conky, qtile, nvim
 
+source $HOME/.dmenu/.config/dm-script.conf
+
 #Declare are the themes thats available
 declare -a options=(
 "iceberg"
@@ -59,7 +61,7 @@ for opt in $(printf '%s\n' "${options[@]}") ; do
 done
 
 #Prompt you to choose theme
-choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu -p "Choose your theme" )
+choice=$(printf '%s\n' "${options[@]}" | run -p "Choose your theme" )
 
 #Exit if choice is empty
 [ -z $choice ] && exit
