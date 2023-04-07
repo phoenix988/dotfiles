@@ -7,16 +7,35 @@
 #                                     
 # -*- coding: utf-8 -*-
 #Rofi script that will copy the choosen password to my pass database
-list=$(find  $HOME/.password-store/ -iname "*.gpg" | sed -e 's/.gpg//g' -e 's/\/home\/karl\/.password-store//g' -e 's/\///')
+list=$(find  $HOME/.password-store/ -iname "*.gpg" | sed -e 's/.gpg//g' -e 's/\/home\/karl\/.password-store//g' -e 's/\///' | sed -e 's/^karlfredin5@gmail.com//g' -e 's/^karlfredin@hotmail.se//g' -e 's/^phoenix081408@gmail.com//g' -e 's/^karlfredin@gmail.com//g')
 
+declare -a user_or_password=( "username" "password" )
 declare -a options=($list)
 
-choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu -p "<" )
+choice=$(printf '%s\n' "${options[@]}" | wofi --show dmenu -p "<" )
 
 [ -z "$choice" ] && exit 
 
-pass show $choice | xclip -selection clipboard
+another_choice=$(printf '%s\n' "${user_or_password[@]}" | wofi --show dmenu -p "<")
 
-sleep 20
 
-xsel -cb
+if [ $another_choice = "username" ] ; then
+
+
+    user=$(echo $choice | awk -F / '{print $NF}')
+    
+     #    echo $user | xclip -selection clipboard
+     wl-copy $user
+     else
+
+#    pass show $choice | xclip -selection clipboard
+    pass=$(pass show $choice)
+    wl-copy $pass
+    sleep 20
+    wl-copy -c
+#    xsel -cb
+fi
+
+
+
+
