@@ -4,13 +4,29 @@ command_exist() {
         type "$1" &> /dev/null;
 }
 
-#update aliases
+# update aliases
 alias uali="bash $HOME/.scripts/activated/create-aliases"
 
-#show ip
+# show ip
 alias ipa="ifconfig | awk '/inet/ {print $2}' | head -n4"
 
-#ls aliases
+
+# ls aliases
+if command_exist lsd ; then
+
+alias ls='lsd --color=auto'
+alias la='lsd -a'
+alias lA='lsd -A'
+alias ll='lsd -l'
+alias lla='lsd -la'
+alias ld='lsd -l | grep ^d'
+alias l='lsd'
+alias l.="lsd -A | egrep '^\.'"
+alias hidden="lsd -A | grep -v ^[A-Z] | grep -v ^[a-z]"
+
+
+else
+
 alias ls='ls --color=auto'
 alias la='ls -a'
 alias lA='ls -A'
@@ -20,6 +36,8 @@ alias ld='ls -l | grep ^d'
 alias l='ls'
 alias l.="ls -A | egrep '^\.'"
 alias hidden="ls -A | grep -v ^[A-Z] | grep -v ^[a-z]"
+
+fi
 
 alias htop='btop'
 
@@ -57,8 +75,15 @@ if command_exist apt ; then
    alias nala="sudo nala"
    alias search="sudo nala search"
    alias install="sudo nala install"
+   
+
+if command_exist batcat ; then
+
    alias bat='batcat'
    alias cat='batcat'
+
+fi
+
 
 elif command_exist pacman ; then
 
