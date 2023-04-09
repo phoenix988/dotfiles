@@ -5,7 +5,7 @@ command_exist() {
 }
 
 #update aliases
-alias uali="bash $HOME/.scripts/activated/c-aliases.sh"
+alias uali="bash $HOME/.scripts/activated/create-aliases"
 
 #show ip
 alias ipa="ifconfig | awk '/inet/ {print $2}' | head -n4"
