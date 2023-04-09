@@ -1,22 +1,20 @@
-#!/usr/bin/fish
+#!/usr/bin/bash
 
 #This will link all custom proton versions to lutn folder
 
-set proton_path "$HOME/.steam/root/compatibilitytools.d/"
-set  lutris_path "$HOME/.local/share/lutris/runners/wine/"
+PROTON_PATH="$HOME/.steam/root/compatibilitytools.d/"
+LUTRIS_PATH="$HOME/.local/share/lutris/runners/wine/"
 
-set custom_protons (ls $proton_path )
-set lutris_proton (ls $lutris_path)
-
-
-
-for custom in $custom_protons 
+CUSTOM_PROTONS=$(ls $PROTON_PATH )
+LUTRIS_PROTONS=$(ls $LUTRIS_PATH )
 
 
-echo $lutris_proton | xargs -n1 | grep $custom &> /dev/null
+for $CUSTOM in $CUSTOM_PROTONS ; do 
 
 
-[ $status != "0" ] && ln -s $proton_path/$custom   $lutris_path/$custom
+echo $LUTRIS_PROTONS | xargs -n1 | grep $CUSTOM &> /dev/null
 
 
-end
+[ $status != "0" ] && ln -s $PROTON_PATH/$CUSTOM   $LUTRIS_PATH/$CUSTOM
+
+done

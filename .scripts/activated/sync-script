@@ -1,0 +1,127 @@
+#!/bin/bash
+##____  _                      _
+#|  _ \| |__   ___   ___ _ __ (_)_  __
+#| |_) | '_ \ / _ \ / _ \ '_ \| \ \/ /
+#|  __/| | | | (_) |  __/ | | | |>  <
+#|_|   |_| |_|\___/ \___|_| |_|_/_/\_\
+#
+# -*- coding: utf-8 -*-
+
+#script that will compare all my config files and scripts to keep them up to date
+#if it detect one change its gonna update to all my locations so I always have the latest version
+#in my github repos etc
+
+declare -A files
+
+
+# dmscripts
+files[$HOME/.dmenu/dm-app]="$HOME/myrepos/dmscripts/.dmenu/dm-app"
+files[$HOME/.dmenu/dm-arch-wiki]="$HOME/myrepos/dmscripts/.dmenu/dm-arch-wiki"
+files[$HOME/.dmenu/dm-audioset]="$HOME/myrepos/dmscripts/.dmenu/dm-audioset"
+files[$HOME/.dmenu/dm-change-theme]="$HOME/myrepos/dmscripts/.dmenu/dm-change-theme"
+files[$HOME/.dmenu/dm-close-qtile]="$HOME/myrepos/dmscripts/.dmenu/dm-close-qtile"
+files[$HOME/.dmenu/dm-display-font]="$HOME/myrepos/dmscripts/.dmenu/dm-display-font"
+files[$HOME/.dmenu/dm-editconfig]="$HOME/myrepos/dmscripts/.dmenu/dm-editconfig"
+files[$HOME/.dmenu/dm-emojis]="$HOME/myrepos/dmscripts/.dmenu/dm-emojis"
+files[$HOME/.dmenu/dm-fan-asus]="$HOME/myrepos/dmscripts/.dmenu/dm-fan-asus"
+files[$HOME/.dmenu/dm-fan-nvidia]="$HOME/myrepos/dmscripts/.dmenu/dm-fan-nvidia"
+files[$HOME/.dmenu/dm-input]="$HOME/myrepos/dmscripts/.dmenu/dm-input"
+files[$HOME/.dmenu/dm-keyboard-color]="$HOME/myrepos/dmscripts/.dmenu/dm-keyboard-color"
+files[$HOME/.dmenu/dm-kill]="$HOME/myrepos/dmscripts/.dmenu/dm-kill"
+files[$HOME/.dmenu/dm-kittychangetheme]="$HOME/myrepos/dmscripts/.dmenu/dm-kittychangetheme"
+files[$HOME/.dmenu/dm-leftwm-theme]="$HOME/myrepos/dmscripts/.dmenu/dm-leftwm-theme"
+files[$HOME/.dmenu/dm-man-page]="$HOME/myrepos/dmscripts/.dmenu/dm-man-page"
+files[$HOME/.dmenu/dm-mount]="$HOME/myrepos/dmscripts/.dmenu/dm-mount"
+files[$HOME/.dmenu/dm-nordvpn]="$HOME/myrepos/dmscripts/.dmenu/dm-nordvpn"
+files[$HOME/.dmenu/dm-open-video]="$HOME/myrepos/dmscripts/.dmenu/dm-open-video"
+files[$HOME/.dmenu/dm-openpyn]="$HOME/myrepos/dmscripts/.dmenu/dm-openpyn"
+files[$HOME/.dmenu/dm-openweb]="$HOME/myrepos/dmscripts/.dmenu/dm-openweb"
+files[$HOME/.dmenu/dm-openweb-fullscreen]="$HOME/myrepos/dmscripts/.dmenu/dm-openweb-fullscreen"
+files[$HOME/.dmenu/dm-pass]="$HOME/myrepos/dmscripts/.dmenu/dm-pass"
+files[$HOME/.dmenu/dm-pdfview]="$HOME/myrepos/dmscripts/.dmenu/dm-pdfview"
+files[$HOME/.dmenu/dm-play-pause]="$HOME/myrepos/dmscripts/.dmenu/dm-play-pause"
+files[$HOME/.dmenu/dm-renice]="$HOME/myrepos/dmscripts/.dmenu/dm-renice"
+files[$HOME/.dmenu/dm-restart]="$HOME/myrepos/dmscripts/.dmenu/dm-restart"
+files[$HOME/.dmenu/dm-search]="$HOME/myrepos/dmscripts/.dmenu/dm-search"
+files[$HOME/.dmenu/dm-set-wallpaper]="$HOME/myrepos/dmscripts/.dmenu/dm-set-wallpaper"
+files[$HOME/.dmenu/dm-system76-graphics]="$HOME/myrepos/dmscripts/.dmenu/dm-system76-graphics"
+files[$HOME/.dmenu/dm-timeshift]="$HOME/myrepos/dmscripts/.dmenu/dm-timeshift"
+files[$HOME/.dmenu/dm-urxvt-changetheme]="$HOME/myrepos/dmscripts/.dmenu/dm-urxvt-changetheme"
+files[$HOME/.dmenu/dm-virt-manager]="$HOME/myrepos/dmscripts/.dmenu/dm-virt-manager"
+files[$HOME/.dmenu/dm-xfce4screensaver-bg]="$HOME/myrepos/dmscripts/.dmenu/dm-xfce4screensaver-bg"
+files[$HOME/.config/dm-script.conf]="$HOME/myrepos/dmscripts/.config/dm-script.conf"
+
+
+
+# Scripts
+files[$HOME/.scripts/activated/btrfs-swap]="$HOME/myrepos/dotfiles/.scripts/activated/btrfs-swap"
+files[$HOME/.scripts/activated/change-display-layout.sh]="$HOME/myrepos/dotfiles/.scripts/activated/change-display-layout.sh"
+files[$HOME/.scripts/activated/convert-mp4]="$HOME/myrepos/dotfiles/.scripts/activated/convert-mp4"
+files[$HOME/.scripts/activated/create-aliases]="$HOME/myrepos/dotfiles/.scripts/activated/create-aliases"
+files[$HOME/.scripts/activated/create-nvim-link]="$HOME/myrepos/dotfiles/.scripts/activated/create-nvim-link"
+files[$HOME/.scripts/activated/launch-htop]="$HOME/myrepos/dotfiles/.scripts/activated/launch-htop"
+files[$HOME/.scripts/activated/swaybg]="$HOME/myrepos/dotfiles/.scripts/activated/swaybg"
+files[$HOME/.scripts/activated/swaylock]="$HOME/myrepos/dotfiles/.scripts/activated/swaylock"
+files[$HOME/.scripts/activated/restart-conky]="$HOME/myrepos/dotfiles/.scripts/activated/restart-conky"
+files[$HOME/.scripts/activated/set-random-bg-wayland]="$HOME/myrepos/dotfiles/.scripts/activated/set-random-bg-wayland"
+files[$HOME/.scripts/activated/set-random-bg]="$HOME/myrepos/dotfiles/.scripts/activated/set-random-bg"
+files[$HOME/.scripts/activated/kbd-backlight-down]="$HOME/myrepos/dotfiles/.scripts/activated/kbd-backlight-down"
+files[$HOME/.scripts/activated/kbd-backlight-up]="$HOME/myrepos/dotfiles/.scripts/activated/kbd-backlight-up"
+files[$HOME/.scripts/activated/sync-script]="$HOME/myrepos/dotfiles/.scripts/activated/sync-script"
+files[$HOME/.scripts/activated/move]="$HOME/myrepos/dotfiles/.scripts/activated/move"
+files[$HOME/.scripts/activated/picom-control]="$HOME/myrepos/dotfiles/.scripts/activated/picom-control"
+files[$HOME/.scripts/activated/fan-control]="$HOME/myrepos/dotfiles/.scripts/activated/fan-control"
+files[$HOME/.scripts/activated/prev-tmux-pane.sh]="$HOME/myrepos/dotfiles/.scripts/activated/prev-tmux-pane.sh"
+files[$HOME/.scripts/activated/launch-vifm]="$HOME/myrepos/dotfiles/.scripts/activated/launch-vifm"
+files[$HOME/.scripts/activated/lutris-run]="$HOME/myrepos/dotfiles/.scripts/activated/lutris-run"
+files[$HOME/.scripts/activated/medianext]="$HOME/myrepos/dotfiles/.scripts/activated/medianext"
+
+
+
+
+# Docker
+files[$HOME/.scripts/docker/docker-stats]="$HOME/myrepos/dotfiles/.scripts/activated/docker-stats"
+files[$HOME/.scripts/docker/backup-volumes]="$HOME/myrepos/dotfiles/.scripts/activated/backup-volumes"
+
+
+
+
+
+
+
+
+for COMPARE in $(printf '%s\n' "${!files[@]}") ; do
+
+
+COMPARE_WITH=$(printf '%s\n' "${files["${COMPARE}"]}")
+
+if cmp --quiet $COMPARE $COMPARE_WITH ; then
+
+  printf '%s\n' "No Change Detected: $COMPARE"
+
+else
+
+CHECK_FOR_LATEST=$(ls -lt  $COMPARE_WITH $COMPARE 2> /dev/null | head -n1 | awk '{print $NF}')
+
+if [ "$CHECK_FOR_LATEST" = "$COMPARE" ] ; then
+
+    LATEST=$(echo $CHECK_FOR_LATEST)
+    OLDEST=$(echo $COMPARE_WITH)
+
+elif [ "$CHECK_FOR_LATEST" = "$COMPARE_WITH" ] ; then
+
+    LATEST=$(echo $CHECK_FOR_LATEST)
+    OLDEST=$(echo $COMPARE)
+
+fi
+
+cp -r $LATEST $OLDEST 2> /dev/null
+
+printf '%s\n' "Moving: $LATEST to $OLDEST"
+
+sleep 2
+
+fi
+
+
+done

@@ -18,6 +18,8 @@ declare -a options=(
 
 )
 
+killall swaybg
+
 #Will pick a random directory from the array
 RANDOM_DIR=$(printf '%s\n' "${options[@]}" | shuf | head -n1)
 
@@ -25,4 +27,9 @@ RANDOM_DIR=$(printf '%s\n' "${options[@]}" | shuf | head -n1)
 RANDOM_PICTURE=$(ls -d $RANDOM_DIR/* | shuf | head -n1)
 
 #Sets the background
-swaybg -i $RANDOM_PICTURE
+swaybg -i $RANDOM_PICTURE &
+
+IMAGE=$(cat ~/.fehbg | awk '{print $NF}' | tail -n1)  
+
+
+sed -i "s|$IMAGE|$RANDOM_PICTURE|g" ~/.fehbg

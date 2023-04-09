@@ -7,6 +7,9 @@
 #                                     
 # -*- coding: utf-8 -*-
 #Script to set the background for hyprland
+
+killall swaybg 
+
 PICTURE=$(cat $HOME/.fehbg | grep feh | awk '{print $NF}')
 
 

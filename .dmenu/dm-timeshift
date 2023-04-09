@@ -7,10 +7,10 @@
 #                                     
 # -*- coding: utf-8 -*-
 
-
-
 #dmenu script to delete or create snapshots using timeshift
 
+
+#Source the config file for dmscript
 source $HOME/.dmenu/.config/dm-script.conf
 
 declare -a options=(
