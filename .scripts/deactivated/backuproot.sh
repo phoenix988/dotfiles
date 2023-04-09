@@ -1,1 +1,0 @@
-sudo rsync -aAXvH / --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/opt/media/*" ,"/opt/backup/*","/home/*" , "/rootfs" ,"/var/lib/libvirt/images/*"} /rootfs
