@@ -16,7 +16,8 @@ from libqtile import layout, bar, widget, hook
 from libqtile.lazy import lazy
 from typing import List  # noqa: F401
 
-from color import colors, layout_colors
+#change your theme here
+from color  import colors, layout_colors
 
 #Importing qtile_extras libaries
 from qtile_extras import widget
@@ -29,13 +30,13 @@ from qtile_extras.widget.decorations import RectDecoration, PowerLineDecoration,
 #Define variables
 mod = "mod4"        # Sets mod key to SUPER/WINDOWS
 #Terminals
-myTerm = "kitty -e /home/karl/.scripts/activated/create-tmux-session.sh"      # My terminal of choice
+myTerm = "kitty -e /usr/bin/myscripts/create-tmux-session.sh"      # My terminal of choice
 myterm = "kitty -e zsh"
 sysmon = "kitty --class=btop -e btop" #System monitor utility
 
 #Filemanagers
 fileManager = "kitty --class=vifm -e vifm"              #My terminal filemanager of choice
-guifileManager = "nautilus /home/karl/Pictures/"        #My gui terminal of choice
+guifileManager = "krusader"        #My gui terminal of choice
 
 #Browsers
 browser1 = "brave-browser"       #My browser of choice
@@ -53,6 +54,14 @@ lockscreen =  "slock"   #My lockscreen of choice
 #My custom scripts
 dmenu_path = "/home/karl/.dmenu" #Path to my dmenu scripts
 script_path = "/home/karl/.scripts/activated" #Path to my scripts
+
+# Define scratchpads
+groups = [
+    ScratchPad("scratchpad", [
+       DropDown("vifm", "kitty --class=vifm -e vifm", width=0.8, height=0.8, x=0.1, y=0.1, opacity=0.9), ]),
+
+    Group("a"),
+]
 
 #START_KEYS
 keys = [
@@ -83,11 +92,16 @@ keys = [
              ),
 
          #KEYS_GROUP Keybindings for scratchpads
-         # Key(["mod1", ], "o", #show scratchpad vifm
-         #      lazy.group['scratchpad'].dropdown_toggle('vifm'),
-         #      desc='show scratchpad vifm'
-         #     ),
+         Key(["mod1", ], "o", #show scratchpad vifm
+              lazy.group['scratchpad'].dropdown_toggle('vifm'),
+              desc='show scratchpad vifm'
+             ),
 
+         #KEYS_GROUP keybinding for Minimizing windows
+         Key(["mod1", ], "m", #Minimize window
+              lazy.spawn("Qminimize -m"),
+              desc='Minimize window'
+             ),
 
          #KEYS_GROUP Launch applications with super + key
          Key([mod, ], "r", #Run Rofi
@@ -342,10 +356,6 @@ keys = [
              lazy.layout.grow_up(),
              desc='increase the size of the window upwards'
              ),
-         Key(["mod1", ], "m", #Minimize window
-              lazy.spawn("Qminimize -m"),
-              desc='Minimize window'
-             ),
 
          #KEYS_GROUP Stack controls
          Key([mod, "shift"], "Tab", #Switch which side main pane occupies, XmonadTall
@@ -442,7 +452,7 @@ keys = [
                  desc='Choose a config file to edit'
                  ),
              Key([], "m", #Change the fan Mode of my laptop 
-                 lazy.spawn(dmenu_path + "/dm-fan-control"),
+                 lazy.spawn(dmenu_path + "/dm-mount"),
                  desc='Mount some harddrives using dmenu'
                  ),
              Key([], "c", #Change RGB color on my asus laptop
@@ -506,7 +516,7 @@ keys = [
                  desc='creates or remove timeshift backup'
                  ),
              Key([], "q", #Opens a VM of your choice in KVM 
-                 lazy.spawn(dmenu_path + "/dm-virt-manager"),
+                 lazy.spawn(dmenu_path + "/dm-open-virt-cons"),
                  desc='Opens a VM of your choice in KVM'
                  ),
              Key([], "j", #Script for pass
@@ -570,6 +580,11 @@ keys = [
 #END_KEYS
 
 
+#keys.extend([
+#     Key([mod], "o", lazy.group['scratchpad'].dropdown_toggle('vifm')),
+#
+#])
+
 
 
 
@@ -579,14 +594,13 @@ group_names = [("WWW", {'layout': 'bsp' ,'matches':[Match(wm_class=["Brave-brows
                ("SYS", {'layout': 'bsp', 'matches':[Match(wm_class=["TeamViewer"])]}),
                ("GAM", {'layout': 'max', 'matches':[Match(wm_class=["lutris" , "Steam" , "upc.exe" , "steam_proton" , "heroic"])]}),
                ("DOC", {'layout': 'bsp', 'matches':[Match(wm_class=["re.sonny.Tangram", "crx_cifhbcnohmdccbgoicgdjpfamggdegmo", "disk.yandex.com__client_disk"])]}),
-               ("SOC", {'layout': 'max', 'matches':[Match(wm_class=["discord" , "Franz" , "whatsapp-nativefier-d40211" , "altus" , "whatsdesk" , "whatsapp-for-linux", "web.whatsapp.com", "whatsapp-app"])]}),
+               ("SOC", {'layout': 'max', 'matches':[Match(wm_class=["discord" , "Franz" , "whatsapp-nativefier-d40211" , "altus" , "whatsdesk" , "whatsapp-for-linux", "web.whatsapp.com"])]}),
                ("REC", {'layout': 'bsp', 'matches':[Match(wm_class=["Spotify"])]}),
                ("VID", {'layout': 'treetab', 'matches':[Match(wm_class=["nemo"  , "io.github.celluloid_player.Celluloid" , "urxvt" , "obs", "youtube.com", "netflix.com"])]}),
                ("GFX", {'layout': 'bsp', 'matches':[Match(wm_class=["gimp-2.10","Gimp" ,"Cinelerra","Olive", "kdenlive" , "resolve" ])]})]
 
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
-
 
 for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod], str(i), lazy.group[name].toscreen()))        # Switch to another group
@@ -839,6 +853,26 @@ def init_widgets_list():
                        padding = -1,
                        fontsize = 45
                        ),
+             widget.OpenWeather(
+                       background = colors[0],
+                       foreground = colors[5],
+                       cityid = "598316",
+                       format = '{location_city}: {main_temp} {units_temperature}°  {weather_details}',
+                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("brave-browser https://openweathermap.org/city/598316")},
+                       decorations = [
+                            BorderDecoration (
+                            colour = colors[5],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
+                            ],
+                       ),
+             widget.TextBox(
+                       text = '',
+                       background = colors[0],
+                       foreground = colors[0],
+                       padding = -1,
+                       fontsize = 45
+                       ),
              widget.TextBox(
                        text = '🖴',
                        background = colors[0],
@@ -865,7 +899,7 @@ def init_widgets_list():
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
-                        ),
+                       ),
              widget.TextBox(
                        text = '',
                        background = colors[0],
@@ -884,7 +918,7 @@ def init_widgets_list():
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
-                        ),
+                       ),
              widget.CPU(
                          foreground = colors[2],
                          background = colors[0],
@@ -896,7 +930,7 @@ def init_widgets_list():
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
-                        ),
+                       ),
              widget.TextBox(
                        text='',
                        background = colors[0],
@@ -928,8 +962,8 @@ def init_widgets_list():
                             colour = colors[6],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
-                     ],
-                     ),
+                            ],
+                       ),
              widget.TextBox(
                        text = '',
                        background = colors[0],
@@ -974,17 +1008,17 @@ def init_widgets_list():
                      padding = 2,
                      foreground = colors[5],
                      background = colors[0],
+                     fontsize = 14,
                      decorations = [
                             BorderDecoration (
                             colour = colors[5],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
-                             ],
-                     fontsize = 14
-                      ),
+                            ],
+                       ),
              widget.CheckUpdates(
                      update_interval = 1800,
-                     distro = "Ubuntu",
+                     distro = "Arch",
                      display_format = "{updates} Updates",
                      colour_have_updates = colors[5],
                      colour_no_updates = colors[5],
@@ -994,10 +1028,10 @@ def init_widgets_list():
                             colour = colors[5],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
-                       ],
+                            ],
                      mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myterm + ' -e sudo nala upgrade')},
                      background = colors[0]
-                     ),
+                       ),
              widget.TextBox(
                        text = '',
                        background = colors[0],
@@ -1016,37 +1050,18 @@ def init_widgets_list():
                             colour = colors[4],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
-                     ],
+                            ],
                        ),
              widget.Volume(
                       foreground = colors[4],
                       background = colors[0],
                       padding = 5,
-                       decorations = [
+                      decorations = [
                             BorderDecoration (
                             colour = colors[4],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
-                     ],
-                      ),
-             widget.TextBox(
-                       text = '',
-                       background = colors[0],
-                       foreground = colors[0],
-                       padding = -1,
-                       fontsize = 45
-                       ),
-             widget.Battery(
-                       foreground = colors[8],
-                       background = colors[0],
-                       padding = -8,
-                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("xfce4-power-manager-settings")},
-                       decorations = [
-                            BorderDecoration (
-                            colour = colors[8],
-                            border_width = [0, 0, 2, 0],
-                            padding_x = 0, )
-                       ],
+                            ],
                        ),
              widget.TextBox(
                        text = '',
@@ -1055,6 +1070,18 @@ def init_widgets_list():
                        padding = -1,
                        fontsize = 45
                        ),
+            # widget.Battery(
+            #           foreground = colors[8],
+            #           background = colors[0],
+            #           padding = -8,
+            #           mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("xfce4-power-manager-settings")},
+            #           decorations = [
+            #                BorderDecoration (
+            #                colour = colors[8],
+            #                border_width = [0, 0, 2, 0],
+            #                padding_x = 0, )
+            #                ],
+            #          ),
              widget.TextBox(
                         text = '',
                         background = colors[0],
@@ -1066,15 +1093,15 @@ def init_widgets_list():
                             colour = colors[2],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
-                       ],
-                        ),
+                            ],
+                       ),
              widget.Sep(
                        linewidth = 0,
                        padding = 6,
                        foreground = colors[2],
                        background = colors[0]
                        ),
-                       ]
+    ]
 
     return widgets_list
 
@@ -1169,6 +1196,8 @@ focus_on_window_activation = "smart"
 
 
 
+
+
 @hook.subscribe.startup_once
 def start_once():
     home = os.path.expanduser('~')
@@ -1185,5 +1214,6 @@ def start_once():
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
+
 
 

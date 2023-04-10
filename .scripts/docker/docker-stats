@@ -1,5 +1,4 @@
 #!/bin/bash
 #
-#
 docker stats $(docker ps | awk '{print $NF}' | grep -v NAMES)
 

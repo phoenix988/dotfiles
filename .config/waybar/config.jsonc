@@ -9,6 +9,7 @@
     "modules-left": [
         "clock",
         "cpu",
+        "temperature",
         "memory",
         "custom/weather",
         "wlr/workspaces"
@@ -17,7 +18,6 @@
     "modules-right": [
         "tray",
         "custom/updates",
-        "temperature",
         "hyprland/language",
         "pulseaudio",
         "pulseaudio#microphone"
@@ -62,7 +62,7 @@
     },
         "temperature": {
         // "thermal-zone": 2,
-        "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
+        "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
         "interval": 2,
         // "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C ",

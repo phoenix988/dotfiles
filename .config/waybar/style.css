@@ -102,7 +102,7 @@ tooltip {
 }
 
 #cpu {
-    color: #88C0D0;
+    color: #f38ba8;
     border-radius: 10px 0px 0px 10px;
     margin-left: 10px;
     border-right: 0px;
@@ -110,7 +110,7 @@ tooltip {
     }
 
 #memory {
-    color: #B48EAD;
+    color: #f38ba8;
     border-radius: 0px 10px 10px 0px;
     margin-left: 0px;
     border-right: 0px;
@@ -133,7 +133,7 @@ tooltip {
 }
 
 #temperature {
-    color: #89b4fa;
+    color: #f38ba8;
     border-left: 0px;
     border-right: 0px;
 }
@@ -161,5 +161,6 @@ tooltip {
     border-radius: 10px 10px 10px 10px;
     border-right: 0px;
     margin-left: 10px;
+    color: #FFFACD;
 
 }

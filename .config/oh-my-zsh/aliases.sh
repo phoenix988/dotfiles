@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 command_exist() {
         type "$1" &> /dev/null;
 }
@@ -11,7 +12,7 @@ alias uali="bash $HOME/.scripts/activated/create-aliases"
 alias ipa="ifconfig | awk '/inet/ {print $2}' | head -n4"
 
 
-# ls aliases
+# ls aliases use lsd if its available
 if command_exist lsd ; then
 
 alias ls='lsd --color=auto'
@@ -39,35 +40,52 @@ alias hidden="ls -A | grep -v ^[A-Z] | grep -v ^[a-z]"
 
 fi
 
+# btop alias if it's installed
+if command_exist btop ; then
+
 alias htop='btop'
 
-## Colorize the grep command output for ease of use (good for log files)##
+
+fi
+
+# Colorize the grep command output for ease of use (good for log files)##
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
-#readable output
+# readable output
 alias df='df -h'
 alias fsp="df -h | grep -v /var"
 
 
-#free
+# free
 alias free="free -mt"
 
-#use all cores
+# use all cores
 alias uac="sh ~/.bin/main/000*"
 
-#continue download
+# continue download
 alias wget="wget -c"
 
-#userlist
+# userlist
 alias userlist="cut -d: -f1 /etc/passwd"
 
-#merge new settings
+# merge new settings
 alias merge="xrdb -merge ~/.Xresources"
 
 # Aliases for software managment
 if command_exist apt ; then
+
+  if command_exist nala ; then
+
+   alias apt='sudo apt'
+   alias update='sudo apt update && sudo apt upgrade'
+   alias remove="sudo apt remove"
+   alias nala="sudo apt"
+   alias search="sudo apt search"
+   alias install="sudo apt install"
+
+  else
 
    alias apt='sudo nala'
    alias update='sudo nala update && sudo nala upgrade'
@@ -75,7 +93,7 @@ if command_exist apt ; then
    alias nala="sudo nala"
    alias search="sudo nala search"
    alias install="sudo nala install"
-   
+fi
 
 if command_exist batcat ; then
 
@@ -91,7 +109,7 @@ elif command_exist pacman ; then
     alias update='sudo pacman -Syyu'
     alias remove="sudo pacman -Rns"
 
-    #fix obvious typo's
+    # fix obvious typo's
     alias cd..='cd ..'
     alias pdw="pwd"
     alias udpate='sudo pacman -Syyu'
@@ -100,14 +118,17 @@ elif command_exist pacman ; then
     alias updqte='sudo pacman -Syyu'
     alias upqll="paru -Syu --noconfirm"
  
-    #pacman unlock
+    # pacman unlock
     alias unlock="sudo rm /var/lib/pacman/db.lck"
     alias rmpacmanlock="sudo rm /var/lib/pacman/db.lck"
     
-    #change cat to bat
-    alias cat='bat'
-    alias ncat='/usr/bin/cat'
 
+if command_exist bat ; then
+
+    # Change cat to bat
+    alias cat='bat'
+    alias norcat='/usr/bin/cat'
+fi
     # paru as aur helper - updates everything
     alias pksyua="paru -Syu --noconfirm"
     alias upall="paru -Syu --noconfirm"
@@ -130,35 +151,35 @@ fi
 
 
 
-#ps
+# ps
 alias psa="ps auxf"
 alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
 
-#grub update
+# grub update
 alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 
-#add new fonts
+# update font cache
 alias update-fc='sudo fc-cache -fv'
 
 
-#switch between bash and zsh
+# switch between bash and zsh
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
 alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
 alias tofish="sudo chsh $USER -s /usr/bin/fish && echo 'Now log out.'"
 
-#quickly kill conkies
+# quickly kill conkies
 alias kc='killall conky'
 
-#hardware info --short
+# hardware info --short
 alias hw="hwinfo --short"
 alias temp="inxi -Fx | grep cpu"
 
 
-#check vulnerabilities microcode
+# check vulnerabilities microcode
 alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
 
 
-#yt-dlp
+# yt-dlp
 alias yta-aac="yt-dlp --extract-audio --audio-format aac "
 alias yta-best="yt-dlp --extract-audio --audio-format best "
 alias yta-flac="yt-dlp --extract-audio --audio-format flac "
@@ -170,38 +191,39 @@ alias yta-wav="yt-dlp --extract-audio --audio-format wav "
 alias ytv-best="yt-dlp -f bestvideo+bestaudio "
 alias ytd="yt-dlp"
 
-#Recent Installed Packages
+# Recent Installed Packages
 alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
 alias riplong="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -3000 | nl"
 
-#get the error messages from journalctl
+# get the error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
 alias checkerror="sudo journalctl -p 3 -xb"
 
-#gpg
-#verify signature for isos
+# gpg
+# verify signature for isos
 alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
-#receive the key of a developer
+
+# receive the key of a developer
 alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 
-#common gpg commands
+# common gpg commands
 alias dec="gpg --decrypt"
 alias enc="gpg --encrypt -r karlfredin@gmail.com"
 alias gpgk="gpg --list-secret-keys --keyid-format LONG"
 
 
-#maintenance
+# maintenance
 alias big="expac -H M '%m\t%n' | sort -h | nl"
 alias downgrada="sudo downgrade --ala-url https://bike.seedhost.eu/arcolinux/"
 
-#systeminfo
+# systeminfo
 alias probe="sudo -E hw-probe -all -upload"
 
-#shutdown or reboot
+# shutdown or reboot
 alias ssn="sudo shutdown now"
 alias sr="sudo reboot"
 
-#shortcuts to directories
+# shortcuts to directories
 alias awem="cd /home/karl/.config/awesome/"
 alias qm="cd /home/karl/.config/qtile/"
 alias xm="cd /home/karl/.xmonad/"
@@ -212,21 +234,21 @@ alias dmove="cd ~/.dmenu"
 alias backup="cd /mnt/backup"
 alias backup-home="cd /mnt/backup/home"
 alias media="cd /mnt/autofs/music/videos/"
-alias cbak="cd ~/Yandex.Disk/Backups/homefolder/karl/"
+alias cbak="cd ~/Yandex.Disk/Backups/"
 alias app="cd /usr/share/applications/"
 alias localapp="cd ~/.local/share/applications/"
 alias script="cd ~/.scripts/activated"
-alias scriptd="cd ~/.scripts/deactivated"
 alias mm="cd /home/karl/.local/share/mail/karlfredin@gmail.com"
 alias mbas="cd ~/.config/bash"
 alias mqute="cd ~/.config/qutebrowser"
 alias mconky="cd ~/.config/conky"
 alias mpic="cd ~/Pictures"
 alias mvideo="cd ~/Videos"
-alias mraw="cd ~/Videos/raw"
 alias mzsh="cd ~/.config/oh-my-zsh/"
 alias mkitty="cd ~/.config/kitty/"
-alias mkpop="cd ~/.scripts/learnkpop/"
+alias mhypr="cd ~/.config/hypr/"
+alias mway="cd ~/.config/waybar/"
+alias learn="cd ~/myrepos/"
 alias vm="cd /media/vm"
 alias yandex="cd /media/cloud_storage/Yandex.Disk/"
 alias games="cd /media/games_1"
@@ -238,39 +260,42 @@ alias autofs="cd /mnt/autofs"
 alias mgit="cd ~/git-reps"
 alias mdmenu="cd ~/.dmenu"
 alias iso="cd ~/iso"
+alias setup="cd ~/myrepos/setup"
+alias dmscripts="cd ~/myrepos/dmscripts/.dmenu"
+alias dotfiles="cd ~/myrepos/dotfiles"
 
-#checks the values of mouse/keyboards clicks
+# checks the values of mouse/keyboards clicks
 alias keycheck="xev"
 
-#alias for sudo 
+# alias for sudo
 alias please="sudo"
 
-#check the wmclass fo windows
+# check the wmclass fo windows
 alias wmclass="xprop WM_CLASS" 
 
-#Nordvpn
+# Nordvpn
 alias vpn="nordvpn status"
 
-#Image viewer
+# Image viewer
 alias sxfa="sxiv -f *"
 alias pp="sxiv /var/pictures/backgrounds/*"
 
-#KVM 
+# KVM
 alias virsh="virsh -c qemu:///system"
 
-#Alias for vifm to add more functionality
+# Alias for vifm to add more functionality
 alias vifm="vifmrun"
 
-#Clear command
+# Clear command
 alias cls="clear"
 
-#RM aliases
+# RM aliases
 alias rm="rm -i"
 alias rmf="rm -f"
 alias rmr="rm -r"
 alias rmrf="rm -rf"
 
-#vim for important configuration files
+# vim for important configuration files
 alias vaw="vim ~/.config/awesome/rc.lua"
 alias vqt="vim ~/.config/qtile/config.py"
 alias qE="vim ~/.config/qtile/config.py"
@@ -298,17 +323,15 @@ alias vfis="vim ~/.config/fish/config.fish"
 # Gui editor
 alias nv="neovide"
 
-# SSH 
+# SSH
 alias mediaserver="ssh karl@192.168.1.30"
-alias game-server="ssh karl@192.168.1.31"
-alias router="ssh root@10.1.0.1"  
+alias gameserver="ssh karl@192.168.1.31"
+alias router="ssh root@10.1.0.1"
 alias phoe01="ssh karl@phoe01"  
 alias phoe02="ssh karl@phoe02"  
-alias phoe03="ssh karl@10.1.0.55"  
-alias moxi="ssh root@moxi.home"  
-alias moxi-server="ssh karl@moxi-server01"
-alias phoe04="ssh karl@10.1.0.55"  
-alias phoe-server01="ssh karl@10.1.0.50"  
+alias phoe03="ssh karl@10.1.0.55"
+alias phoe04="ssh karl@10.1.0.55"
+alias phoeserver01="ssh karl@10.1.0.50"
 alias kssh="kitty +kitten ssh"
 
 # git aliases
@@ -324,10 +347,10 @@ alias filetokrusader="xdg-mime default org.kde.krusader.desktop inode/directory 
 alias filetopcmanfm="xdg-mime default pcmanfm.desktop inode/directory application"
 
 
-#Change the default xclip behaviour 
+# Change the default xclip behaviour
 alias xclip="xclip -selection clipboard"
 
-#Sets some Variables
+# Sets some Variables
 export EDITOR=vim
 export VISUAL=vim
 export omf=/home/karl/.config/fish/conf.d/omf.fish
@@ -336,4 +359,4 @@ export qt=/home/karl/.config/qtile/config.py
 export github='https://github.com'
 export date_for_backup=$(date +%d-%h-%Y-%H-%M )  
 
-#export DOCKER_HOST=ssh://karl@192.168.1.31
+# export DOCKER_HOST=ssh://karl@192.168.1.31

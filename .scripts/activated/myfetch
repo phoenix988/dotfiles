@@ -1,0 +1,11 @@
+#!/bin/bash
+[ -d /etc/apt ] && package=$(dpkg -l | wc -l | awk '{print "pkg" "\t" $0}')
+[ -d /etc/dnf ] && package=$(dnf list installed | wc -l | awk '{print "pkg" "\t" $0}')
+[ -e /etc/pacman.conf ] && package=$(pacman -Qq | wc -l | awk '{print "pkg" "\t" $0}')
+
+cat /etc/os-release | awk -F = '/^NAME/ {print "os" "\t" $2}' | sed 's/"//g'
+hostname | awk '{print "host" "\t" $0}'
+uptime | awk '{print "uptime" "\t" $3 }' | sed -e 's/,//g'
+printf '%s\n' "${package[@]}"
+free -m | awk '/^Mem/ {print "mem" "\t" $3 " / " $2}'
+

@@ -1,10 +1,13 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
+##____  _                      _
+#|  _ \| |__   ___   ___ _ __ (_)_  __
+#| |_) | '_ \ / _ \ / _ \ '_ \| \ \/ /
+#|  __/| | | | (_) |  __/ | | | |>  <
+#|_|   |_| |_|\___/ \___|_| |_|_/_/\_\
+#
+# -*- coding: utf-8 -*-
 # Path to your oh-my-zsh installation.
 export ZSH="/home/karl/.config/oh-my-zsh"
-
-ZSH_THEME="nord"
+ZSH_THEME='nord'
 
 export HISTCONTROL=ignoreboth:erasedups
 
@@ -107,14 +110,15 @@ source $ZSH/oh-my-zsh.sh
 #Source the starship prompt
 #eval "$(starship init zsh)"
 
-source $ZSH/aliases.sh
 
+source $ZSH/aliases.sh
+#uwufetch
 pfetch
 
 
 alias sou="source ~/.zshrc"
 
-add_myscripts="$HOME/.scripts/activated"
+add_myscripts="/home/karl/.scripts/activated"
 myscripts_exist=$(echo $PATH | sed 's/:/\n/g' | grep $add_myscripts)
 [ -z "$myscripts_exist" ] &&  PATH="$PATH:$add_myscripts"
 
@@ -122,15 +126,21 @@ add_dmenu="/home/karl/.dmenu"
 dmenu_exist=$(echo $PATH | sed 's/:/\n/g' | grep $add_dmenu)
 [ -z "$dmenu_exist" ] &&  PATH="$PATH:$add_dmenu"
 
+add_doom="/home/karl/.config/emacs/bin/"
+doom_exist=$(echo $PATH | sed 's/:/\n/g' | grep $add_doom)
+[ -z "$doom_exist" ] &&  PATH="$PATH:$add_doom"
+
+
 
 
 [ "$TERM" = "xterm-color" ] && export TERM=xterm-256color
 
 
-source $ZSH/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source $ZSH/zsh-vim-mode/zsh-vim-mode.plugin.zsh
 
+
+source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZSH/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source $ZSH/zsh-vim-mode/zsh-vim-mode.plugin.zsh
 
 
 bindkey '^ ' autosuggest-accept
@@ -169,7 +179,9 @@ ex ()
        fi  
 }
 
-#export GPG_TTY=$(tty)
-#export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-#gpgconf --launch gpg-agent
+
+date=$(date +%d-%h-%Y-%H-%M)
+
+
+#[ $DISPLAY = ":1"  ] || Hyprland
 

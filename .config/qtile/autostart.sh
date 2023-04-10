@@ -9,6 +9,7 @@ picom -b --config  $HOME/.config/picom/picom-jona.conf
 
 #Set Display layout
 #$HOME/.screenlayout/layout.sh &
+emacs --daemon &
 
 #Set wallpaper
 ~/.fehbg &
@@ -28,4 +29,6 @@ steam &
 discord &
 lutris &
 blueman-manager &
-redshift -l 54.9038:23.8924 &
+
+
+
