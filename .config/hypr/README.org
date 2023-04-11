@@ -4,12 +4,28 @@
 
 * TABLE OF CONTENT
 ** DEPENDENCIES
-*** Things you need to install
+*** Things you need to install for my hyprland desktop
 
 
-** OTHER CONFIGS YOU NEED
-*** wofi
-*** waybar
-*** My dmscripts (Optional)
+*** OTHER CONFIGS YOU NEED
++ wofi
++ waybar
++ ![Dmscripts](https://github.com/phoenix988/dmscripts)
+
 
 ** STANDARD KEYBINDINGS
+**** Window Control
+-> SUPER + H  Move focus to the left window
+-> SUPER + L  Move focus to the right window
+-> SUPER + K  Move focus to the up window
+-> SUPER + J  Move focus to the down window
+
+-> SUPER + SHIFT + H
+-> SUPER + SHIFT + L
+-> SUPER + SHIFT + K
+-> SUPER + SHIFT + J
+
+-> SUPER + CTRL + H
+-> SUPER + CTRL + L
+-> SUPER + CTRL + K
+-> SUPER + CTRL + J
