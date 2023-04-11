@@ -1,0 +1,15 @@
+#+TITLE: Hyprland Configuration
+#+DESCRIPTION: This is my configuration file for Hyprland
+#+AUTHOR: Karl Fredin
+
+* TABLE OF CONTENT
+** DEPENDENCIES
+*** Things you need to install
+
+
+** OTHER CONFIGS YOU NEED
+*** wofi
+*** waybar
+*** My dmscripts (Optional)
+
+** STANDARD KEYBINDINGS
