@@ -8,24 +8,30 @@
 
 
 *** OTHER CONFIGS YOU NEED
-+ wofi
-+ waybar
-+ ![Dmscripts](https://github.com/phoenix988/dmscripts)
++ Wofi
++ Waybar
++ Dmscripts
 
 
 ** STANDARD KEYBINDINGS
 **** Window Control
--> SUPER + H  Move focus to the left window
--> SUPER + L  Move focus to the right window
--> SUPER + K  Move focus to the up window
--> SUPER + J  Move focus to the down window
+| MOVE WINDOWS FOCUS | DESCRIPTION                    |
+|--------------------+--------------------------------|
+| SUPER + H          | Move focus to the left window  |
+| SUPER + L          | Move focus to the right window |
+| SUPER + K          | Move focus to the up window    |
+| SUPER + J          | Move focus to the down window  |
 
--> SUPER + SHIFT + H
--> SUPER + SHIFT + L
--> SUPER + SHIFT + K
--> SUPER + SHIFT + J
+| MOVE WINDOWS AROUND | DESCRIPTION              |
+|---------------------+--------------------------|
+| SUPER + SHIFT + H   | Move window to the left  |
+| SUPER + SHIFT + L   | Move window to the right |
+| SUPER + SHIFT + K   | Move window to the up    |
+| SUPER + SHIFT + J   | Move window to the down  |
 
--> SUPER + CTRL + H
--> SUPER + CTRL + L
--> SUPER + CTRL + K
--> SUPER + CTRL + J
+| RESIZE WINDOWS   | DESCRIPTION                |
+|------------------+----------------------------|
+| SUPER + CTRL + H | Resize window to the left  |
+| SUPER + CTRL + L | Resize window to the right |
+| SUPER + CTRL + K | Resize window to the up    |
+| SUPER + CTRL + J | Resize window to the down  |
