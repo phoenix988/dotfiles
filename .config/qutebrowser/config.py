@@ -301,7 +301,7 @@ c.tabs.indicator.width = 1
 # Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 # for a blank page.
 # Type: FuzzyUrl
-c.url.default_page = 'http://docs.qtile.org/en/latest/'
+c.url.default_page = 'http://www.phoenixonline.club'
 
 # URL segments where `:navigate increment/decrement` will search for a
 # number.

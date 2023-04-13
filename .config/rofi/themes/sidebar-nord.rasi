@@ -13,8 +13,8 @@
     lightblack:  #81A1C1;
     //
     // Red
-    red:         #cd5c5c;
-    lightred:    #cc5533;
+    red:         #2E3440;
+    lightred:    #2E3440;
     //
     // Green
     green:       #86af80;
@@ -111,8 +111,8 @@ element selected urgent {
 }
 error-message {
     expand: true;
-    background-color: red;
-    border-color: darkred;
+    background-color: @red;
+    border-color: @red;
     border: 2px;
     padding: 1em;
 }

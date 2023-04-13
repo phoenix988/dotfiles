@@ -6,14 +6,19 @@
 #|_|   |_| |_|\___/ \___|_| |_|_/_/\_\
 #
 # -*- coding: utf-8 -*-
-
 #script that will compare all my config files and scripts to keep them up to date
 #if it detect one change its gonna update to all my locations so I always have the latest version
 #in my github repos etc
+
+# Define variables that are used in the script
 DOTFILES_REPO_PATH="$HOME/myrepos/dotfiles"
 DMSCRIPTS_REPO_PATH="$HOME/myrepos/dmscripts"
 
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
 
+# Declare the array that that contains files
+# that I want to sync to my github repos folder
 declare -A files
 
 # dmscripts
@@ -40,62 +45,75 @@ files[$HOME/.config/kitty/kitty.conf]="$DOTFILES_REPO_PATH/.config/kitty/kitty.c
 files[$HOME/.config/starship.toml]="$DOTFILES_REPO_PATH/.zshrc"
 files[$HOME/.config/qtile/config.py]="$DOTFILES_REPO_PATH/.config/qtile/config.py"
 files[$HOME/.config/qtile/autostart.sh]="$DOTFILES_REPO_PATH/.config/qtile/autostart.sh"
+files[$HOME/.config/qtile/themes]="$DOTFILES_REPO_PATH/.config/qtile/themes"
 files[$HOME/.config/hypr]="$DOTFILES_REPO_PATH/.config/hypr"
 files[$HOME/.config/waybar/config.jsonc]="$DOTFILES_REPO_PATH/.config/waybar/config.jsonc"
 files[$HOME/.config/waybar/style.css]="$DOTFILES_REPO_PATH/.config/waybar/style.css"
 files[$HOME/.config/vifm/vifmrc]="$DOTFILES_REPO_PATH/.config/vifm/vifmrc"
 files[$HOME/.config/wlogout]="$DOTFILES_REPO_PATH/.config/wlogout"
+files[$HOME/.config/rofi/themes]="$DOTFILES_REPO_PATH/.config/rofi/themes"
+files[$HOME/.config/rofi/config.rasi]="$DOTFILES_REPO_PATH/.config/rofi/config.rasi"
 files[$HOME/.config/wofi]="$DOTFILES_REPO_PATH/.config/wofi"
 files[$HOME/.config/doom]="$DOTFILES_REPO_PATH/.config/doom"
 files[$HOME/.config/nvim/init.vim]="$DOTFILES_REPO_PATH/.config/nvim/init.vim"
 files[$HOME/.config/nvim/vim-plug]="$DOTFILES_REPO_PATH/.config/nvim/vim-plug"
 files[$HOME/.config/oh-my-zsh/aliases.sh]="$DOTFILES_REPO_PATH/.config/oh-my-zsh/aliases.sh"
 files[$HOME/.tmux.conf.local]="$DOTFILES_REPO_PATH/.tmux.conf.local"
+files[$HOME/.config/qutebrowser/config.py]="$DOTFILES_REPO_PATH/.config/qutebrowser/config.py"
+files[$HOME/.config/qutebrowser/quickmarks]="$DOTFILES_REPO_PATH/.config/qutebrowser/quickmarks"
 
 for COMPARE in $(printf '%s\n' "${!files[@]}") ; do
 
 if [ -d $COMPARE ] ; then
 
-SOURCE=$(printf '%s\n' $(printf '%s\n' "${files["${COMPARE}"]}") )
+       SOURCE=$(printf '%s\n' $(printf '%s\n' "${files["${COMPARE}"]}") )
 
 
 
 for SOURCE_LOOP in $(ls  $SOURCE/* ) ; do
 
 
-DEST=$(echo $SOURCE_LOOP | sed -e "s|$DMSCRIPTS_REPO_PATH|$HOME|"  -e "s|$DOTFILES_REPO_PATH|$HOME|" )
+       DEST=$(echo $SOURCE_LOOP | sed -e "s|$DMSCRIPTS_REPO_PATH|$HOME|"  -e "s|$DOTFILES_REPO_PATH|$HOME|" )
 
 if cmp --quiet $DEST $SOURCE_LOOP ; then
 
-    printf '%s\n' "No Change Detected: $DEST"
+    if [ -z $DEST  ] ; then
+
+       echo "" &> /dev/null
+
+    else
+
+      echo -e "${RED}-- No Change Detected: ${DEST}"
+
+    fi
 
 else
 
-CHECK_FOR_LATEST=$(ls -lt  $DEST $SOURCE_LOOP 2> /dev/null | head -n1 | awk '{print $NF}')
+       CHECK_FOR_LATEST=$(ls -lt  $DEST $SOURCE_LOOP 2> /dev/null | head -n1 | awk '{print $NF}')
 
 if [ "$CHECK_FOR_LATEST" = "$DEST" ] ; then
 
-    LATEST=$(echo $CHECK_FOR_LATEST)
-    OLDEST=$(echo $SOURCE_LOOP)
+       LATEST=$(echo $CHECK_FOR_LATEST)
+       OLDEST=$(echo $SOURCE_LOOP)
 
 elif [ "$CHECK_FOR_LATEST" = "$SOURCE_LOOP" ] ; then
 
-    LATEST=$(echo $CHECK_FOR_LATEST)
-    OLDEST=$(echo $DEST)
+       LATEST=$(echo $CHECK_FOR_LATEST)
+       OLDEST=$(echo $DEST)
 
 fi
 
-SAME_NAME_OLDEST=$(echo $OLDEST | awk  -F / '{print $NF}')
-SAME_NAME_LATEST=$(echo $LATEST | awk  -F / '{print $NF}')
+       SAME_NAME_OLDEST=$(echo $OLDEST | awk  -F / '{print $NF}')
+       SAME_NAME_LATEST=$(echo $LATEST | awk  -F / '{print $NF}')
 
 
 if [ "$SAME_NAME_OLDEST" = "$SAME_NAME_LATEST" ] ; then
 
-cp -r $LATEST $OLDEST 2> /dev/null
+       cp -r $LATEST $OLDEST 2> /dev/null
 
-printf '%s\n' "Moving: $LATEST to $OLDEST"
+       echo -e "${GREEN}++ Moving: ${LATEST} to ${OLDEST}"
 
-sleep 1
+       sleep 1
 
 fi
 
@@ -104,43 +122,52 @@ fi
 
 done
 
-
 elif [ -f $COMPARE ] ; then
 
 
-COMPARE_WITH=$(printf '%s\n' "${files["${COMPARE}"]}")
+      COMPARE_WITH=$(printf '%s\n' "${files["${COMPARE}"]}")
 
 if cmp --quiet $COMPARE $COMPARE_WITH ; then
 
-  printf '%s\n' "No Change Detected: $COMPARE"
+
+    if [ -z $COMPARE  ] ; then
+
+       echo "" &> /dev/null
+
+    else
+
+      echo -e "${RED}-- No Change Detected: ${COMPARE}"
+
+    fi
+
 
 else
 
-CHECK_FOR_LATEST=$(ls -lt  $COMPARE_WITH $COMPARE 2> /dev/null | head -n1 | awk '{print $NF}')
+      CHECK_FOR_LATEST=$(ls -lt  $COMPARE_WITH $COMPARE 2> /dev/null | head -n1 | awk '{print $NF}')
 
 if [ "$CHECK_FOR_LATEST" = "$COMPARE" ] ; then
 
-    LATEST=$(echo $CHECK_FOR_LATEST)
-    OLDEST=$(echo $COMPARE_WITH)
+      LATEST=$(echo $CHECK_FOR_LATEST)
+      OLDEST=$(echo $COMPARE_WITH)
 
 elif [ "$CHECK_FOR_LATEST" = "$COMPARE_WITH" ] ; then
 
-    LATEST=$(echo $CHECK_FOR_LATEST)
-    OLDEST=$(echo $COMPARE)
+      LATEST=$(echo $CHECK_FOR_LATEST)
+      OLDEST=$(echo $COMPARE)
 
 fi
 
-SAME_NAME_OLDEST=$(echo $OLDEST | awk  -F / '{print $NF}')
-SAME_NAME_LATEST=$(echo $LATEST | awk  -F / '{print $NF}')
+      SAME_NAME_OLDEST=$(echo $OLDEST | awk  -F / '{print $NF}')
+      SAME_NAME_LATEST=$(echo $LATEST | awk  -F / '{print $NF}')
 
 
 if [ "$SAME_NAME_OLDEST" = "$SAME_NAME_LATEST" ] ; then
 
-cp -r $LATEST $OLDEST 2> /dev/null
+     cp -r $LATEST $OLDEST 2> /dev/null
 
-printf '%s\n' "Moving: $LATEST to $OLDEST"
+     echo -e "${GREEN}++ Moving: ${LATEST} to ${OLDEST}"
 
-sleep 1
+     sleep 1
 
 fi
 

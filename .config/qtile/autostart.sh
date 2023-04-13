@@ -28,7 +28,7 @@ flameshot &
 steam &
 discord &
 lutris &
-blueman-manager &
+blueman-applet &
 
 
 

@@ -104,3 +104,36 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+
+;; Keybindings
+(map! :leader
+      (:prefix ("v". "buffer")
+       :desc "Newtab" "n" #'+workspace/new
+       :desc "Deletetab" "d" #'+workspace/delete
+       :desc "Newname" "N" #'+workspace/new-named
+       :desc "Swap Left" "l" #'+workspace/swap-left
+       :desc "Swap Right" "r" #'+workspace/swap-right
+       :desc "Load tab" "L" #'+workspace/load
+       :desc "Switch to tab number 0" "1" #'+workspace/switch-to-0
+       :desc "Switch to tab number 1" "2" #'+workspace/switch-to-1
+       :desc "Switch to tab number 2" "3" #'+workspace/switch-to-2
+       :desc "Switch to tab number 3" "4" #'+workspace/switch-to-3
+       :desc "Switch to tab number 4" "5" #'+workspace/switch-to-4
+       :desc "Switch to tab number 5" "6" #'+workspace/switch-to-5
+       :desc "Switch to tab number 6" "7" #'+workspace/switch-to-6
+       :desc "Switch to tab number 7" "8" #'+workspace/switch-to-7
+       :desc "Switch to tab number 8" "9" #'+workspace/switch-to-8
+       :desc "Vterm" "v" #'vterm
+       :desc "term" "t" #'vterm
+       :desc "Eshell" "e" #'eshell))
+
+(map! :leader
+      (:prefix ("d". "buffer")
+       :desc "Neotree open" "o" #'neotree
+       :desc "Neotree dir" "d" #'neotree-dir))
+
+
+(evil-define-key 'normal peep-dired-mode-map
+  (kbd "j") 'peep-dired-next-file
+  (kbd "k") 'peep-dired-prev-file)
+(add-hook 'peep-dired-hook 'evil-normalize-keymaps)
