@@ -7,7 +7,7 @@
 # -*- coding: utf-8 -*-
 # Path to your oh-my-zsh installation.
 export ZSH="/home/karl/.config/oh-my-zsh"
-ZSH_THEME='nord'
+#ZSH_THEME='nord'
 
 export HISTCONTROL=ignoreboth:erasedups
 
@@ -108,10 +108,11 @@ source $ZSH/oh-my-zsh.sh
 #
 
 #Source the starship prompt
-#eval "$(starship init zsh)"
+eval "$(starship init zsh)"
 
 
-source $ZSH/aliases.sh
+[ -f $HOME/.config/alias-zsh-bash ] && source $HOME/.config/alias-zsh-bash
+
 #uwufetch
 pfetch
 
