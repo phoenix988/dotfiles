@@ -1,0 +1,27 @@
+#+title: Dotfiles
+#+DESCRIPTION: Here I store dotfiles for various programs I use
+#+AUTHOR: Karl Fredin
+
+
+* TABLE OF CONTENTS
+
+** [[Aboyt My Dotfiles][About]]
+** [[Configs][Configs]]
+- [[Configs][Hyprland]]
+- [[Configs][Waybar]]
+- [[Zsh][Zsh]]
+- [[Qtile][Qtile]]
+- [[Doom Emacs][Doom Emacs]]
+
+** [[Scripts][Scripts]]
+
+
+  
+*** Aboyt My Dotfiles
+
+*** Configs
+**** Hyprland
+**** Waybar
+**** Zsh
+**** Qtile
+**** Doom Emacs
