@@ -34,6 +34,7 @@ if it detects that it has changed
 | Dmenu Scripts Home                          | Dmenu Scripts Repo                                 |
 |---------------------------------------------+----------------------------------------------------|
 | $HOME/.dmenu                                | $DMSCRIPTS_REPO_PATH/.dmenu                        |
+
 |---------------------------------------------+----------------------------------------------------|
 | Scripts Paths Home                          | Script Paths Repo                                  |
 |---------------------------------------------+----------------------------------------------------|
@@ -43,6 +44,7 @@ if it detects that it has changed
 | $HOME/.scripts/backup-scripts/btrfs         | $DOTFILES_REPO_PATH/.scripts/backup-scripts/btrfs  |
 | $HOME/.scripts/backup-scripts/yandex-script | $DOTFILES_REPO_PATH/.scripts/yandex-script         |
 | $HOME/.scripts/docker                       | $DOTFILES_REPO_PATH/.scripts/docker                |
+
 |---------------------------------------------+----------------------------------------------------|
 | Config Path Home                            | Config Path Repos                                  |
 |---------------------------------------------+----------------------------------------------------|
