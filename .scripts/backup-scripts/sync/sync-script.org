@@ -42,35 +42,36 @@ if it detects that it has changed
 | $HOME/.scripts/docker                       | $DOTFILES_REPO_PATH/.scripts/docker               |
 
 **** Config Paths
-|---------------------------------------------+----------------------------------------------------|
-| Config Path Home                            | Config Path Repos                                  |
-|---------------------------------------------+----------------------------------------------------|
-| $HOME/.zshrc                                | $DOTFILES_REPO_PATH/.zshrc                         |
-| $HOME/.bashrc                               | $DOTFILES_REPO_PATH/.bashrc                        |
-| $HOME/.config/bash                          | $DOTFILES_REPO_PATH/.config/bash                   |
-| $HOME/.config/kitty/kitty.conf              | $DOTFILES_REPO_PATH/.config/kitty/kitty.conf       |
-| $HOME/.config/starship.toml                 | $DOTFILES_REPO_PATH/.config/starship.toml          |
-| $HOME/.config/qtile/config.py               | $DOTFILES_REPO_PATH/.config/qtile/config.py        |
-| $HOME/.config/qtile/autostart.sh            | $DOTFILES_REPO_PATH/.config/qtile/autostart.sh     |
-| $HOME/.config/qtile/themes                  | $DOTFILES_REPO_PATH/.config/qtile/themes           |
-| $HOME/.config/hypr                          | $DOTFILES_REPO_PATH/.config/hypr                   |
-| $HOME/.config/waybar/config.jsonc           | $DOTFILES_REPO_PATH/.config/waybar/config.jsonc    |
-| $HOME/.config/waybar/style.css              | $DOTFILES_REPO_PATH/.config/waybar/style.css       |
-| $HOME/.config/vifm/vifmrc                   | $DOTFILES_REPO_PATH/.config/vifm/vifmrc            |
-| $HOME/.config/wlogout                       | $DOTFILES_REPO_PATH/.config/wlogout                |
-| $HOME/.config/rofi/themes                   | $DOTFILES_REPO_PATH/.config/rofi/themes            |
-| $HOME/.config/rofi/config.rasi              | $DOTFILES_REPO_PATH/.config/rofi/config.rasi       |
-| $HOME/.config/wofi                          | $DOTFILES_REPO_PATH/.config/wofi                   |
-| $HOME/.config/doom                          | $DOTFILES_REPO_PATH/.config/doom                   |
-| $HOME/.config/doom/eshell                   | $DOTFILES_REPO_PATH/.config/doom/eshell            |
-| $HOME/.config/nvim/init.vim                 | $DOTFILES_REPO_PATH/.config/nvim/init.vim          |
-| $HOME/.config/nvim/vim-plug                 | $DOTFILES_REPO_PATH/.config/nvim/vim-plug          |
-| $HOME/.config/alias-zsh-bash                | $DOTFILES_REPO_PATH/.config/alias-zsh-bash         |
-| $HOME/.config/fish/conf.d/alias.fish        | $DOTFILES_REPO_PATH/.config/fish/conf.d/alias.fish |
-| $HOME/.config/fish/config.fish              | $DOTFILES_REPO_PATH/.config/fish/config.fish       |
-| $HOME/.tmux.conf.local                      | $DOTFILES_REPO_PATH/.tmux.conf.local               |
-| $HOME/.config/qutebrowser/config.py         | $DOTFILES_REPO_PATH/.config/qutebrowser/config.py  |
-| $HOME/.config/qutebrowser/quickmarks        | $DOTFILES_REPO_PATH/.config/qutebrowser/quickmarks |
+|--------------------------------------+----------------------------------------------------|
+| Config Path Home                     | Config Path Repos                                  |
+|--------------------------------------+----------------------------------------------------|
+| $HOME/.zshrc                         | $DOTFILES_REPO_PATH/.zshrc                         |
+| $HOME/.bashrc                        | $DOTFILES_REPO_PATH/.bashrc                        |
+| $HOME/.config/bash                   | $DOTFILES_REPO_PATH/.config/bash                   |
+| $HOME/.config/kitty/kitty.conf       | $DOTFILES_REPO_PATH/.config/kitty/kitty.conf       |
+| $HOME/.config/alacritty              | $DOTFILES_REPO_PATH/.config/alacritty              |
+| $HOME/.config/starship.toml          | $DOTFILES_REPO_PATH/.config/starship.toml          |
+| $HOME/.config/qtile/config.py        | $DOTFILES_REPO_PATH/.config/qtile/config.py        |
+| $HOME/.config/qtile/autostart.sh     | $DOTFILES_REPO_PATH/.config/qtile/autostart.sh     |
+| $HOME/.config/qtile/themes           | $DOTFILES_REPO_PATH/.config/qtile/themes           |
+| $HOME/.config/hypr                   | $DOTFILES_REPO_PATH/.config/hypr                   |
+| $HOME/.config/waybar/config.jsonc    | $DOTFILES_REPO_PATH/.config/waybar/config.jsonc    |
+| $HOME/.config/waybar/style.css       | $DOTFILES_REPO_PATH/.config/waybar/style.css       |
+| $HOME/.config/vifm/vifmrc            | $DOTFILES_REPO_PATH/.config/vifm/vifmrc            |
+| $HOME/.config/wlogout                | $DOTFILES_REPO_PATH/.config/wlogout                |
+| $HOME/.config/rofi/themes            | $DOTFILES_REPO_PATH/.config/rofi/themes            |
+| $HOME/.config/rofi/config.rasi       | $DOTFILES_REPO_PATH/.config/rofi/config.rasi       |
+| $HOME/.config/wofi                   | $DOTFILES_REPO_PATH/.config/wofi                   |
+| $HOME/.config/doom                   | $DOTFILES_REPO_PATH/.config/doom                   |
+| $HOME/.config/doom/eshell            | $DOTFILES_REPO_PATH/.config/doom/eshell            |
+| $HOME/.config/nvim/init.vim          | $DOTFILES_REPO_PATH/.config/nvim/init.vim          |
+| $HOME/.config/nvim/vim-plug          | $DOTFILES_REPO_PATH/.config/nvim/vim-plug          |
+| $HOME/.config/alias-zsh-bash         | $DOTFILES_REPO_PATH/.config/alias-zsh-bash         |
+| $HOME/.config/fish/conf.d/alias.fish | $DOTFILES_REPO_PATH/.config/fish/conf.d/alias.fish |
+| $HOME/.config/fish/config.fish       | $DOTFILES_REPO_PATH/.config/fish/config.fish       |
+| $HOME/.tmux.conf.local               | $DOTFILES_REPO_PATH/.tmux.conf.local               |
+| $HOME/.config/qutebrowser/config.py  | $DOTFILES_REPO_PATH/.config/qutebrowser/config.py  |
+| $HOME/.config/qutebrowser/quickmarks | $DOTFILES_REPO_PATH/.config/qutebrowser/quickmarks |
 
 
 **** Other Variables
@@ -110,6 +111,7 @@ files[$HOME/.zshrc]="$DOTFILES_REPO_PATH/.zshrc"
 files[$HOME/.bashrc]="$DOTFILES_REPO_PATH/.bashrc"
 files[$HOME/.config/bash]="$DOTFILES_REPO_PATH/.config/bash"
 files[$HOME/.config/kitty/kitty.conf]="$DOTFILES_REPO_PATH/.config/kitty/kitty.conf"
+files[$HOME/.config/alacritty]="$DOTFILES_REPO_PATH/.config/alacritty"
 files[$HOME/.config/starship.toml]="$DOTFILES_REPO_PATH/.config/starship.toml"
 files[$HOME/.config/qtile/config.py]="$DOTFILES_REPO_PATH/.config/qtile/config.py"
 files[$HOME/.config/qtile/autostart.sh]="$DOTFILES_REPO_PATH/.config/qtile/autostart.sh"
@@ -176,7 +178,7 @@ if [ -d $COMPARE ] ; then
 
        SOURCE=$(printf '%s\n' $(printf '%s\n' "${files["${COMPARE}"]}") )
 
-for SOURCE_LOOP in $(ls  $SOURCE/* ) ; do
+for SOURCE_LOOP in $(find  $SOURCE/* -type f ) ; do
 
        DEST=$(echo $SOURCE_LOOP | sed -e "s|$DMSCRIPTS_REPO_PATH|$HOME|"  -e "s|$DOTFILES_REPO_PATH|$HOME|" )
 

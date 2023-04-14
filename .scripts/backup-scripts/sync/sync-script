@@ -22,6 +22,7 @@ files[$HOME/.zshrc]="$DOTFILES_REPO_PATH/.zshrc"
 files[$HOME/.bashrc]="$DOTFILES_REPO_PATH/.bashrc"
 files[$HOME/.config/bash]="$DOTFILES_REPO_PATH/.config/bash"
 files[$HOME/.config/kitty/kitty.conf]="$DOTFILES_REPO_PATH/.config/kitty/kitty.conf"
+files[$HOME/.config/alacritty]="$DOTFILES_REPO_PATH/.config/alacritty"
 files[$HOME/.config/starship.toml]="$DOTFILES_REPO_PATH/.config/starship.toml"
 files[$HOME/.config/qtile/config.py]="$DOTFILES_REPO_PATH/.config/qtile/config.py"
 files[$HOME/.config/qtile/autostart.sh]="$DOTFILES_REPO_PATH/.config/qtile/autostart.sh"
@@ -70,7 +71,7 @@ if [ -d $COMPARE ] ; then
 
        SOURCE=$(printf '%s\n' $(printf '%s\n' "${files["${COMPARE}"]}") )
 
-for SOURCE_LOOP in $(ls  $SOURCE/* ) ; do
+for SOURCE_LOOP in $(find  $SOURCE/* -type f ) ; do
 
        DEST=$(echo $SOURCE_LOOP | sed -e "s|$DMSCRIPTS_REPO_PATH|$HOME|"  -e "s|$DOTFILES_REPO_PATH|$HOME|" )
 
