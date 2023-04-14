@@ -42,15 +42,14 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-
+;; Load package doom-theme
 (use-package doom-themes
-  :ensure t
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-nord t)
-
+  ;; Choose your theme Here
+  (load-theme 'doom-nord-aurora t)
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
@@ -60,8 +59,6 @@
   (doom-themes-treemacs-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
-
- (setq doom-theme 'doom-nord)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -106,14 +103,16 @@
 
 
 ;; Keybindings
+;; Tab/workspaces keybindings
 (map! :leader
-      (:prefix ("v". "buffer")
+      (:prefix ("t". "buffer")
        :desc "Newtab" "n" #'+workspace/new
        :desc "Deletetab" "d" #'+workspace/delete
        :desc "Newname" "N" #'+workspace/new-named
-       :desc "Swap Left" "l" #'+workspace/swap-left
-       :desc "Swap Right" "r" #'+workspace/swap-right
+       :desc "Swap Left" "j" #'+workspace/swap-left
+       :desc "Swap Right" "k" #'+workspace/swap-right
        :desc "Load tab" "L" #'+workspace/load
+       :desc "Toggle tabs" "h" #'centaur-tabs-mode
        :desc "Switch to tab number 0" "1" #'+workspace/switch-to-0
        :desc "Switch to tab number 1" "2" #'+workspace/switch-to-1
        :desc "Switch to tab number 2" "3" #'+workspace/switch-to-2
@@ -122,18 +121,70 @@
        :desc "Switch to tab number 5" "6" #'+workspace/switch-to-5
        :desc "Switch to tab number 6" "7" #'+workspace/switch-to-6
        :desc "Switch to tab number 7" "8" #'+workspace/switch-to-7
-       :desc "Switch to tab number 8" "9" #'+workspace/switch-to-8
-       :desc "Vterm" "v" #'vterm
-       :desc "term" "t" #'vterm
-       :desc "Eshell" "e" #'eshell))
+       :desc "Switch to tab number 8" "9" #'+workspace/switch-to-8))
 
+;; Switch workspace using ctrl + number
+(map! "C-1" #'+workspace/switch-to-0)
+(map! "C-2" #'+workspace/switch-to-1)
+(map! "C-3" #'+workspace/switch-to-2)
+(map! "C-4" #'+workspace/switch-to-3)
+(map! "C-5" #'+workspace/switch-to-4)
+(map! "C-6" #'+workspace/switch-to-5)
+(map! "C-7" #'+workspace/switch-to-6)
+(map! "C-8" #'+workspace/switch-to-7)
+(map! "C-9" #'+workspace/switch-to-8)
+
+
+;; Neotree Keybindings
 (map! :leader
       (:prefix ("d". "buffer")
-       :desc "Neotree open" "o" #'neotree
-       :desc "Neotree dir" "d" #'neotree-dir))
+       :desc "Neotree open in current folder" "o" #'neotree
+       :desc "Neotree hider" "h" #'neotree-hide
+       :desc "Neotree dir choose directory" "d" #'neotree-dir
+       :desc "Neotree refresh" "r" #'neotree-refresh))
+(map! "<f5>" #'neotree-toggle)
 
+;; Open terminals in Emacs
+(map! :leader
+      (:prefix ("t". "buffer")
+       :desc "Term" "t" #'term
+       :desc "Eshell" "e" #'eshell
+       :desc "Eshell Popup" "E" #'+eshell/toggle
+       :desc "Vterm" "V" #'vterm))
 
+;; Move around in splits with vim keys
+(map! "C-l" #'evil-window-right)
+(map! "C-h" #'evil-window-left)
+(map! "C-k" #'evil-window-up)
+(map! "C-j" #'evil-window-down)
+
+;; Use vim keys in dired
 (evil-define-key 'normal peep-dired-mode-map
   (kbd "j") 'peep-dired-next-file
   (kbd "k") 'peep-dired-prev-file)
 (add-hook 'peep-dired-hook 'evil-normalize-keymaps)
+
+
+;; Shell configuration in emacs
+(setq shell-file-name "/bin/zsh"
+      vterm-max-scrollback 5000)
+
+
+(setq eshell-rc-script "~/.config/doom/eshell/profile"
+      eshell-aliases-file "~/.config/doom/eshell/aliases"
+      eshell-history-size 5000
+      eshell-buffer-maximum-lines 5000
+      eshell-hist-ignoredups t
+      eshell-scroll-to-bottom-on-input t
+      eshell-destroy-buffer-when-process-dies t
+      eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
+
+;; Centaur tabs mode on
+(setq centaur-tabs-set-bar 'over)
+(centaur-tabs-mode t)
+
+;; Sets line to relative
+(setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode)
+
+
