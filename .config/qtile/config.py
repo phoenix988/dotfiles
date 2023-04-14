@@ -3,7 +3,6 @@
 #| |_) | '_ \ / _ \ / _ \ '_ \| \ \/ /
 #|  __/| | | | (_) |  __/ | | | |>  < 
 #|_|   |_| |_|\___/ \___|_| |_|_/_/\_\
-#                                     
 # -*- coding: utf-8 -*-
 import os
 import re
@@ -16,15 +15,13 @@ from libqtile import layout, bar, widget, hook
 from libqtile.lazy import lazy
 from typing import List  # noqa: F401
 
+# Import the colors qtile will use
+from color import colors, layout_colors
 
 # Importing qtile_extras libaries
 from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration, PowerLineDecoration, BorderDecoration
 
-# Define variables
-
-# Import the colors qtile will use
-from color import colors, layout_colors
 
 # Define super key as variable
 mod = "mod4"
