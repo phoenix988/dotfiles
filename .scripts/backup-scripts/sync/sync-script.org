@@ -2,12 +2,14 @@
 #+DESCRIPTION: This script will sync choosen dotfiles, script etc with my git repos
 #+AUTHOR: Karl Fredin
 #+PROPERTY: header-args :tangle sync-script
-#+auto_tangle t
 #+STARTUP: showeverything
 
 * TABLE OF CONTENT
 - [[About This Script][About]]
 - [[Variables][Variables]]
+- [[Script Paths][Script Path]]
+- [[Config Paths][Config Path]]
+- [[Other Variables][Other Variables]]
 - [[Cases][Cases]]
 - [[Function][The Function]]
 
@@ -24,27 +26,22 @@ inspect it later. You can also combine the two switches
 
 
 
-
-
 *** Variables
 This is the Config files that this script will sync
 if it detects that it has changed
+****  Script Paths
+|---------------------------------------------+---------------------------------------------------|
+| Scripts Home                                | Scripts Repo                                      |
+|---------------------------------------------+---------------------------------------------------|
+| $HOME/.dmenu                                | $DMSCRIPTS_REPO_PATH/.dmenu                       |
+| $HOME/.scripts/activated                    | $DOTFILES_REPO_PATH/.scripts/activated            |
+| $HOME/.scripts/restart                      | $DOTFILES_REPO_PATH/.scripts/restart              |
+| $HOME/.scripts/backup-scripts/sync          | $DOTFILES_REPO_PATH/.scripts/backup-scripts/sync  |
+| $HOME/.scripts/backup-scripts/btrfs         | $DOTFILES_REPO_PATH/.scripts/backup-scripts/btrfs |
+| $HOME/.scripts/backup-scripts/yandex-script | $DOTFILES_REPO_PATH/.scripts/yandex-script        |
+| $HOME/.scripts/docker                       | $DOTFILES_REPO_PATH/.scripts/docker               |
 
-|---------------------------------------------+----------------------------------------------------|
-| Dmenu Scripts Home                          | Dmenu Scripts Repo                                 |
-|---------------------------------------------+----------------------------------------------------|
-| $HOME/.dmenu                                | $DMSCRIPTS_REPO_PATH/.dmenu                        |
-
-|---------------------------------------------+----------------------------------------------------|
-| Scripts Paths Home                          | Script Paths Repo                                  |
-|---------------------------------------------+----------------------------------------------------|
-| $HOME/.scripts/activated                    | $DOTFILES_REPO_PATH/.scripts/activated             |
-| $HOME/.scripts/restart                      | $DOTFILES_REPO_PATH/.scripts/restart               |
-| $HOME/.scripts/backup-scripts/sync          | $DOTFILES_REPO_PATH/.scripts/backup-scripts/sync   |
-| $HOME/.scripts/backup-scripts/btrfs         | $DOTFILES_REPO_PATH/.scripts/backup-scripts/btrfs  |
-| $HOME/.scripts/backup-scripts/yandex-script | $DOTFILES_REPO_PATH/.scripts/yandex-script         |
-| $HOME/.scripts/docker                       | $DOTFILES_REPO_PATH/.scripts/docker                |
-
+**** Config Paths
 |---------------------------------------------+----------------------------------------------------|
 | Config Path Home                            | Config Path Repos                                  |
 |---------------------------------------------+----------------------------------------------------|
@@ -75,6 +72,8 @@ if it detects that it has changed
 | $HOME/.config/qutebrowser/config.py         | $DOTFILES_REPO_PATH/.config/qutebrowser/config.py  |
 | $HOME/.config/qutebrowser/quickmarks        | $DOTFILES_REPO_PATH/.config/qutebrowser/quickmarks |
 
+
+**** Other Variables
 Other Variables that we set that we use later in the script
 We specity the paths to our dotfiles repos and then we specify
 some colors that we want our output to be when we specify -v
