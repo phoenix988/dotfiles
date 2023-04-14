@@ -316,7 +316,7 @@ c.url.incdec_segments = ['path', 'query']
 
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
-c.url.start_pages = 'http://docs.qtile.org/en/latest/'
+c.url.start_pages = 'www.phoenixonline.club'
 
 # Set the main window background to transparent.  This allows having a
 # transparent tab- or statusbar (might require a compositor such as
