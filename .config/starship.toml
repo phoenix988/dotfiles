@@ -1,115 +1,20 @@
-## Inserts a blank line between shell prompts
-#add_newline = false
-#
-#
-#[line_break]
-#disabled=true
-#
-## Replace the "❯" symbol in the prompt with "➜"
-#[character]                            # The name of the module we are configuring is "character"
-#success_symbol = "[⇒](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
-#error_symbol = "[✗](bold red)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
-#vicmd_symbol = "[⇐](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
-#
-## Disable the package module, hiding it from the prompt completely
-#[package]
-#disabled = true
-#
-
-
 format = """
-$status \
-${custom.tztime} \
-$username\
-$hostname\
-$slvl\
-$kubernetes\
-$directory\
-$git_branch\
-$git_commit\
-$git_state\
-$git_status\
-$docker_context\
-$package\
-$cmake\
-$nodejs\
-$perl\
-$python \
-$dotnet\
-$dart\
-$dotnet\
-$elixir\
-$elm\
-$erlang\
-$golang\
-$helm\
-$java\
-$julia\
-$kotlin\
-$nim\
-$ocaml\
-$php\
-$purescript\
-$swift\
-$zig\
-$gcloud\
-$openstack\
-$crystal\
-$lua\
-$jobs\
-$ruby\
-$rust\
-$terraform\
-$vagrant\
-$nix_shell\
-$conda\
-$aws \
-$env_var\
-$cmd_durations\
-$line_break\
-$character"""
+[\uE0B6](fg:#1C4961)[$directory](bg:#1C4961)[\uE0B0](fg:#1C4961 bg:#2F79A1)$git_branch[\uE0B0](fg:#2F79A1 bg:#3A95C7)$git_status[\uE0B0](#3A95C7 bg:#40A9E0)$time[\uE0B0](#40A9E0 bg:none) $all$character """
 
-# Don't print a new line at the start of the prompt
-add_newline = false
-
-[character]
-success_symbol = "[λ](grey)"
-error_symbol = "[λ](bold red)"
+add_newline = true
 
 [directory]
-truncation_length = 100
-truncate_to_repo = false
-style = "yellow"
-format = "[:$path]($style)[$read_only]($read_only_style) " 
+style = "bg:#1C4961 fg:white"
 
 [git_branch]
-symbol = ""
-style = "bold white"
-format = '[\($symbol$branch\)]($style) '
+format = "[ $symbol$branch ]($style)"
+style = "bg:#2F79A1 fg:white"
 
 [git_status]
-untracked = ""
-format = '([\[$conflicted$deleted$renamed$modified$staged$behind\]]($style) )'
-modified = '*'
+format = "[ $all_status$ahead_behind ]($style)"
+style = "bg:#3A95C7 fg:white"
 
-#[python]
-#format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\))($style)'
-
-[status]
-disabled = false
-format = '[\[$status - $common_meaning\]](yellow)'
-
-[custom.tztime]
-command = 'date +"%a %b %d %Y %l:%M%p "'
-when = "true"
-format = '[\[$symbol($output)\]](purple)'
-
-[env_var]
-variable = "0"
-
-[hg_branch]
-disabled = true
 [time]
-disabled = true
-[battery]
-disabled = true
+disabled = false
+format = "[ $time ]($style)"
+style = "bg:#40A9E0 fg:white"
