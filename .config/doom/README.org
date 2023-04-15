@@ -10,34 +10,33 @@
 - [[Line Numbers][Line Numbers]]
 - [[Fonts][Fonts]]
 - [[Themes][Themes]]
-** [[Workspaces][Keybindings]]
-*** [[Workspaces][Workspaces]]
-- [[Tabs][Tabs]]
-- [[Splits][Splits]]
-*** [[File Management][File Management]]
-- [[Dired][Dired]]
-- [[Neotree][Neotree]]
-*** [[Terminal][Term]]
+- [[Workspaces][Keybindings]]
+  - [[Workspaces][Workspaces]]
+    - [[Tabs][Tabs]]
+    - [[Splits][Splits]]
+  - [[File Management][File Management]]
+    - [[Dired][Dired]]
+    - [[Neotree][Neotree]]
+    - [[Terminal][Term]]
 
 
 
-*** About My Doom
+** About My Doom
 This is my personal Doom Emacs config that I have written using emacs org mode
 so that I can easily make comments inside the document so it's easier to read and
 know whats going on. In order to use this config you need to have Doom Emacs installed.
 
 
-**** Beacon
+** Beacon
 Never lose your cursor! Beacon makes your cursor shine when you scroll
 #+begin_src emacs-lisp :tangle config.el
 
-;; Beacon Mode never lose your cursor
 (beacon-mode 1)
 
 #+end_src
 
 
-**** Centaur Tabs
+** Centaur Tabs
 settings for centaur tabs if you want, change here if
 you dont want the tabs to be visible
 and change over if you want the tabs to be at the bottom
@@ -51,31 +50,28 @@ Keybinding I have set for it for disable the tabs
 
 #+begin_src emacs-lisp :tangle config.el
 
-;; Centaur tabs mode on
 (setq centaur-tabs-set-bar 'over)
 (centaur-tabs-mode t)
 
 
 #+end_src
 
-**** Shell
+** Shell
 
 Settings for the various shells inside of emacs
 #+begin_src emacs-lisp :tangle config.el
 
-;; Shell configuration in emacs
 (setq shell-file-name "/bin/zsh"
       vterm-max-scrollback 5000)
 
 
 #+end_src
 
-**** Line Numbers
+** Line Numbers
 Settings for line numbers change relative to example absolute if you want
 to see the exact line number of the file. But I always prefer relative
 #+begin_src emacs-lisp :tangle config.el
 
-;; Sets line to relative
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode)
 
@@ -84,12 +80,11 @@ to see the exact line number of the file. But I always prefer relative
 
 
 
-**** Fonts
+** Fonts
 The various font settings for doom emacs. If you want to change the font
 Family and size you can do that here. you can set italic font,big font and normal font.
 #+begin_src emacs-lisp :tangle config.el
 
-;; Doom fonts
 (setq doom-font (font-spec :family "JetBrains Mono" :size 15)
       doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15)
       doom-big-font (font-spec :family "JetBrains Mono" :size 24))
@@ -105,44 +100,42 @@ Family and size you can do that here. you can set italic font,big font and norma
 
 
 
-**** Themes
+** Themes
 Here you can set your prefered theme, I load my themes with the package doom-themes
 So I have various themes to choose from. If you want to change theme change the variable
 Load-theme to the prefered them you can also do 'SPC h' + t to change theme on the fly
 But to make it permanent you need to modify config.el
 #+begin_src emacs-lisp :tangle config.el
 
-;; Load package doom-theme
 (use-package doom-themes
   :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  ;; Choose your theme Here
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
   (load-theme 'doom-nord-aurora t)
-  ;; Enable flashing mode-line on errors
+
   (doom-themes-visual-bell-config)
-  ;; Enable custom neotree theme (all-the-icons must be installed!)
+
   (doom-themes-neotree-config)
-  ;; or for treemacs users
-  (setq doom-themes-treemacs-theme "doom-nord") ; use "doom-colors" for less minimal icon theme
+
+  (setq doom-themes-treemacs-theme "doom-nord")
+
   (doom-themes-treemacs-config)
-  ;; Corrects (and improves) org-mode's native fontification.
+
   (doom-themes-org-config))
 
 #+end_src
 
 
 
-**** Keybindings
+** Keybindings
 This is my custom keybindings I prefer to use. For various task
 You can do inside of emacs
-***** Workspaces
+*** Workspaces
 Keybindings to manipulate workspaces/tabs. To switch work space you can
 just do ctrl plus number of workspace you want to move to in order to switch
 fast and efficent
 
-****** Tabs
+**** Tabs
 My keybinding for creating new workspaces and switching between them
 
 | Command                | Description                         | Keybindings    |
@@ -165,7 +158,7 @@ My keybinding for creating new workspaces and switching between them
 | centaur-tabs-mode      | Toggle Tabs                         | SPC t h        |
 
 #+begin_src emacs-lisp :tangle config.el
-;; Tab/workspaces keybindings
+
 (map! :leader
       (:prefix ("t". "buffer")
        :desc "Toggle tabs" "h" #'centaur-tabs-mode
@@ -185,7 +178,6 @@ My keybinding for creating new workspaces and switching between them
        :desc "Switch to tab number 7" "8" #'+workspace/switch-to-7
        :desc "Switch to tab number 8" "9" #'+workspace/switch-to-8))
 
-;; Switch workspace using ctrl + number
 (map! "C-1" #'+workspace/switch-to-0)
 (map! "C-2" #'+workspace/switch-to-1)
 (map! "C-3" #'+workspace/switch-to-2)
@@ -199,7 +191,7 @@ My keybinding for creating new workspaces and switching between them
 #+end_src
 
 
-****** Splits
+**** Splits
 Custom keybidning to move cursor between splits
 I prefer to be able to just move with CTRL + the vim keys
 
@@ -212,7 +204,6 @@ I prefer to be able to just move with CTRL + the vim keys
 
 #+begin_src emacs-lisp :tangle config.el
 
-;; Move around in splits with vim keys
 (map! "C-l" #'evil-window-right)
 (map! "C-h" #'evil-window-left)
 (map! "C-k" #'evil-window-up)
@@ -220,11 +211,11 @@ I prefer to be able to just move with CTRL + the vim keys
 
 #+end_src
 
-***** File Management
+*** File Management
 Keybindings for file management inside emacs
 using dired and neotree.
 
-****** Dired
+**** Dired
 Bindings for Dired which is the emacs filemanager
 This configuration allows me to use the vim keys inside of dired
 
@@ -252,7 +243,7 @@ This configuration allows me to use the vim keys inside of dired
 #+end_src
 
 
-****** Neotree
+**** Neotree
 Keybindings to quickly access the neotree in emacs
 neotree is very similar to Nerdtree in vim
 
@@ -265,7 +256,7 @@ neotree is very similar to Nerdtree in vim
 | neotree-toggle  | Toggle neotree on and off           | F5          |
 
 #+begin_src emacs-lisp :tangle config.el
-;; Neotree Keybindings
+
 (map! :leader
       (:prefix ("d". "buffer")
        :desc "Neotree Open in current Folder" "o" #'neotree
@@ -276,10 +267,9 @@ neotree is very similar to Nerdtree in vim
 (map! "<f5>" #'neotree-toggle)
 
 
-
 #+end_src
 
-***** Terminal
+*** Terminal
 Custom keybindings to open termninals within emacs
 thins like term,vterm and eshell
 
@@ -292,7 +282,7 @@ thins like term,vterm and eshell
 | e       | Open Vterminal in emacs | SPC T V     |
 
 #+begin_src emacs-lisp :tangle config.el
-;; Open terminals in Emacs
+
 (map! :leader
       (:prefix ("t". "buffer")
        :desc "Term" "t" #'term

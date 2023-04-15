@@ -31,7 +31,6 @@ alias app cd /usr/share/applications/ $*
 alias localapp cd ~/.local/share/applications/ $*
 alias script cd ~/.scripts/activated $*
 alias mm cd /home/karl/.local/share/mail/karlfredin@gmail.com $*
-alias mbas cd ~/.config/bash $*
 alias mqute cd ~/.config/qutebrowser $*
 alias mconky cd ~/.config/conky $*
 alias mpic cd ~/Pictures $*
@@ -40,14 +39,10 @@ alias mzsh cd ~/.config/oh-my-zsh/ $*
 alias mkitty cd ~/.config/kitty/ $*
 alias mhypr cd ~/.config/hypr/ $*
 alias mway cd ~/.config/waybar/ $*
-alias learn cd ~/myrepos/ $*
+alias learn cd ~/myrepos/azla $*
 alias vm cd /mnt/vm $*
-alias yandex cd /media/cloud_storage/Yandex.Disk/ $*
-alias games cd /media/games_1 $*
-alias games2 cd /media/games_/ $*
-alias steam1 cd ~/Games/Steam/steamapps/ $*
-alias steam2 /mnt/ntfs/SteamLibrary/steamapps/ $*
-alias mgit cd ~/git-reps $*
+alias yandex cd /media/cloud-storage/Yandex.Disk/ $*
+alias mgit cd ~/myrepos $*
 alias iso cd ~/iso $*
 alias setup cd ~/myrepos/setup $*
 alias dmscripts cd ~/myrepos/dmscripts/.dmenu $*
