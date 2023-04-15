@@ -5,7 +5,7 @@
 
 * TABLE OF CONTENTS
 
-** [[Aboyt My Dotfiles][About]]
+** [[About My Dotfiles][About]]
 ** [[Configs][Configs]]
 - [[Configs][Hyprland]]
 - [[Configs][Waybar]]
@@ -15,9 +15,13 @@
 
 ** [[Scripts][Scripts]]
 
-
   
-*** Aboyt My Dotfiles
+*** About My Dotfiles
+This repo is for all my personal config files for Software I use daily
+Alot of my configs are based of other peoples configs to make it easy for me.
+I just tweak them to my liking. For example my qtile config I based off Distro Tubes
+Qtile config and tweaked some keybindings I didn't like and styled it a little bit
+
 
 *** Configs
 **** Hyprland
