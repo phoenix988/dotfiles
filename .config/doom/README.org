@@ -49,33 +49,24 @@ Keybinding I have set for it for disable the tabs
 
 
 #+begin_src emacs-lisp :tangle config.el
-
 (setq centaur-tabs-set-bar 'over)
 (centaur-tabs-mode t)
-
-
 #+end_src
 
 ** Shell
 
 Settings for the various shells inside of emacs
 #+begin_src emacs-lisp :tangle config.el
-
 (setq shell-file-name "/bin/zsh"
       vterm-max-scrollback 5000)
-
-
 #+end_src
 
 ** Line Numbers
 Settings for line numbers change relative to example absolute if you want
 to see the exact line number of the file. But I always prefer relative
 #+begin_src emacs-lisp :tangle config.el
-
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode)
-
-
 #+end_src
 
 
@@ -84,7 +75,6 @@ to see the exact line number of the file. But I always prefer relative
 The various font settings for doom emacs. If you want to change the font
 Family and size you can do that here. you can set italic font,big font and normal font.
 #+begin_src emacs-lisp :tangle config.el
-
 (setq doom-font (font-spec :family "JetBrains Mono" :size 15)
       doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15)
       doom-big-font (font-spec :family "JetBrains Mono" :size 24))
@@ -94,8 +84,6 @@ Family and size you can do that here. you can set italic font,big font and norma
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
-
-
 #+end_src
 
 
@@ -106,7 +94,6 @@ So I have various themes to choose from. If you want to change theme change the 
 Load-theme to the prefered them you can also do 'SPC h' + t to change theme on the fly
 But to make it permanent you need to modify config.el
 #+begin_src emacs-lisp :tangle config.el
-
 (use-package doom-themes
   :config
   (setq doom-themes-enable-bold t
@@ -122,7 +109,6 @@ But to make it permanent you need to modify config.el
   (doom-themes-treemacs-config)
 
   (doom-themes-org-config))
-
 #+end_src
 
 
@@ -158,25 +144,24 @@ My keybinding for creating new workspaces and switching between them
 | centaur-tabs-mode      | Toggle Tabs                         | SPC t h        |
 
 #+begin_src emacs-lisp :tangle config.el
-
 (map! :leader
       (:prefix ("t". "buffer")
        :desc "Toggle tabs" "h" #'centaur-tabs-mode
-       :desc "Newtab" "n" #'+workspace/new
-       :desc "Deletetab" "d" #'+workspace/delete
-       :desc "Newname" "N" #'+workspace/new-named
-       :desc "Swap Left" "j" #'+workspace/swap-left
-       :desc "Swap Right" "k" #'+workspace/swap-right
-       :desc "Load tab" "L" #'+workspace/load
-       :desc "Switch to tab number 0" "1" #'+workspace/switch-to-0
-       :desc "Switch to tab number 1" "2" #'+workspace/switch-to-1
-       :desc "Switch to tab number 2" "3" #'+workspace/switch-to-2
-       :desc "Switch to tab number 3" "4" #'+workspace/switch-to-3
-       :desc "Switch to tab number 4" "5" #'+workspace/switch-to-4
-       :desc "Switch to tab number 5" "6" #'+workspace/switch-to-5
-       :desc "Switch to tab number 6" "7" #'+workspace/switch-to-6
-       :desc "Switch to tab number 7" "8" #'+workspace/switch-to-7
-       :desc "Switch to tab number 8" "9" #'+workspace/switch-to-8))
+       :desc "New Workspace" "n" #'+workspace/new
+       :desc "Delete Workspace" "d" #'+workspace/delete
+       :desc "Rename Workspace" "N" #'+workspace/new-named
+       :desc "Swap Workspace left" "j" #'+workspace/swap-left
+       :desc "Swap Workspace right" "k" #'+workspace/swap-right
+       :desc "Load Workspace" "L" #'+workspace/load
+       :desc "Switch to Workspace 1" "1" #'+workspace/switch-to-0
+       :desc "Switch to Workspace 2" "2" #'+workspace/switch-to-1
+       :desc "Switch to Workspace 3" "3" #'+workspace/switch-to-2
+       :desc "Switch to Workspace 4" "4" #'+workspace/switch-to-3
+       :desc "Switch to Workspace 5" "5" #'+workspace/switch-to-4
+       :desc "Switch to Workspace 6" "6" #'+workspace/switch-to-5
+       :desc "Switch to Workspace 7" "7" #'+workspace/switch-to-6
+       :desc "Switch to Workspace 8" "8" #'+workspace/switch-to-7
+       :desc "Switch to Workspace 9" "9" #'+workspace/switch-to-8))
 
 (map! "C-1" #'+workspace/switch-to-0)
 (map! "C-2" #'+workspace/switch-to-1)
@@ -187,7 +172,6 @@ My keybinding for creating new workspaces and switching between them
 (map! "C-7" #'+workspace/switch-to-6)
 (map! "C-8" #'+workspace/switch-to-7)
 (map! "C-9" #'+workspace/switch-to-8)
-
 #+end_src
 
 
@@ -203,12 +187,10 @@ I prefer to be able to just move with CTRL + the vim keys
 | evil-window-down  | move cursor down in the split  | C-j         |
 
 #+begin_src emacs-lisp :tangle config.el
-
 (map! "C-l" #'evil-window-right)
 (map! "C-h" #'evil-window-left)
 (map! "C-k" #'evil-window-up)
 (map! "C-j" #'evil-window-down)
-
 #+end_src
 
 *** File Management
@@ -219,15 +201,14 @@ using dired and neotree.
 Bindings for Dired which is the emacs filemanager
 This configuration allows me to use the vim keys inside of dired
 
-
-| Command                 | Description          | Keybindings |
-|-------------------------+----------------------+-------------|
-| dired-create-empty-file | Create new file      | SPC d c     |
-| dired-create-directory  | Create new directory | SPC d D     |
+| Command                 | Description              | Keybindings |
+|-------------------------+--------------------------+-------------|
+| dired-create-empty-file | Create new file          | SPC d c     |
+| dired-create-directory  | Create new directory     | SPC d D     |
+| dired-jump              | Open dired in new window | SPC o -     |
 
 
 #+begin_src emacs-lisp :tangle config.el
-
 (map! :leader
       (:prefix ("d". "buffer")
        :desc "Make file in Dired" "c" #'dired-create-empty-file
@@ -238,8 +219,6 @@ This configuration allows me to use the vim keys inside of dired
   (kbd "j") 'peep-dired-next-file
   (kbd "k") 'peep-dired-prev-file)
   (add-hook 'peep-dired-hook 'evil-normalize-keymaps)
-
-
 #+end_src
 
 
@@ -256,38 +235,33 @@ neotree is very similar to Nerdtree in vim
 | neotree-toggle  | Toggle neotree on and off           | F5          |
 
 #+begin_src emacs-lisp :tangle config.el
-
 (map! :leader
       (:prefix ("d". "buffer")
-       :desc "Neotree Open in current Folder" "o" #'neotree
+       :desc "Neotree current folder" "o" #'neotree
        :desc "Neotree Hide" "h" #'neotree-hide
-       :desc "Neotree dir choose directory" "d" #'neotree-dir
+       :desc "Neotree pick directory" "d" #'neotree-dir
        :desc "Neotree refresh" "r" #'neotree-refresh))
 
 (map! "<f5>" #'neotree-toggle)
-
-
 #+end_src
 
 *** Terminal
 Custom keybindings to open termninals within emacs
 thins like term,vterm and eshell
 
-
-| Command | Description             | Keybindings |
-|---------+-------------------------+-------------|
-| term    | Open Terminal in emacs  | SPC t t     |
-| eshell  | Open eshell in emacs    | SPC t e     |
-| E       | Toggle eshell           | SPC t E     |
-| e       | Open Vterminal in emacs | SPC T V     |
+| Command       | Description              | Keybindings |
+|---------------+--------------------------+-------------|
+| term          | Open Terminal in emacs   | SPC t t     |
+| eshell        | Open eshell in emacs     | SPC t e     |
+| eshell/toggle | Toggle eshell            | SPC t E     |
+| +vterm/toggle | Open Vterminal in emacs  | SPC t V     |
+| +vterm/here   | Open Vterm in fullscreen | SPC o T     |
 
 #+begin_src emacs-lisp :tangle config.el
-
 (map! :leader
       (:prefix ("t". "buffer")
        :desc "Term" "t" #'term
        :desc "Eshell" "e" #'eshell
        :desc "Eshell Popup" "E" #'+eshell/toggle
        :desc "Vterm" "V" #'vterm))
-
 #+end_src

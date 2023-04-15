@@ -38,21 +38,21 @@
 (map! :leader
       (:prefix ("t". "buffer")
        :desc "Toggle tabs" "h" #'centaur-tabs-mode
-       :desc "Newtab" "n" #'+workspace/new
-       :desc "Deletetab" "d" #'+workspace/delete
-       :desc "Newname" "N" #'+workspace/new-named
-       :desc "Swap Left" "j" #'+workspace/swap-left
-       :desc "Swap Right" "k" #'+workspace/swap-right
-       :desc "Load tab" "L" #'+workspace/load
-       :desc "Switch to tab number 0" "1" #'+workspace/switch-to-0
-       :desc "Switch to tab number 1" "2" #'+workspace/switch-to-1
-       :desc "Switch to tab number 2" "3" #'+workspace/switch-to-2
-       :desc "Switch to tab number 3" "4" #'+workspace/switch-to-3
-       :desc "Switch to tab number 4" "5" #'+workspace/switch-to-4
-       :desc "Switch to tab number 5" "6" #'+workspace/switch-to-5
-       :desc "Switch to tab number 6" "7" #'+workspace/switch-to-6
-       :desc "Switch to tab number 7" "8" #'+workspace/switch-to-7
-       :desc "Switch to tab number 8" "9" #'+workspace/switch-to-8))
+       :desc "New Workspace" "n" #'+workspace/new
+       :desc "Delete Workspace" "d" #'+workspace/delete
+       :desc "Rename Workspace" "N" #'+workspace/new-named
+       :desc "Swap Workspace left" "j" #'+workspace/swap-left
+       :desc "Swap Workspace right" "k" #'+workspace/swap-right
+       :desc "Load Workspace" "L" #'+workspace/load
+       :desc "Switch to Workspace 1" "1" #'+workspace/switch-to-0
+       :desc "Switch to Workspace 2" "2" #'+workspace/switch-to-1
+       :desc "Switch to Workspace 3" "3" #'+workspace/switch-to-2
+       :desc "Switch to Workspace 4" "4" #'+workspace/switch-to-3
+       :desc "Switch to Workspace 5" "5" #'+workspace/switch-to-4
+       :desc "Switch to Workspace 6" "6" #'+workspace/switch-to-5
+       :desc "Switch to Workspace 7" "7" #'+workspace/switch-to-6
+       :desc "Switch to Workspace 8" "8" #'+workspace/switch-to-7
+       :desc "Switch to Workspace 9" "9" #'+workspace/switch-to-8))
 
 (map! "C-1" #'+workspace/switch-to-0)
 (map! "C-2" #'+workspace/switch-to-1)
@@ -82,9 +82,9 @@
 
 (map! :leader
       (:prefix ("d". "buffer")
-       :desc "Neotree Open in current Folder" "o" #'neotree
+       :desc "Neotree current folder" "o" #'neotree
        :desc "Neotree Hide" "h" #'neotree-hide
-       :desc "Neotree dir choose directory" "d" #'neotree-dir
+       :desc "Neotree pick directory" "d" #'neotree-dir
        :desc "Neotree refresh" "r" #'neotree-refresh))
 
 (map! "<f5>" #'neotree-toggle)
