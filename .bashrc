@@ -109,7 +109,7 @@ plugins=(
 #      plugins+=(tmux-autoattach)
 #  fi
 
-source "$OSH"/oh-my-bash.sh
+[ -f "$OSH"/oh-my-bash.sh ] && source "$OSH"/oh-my-bash.sh
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -137,14 +137,14 @@ source "$OSH"/oh-my-bash.sh
 #
 
 # Run pfetch on launch
-pfetch
+[ -f /usr/bin/pfetch ] && pfetch
 
 alias sou="source ~/.bashrc"
 
 # BEGIN_KITTY_SHELL_INTEGRATION
 if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
 # END_KITTY_SHELL_INTEGRATION
-. "$HOME/.cargo/env"
+[ -e "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 
 # Source my aliases
@@ -198,4 +198,4 @@ fi
 #doom_exist=$(echo $PATH | sed 's/:/\n/g' | grep $add_doom)
 #[ -z "$doom_exist" ] &&  PATH="$PATH:$add_doom"
 
-eval "$(starship init bash)"
+[ -e /usr/local/bin/starship ] && eval "$(starship init bash)"
