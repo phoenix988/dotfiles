@@ -1,7 +1,11 @@
 (beacon-mode 1)
 
-(setq centaur-tabs-set-bar 'over)
-(centaur-tabs-mode t)
+(add-hook 'after-init-hook 'global-company-mode)
+(setq company-backends (delete 'company-capf company-backends))
+(add-to-list 'company-backends 'company-files)
+
+;;(setq centaur-tabs-set-bar 'over)
+;;(centaur-tabs-mode t)
 
 (setq shell-file-name "/bin/zsh"
       vterm-max-scrollback 5000)
@@ -34,6 +38,8 @@
   (doom-themes-treemacs-config)
 
   (doom-themes-org-config))
+
+(setq +workspaces/display t)
 
 (map! :leader
       (:prefix ("t". "buffer")
@@ -95,3 +101,15 @@
        :desc "Eshell" "e" #'eshell
        :desc "Eshell Popup" "E" #'+eshell/toggle
        :desc "Vterm" "V" #'vterm))
+
+
+(defface my-eshell-prompt-face-1
+  '((t (:foreground "cyan" :weight bold)))
+  "Face for custom Eshell prompt color 1.")
+
+(defface my-eshell-prompt-face-2
+  '((t (:foreground "magenta" :weight bold)))
+  "Face for custom Eshell prompt color 2.")
+
+(setq eshell-prompt-face 'my-eshell-prompt-face-1)
+(setq eshell-prompt-separator-face 'my-eshell-prompt-face-2)
