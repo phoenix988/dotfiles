@@ -91,7 +91,13 @@ use {
 
 use('brenoprata10/nvim-highlight-colors')
 
+use("jreybert/vimagit")
+
+use('lambdalisue/suda.vim')
+
 vim.cmd('colorscheme nord')
 -- vim.cmd('colorscheme rose-pine') 
+
+
 
 end)

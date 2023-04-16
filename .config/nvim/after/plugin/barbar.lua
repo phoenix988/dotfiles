@@ -15,7 +15,7 @@ require'barbar'.setup {
   -- Excludes buffers from the tabline
   exclude_ft = {'javascript'},
   exclude_name = {'package.json'},
-  
+
   focus_on_close = 'left',
 
   -- Disable highlighting alternate buffers
@@ -40,7 +40,7 @@ require'barbar'.setup {
       [vim.diagnostic.severity.HINT] = {enabled = true},
     },
     filetype = {
-      
+
       custom_colors = false,
 
       -- Requires `nvim-web-devicons` if `true`
@@ -95,5 +95,3 @@ require'barbar'.setup {
   -- where X is the buffer number. But only a static string is accepted here.
   no_name_title = nil,
 }
-
-
