@@ -1,8 +1,0 @@
-#!/bin/bash
-#
-#
-test=$(ls -lh /usr/bin | grep vim | awk '$11 == "vim" {print  $NF}'  ) 
-
-sort=$(echo $test | xargs -n1 | uniq)
-
-[ $sort = "vim" ] && rm /usr/bin/vim && ln -s /usr/bin/nvim /usr/bin/vim

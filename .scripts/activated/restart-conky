@@ -1,7 +1,0 @@
-#!/bin/bash
-
-#Kills the current conky
-killall conky
-
-#starts it again
-conky -c $HOME/.config/conky/main

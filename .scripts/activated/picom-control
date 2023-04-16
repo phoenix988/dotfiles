@@ -1,7 +1,0 @@
-#!/bin/bash
-
-
-picom=$(ps aux | grep picom | awk '{print  $11}' | grep picom)
-
-
-[ -z $picom ] && picom -b --config  $HOME/.config/picom/picom-jona.conf || killall picom
