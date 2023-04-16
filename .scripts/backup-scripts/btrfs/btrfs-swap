@@ -1,0 +1,14 @@
+#!/bin/bash
+
+size="$2"
+dir="$1"
+
+
+truncate -s 0 $dir
+chattr +C $dir
+btrfs property set $dir compression none
+fallocate -l $size $dir
+chmod 600 $dir
+lsattr $dir
+mkswap $dir
+swapon $dir

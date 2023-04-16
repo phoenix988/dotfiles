@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+proton_ver="$1"
+
+steam_path="$HOME/.steam/root/compatibilitytools.d"
+
+
+
+
+ wget https://github.com/GloriousEggroll/proton-ge-custom/releases/download/$proton_ver/Proton-$proton_ver.tar.gz -O $steam_path/Proton-$proton_ver.tar.gz && tar -zxf $steam_path/Proton-$proton_ver.tar.gz -C $steam_path && rm $steam_path/Proton-$proton_ver.tar.gz 
+
