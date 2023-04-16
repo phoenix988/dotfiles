@@ -32,6 +32,7 @@
      - [[Treesitter]]
      - [[Undotree]]
      - [[Whichkey]]
+     - [[Dashboard]]
 
 
 * Neovim
@@ -74,17 +75,19 @@ Of course neovim has more builtin commands but I dont list them here.
 | Source     | Source lua file | SPC h s    |
 
 *** Window
-| Command     | Description     | Keybinding |
-|-------------+-----------------+------------|
-| BufferNext  | Next buffer     | SPC b n    |
-| BufferPrev  | Previous Buffer | SPC b p    |
-| BufferClose | Kill buffer     | SPC b k    |
-| Tabnew      |  Open new tab   | SPC t n    |
-| Tabclose |  close current tab | SPC t n    |
+| Command     | Description       | Keybinding |
+|-------------+-------------------+------------|
+| BufferNext  | Next buffer       | SPC b n    |
+| BufferPrev  | Previous Buffer   | SPC b p    |
+| BufferClose | Kill buffer       | SPC b k    |
+| Tabnew      | Open new tab      | SPC t n    |
+| Tabclose    | close current tab | SPC t n    |
+| Dashboard   | Move to dashboard | SPC d      |
 
 
 * Config
 ** Init
+Source all my lua files
 #+begin_src lua :tangle init.lua
 require("karl.remap")
 require("karl.set")
@@ -93,6 +96,7 @@ require("karl.bootstrap")
 #+end_src
 
 ** Bootstrap
+This automatically download packer if you want to use this config on a new install
 #+begin_src lua :tangle lua/karl/bootstrap.lua
 local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -105,6 +109,7 @@ end
 #+end_src
 
 ** Standard Remaps
+Sets some standard keybindings here
 #+begin_src lua :tangle lua/karl/remap.lua
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
@@ -119,6 +124,8 @@ vim.keymap.set("n", "gT", vim.cmd.BufferPrevious)
 #+end_src
 
 ** Standard Sets
+Some standard neovim settings based on your prefrence
+like line numbers,save undo after session etc
 #+begin_src lua :tangle lua/karl/set.lua
 vim.wo.relativenumber = true
 vim.opt.nu = true
@@ -154,6 +161,7 @@ vim.opt.updatetime = 50
 #+end_src
 
 ** Packer
+Install all my plugins using packer
 #+begin_src lua tangle: lua/karl/packer.lua
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
@@ -164,40 +172,59 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-   use {
+-- Install telescopes to navigate recentfiles and have a file explorer in vim
+use {
    'nvim-telescope/telescope.nvim', tag = '0.1.1',
    requires = { {'nvim-lua/plenary.nvim'} }
 }
-
 use {"smartpde/telescope-recent-files"}
+use {
+    "nvim-telescope/telescope-file-browser.nvim",
+    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+}
 
+-- Install prefefered colorschemes
 use({ 'shaunsingh/nord.nvim', as = 'nord' })
-
 use({ 'rose-pine/neovim', as = 'rose-pine' })
 
+-- Tresitter to improve colors in your files
 use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 use('nvim-treesitter/playground')
+
+-- Harpoon to quickly navigate commonly used files
 use('ThePrimeagen/harpoon')
 
+-- Nerdtree to have a file tree on the side to quickly navigate files
 use('preservim/nerdtree')
 
+-- Vifm inside of vim
 use("vifm/vifm.vim")
 
+-- Whichkey to see all your keybinding when you press the leaderkey
+-- Similar to emacs
 use("folke/which-key.nvim")
 
+-- Undotree to see what you have done to the file
 use('mbbill/undotree')
-use('tpope/vim-fugitive')
+
+
 use 'nvim-tree/nvim-web-devicons'
+
+-- Tabs
 use {'romgrk/barbar.nvim', requires = 'nvim-web-devicons'}
+
+-- Fancy status line for neovim
 use {
   'nvim-lualine/lualine.nvim',
   requires = { 'nvim-tree/nvim-web-devicons', opt = true }
 }
 
+-- Terminal for vim
 use {"akinsho/toggleterm.nvim", tag = '*', config = function()
   require("toggleterm").setup()
 end}
 
+-- Lsp for neovim for autocompletion and alot of other things
 use {
   'VonHeikemen/lsp-zero.nvim',
   branch = 'v1.x',
@@ -226,6 +253,7 @@ use {
   }
 }
 
+-- Startscreen for neovim
 use {
   'glepnir/dashboard-nvim',
   event = 'VimEnter',
@@ -237,35 +265,30 @@ use {
   requires = {'nvim-tree/nvim-web-devicons'}
 }
 
+-- Lastplace to remember old location since you left the file last time
 use('ethanholz/nvim-lastplace')
 
+-- Orgmode for neovim not as good as emacs though
 use('nvim-orgmode/orgmode')
 
-use {
-    "nvim-telescope/telescope-file-browser.nvim",
-    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-}
-
+-- Highlight colors inside of vim
 use('brenoprata10/nvim-highlight-colors')
 
+-- git client for vim
 use("jreybert/vimagit")
+use('tpope/vim-fugitive')
 
+-- Save files as sudo
 use('lambdalisue/suda.vim')
-
-vim.cmd('colorscheme nord')
--- vim.cmd('colorscheme rose-pine')
 
 
 end)
-
-
-
-
-
 #+end_src
 
 ** Plugins
+This is all my configs for the various Plugins I have installed
 *** Barbar
+Settings for barbar plugin which gives you better tabs in neovim
 #+begin_src lua :tangle after/plugin/barbar.lua
 vim.keymap.set("n", "<Leader>tn", vim.cmd.tabnew)
 vim.keymap.set("n", "<Leader>td", vim.cmd.tabclose)
@@ -368,6 +391,8 @@ require'barbar'.setup {
 
 
 *** Colors
+Sets colorscheme inside of neovim and configure neovim highlight
+color plugin
 #+begin_src lua  :tangle after/plugin/colors.lua
 function ColorMyPencils(color)
          color = color or "nord"
@@ -382,16 +407,19 @@ require("nvim-highlight-colors").toggle()
 
 vim.keymap.set("n", "<Leader>ch", vim.cmd.HighlightColorsToggle)
 
+
 ColorMyPencils()
 #+end_src
 
 *** Fugitive
+Sets fugitive keybinding which is a gitclient in Neovim
 #+begin_src lua :tangle after/plugin/fugitive.lua
 
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 
 #+end_src
 *** Harpoon
+Keybinding settings for harpoon plugin
 #+begin_src lua :tangle after/plugin/harpoon.lua
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
@@ -410,6 +438,8 @@ vim.keymap.set("n", "<C-9>", function() ui.nav_file(9) end)
 
 #+end_src
 *** Lastplace
+Lastplace never starts at the top of your files again
+if you exit a file and come back to it this will remeber your last location
 #+begin_src lua :tangle after/plugin/lastplace.lua
 require'nvim-lastplace'.setup {
     lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
@@ -419,6 +449,8 @@ require'nvim-lastplace'.setup {
 
 #+end_src
 *** Lsp-zero
+Configure LSP zero for autocompletion and a ton of other features
+check there github for more info you can do a ton with this plugin
 #+begin_src lua :tangle after/plugin/lsp.lua
 local lsp = require('lsp-zero')
 
@@ -451,6 +483,8 @@ lsp.setup()
 
 #+end_src
 *** Lualine
+Settings for lualine which is the status bar you see att the bottom of neovim.
+Here you can customize it to your liking
 #+begin_src lua :tangle after/plugin/lualine.lua
 require('lualine').setup {
   options = {
@@ -495,6 +529,7 @@ require('lualine').setup {
 
 #+end_src
 *** NerdTree
+Keybindings to quickly access NerdTree
 #+begin_src lua  :tangle after/plugin/nerdtree.lua
 
 vim.keymap.set("n", "<F5>", vim.cmd.NERDTreeToggle)
@@ -502,6 +537,8 @@ vim.keymap.set("n", "<F6>", vim.cmd.NERDTreeFind)
 
 #+end_src
 *** Orgmode
+Settings for orgmode inside of Neovim so you get syntax highlightning inside of Neovim
+Similar to emacs but please keep in mind that you wont have the same features as in emacs
 #+begin_src lua :tangle after/plugin/orgmode.lua
 -- init.lua
 
@@ -528,12 +565,16 @@ require('orgmode').setup({
 
 #+end_src
 *** Suda
+Keybinding to save files as sudo
 #+begin_src lua :tangle after/plugin/sudo.lua
 
 vim.keymap.set('n', '<Leader>fs', vim.cmd.SudaWrite)
 
 #+end_src
 *** Telescope
+Keybindings to access telescope which lets you quickly access files
+My favorite is to quickly access recent files. Which makes it so you can access
+files super fast
 #+begin_src lua :tangle after/plugin/telescope.lua
 
 local builtin = require('telescope.builtin')
@@ -571,6 +612,8 @@ vim.api.nvim_set_keymap(
 
 #+end_src
 *** Treesitter
+Treesitter config this makes colors inside your files way better
+Syntax highlighning is way better with this plugin
 #+begin_src lua :tangle after/plugin/treesitter.lua
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
@@ -596,12 +639,16 @@ require'nvim-treesitter.configs'.setup {
 #+end_src
 
 *** Undotree
+Undotree keybinding to quickly access your undotreewhere you can see
+changes you have done to your file
 #+begin_src lua :tangle after/plugin/undotree.lua
 vim.keymap.set("n", "<Leader>u", vim.cmd.UndotreeToggle)
 #+end_src
 
-
 *** Whichkey
+Settings for whichkey which is what you see when your
+press your leader key and wait for a few seconds.
+It's very similar to the one you see in emacs but les useful imo
 #+begin_src lua :tangle after/plugin/whichkey.lua
 local status, which_key = pcall(require, "which-key")
 if not status then
@@ -612,4 +659,25 @@ which_key.setup({
 -- your configuration comes here
 	-- or leave it empty to use the default settings
 })
+#+end_src
+
+*** Dashboard
+Dashboard settings so you can customize the settings of your dashboard
+It has a ton of settings so check there github for the settings that you can use.
+Also set a keybinding so I can quickly access my dashboard
+#+begin_src lua :tangle after/plugin/dashboard.lua
+vim.g.dashboard_default_executive = 'telescope'
+vim.g.default_banner = {
+	[[ ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗]],
+	[[ ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║]],
+	[[ ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║]],
+	[[ ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║]],
+	[[ ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║]],
+	[[ ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝]],
+	[[,                                                      ]],
+	[[TIP: To exit Neovim, just power off your computer.     ]],
+ }
+
+vim.keymap.set('n', '<Leader>d', vim.cmd.Dashboard)
+
 #+end_src

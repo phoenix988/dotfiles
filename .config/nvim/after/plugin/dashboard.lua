@@ -6,6 +6,8 @@ vim.g.default_banner = {
 	[[ ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║]],
 	[[ ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║]],
 	[[ ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝]],
-	[[,                                                      ]], 
+	[[,                                                      ]],
 	[[TIP: To exit Neovim, just power off your computer.     ]],
  }
+
+vim.keymap.set('n', '<Leader>d', vim.cmd.Dashboard)

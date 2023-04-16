@@ -11,4 +11,5 @@ require("nvim-highlight-colors").toggle()
 
 vim.keymap.set("n", "<Leader>ch", vim.cmd.HighlightColorsToggle)
 
+
 ColorMyPencils()
