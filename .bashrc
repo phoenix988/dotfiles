@@ -150,7 +150,7 @@ if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integr
 # Source my aliases
 [ -e $HOME/.config/alias-zsh-bash ] && source ~/.config/alias-zsh-bash
 
-
+#Test
 # Makes it easier to extract files
 ex ()
 {
