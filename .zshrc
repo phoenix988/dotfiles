@@ -114,8 +114,7 @@ eval "$(starship init zsh)"
 [ -f $HOME/.config/alias-zsh-bash ] && source $HOME/.config/alias-zsh-bash
 
 #uwufetch
-pfetch
-
+[ -f /usr/bin/pfetch ] && pfetch
 
 alias sou="source ~/.zshrc"
 
