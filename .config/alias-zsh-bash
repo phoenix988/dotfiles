@@ -4,9 +4,6 @@ command_exist() {
         type "$1" &> /dev/null;
 }
 
-# update aliases
-alias uali="bash $HOME/.scripts/activated/create-aliases"
-
 # show ip
 alias ipa="ifconfig | awk '/inet/ {print $2}' | head -n4"
 
@@ -237,7 +234,7 @@ alias omfm="cd /home/karl/.config/fish/conf.d"
 alias movies="cd /mnt/movies"
 alias dmove="cd ~/.dmenu"
 alias backup="cd /mnt/backup"
-alias backup-home="cd /mnt/backup/home"
+alias bhome="cd /mnt/backup/home"
 alias media="cd /mnt/autofs/music/videos/"
 alias cbak="cd ~/Yandex.Disk/Backups/"
 alias app="cd /usr/share/applications/"
@@ -254,9 +251,9 @@ alias mkitty="cd ~/.config/kitty/"
 alias mhypr="cd ~/.config/hypr/"
 alias mdoom="cd ~/.config/doom/"
 alias mway="cd ~/.config/waybar/"
-alias learn="cd ~/myrepos/"
+alias learn="cd ~/myrepos/azla"
 alias vm="cd /media/vm"
-alias yandex="cd /media/cloud_storage/Yandex.Disk/"
+alias yandex="cd /media/cloud-storage/Yandex.Disk/"
 alias games="cd /media/games_1"
 alias games2="cd /media/games_/"
 alias steam1="cd ~/Games/Steam/steamapps/"

@@ -5,6 +5,7 @@
 * TABLE OF CONTENT
 - [[About My Doom][About]]
 - [[Beacon][Beacon]]
+- [[Autocompletion]]
 - [[Centaur Tabs][Centaur Tabs]]
 - [[Shell][Shell]]
 - [[Line Numbers][Line Numbers]]
@@ -35,6 +36,13 @@ Never lose your cursor! Beacon makes your cursor shine when you scroll
 
 #+end_src
 
+** Autocompletion
+Adding company backends for autocompletion
+#+begin_src emacs-lisp :tangle config.el
+(add-hook 'after-init-hook 'global-company-mode)
+(setq company-backends (delete 'company-capf company-backends))
+(add-to-list 'company-backends 'company-files)
+#+end_src
 
 ** Centaur Tabs
 settings for centaur tabs if you want, change here if
@@ -49,8 +57,8 @@ Keybinding I have set for it for disable the tabs
 
 
 #+begin_src emacs-lisp :tangle config.el
-(setq centaur-tabs-set-bar 'over)
-(centaur-tabs-mode t)
+;;(setq centaur-tabs-set-bar 'over)
+;;(centaur-tabs-mode t)
 #+end_src
 
 ** Shell
@@ -144,6 +152,8 @@ My keybinding for creating new workspaces and switching between them
 | centaur-tabs-mode      | Toggle Tabs                         | SPC t h        |
 
 #+begin_src emacs-lisp :tangle config.el
+(setq +workspaces/display t)
+
 (map! :leader
       (:prefix ("t". "buffer")
        :desc "Toggle tabs" "h" #'centaur-tabs-mode
