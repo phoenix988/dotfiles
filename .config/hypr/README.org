@@ -3,35 +3,371 @@
 #+AUTHOR: Karl Fredin
 
 * TABLE OF CONTENT
-** DEPENDENCIES
-*** Things you need to install for my hyprland desktop
+- [[About My Hyprland][About My Hyprland]]
+  - [[Important Keybindings]]
+  - [[Dependencies]]
+  - [[Configs You Need]]
+- [[Monitors]]
+- [[Startup Apps]]
+- [[Cursor]]
+  - [[Size]]
+  - [[Sensitivity]]
+- [[Input]]
+- [[General]]
+- [[Styling]]
+- [[Layout]]
+- [[Window Rules]]
+- [[Keybindings]]
+  - [[General Keybindings]]
+  - [[Utilities]]
+  - [[Software]]
+  - [[Window Control]]
+  - [[Workspaces]]
+  - [[Run Scripts]]
+  - [[Tmux]]
+  - [[Media Control]]
+- [[Workspace Rules]]
 
 
-*** OTHER CONFIGS YOU NEED
-+ Wofi
-+ Waybar
-+ Dmscripts
+** About My Hyprland
+Hyprland is a windowmanager manager based on the wayland compositer
+and in my opinion it's a fantastic window manager. This is my configuration file for it
+where you will see all my keybindings I prefer to use. In order to use this config fully
+you will need some programs, like wofi,swaybg,swayshot waybar etc
+
+*** Important Keybindings
+This is just a quit recap of one of the most important
+keybindings to know in order to use this config. In order
+to get around quickly. If you know these keybindings
+then you will have no problem to get around in my hyprland.
+
+| Keybinding | DESCRIPTION       |
+|------------+-------------------|
+| SUPER + H  | Move focus  left  |
+| SUPER + L  | Move focus  right |
+| SUPER + K  | Move focus up     |
+| SUPER + J  | Move focus down   |
+
+| Keybinding        | DESCRIPTION              |
+|-------------------+--------------------------|
+| SUPER + SHIFT + H | Move window left  |
+| SUPER + SHIFT + L | Move window right |
+| SUPER + SHIFT + K | Move window up    |
+| SUPER + SHIFT + J | Move window down  |
+
+| Keybinding       | DESCRIPTION         |
+|------------------+---------------------|
+| SUPER + CTRL + H | Resize window left  |
+| SUPER + CTRL + L | Resize window right |
+| SUPER + CTRL + K | Resize window up    |
+| SUPER + CTRL + J | Resize window down  |
+
+| Keybinding            | Description      |
+|-----------------------+------------------|
+| SUPER + Q             | Close Window     |
+| SUPER + SHIFT + Q     | Exit Hyprland    |
+| SUPER + Enter         | Open Term        |
+| SUPER + SHIFT + Enter | Open Filemanager |
+| SUPER + R             | Run Wofi         |
+| SUPER + SHIFT + D     | Open Emacs       |
+
+*** Dependencies
+#+BEGIN_SRC conf
+monitor=DP-2,2560x1440@144,0x0,1
+monitor=DP-3,1920x1080@60,2560x0,1
+#+END_SRC
 
 
-** STANDARD KEYBINDINGS
-**** Window Control
-| MOVE WINDOWS FOCUS | DESCRIPTION                    |
-|--------------------+--------------------------------|
-| SUPER + H          | Move focus to the left window  |
-| SUPER + L          | Move focus to the right window |
-| SUPER + K          | Move focus to the up window    |
-| SUPER + J          | Move focus to the down window  |
+#+begin_src conf
+exec-once = waybar & hyprpaper & /home/karl/.scripts/activated/swaybg-set
+exec-once = lxsession &
+exec-once = steam -silent -no-browser &
+exec-once = nextcloud --background &
+exec-once = emacs --daemon &
+exec-once = blueman-applet &
+exec-once = nm-applet --indicator &
+#+end_src
 
-| MOVE WINDOWS AROUND | DESCRIPTION              |
-|---------------------+--------------------------|
-| SUPER + SHIFT + H   | Move window to the left  |
-| SUPER + SHIFT + L   | Move window to the right |
-| SUPER + SHIFT + K   | Move window to the up    |
-| SUPER + SHIFT + J   | Move window to the down  |
 
-| RESIZE WINDOWS   | DESCRIPTION                |
-|------------------+----------------------------|
-| SUPER + CTRL + H | Resize window to the left  |
-| SUPER + CTRL + L | Resize window to the right |
-| SUPER + CTRL + K | Resize window to the up    |
-| SUPER + CTRL + J | Resize window to the down  |
+
+#+begin_src conf
+env = XCURSOR_SIZE,24
+#+end_src
+
+
+
+#+begin_src conf
+input {
+    kb_layout = us,se,az
+    kb_variant =
+    kb_model =
+    kb_options = grp:caps_toggle
+    kb_rules =
+
+    follow_mouse = 1
+
+    touchpad {
+        natural_scroll = false
+    }
+
+    sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+}
+#+end_src
+
+
+#+begin_src conf
+general {
+    # See https://wiki.hyprland.org/Configuring/Variables/ for more
+
+    gaps_in = 3
+    gaps_out = 10
+    border_size = 2
+
+    # Blue border
+    #col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
+
+    # Purple Border
+    col.active_border = rgba(9930ff99) rgba(5560ff90) 45deg
+
+    col.inactive_border = rgba(595959aa)
+    layout = dwindle
+}
+#+end_src
+
+
+#+begin_src conf
+decoration {
+    # See https://wiki.hyprland.org/Configuring/Variables/ for more
+
+    rounding = 7
+    blur = true
+    blur_size = 3
+    blur_passes = 1
+    blur_new_optimizations = true
+
+    drop_shadow = true
+    shadow_range = 4
+    shadow_render_power = 3
+    col.shadow = rgba(1a1a1aee)
+}
+
+# Animation settings
+animations {
+
+    enabled = true
+
+    bezier = myBezier, 0.05, 0.9, 0.1, 1.05
+
+    animation = windows, 1, 3, myBezier
+    animation = windowsOut, 1, 5, default, popin 80%
+    animation = border, 1, 5, default
+    animation = borderangle, 1, 5, default
+    animation = fade, 1, 3, default
+    animation = workspaces, 1, 2, default
+}
+#+end_src
+
+#+begin_src conf
+dwindle {
+    pseudotile = true
+    preserve_split = true
+}
+
+master {
+    new_is_master = true
+}
+#+end_src
+
+#+begin_src  conf
+device:epic mouse V1 {
+    sensitivity = -0.5
+}
+#+end_src
+
+#+begin_src conf
+windowrule = float, ^(Gimp)$
+windowrule = float, ^(org.kde.kdenlive)$
+windowrule = float, ^(virt-manager)$
+windowrule = float, ^(yad)$
+windowrule = float, ^(mpv)$
+windowrule = float, ^(wdisplays)$
+windowrule = float, ^(pavucontrol)$
+windowrule = float, ^(org.kde.polkit-kde-authentication-agent-1)$
+windowrule = float, ^(brave-plex.phoenixonline.club__-Default)$
+windowrule = float, ^(nm-connection-editor)$
+
+windowrulev2 = workspace 4, title:^(?!.*(lutris)).*(Steam).*$
+windowrulev2 = workspace 4, title:^(?!.*(lutris)).*(Lutris).*$
+windowrulev2 = workspace 5, class:^(?!.*(lutris)).*(heroic).*$
+windowrulev2 = workspace 3, class:^(?!.*(lutris)).*(Gimp).*$
+windowrulev2 = workspace 7, class:^(?!.*(lutris)).*(discord).*$
+windowrulev2 = workspace 6, class:^(?!.*(lutris)).*(whatsapp-nativefier-d40211).*$
+windowrulev2 = workspace 3, class:^(?!.*(lutris)).*(org.kde.kdenlive).*$
+
+#+end_src
+
+#+begin_src conf
+$mainMod = SUPER
+$browser1 = qutebrowser
+$browser2 = brave-browser
+
+
+#START_KEYS
+# General Keybindings
+bind = $mainMod, Q, killactive,                                       #Kill current window
+bind = $mainMod, F, fullscreen                                        #Toggle fullscreen mode
+bind = $mainMod, tab, togglesplit,                                    #Change the dwindle layoout
+bind = $mainMod SHIFT, P, pseudo,                                     #Dwindle
+bind = $mainMod SHIFT, Q, exit,                                       #Force quit Hyprland
+bind = $mainMod SHIFT, F, togglefloating                              #Toggle floating
+
+
+# Utilities
+bind = $mainMod, M, exec, wlogout                                     #Logout screen
+bind = $mainMod, R, exec, wofi --show drun                            #Run menu
+bind = $mainMod, U, exec, $HOME/.config/hypr/hyprland-keys            #Shows this help menu
+
+
+# Lock Screen
+bind = CTRL ALT, L, exec, /home/karl/.scripts/activated/swaylock      #Lock the screen using swaylock
+
+
+# Launch programs Mod + key
+bind = $mainMod, G, exec, gimp                                                          #Launch Gimp
+bind = $mainMod, O, exec, obs                                                           #Launch OBS
+bind = $mainMod, B, exec, $browser1                                                     #Launch browser1
+bind = $mainMod, I, exec, lxappearance                                                  #Launch lxappearance
+bind = $mainMod, S, exec, grim -g "$(slurp)" - | wl-copy                                #Take screenshot
+bind = $mainMod, T, exec, kitty -e $HOME/.scripts/activated/create-tmux-session.sh      #Open the terminal with tmux
+bind = $mainMod, return, exec, kitty                                                    #Open the terminal
+
+
+# Launch program mod + Shift + key
+bind = $mainMod SHIFT, return, exec, thunar                                  #Launch filemanager
+bind = $mainMod SHIFT, E, exec, emacsclient -c -a '' --eval '(dired nil)'    #Launch terminal filemanager
+bind = $mainMod SHIFT, V, exec, virt-manager                                 #Launch virt-manager
+bind = $mainMod SHIFT, I, exec, xfce4-appearance-settings                    #Launch xfce4-appearance-settings
+bind = $mainMod SHIFT, Y, exec, kitty -e "mutt"                              #Launch mutt email client
+bind = $mainMod SHIFT, T, exec, kitty -e "btop"                              #Launch btop
+bind = $mainMod SHIFT, W, exec, librewolf                                    #Launch librewolf
+bind = $mainMod SHIFT, G, exec, kdenlive                                     #Launch Kdenlive
+bind = $mainMod SHIFT, D, exec, emacsclient -c -a "emacs"                    #Launch emacs
+
+# Launch Program shift + ctrl + key
+bind = ALT CTRL, S, exec, steam                                  #Launch Steam
+bind = ALT CTRL, P, exec, pavucontrol                            #Launch Pavucontrol
+bind = ALT CTRL, B, exec, gparted                                #Launch gparted
+bind = ALT CTRL, T, exec, lxtask                                 #Launch lxtask
+
+# F keys bindings
+bind = $mainMod, F12, exec, $HOME/.scripts/activated/set-random-bg-wayland              #Set random bg
+bind = $mainMod, F11, exec, $HOME/.scripts/restart/restart-waybar                       #Restart waybar
+
+
+# Move focus with mainMod + arrow keys
+bind = $mainMod, H, movefocus, l                       # Move focus to the left window
+bind = $mainMod, L, movefocus, r                       # Move focus to the right window
+bind = $mainMod, K, movefocus, u                       # Move focus to the above window
+bind = $mainMod, J, movefocus, d                       # Move focus to the below window
+bind = $mainMod CTRL, L, resizeactive, 60 0            # Resize the window to the right
+bind = $mainMod CTRL, H, resizeactive, -60 0           # Resize the window to the left
+bind = $mainMod CTRL, K, resizeactive, 0 -60           # Resize the window to the up
+bind = $mainMod CTRL, J, resizeactive, 0 60            # Resize the window to the down
+bind = $mainMod SHIFT, H, movewindow, l                # Move window to the left
+bind = $mainMod SHIFT, L, movewindow, r                # Move the window to the right
+bind = $mainMod SHIFT, K, movewindow, u                # Move the window to the up
+bind = $mainMod SHIFT, J, movewindow, d                # Move the window to the down
+
+
+# Move/resize windows with mainMod + LMB/RMB and dragging
+bindm = $mainMod, mouse:272, movewindow               # Move window using the mouse
+bindm = $mainMod, mouse:273, resizewindow             # Resize window using the mouse
+
+
+# Switch workspaces with mainMod + [0-9]
+bind = $mainMod, 1, workspace, 1                       # Move to workspace 1
+bind = $mainMod, 2, workspace, 2                       # Move to workspace 2
+bind = $mainMod, 3, workspace, 3                       # Move to workspace 3
+bind = $mainMod, 4, workspace, 4                       # Move to workspace 4
+bind = $mainMod, 5, workspace, 5                       # Move to workspace 5
+bind = $mainMod, 6, workspace, 6                       # Move to workspace 6
+bind = $mainMod, 7, workspace, 7                       # Move to workspace 7
+bind = $mainMod, 8, workspace, 8                       # Move to workspace 8
+bind = $mainMod, 9, workspace, 9                       # Move to workspace 9
+bind = $mainMod, 0, workspace, 10                      # Move to workspace 10
+
+# Move active window to a workspace with mainMod + SHIFT + [0-9]
+bind = $mainMod SHIFT, 1, movetoworkspace, 1           # Move window to workspace 1
+bind = $mainMod SHIFT, 2, movetoworkspace, 2           # Move window to workspace 2
+bind = $mainMod SHIFT, 3, movetoworkspace, 3           # Move window to workspace 3
+bind = $mainMod SHIFT, 4, movetoworkspace, 4           # Move window to workspace 4
+bind = $mainMod SHIFT, 5, movetoworkspace, 5           # Move window to workspace 5
+bind = $mainMod SHIFT, 6, movetoworkspace, 6           # Move window to workspace 6
+bind = $mainMod SHIFT, 7, movetoworkspace, 7           # Move window to workspace 7
+bind = $mainMod SHIFT, 8, movetoworkspace, 8           # Move window to workspace 8
+bind = $mainMod SHIFT, 9, movetoworkspace, 9           # Move window to workspace 9
+bind = $mainMod SHIFT, 0, movetoworkspace, 10          # Move window to workspace 10
+
+# Scroll through existing workspaces with mainMod + scroll
+bind = $mainMod, E, workspace, e+1                     # Scroll through all the workspaces forward
+bind = $mainMod, W, workspace, e-1                     # Scroll through all the workspaces backwards
+
+
+# Dmenu keybindings using alt + k
+binde=ALT,E, exec, $HOME/.dmenu/dm-editconfig                   #Dmenu script to edit my config files
+binde=ALT,J, exec, $HOME/.dmenu/dm-pass                         #Dmenu script for the pass utility
+binde=ALT,B, exec, $HOME/.dmenu/dm-timeshift                    #Dmenu script to take timeshift snapshots
+binde=ALT,F, exec, $HOME/.dmenu/dm-openweb-fullscreen           #Dmenu script to open websites in fullscreen
+binde=ALT,S, exec, $HOME/.dmenu/dm-search                       #Dmenu script for some search engines
+binde=ALT,V, exec, $HOME/.dmenu/dm-nordvpn                      #Dmenu script to connect to a vpn
+binde=ALT,W, exec, /home/karl/.dmenu/dm-set-wallpaper           #Dmenu script to set wallpaper
+binde=ALT,O, exec, /home/karl/.dmenu/dm-openweb                 #Dmenu script to open bookmarked websites
+binde=ALT,L, exec, $HOME/.dmenu/dm-layout                       #Dmenu script to change keyboard layout
+binde=ALT,T, exec, $HOME/.dmenu/dm-kittychangetheme             #Dmenu script to change kitty theme
+binde=ALT,A, exec, $HOME/.dmenu/dm-audioset                     #Dmenu script to change audio source
+binde=ALT,K, exec, $HOME/.dmenu/dm-kill                         #Dmenu script to kill a process
+binde=ALT,Q, exec, $HOME/.dmenu/dm-virt-manager                 #Dmenu script to open virtual machines
+binde=ALT,P, exec, $HOME/.dmenu/dm-play-pause                   #Dmenu script to control media
+binde=ALT,N, exec, $HOME/.dmenu/dm-ssh                   #Dmenu script to control media
+binde=ALT,R, exec, $HOME/.dmenu/dm-tmux                   #Dmenu script to control media
+
+
+# Tmux keybindings
+bind = CTRL ALT, 1, exec, tmux select-window -t karl:1                             # Move to tmux window 1
+bind = CTRL ALT, 2, exec, tmux select-window -t karl:2                             # Move to tmux window 2
+bind = CTRL ALT, 3, exec, tmux select-window -t karl:3                             # Move to tmux window 3
+bind = CTRL ALT, 4, exec, tmux select-window -t karl:4                             # Move to tmux window 4
+bind = CTRL ALT, 5, exec, tmux select-window -t karl:5                             # Move to tmux window 5
+bind = CTRL ALT, 6, exec, tmux select-window -t karl:6                             # Move to tmux window 6
+bind = CTRL ALT, 7, exec, tmux select-window -t karl:7                             # Move to tmux window 7
+bind = CTRL ALT, 8, exec, tmux select-window -t karl:8                             # Move to tmux window 8
+bind = CTRL ALT, 9, exec, tmux select-window -t karl:9                             # Move to tmux window 9
+bind = CTRL ALT, S, exec, tmux splitw -v                                           # Split the window vertically
+bind = CTRL ALT, V, exec, tmux splitw -h                                           # split the window horizontinally
+bind = CTRL ALT, X, exec, tmux kill-pane -t karl                                   # kill the current pane
+bind = CTRL ALT, C, exec, tmux new-window -t karl                                  # create a new tmux pane
+
+
+# Media controls
+bind = , XF86AudioPlay, exec, /home/karl/.scripts/activated/mediaplay                 # Media play/pause
+bind = , XF86AudioNext, exec, /home/karl/.scripts/activated/medianext                 # Media next
+bind = , XF86AudioPrev, exec, /home/karl/.scripts/activated/mediaprev                 # Media prev
+bind = , XF86AudioMute, exec, /home/karl/.scripts/activated/mute-unmute.sh            # Media mute/unmute
+bind = , XF86AudioLowerVolume, exec, /home/karl/.scripts/activated/volume-down.sh     # Media lower volume
+bind = , XF86AudioRaiseVolume, exec, /home/karl/.scripts/activated/volume-up.sh       # Media raise volume
+#END_KEYS
+#+end_src
+
+#+begin_src conf
+wsbind=1,DP-2
+wsbind=2,DP-2
+wsbind=3,DP-2
+wsbind=4,DP-2
+wsbind=5,DP-2
+
+wsbind=6,DP-3
+wsbind=7,DP-3
+wsbind=8,DP-3
+wsbind=9,DP-3
+wsbind=10,DP-3
+#+end_src
