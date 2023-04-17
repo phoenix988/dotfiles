@@ -6,10 +6,10 @@
 * TABLE OF CONTENTS
 - [[Neovim]]
 - [[Keybindings]]
-   - [[File Management]]
-   - [[Theme]]
-   - [[Source]]
-   - [[Window]]
+  - [[File Management]]
+  - [[Theme]]
+  - [[Source]]
+  - [[Window]]
 - [[Config]]
   - [[Init]]
   - [[Bootstrap]]
@@ -17,22 +17,15 @@
   - [[Standard Sets]]
   - [[Packer]]
   - [[Plugins]]
-     - [[Barbar]]
-     - [[Colors]]
-     - [[Fugitive]]
-     - [[Harpoon]]
-     - [[Lastplace]]
-     - [[Lsp-zero]]
-     - [[Lualine]]
-     - [[NerdTree]]
-     - [[nord]]
-     - [[Orgmode]]
-     - [[Suda]]
-     - [[Telescope]]
-     - [[Treesitter]]
-     - [[Undotree]]
-     - [[Whichkey]]
-     - [[Dashboard]]
+    - [[Colors]]
+    - [[Lastplace]]
+    - [[Lsp-zero]]
+    - [[Lualine]]
+    - [[NerdTree]]
+    - [[Orgmode]]
+    - [[Treesitter]]
+    - [[Whichkey]]
+    - [[Dashboard]]
 
 
 * Neovim
@@ -52,15 +45,13 @@ Of course neovim has more builtin commands but I dont list them here.
 | Ex                     | Open built in explorer          | SPC p v    |
 | Vifm                   | Open vifm file manager          | SPC .      |
 | Telescope find_files   | Find files in telescope         | SPC f f    |
-| Telescope git_files    | Find files in a git repo        | C-p        |
 | Telescope recent_files | Find recent files               | SPC f r    |
-| Telescope file_browser | Open file browser               | SPC o -    |
-| NerdTree               | Toggle NerdTree                 | F5         |
-| NerdTreeFind           | Toggle NerdTree in current dir  | F6         |
-| Grep                   | Grep a string of text in a file | SPC p s    |
+| NeotreeToggle          | Toggle NeoTree                  | SPC f t    |
+| NerdTreeToggleFocus    | Focus NerdTree                  | F6         |
 | mark.add_file          | Add a file in harpoon           | SPC a      |
 | ui.toggle_quick_menu   | Open harpoon menu               | C-e        |
 | ui.nav_file(1-9)       | Navigate the harpoon files      | C-(1-9)    |
+| Grep                   | Grep a string of text in a file | SPC p s    |
 
 *** Theme
 | Command               | Description            | Keybinding |
@@ -75,24 +66,30 @@ Of course neovim has more builtin commands but I dont list them here.
 | Source     | Source lua file | SPC h s    |
 
 *** Window
-| Command     | Description       | Keybinding |
-|-------------+-------------------+------------|
-| BufferNext  | Next buffer       | SPC b n    |
-| BufferPrev  | Previous Buffer   | SPC b p    |
-| BufferClose | Kill buffer       | SPC b k    |
-| Tabnew      | Open new tab      | SPC t n    |
-| Tabclose    | close current tab | SPC t n    |
-| Dashboard   | Move to dashboard | SPC d      |
+| Command     | Description       | Keybinding |   |   |   |
+|-------------+-------------------+------------+---+---+---|
+| BufferNext  | Next buffer       | SPC b n    |   |   |   |
+| BufferPrev  | Previous Buffer   | SPC b p    |   |   |   |
+| BufferClose | Kill buffer       | SPC b k    |   |   |   |
+| Tabnew      | Open new tab      | SPC t n    |   |   |   |
+| Tabclose    | close current tab | SPC t n    |   |   |   |
+| Dashboard   | Move to dashboard | SPC d      |   |   |   |
+
+*** Git
+| Command             | Description              | Keybinding |
+|---------------------+--------------------------+------------|
+| Telescope git_files | Find files in a git repo | SPC g f    |
+| Git                 | Open git status          | SPC g s    |
 
 
 * Config
 ** Init
 Source all my lua files
 #+begin_src lua :tangle init.lua
-require("karl.remap")
-require("karl.set")
-require("karl.packer")
 require("karl.bootstrap")
+require("karl.set")
+require("karl.remap")
+require("karl.packer")
 #+end_src
 
 ** Bootstrap
@@ -109,19 +106,97 @@ end
 #+end_src
 
 ** Standard Remaps
-Sets some standard keybindings here
+Sets some standard keybindings here. I will also set all my keyboards
+for the various plugins I have too I found it too confusing to have multiple files for
+all my keybindings this is easier to manage and modify
 #+begin_src lua :tangle lua/karl/remap.lua
+-- Space set as Leader Key
 vim.g.mapleader = " "
+
+-- File explorers in neovim
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>.", vim.cmd.Vifm)
-vim.keymap.set("n", "<leader>hr", vim.cmd.PackerSync)
-vim.keymap.set("n", "<leader>hs", vim.cmd.so)
+vim.api.nvim_set_keymap('n', '<Leader>fb', ':Telescope file_browser<CR>', { noremap = true, silent = true })
+
+
+-- Quickly move between windows
 vim.keymap.set("n", "<leader>bn", vim.cmd.BufferNext)
 vim.keymap.set("n", "<leader>bp", vim.cmd.BufferPrevious)
 vim.keymap.set("n", "<leader>bk", vim.cmd.BufferClose)
 vim.keymap.set("n", "gt", vim.cmd.BufferNext)
 vim.keymap.set("n", "gT", vim.cmd.BufferPrevious)
+vim.keymap.set("n", "<Leader>tn", vim.cmd.tabnew)
+vim.keymap.set("n", "<Leader>td", vim.cmd.tabclose)
+vim.keymap.set("n", "<Leader>ch", vim.cmd.HighlightColorsToggle)
+vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+vim.api.nvim_set_keymap('n', '<Leader>gp', ':Git push<CR>', { noremap = true, silent = true })
+
+-- Neotree keybindings
+vim.keymap.set("n", "<F5>", vim.cmd.NeoTreeFocusToggle)
+vim.keymap.set("n", "<F6>", vim.cmd.Neotree)
+vim.keymap.set("n", "<F4>", vim.cmd.NERDTreeToggle)
+vim.keymap.set("n", "<Leader>ft", vim.cmd.NeoTreeFocusToggle)
+vim.api.nvim_set_keymap('n', '<Leader>ns', ':Neotree ~/myrepos/setup<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>na', ':Neotree ~/myrepos/azla<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>nd', ':Neotree ~/myrepos/dotfiles<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>ng', ':Neotree ~/myrepos<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>nc', ':Neotree ~/.config<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>nn', ':Neotree ~/.config/nvim<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>n.', ':Neotree .<CR>', { noremap = true, silent = true })
+
+-- Update plugins
+vim.keymap.set("n", "<leader>hr", vim.cmd.PackerSync)
+
+-- Source a file
+vim.keymap.set("n", "<leader>hs", vim.cmd.so)
+
+-- Keybindings for Harpoon
+local mark = require("harpoon.mark")
+local ui = require("harpoon.ui")
+
+vim.keymap.set("n", "<leader>a", mark.add_file)
+vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
+vim.keymap.set("n", "<C-1>", function() ui.nav_file(1) end)
+vim.keymap.set("n", "<C-2>", function() ui.nav_file(2) end)
+vim.keymap.set("n", "<C-3>", function() ui.nav_file(3) end)
+vim.keymap.set("n", "<C-4>", function() ui.nav_file(4) end)
+vim.keymap.set("n", "<C-5>", function() ui.nav_file(5) end)
+vim.keymap.set("n", "<C-6>", function() ui.nav_file(6) end)
+vim.keymap.set("n", "<C-7>", function() ui.nav_file(7) end)
+vim.keymap.set("n", "<C-8>", function() ui.nav_file(8) end)
+vim.keymap.set("n", "<C-9>", function() ui.nav_file(9) end)
+
+-- Keybinding to save as sudo
+vim.keymap.set('n', '<Leader>fs', vim.cmd.SudaWrite)
+
+-- Keybinding to open UndoTree
+vim.keymap.set("n", "<Leader>u", vim.cmd.UndotreeToggle)
+
+-- Jump back to your dashboard
+vim.keymap.set('n', '<Leader>d', vim.cmd.Dashboard)
+
+-- Keybindings for telescope
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<Leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<Leader>gf', builtin.git_files, {})
+vim.keymap.set('n', '<Leader>ht', builtin.colorscheme, {})
+vim.keymap.set('n', '<Leader>ps', function()
+builtin.grep_string({ search = vim.fn.input("Grep >") } );
+
+
+end)
+
+require("telescope").load_extension("recent_files")
+
+vim.api.nvim_set_keymap("n", "<Leader>fr",
+  [[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]],
+  {noremap = true, silent = true})
+
+require("telescope").load_extension "file_browser"
+
+
 #+end_src
+
 
 ** Standard Sets
 Some standard neovim settings based on your prefrence
@@ -158,13 +233,14 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 --
 vim.opt.updatetime = 50
+
+vim.o.modifiable = true
 #+end_src
 
 ** Packer
 Install all my plugins using packer
-#+begin_src lua tangle: lua/karl/packer.lua
+#+begin_src lua :tangle lua/karl/packer.lua
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
-
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
@@ -194,8 +270,16 @@ use('nvim-treesitter/playground')
 -- Harpoon to quickly navigate commonly used files
 use('ThePrimeagen/harpoon')
 
--- Nerdtree to have a file tree on the side to quickly navigate files
-use('preservim/nerdtree')
+use {
+  "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    }
+  }
+
 
 -- Vifm inside of vim
 use("vifm/vifm.vim")
@@ -211,7 +295,7 @@ use('mbbill/undotree')
 use 'nvim-tree/nvim-web-devicons'
 
 -- Tabs
-use {'romgrk/barbar.nvim', requires = 'nvim-web-devicons'}
+ use {'romgrk/barbar.nvim', requires = 'nvim-web-devicons'}
 
 -- Fancy status line for neovim
 use {
@@ -281,114 +365,16 @@ use('tpope/vim-fugitive')
 -- Save files as sudo
 use('lambdalisue/suda.vim')
 
+if packer_bootstrap then
+		packer.sync()
+	end
 
 end)
+
 #+end_src
 
 ** Plugins
 This is all my configs for the various Plugins I have installed
-*** Barbar
-Settings for barbar plugin which gives you better tabs in neovim
-#+begin_src lua :tangle after/plugin/barbar.lua
-vim.keymap.set("n", "<Leader>tn", vim.cmd.tabnew)
-vim.keymap.set("n", "<Leader>td", vim.cmd.tabclose)
-
-vim.g.barbar_auto_setup = false -- disable auto-setup
-require'barbar'.setup {
---
-  -- Enable/disable animations
-  animation = true,
-
-  -- Enable/disable current/total tabpages indicator (top right corner)
-  tabpages = true,
-
-  clickable = true,
-
-  -- Excludes buffers from the tabline
-  exclude_ft = {'javascript'},
-  exclude_name = {'package.json'},
-
-  focus_on_close = 'left',
-
-  -- Disable highlighting alternate buffers
-  highlight_alternate = false,
-
-  -- Disable highlighting file icons in inactive buffers
-  highlight_inactive_file_icons = false,
-
-  -- Enable highlighting visible buffers
-  highlight_visible = true,
-
-  icons = {
-    -- Configure the base icons on the bufferline.
-    buffer_index = false,
-    buffer_number = false,
-    button = '',
-    -- Enables / disables diagnostic symbols
-    diagnostics = {
-      [vim.diagnostic.severity.ERROR] = {enabled = true, icon = 'ﬀ'},
-      [vim.diagnostic.severity.WARN] = {enabled = false},
-      [vim.diagnostic.severity.INFO] = {enabled = false},
-      [vim.diagnostic.severity.HINT] = {enabled = true},
-    },
-    filetype = {
-
-      custom_colors = false,
-
-      -- Requires `nvim-web-devicons` if `true`
-      enabled = true,
-    },
-    separator = {left = '▎', right = ''},
-
-    -- Configure the icons on the bufferline when modified or pinned.
-    -- Supports all the base icon options.
-    modified = {button = '●'},
-    pinned = {button = '車', filename = true, separator = {right = ''}},
-
-    -- Configure the icons on the bufferline based on the visibility of a buffer.
-    -- Supports all the base icon options, plus `modified` and `pinned`.
-    alternate = {filetype = {enabled = false}},
-    current = {buffer_index = true},
-    inactive = {button = '×'},
-    visible = {modified = {buffer_number = false}},
-  },
-
-  -- Sets the maximum padding width with which to surround each tab
-  maximum_padding = 1,
-
-  -- Sets the minimum padding width with which to surround each tab
-  minimum_padding = 1,
-
-  -- Sets the maximum buffer name length.
-  maximum_length = 30,
-
-  -- If set, the letters for each buffer in buffer-pick mode will be
-  -- assigned based on their name. Otherwise or in case all letters are
-  -- already assigned, the behavior is to assign letters in order of
-  -- usability (see order below)
-  semantic_letters = true,
-
-  -- Set the filetypes which barbar will offset itself for
-  sidebar_filetypes = {
-    -- Use the default values: {event = 'BufWinLeave', text = nil}
-    NvimTree = true,
-    -- Or, specify the event which the sidebar executes when leaving:
-    ['neo-tree'] = {event = 'BufWipeout'},
-    -- Or, specify both
-    Outline = {event = 'BufWinLeave', text = 'symbols-outline'},
-  },
-
-  -- New buffer letters are assigned in this order. This order is
-  -- optimal for the qwerty keyboard layout but might need adjustment
-  -- for other layouts.
-  letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
-
-  -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
-  -- where X is the buffer number. But only a static string is accepted here.
-  no_name_title = nil,
-}
-#+end_src
-
 
 *** Colors
 Sets colorscheme inside of neovim and configure neovim highlight
@@ -405,38 +391,11 @@ require("nvim-highlight-colors").turnOff()
 require("nvim-highlight-colors").turnOn()
 require("nvim-highlight-colors").toggle()
 
-vim.keymap.set("n", "<Leader>ch", vim.cmd.HighlightColorsToggle)
-
 
 ColorMyPencils()
 #+end_src
 
-*** Fugitive
-Sets fugitive keybinding which is a gitclient in Neovim
-#+begin_src lua :tangle after/plugin/fugitive.lua
 
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
-
-#+end_src
-*** Harpoon
-Keybinding settings for harpoon plugin
-#+begin_src lua :tangle after/plugin/harpoon.lua
-local mark = require("harpoon.mark")
-local ui = require("harpoon.ui")
-
-vim.keymap.set("n", "<leader>a", mark.add_file)
-vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
-vim.keymap.set("n", "<C-1>", function() ui.nav_file(1) end)
-vim.keymap.set("n", "<C-2>", function() ui.nav_file(2) end)
-vim.keymap.set("n", "<C-3>", function() ui.nav_file(3) end)
-vim.keymap.set("n", "<C-4>", function() ui.nav_file(4) end)
-vim.keymap.set("n", "<C-5>", function() ui.nav_file(5) end)
-vim.keymap.set("n", "<C-6>", function() ui.nav_file(6) end)
-vim.keymap.set("n", "<C-7>", function() ui.nav_file(7) end)
-vim.keymap.set("n", "<C-8>", function() ui.nav_file(8) end)
-vim.keymap.set("n", "<C-9>", function() ui.nav_file(9) end)
-
-#+end_src
 *** Lastplace
 Lastplace never starts at the top of your files again
 if you exit a file and come back to it this will remeber your last location
@@ -528,12 +487,12 @@ require('lualine').setup {
 }
 
 #+end_src
-*** NerdTree
-Keybindings to quickly access NerdTree
-#+begin_src lua  :tangle after/plugin/nerdtree.lua
+*** Neotree
+#+begin_src lua :tangle after/plugin/neotree.lua
 
-vim.keymap.set("n", "<F5>", vim.cmd.NERDTreeToggle)
-vim.keymap.set("n", "<F6>", vim.cmd.NERDTreeFind)
+vim.g.neotree_auto_open = 1
+vim.g.neotree_quit_on_open = 1
+vim.g.neotree_hide_dotfiles = 0
 
 #+end_src
 *** Orgmode
@@ -564,53 +523,7 @@ require('orgmode').setup({
 })
 
 #+end_src
-*** Suda
-Keybinding to save files as sudo
-#+begin_src lua :tangle after/plugin/sudo.lua
 
-vim.keymap.set('n', '<Leader>fs', vim.cmd.SudaWrite)
-
-#+end_src
-*** Telescope
-Keybindings to access telescope which lets you quickly access files
-My favorite is to quickly access recent files. Which makes it so you can access
-files super fast
-#+begin_src lua :tangle after/plugin/telescope.lua
-
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<C-p>', builtin.git_files, {})
-vim.keymap.set('n', '<Leader>ht', builtin.colorscheme, {})
-vim.keymap.set('n', '<leader>ps', function()
-builtin.grep_string({ search = vim.fn.input("Grep >") } );
-
-
-end)
-
-require("telescope").load_extension("recent_files")
-
-vim.api.nvim_set_keymap("n", "<Leader>fr",
-  [[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]],
-  {noremap = true, silent = true})
-
-require("telescope").load_extension "file_browser"
-
-vim.api.nvim_set_keymap(
-  "n",
-  "<space>o-",
-  ":Telescope file_browser",
-  { noremap = true }
-)
-
-vim.api.nvim_set_keymap(
-  "n",
-  "<space>fb",
-  ":Telescope file_browser",
-  { noremap = true }
-)
-
-
-#+end_src
 *** Treesitter
 Treesitter config this makes colors inside your files way better
 Syntax highlighning is way better with this plugin
@@ -638,12 +551,6 @@ require'nvim-treesitter.configs'.setup {
 }
 #+end_src
 
-*** Undotree
-Undotree keybinding to quickly access your undotreewhere you can see
-changes you have done to your file
-#+begin_src lua :tangle after/plugin/undotree.lua
-vim.keymap.set("n", "<Leader>u", vim.cmd.UndotreeToggle)
-#+end_src
 
 *** Whichkey
 Settings for whichkey which is what you see when your
@@ -678,6 +585,5 @@ vim.g.default_banner = {
 	[[TIP: To exit Neovim, just power off your computer.     ]],
  }
 
-vim.keymap.set('n', '<Leader>d', vim.cmd.Dashboard)
 
 #+end_src

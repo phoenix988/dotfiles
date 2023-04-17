@@ -1,5 +1,4 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
-
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
@@ -7,40 +6,67 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-   use {
+-- Install telescopes to navigate recentfiles and have a file explorer in vim
+use {
    'nvim-telescope/telescope.nvim', tag = '0.1.1',
    requires = { {'nvim-lua/plenary.nvim'} }
 }
-
 use {"smartpde/telescope-recent-files"}
+use {
+    "nvim-telescope/telescope-file-browser.nvim",
+    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+}
 
+-- Install prefefered colorschemes
 use({ 'shaunsingh/nord.nvim', as = 'nord' })
-
 use({ 'rose-pine/neovim', as = 'rose-pine' })
 
+-- Tresitter to improve colors in your files
 use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 use('nvim-treesitter/playground')
+
+-- Harpoon to quickly navigate commonly used files
 use('ThePrimeagen/harpoon')
 
-use('preservim/nerdtree')
+use {
+  "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    }
+  }
 
+
+-- Vifm inside of vim
 use("vifm/vifm.vim")
 
-use("folke/which-key.nvim") 
+-- Whichkey to see all your keybinding when you press the leaderkey
+-- Similar to emacs
+use("folke/which-key.nvim")
 
+-- Undotree to see what you have done to the file
 use('mbbill/undotree')
-use('tpope/vim-fugitive')
+
+
 use 'nvim-tree/nvim-web-devicons'
-use {'romgrk/barbar.nvim', requires = 'nvim-web-devicons'}
+
+-- Tabs
+ use {'romgrk/barbar.nvim', requires = 'nvim-web-devicons'}
+
+-- Fancy status line for neovim
 use {
   'nvim-lualine/lualine.nvim',
   requires = { 'nvim-tree/nvim-web-devicons', opt = true }
 }
 
+-- Terminal for vim
 use {"akinsho/toggleterm.nvim", tag = '*', config = function()
   require("toggleterm").setup()
 end}
 
+-- Lsp for neovim for autocompletion and alot of other things
 use {
   'VonHeikemen/lsp-zero.nvim',
   branch = 'v1.x',
@@ -69,6 +95,7 @@ use {
   }
 }
 
+-- Startscreen for neovim
 use {
   'glepnir/dashboard-nvim',
   event = 'VimEnter',
@@ -80,24 +107,24 @@ use {
   requires = {'nvim-tree/nvim-web-devicons'}
 }
 
+-- Lastplace to remember old location since you left the file last time
 use('ethanholz/nvim-lastplace')
 
+-- Orgmode for neovim not as good as emacs though
 use('nvim-orgmode/orgmode')
 
-use {
-    "nvim-telescope/telescope-file-browser.nvim",
-    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-}
-
+-- Highlight colors inside of vim
 use('brenoprata10/nvim-highlight-colors')
 
+-- git client for vim
 use("jreybert/vimagit")
+use('tpope/vim-fugitive')
 
+-- Save files as sudo
 use('lambdalisue/suda.vim')
 
-vim.cmd('colorscheme nord')
--- vim.cmd('colorscheme rose-pine') 
-
-
+if packer_bootstrap then
+		packer.sync()
+	end
 
 end)
