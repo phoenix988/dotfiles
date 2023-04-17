@@ -223,10 +223,10 @@ I first discovered this plugin in neovim and wanted the same kind of
 thing in emacs
 | Command                  | Description          | Keybindings |
 |--------------------------+----------------------+-------------|
-| harpoon-quick-menu-hydra | Open hydra menu      | SPC d o     |
-| harpoon-add-file         | Add file to the list | SPC d h     |
-| harpoon-clear            | clear all the file   | SPC d d     |
-| harpoon-toggle-file      | Toggle file          | SPC d r     |
+| harpoon-quick-menu-hydra | Open hydra menu      | SPC j m    |
+| harpoon-add-file         | Add file to the list | SPC j a    |
+| harpoon-clear            | clear all the file   | SPC j c    |
+| harpoon-toggle-file      | Toggle file          | SPC j t    |
 | harpoon-go-to-1          | go to file 1         | SPC (1-9)   |
 | harpoon-go-to-2          | go to file 2         | SPC (1-9)   |
 | harpoon-go-to-3          | go to file 3         | SPC (1-9)   |
