@@ -1,7 +1,8 @@
-#+TITLE: NVIM Configuration
+#+TITLE: Neovim
 #+DESCRIPTION: This is my configuration file for NVIM written in lua
 #+AUTHOR: Karl Fredin
 
+[[file:./images/Neovim-logo.svg.png]]
 
 * TABLE OF CONTENTS
 - [[Neovim]]
@@ -87,9 +88,9 @@ Of course neovim has more builtin commands but I dont list them here.
 Source all my lua files
 #+begin_src lua :tangle init.lua
 require("karl.bootstrap")
+require("karl.packer")
 require("karl.set")
 require("karl.remap")
-require("karl.packer")
 #+end_src
 
 ** Bootstrap
