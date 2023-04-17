@@ -52,3 +52,4 @@
 (package! beacon)
 (package! company)
 (package! evil-tabs)
+(package! harpoon)

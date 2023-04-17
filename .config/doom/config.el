@@ -1,17 +1,11 @@
-(beacon-mode 1)
-
 (add-hook 'after-init-hook 'global-company-mode)
 (setq company-backends (delete 'company-capf company-backends))
 (add-to-list 'company-backends 'company-files)
 
+(beacon-mode 1)
+
 ;;(setq centaur-tabs-set-bar 'over)
 ;;(centaur-tabs-mode t)
-
-(setq shell-file-name "/bin/zsh"
-      vterm-max-scrollback 5000)
-
-(setq display-line-numbers-type 'relative)
-(global-display-line-numbers-mode)
 
 (setq doom-font (font-spec :family "JetBrains Mono" :size 15)
       doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15)
@@ -23,21 +17,10 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-(use-package doom-themes
-  :config
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-  (load-theme 'doom-nord-aurora t)
-
-  (doom-themes-visual-bell-config)
-
-  (doom-themes-neotree-config)
-
-  (setq doom-themes-treemacs-theme "doom-nord")
-
-  (doom-themes-treemacs-config)
-
-  (doom-themes-org-config))
+(map! "C-l" #'evil-window-right)
+(map! "C-h" #'evil-window-left)
+(map! "C-k" #'evil-window-up)
+(map! "C-j" #'evil-window-down)
 
 (setq +workspaces/display t)
 
@@ -70,11 +53,6 @@
 (map! "C-8" #'+workspace/switch-to-7)
 (map! "C-9" #'+workspace/switch-to-8)
 
-(map! "C-l" #'evil-window-right)
-(map! "C-h" #'evil-window-left)
-(map! "C-k" #'evil-window-up)
-(map! "C-j" #'evil-window-down)
-
 (map! :leader
       (:prefix ("d". "buffer")
        :desc "Make file in Dired" "c" #'dired-create-empty-file
@@ -95,6 +73,23 @@
 
 (map! "<f5>" #'neotree-toggle)
 
+;; You can use this hydra menu that have all the commands
+(map! :leader "j m" 'harpoon-quick-menu-hydra)
+(map! :leader "j a" 'harpoon-add-file)
+
+;; And the vanilla commands
+(map! :leader "j c" 'harpoon-clear)
+(map! :leader "j t" 'harpoon-toggle-file)
+(map! :leader "1" 'harpoon-go-to-1)
+(map! :leader "2" 'harpoon-go-to-2)
+(map! :leader "3" 'harpoon-go-to-3)
+(map! :leader "4" 'harpoon-go-to-4)
+(map! :leader "5" 'harpoon-go-to-5)
+(map! :leader "6" 'harpoon-go-to-6)
+(map! :leader "7" 'harpoon-go-to-7)
+(map! :leader "8" 'harpoon-go-to-8)
+(map! :leader "9" 'harpoon-go-to-9)
+
 (map! :leader
       (:prefix ("t". "buffer")
        :desc "Term" "t" #'term
@@ -102,14 +97,24 @@
        :desc "Eshell Popup" "E" #'+eshell/toggle
        :desc "Vterm" "V" #'vterm))
 
+(setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode)
 
-(defface my-eshell-prompt-face-1
-  '((t (:foreground "cyan" :weight bold)))
-  "Face for custom Eshell prompt color 1.")
+(setq shell-file-name "/bin/zsh"
+      vterm-max-scrollback 5000)
 
-(defface my-eshell-prompt-face-2
-  '((t (:foreground "magenta" :weight bold)))
-  "Face for custom Eshell prompt color 2.")
+(use-package doom-themes
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (load-theme 'doom-nord-aurora t)
 
-(setq eshell-prompt-face 'my-eshell-prompt-face-1)
-(setq eshell-prompt-separator-face 'my-eshell-prompt-face-2)
+  (doom-themes-visual-bell-config)
+
+  (doom-themes-neotree-config)
+
+  (setq doom-themes-treemacs-theme "doom-nord")
+
+  (doom-themes-treemacs-config)
+
+  (doom-themes-org-config))

@@ -1,24 +1,28 @@
-#+title: My Doom Emacs config
-#+DESCRIPTION: This is a config file for my doom emacs
+#+title: Doom Emacs
+#+DESCRIPTION: My personal doom emacs config
 #+AUTHOR: Karl Fredin
+
+[[file:./images/emacs-start-page.png]]
+
 
 * TABLE OF CONTENT
 - [[About My Doom][About]]
-- [[Beacon][Beacon]]
 - [[Autocompletion]]
+- [[Beacon][Beacon]]
 - [[Centaur Tabs][Centaur Tabs]]
-- [[Shell][Shell]]
-- [[Line Numbers][Line Numbers]]
 - [[Fonts][Fonts]]
-- [[Themes][Themes]]
 - [[Workspaces][Keybindings]]
   - [[Workspaces][Workspaces]]
-    - [[Tabs][Tabs]]
     - [[Splits][Splits]]
+    - [[Tabs][Tabs]]
   - [[File Management][File Management]]
     - [[Dired][Dired]]
     - [[Neotree][Neotree]]
     - [[Terminal][Term]]
+  - [[Harpoon]]
+- [[Line Numbers][Line Numbers]]
+- [[Shell][Shell]]
+- [[Themes][Themes]]
 
 
 
@@ -27,6 +31,14 @@ This is my personal Doom Emacs config that I have written using emacs org mode
 so that I can easily make comments inside the document so it's easier to read and
 know whats going on. In order to use this config you need to have Doom Emacs installed.
 
+** Autocompletion
+Adding company backends for autocompletion
+#+begin_src emacs-lisp :tangle config.el
+(add-hook 'after-init-hook 'global-company-mode)
+(setq company-backends (delete 'company-capf company-backends))
+(add-to-list 'company-backends 'company-files)
+#+end_src
+
 
 ** Beacon
 Never lose your cursor! Beacon makes your cursor shine when you scroll
@@ -34,14 +46,6 @@ Never lose your cursor! Beacon makes your cursor shine when you scroll
 
 (beacon-mode 1)
 
-#+end_src
-
-** Autocompletion
-Adding company backends for autocompletion
-#+begin_src emacs-lisp :tangle config.el
-(add-hook 'after-init-hook 'global-company-mode)
-(setq company-backends (delete 'company-capf company-backends))
-(add-to-list 'company-backends 'company-files)
 #+end_src
 
 ** Centaur Tabs
@@ -61,24 +65,6 @@ Keybinding I have set for it for disable the tabs
 ;;(centaur-tabs-mode t)
 #+end_src
 
-** Shell
-
-Settings for the various shells inside of emacs
-#+begin_src emacs-lisp :tangle config.el
-(setq shell-file-name "/bin/zsh"
-      vterm-max-scrollback 5000)
-#+end_src
-
-** Line Numbers
-Settings for line numbers change relative to example absolute if you want
-to see the exact line number of the file. But I always prefer relative
-#+begin_src emacs-lisp :tangle config.el
-(setq display-line-numbers-type 'relative)
-(global-display-line-numbers-mode)
-#+end_src
-
-
-
 ** Fonts
 The various font settings for doom emacs. If you want to change the font
 Family and size you can do that here. you can set italic font,big font and normal font.
@@ -96,31 +82,6 @@ Family and size you can do that here. you can set italic font,big font and norma
 
 
 
-** Themes
-Here you can set your prefered theme, I load my themes with the package doom-themes
-So I have various themes to choose from. If you want to change theme change the variable
-Load-theme to the prefered them you can also do 'SPC h' + t to change theme on the fly
-But to make it permanent you need to modify config.el
-#+begin_src emacs-lisp :tangle config.el
-(use-package doom-themes
-  :config
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-  (load-theme 'doom-nord-aurora t)
-
-  (doom-themes-visual-bell-config)
-
-  (doom-themes-neotree-config)
-
-  (setq doom-themes-treemacs-theme "doom-nord")
-
-  (doom-themes-treemacs-config)
-
-  (doom-themes-org-config))
-#+end_src
-
-
-
 ** Keybindings
 This is my custom keybindings I prefer to use. For various task
 You can do inside of emacs
@@ -128,6 +89,25 @@ You can do inside of emacs
 Keybindings to manipulate workspaces/tabs. To switch work space you can
 just do ctrl plus number of workspace you want to move to in order to switch
 fast and efficent
+
+**** Splits
+Custom keybidning to move cursor between splits
+I prefer to be able to just move with CTRL + the vim keys
+
+| Command           | Description                    | Keybindings |
+|-------------------+--------------------------------+-------------|
+| evil-window-right | move cursor to the right split | C-l         |
+| evil-window-left  | move cursor to the left split  | C-h         |
+| evil-window-up    | move cursor up in the split    | C-k         |
+| evil-window-down  | move cursor down in the split  | C-j         |
+
+#+begin_src emacs-lisp :tangle config.el
+(map! "C-l" #'evil-window-right)
+(map! "C-h" #'evil-window-left)
+(map! "C-k" #'evil-window-up)
+(map! "C-j" #'evil-window-down)
+#+end_src
+
 
 **** Tabs
 My keybinding for creating new workspaces and switching between them
@@ -184,25 +164,6 @@ My keybinding for creating new workspaces and switching between them
 (map! "C-9" #'+workspace/switch-to-8)
 #+end_src
 
-
-**** Splits
-Custom keybidning to move cursor between splits
-I prefer to be able to just move with CTRL + the vim keys
-
-| Command           | Description                    | Keybindings |
-|-------------------+--------------------------------+-------------|
-| evil-window-right | move cursor to the right split | C-l         |
-| evil-window-left  | move cursor to the left split  | C-h         |
-| evil-window-up    | move cursor up in the split    | C-k         |
-| evil-window-down  | move cursor down in the split  | C-j         |
-
-#+begin_src emacs-lisp :tangle config.el
-(map! "C-l" #'evil-window-right)
-(map! "C-h" #'evil-window-left)
-(map! "C-k" #'evil-window-up)
-(map! "C-j" #'evil-window-down)
-#+end_src
-
 *** File Management
 Keybindings for file management inside emacs
 using dired and neotree.
@@ -255,6 +216,48 @@ neotree is very similar to Nerdtree in vim
 (map! "<f5>" #'neotree-toggle)
 #+end_src
 
+*** Harpoon
+Keybinds for harpoon which lets you quickly access commonly used files
+with only one keystroke. Which can really speed up your workflow.
+I first discovered this plugin in neovim and wanted the same kind of
+thing in emacs
+| Command                  | Description          | Keybindings |
+|--------------------------+----------------------+-------------|
+| harpoon-quick-menu-hydra | Open hydra menu      | SPC d o     |
+| harpoon-add-file         | Add file to the list | SPC d h     |
+| harpoon-clear            | clear all the file   | SPC d d     |
+| harpoon-toggle-file      | Toggle file          | SPC d r     |
+| harpoon-go-to-1          | go to file 1         | SPC (1-9)   |
+| harpoon-go-to-2          | go to file 2         | SPC (1-9)   |
+| harpoon-go-to-3          | go to file 3         | SPC (1-9)   |
+| harpoon-go-to-4          | go to file 4         | SPC (1-9)   |
+| harpoon-go-to-5          | go to file 5         | SPC (1-9)   |
+| harpoon-go-to-6          | go to file 6         | SPC (1-9)   |
+| harpoon-go-to-7          | go to file 7         | SPC (1-9)   |
+| harpoon-go-to-8          | go to file 8         | SPC (1-9)   |
+| harpoon-go-to-9          | go to file 9         | SPC (1-9)   |
+
+
+#+begin_src emacs-lisp :tangle config.el
+;; You can use this hydra menu that have all the commands
+(map! :leader "j m" 'harpoon-quick-menu-hydra)
+(map! :leader "j a" 'harpoon-add-file)
+
+;; And the vanilla commands
+(map! :leader "j c" 'harpoon-clear)
+(map! :leader "j t" 'harpoon-toggle-file)
+(map! :leader "1" 'harpoon-go-to-1)
+(map! :leader "2" 'harpoon-go-to-2)
+(map! :leader "3" 'harpoon-go-to-3)
+(map! :leader "4" 'harpoon-go-to-4)
+(map! :leader "5" 'harpoon-go-to-5)
+(map! :leader "6" 'harpoon-go-to-6)
+(map! :leader "7" 'harpoon-go-to-7)
+(map! :leader "8" 'harpoon-go-to-8)
+(map! :leader "9" 'harpoon-go-to-9)
+#+end_src
+
+
 *** Terminal
 Custom keybindings to open termninals within emacs
 thins like term,vterm and eshell
@@ -275,3 +278,44 @@ thins like term,vterm and eshell
        :desc "Eshell Popup" "E" #'+eshell/toggle
        :desc "Vterm" "V" #'vterm))
 #+end_src
+** Line Numbers
+Settings for line numbers change relative to example absolute if you want
+to see the exact line number of the file. But I always prefer relative
+#+begin_src emacs-lisp :tangle config.el
+(setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode)
+#+end_src
+
+
+** Shell
+Settings for the various shells inside of emacs
+#+begin_src emacs-lisp :tangle config.el
+(setq shell-file-name "/bin/zsh"
+      vterm-max-scrollback 5000)
+#+end_src
+
+** Themes
+Here you can set your prefered theme, I load my themes with the package doom-themes
+So I have various themes to choose from. If you want to change theme change the variable
+Load-theme to the prefered them you can also do 'SPC h' + t to change theme on the fly
+But to make it permanent you need to modify config.el
+#+begin_src emacs-lisp :tangle config.el
+(use-package doom-themes
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (load-theme 'doom-nord-aurora t)
+
+  (doom-themes-visual-bell-config)
+
+  (doom-themes-neotree-config)
+
+  (setq doom-themes-treemacs-theme "doom-nord")
+
+  (doom-themes-treemacs-config)
+
+  (doom-themes-org-config))
+#+end_src
+
+
+
