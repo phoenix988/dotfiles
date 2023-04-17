@@ -2,30 +2,55 @@
 #+DESCRIPTION: Here I store dotfiles for various programs I use
 #+AUTHOR: Karl Fredin
 
-
 * TABLE OF CONTENTS
 
-** [[About My Dotfiles][About]]
-** [[Configs][Configs]]
-- [[Configs][Hyprland]]
-- [[Configs][Waybar]]
-- [[Zsh][Zsh]]
-- [[Qtile][Qtile]]
-- [[Doom Emacs][Doom Emacs]]
+- [[About My Dotfiles][About]]
+- [[Configs][Configs]]
+  - [[Window Managers]]
+    - [[Qtile]]
+    - [[Hyprland]]
+    - [[Awesome]]
+    - [[Xmonad]]
+    - [[SpecreWM]]
+- [[Text Editors]]
+  - [[Doom Emacs]]
+  - [[NeoVim]]
+- [[Other Configs]]
 
-** [[Scripts][Scripts]]
 
   
-*** About My Dotfiles
+** About My Dotfiles
 This repo is for all my personal config files for Software I use daily
 Alot of my configs are based of other peoples configs to make it easy for me.
 I just tweak them to my liking. For example my qtile config I based off Distro Tubes
 Qtile config and tweaked some keybindings I didn't like and styled it a little bit
 
 
-*** Configs
-**** Hyprland
-**** Waybar
-**** Zsh
-**** Qtile
-**** Doom Emacs
+** Configs
+*** Window Managers
+All the Window Manager configs I have
+But the only Two I have played around with and kept up to date
+is hyprland and qtile the other configs might be a bit out of date
+since I have used them
+|----------+---------+----------|
+| Qtile    | Xmonad  | Hyprland |
+| SpecreWM | Awesome |          |
+** Text Editors
+Well the only text editor I use is Doom emacs and Neovim
+Doom emacs is great cause it has a ton of features. But the vim
+motions completly changed the way I use my computer it's fantastic.
+So I store the configs of my favorite text editor here in my dotfiles
+
+|------------+--------|
+| Doom Emacs | NeoVim |
+
+** Other Configs
+Here is some other random connfig files I store here
+like diffrent shells terminals, run prompt etc
+
+|---------+-------------+-----------|
+| Waybar  | Zsh         | Bash      |
+| Fish    | Kitty       | Alacritty |
+| Picom   | Qutebrowser | wofi      |
+| Rofi    | vifm        | Starship  |
+| Wlogout | Tmux        | Dunst     |
