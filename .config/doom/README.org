@@ -2,7 +2,7 @@
 #+DESCRIPTION: My personal doom emacs config
 #+AUTHOR: Karl Fredin
 
-[[file:./images/emacs-start-page.png]]
+[[file:./images/doom-emacs-dash.png]]
 
 
 * TABLE OF CONTENT
