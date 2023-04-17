@@ -1,22 +1,22 @@
-#+TITLE: Hyprland Configuration
+#+TITLE: Hyprland
 #+DESCRIPTION: This is my configuration file for Hyprland
 #+AUTHOR: Karl Fredin
+
+[[file:./images/hyprland.png]]
 
 * TABLE OF CONTENT
 - [[About My Hyprland][About My Hyprland]]
   - [[Important Keybindings]]
-  - [[Dependencies]]
   - [[Configs You Need]]
-- [[Monitors]]
-- [[Startup Apps]]
 - [[Cursor]]
   - [[Size]]
   - [[Sensitivity]]
-- [[Input]]
 - [[General]]
-- [[Styling]]
+- [[Input]]
 - [[Layout]]
-- [[Window Rules]]
+- [[Monitors]]
+- [[Styling]]
+- [[Startup Apps]]
 - [[Keybindings]]
   - [[General Keybindings]]
   - [[Utilities]]
@@ -26,6 +26,7 @@
   - [[Run Scripts]]
   - [[Tmux]]
   - [[Media Control]]
+- [[Window Rules]]
 - [[Workspace Rules]]
 
 
@@ -33,7 +34,9 @@
 Hyprland is a windowmanager manager based on the wayland compositer
 and in my opinion it's a fantastic window manager. This is my configuration file for it
 where you will see all my keybindings I prefer to use. In order to use this config fully
-you will need some programs, like wofi,swaybg,swayshot waybar etc
+you will need some programs, like wofi,swaybg,swayshot waybar etc.
+Also the terminal in this config is kitty so make sure to change that to your
+prefered terminal
 
 *** Important Keybindings
 This is just a quit recap of one of the most important
@@ -71,51 +74,36 @@ then you will have no problem to get around in my hyprland.
 | SUPER + R             | Run Wofi         |
 | SUPER + SHIFT + D     | Open Emacs       |
 
-*** Dependencies
-#+BEGIN_SRC conf
-monitor=DP-2,2560x1440@144,0x0,1
-monitor=DP-3,1920x1080@60,2560x0,1
-#+END_SRC
 
+*** Configs You Need
+If you want to use my config there is some otherthings
+that you need also. Of course you don't need these but then you
+need to customize my config
+- Waybar (For the bar)
+- Swayshot  (For screenshots)
+- Swaybg  (Setting Wallpaper)
+- swaylock  (To lock the screen)
 
-#+begin_src conf
-exec-once = waybar & hyprpaper & /home/karl/.scripts/activated/swaybg-set
-exec-once = lxsession &
-exec-once = steam -silent -no-browser &
-exec-once = nextcloud --background &
-exec-once = emacs --daemon &
-exec-once = blueman-applet &
-exec-once = nm-applet --indicator &
-#+end_src
-
-
-
-#+begin_src conf
+*** Cursor
+Here you can configure mouse settings
+Like size and sensetivity like I have in my config
+**** Size
+#+begin_src conf :tangle hyprland.conf
 env = XCURSOR_SIZE,24
 #+end_src
-
-
-
-#+begin_src conf
-input {
-    kb_layout = us,se,az
-    kb_variant =
-    kb_model =
-    kb_options = grp:caps_toggle
-    kb_rules =
-
-    follow_mouse = 1
-
-    touchpad {
-        natural_scroll = false
-    }
-
-    sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+**** Sensitivity
+#+begin_src  conf :tangle hyprland.conf
+device:epic mouse V1 {
+    sensitivity = -0.5
 }
 #+end_src
 
-
-#+begin_src conf
+*** General
+Some General settings in the window manager like gaps etc
+Check hyprland docs for more info what you can do
+Can also change border color arround the window here
+And also set default layout here. I prefer dwindle layout
+#+begin_src conf :tangle hyprland.conf
 general {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
@@ -134,8 +122,52 @@ general {
 }
 #+end_src
 
+*** Input
+Here you can configure inputs
+Like you can change your keyboard layout here if you desire
+#+begin_src conf :tangle hyprland.conf
+input {
+    kb_layout = us,se,az
+    kb_variant =
+    kb_model =
+    kb_options = grp:caps_toggle
+    kb_rules =
 
-#+begin_src conf
+    follow_mouse = 1
+
+    touchpad {
+        natural_scroll = false
+    }
+
+    sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+}
+#+end_src
+
+*** Layout
+The two layouts in hyprland dwindle and master you can configure them here
+#+begin_src conf :tangle hyprland.conf
+dwindle {
+    pseudotile = true
+    preserve_split = true
+}
+
+master {
+    new_is_master = true
+}
+#+end_src
+
+*** Monitors
+Configure your monitors here like resolution and framerate for example
+#+BEGIN_SRC conf :tangle hyprland.conf
+monitor=DP-2,2560x1440@144,0x0,1
+monitor=DP-3,1920x1080@60,2560x0,1
+#+END_SRC
+
+
+*** Styling
+Here you can configure the fancy part of hyprland. Like you can configure the animation here
+and the decoration. Again check the docks for more info if you like
+#+begin_src conf :tangle hyprland.conf
 decoration {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
@@ -166,47 +198,25 @@ animations {
     animation = workspaces, 1, 2, default
 }
 #+end_src
-
-#+begin_src conf
-dwindle {
-    pseudotile = true
-    preserve_split = true
-}
-
-master {
-    new_is_master = true
-}
+*** Startup Apps
+Here you configure which apps you want to start when you log in to your hyprland session
+#+begin_src conf :tangle hyprland.conf
+exec-once = waybar & hyprpaper & /home/karl/.scripts/activated/swaybg-set
+exec-once = lxsession &
+exec-once = steam -silent -no-browser &
+exec-once = nextcloud --background &
+exec-once = emacs --daemon &
+exec-once = blueman-applet &
+exec-once = nm-applet --indicator &
 #+end_src
 
-#+begin_src  conf
-device:epic mouse V1 {
-    sensitivity = -0.5
-}
-#+end_src
-
-#+begin_src conf
-windowrule = float, ^(Gimp)$
-windowrule = float, ^(org.kde.kdenlive)$
-windowrule = float, ^(virt-manager)$
-windowrule = float, ^(yad)$
-windowrule = float, ^(mpv)$
-windowrule = float, ^(wdisplays)$
-windowrule = float, ^(pavucontrol)$
-windowrule = float, ^(org.kde.polkit-kde-authentication-agent-1)$
-windowrule = float, ^(brave-plex.phoenixonline.club__-Default)$
-windowrule = float, ^(nm-connection-editor)$
-
-windowrulev2 = workspace 4, title:^(?!.*(lutris)).*(Steam).*$
-windowrulev2 = workspace 4, title:^(?!.*(lutris)).*(Lutris).*$
-windowrulev2 = workspace 5, class:^(?!.*(lutris)).*(heroic).*$
-windowrulev2 = workspace 3, class:^(?!.*(lutris)).*(Gimp).*$
-windowrulev2 = workspace 7, class:^(?!.*(lutris)).*(discord).*$
-windowrulev2 = workspace 6, class:^(?!.*(lutris)).*(whatsapp-nativefier-d40211).*$
-windowrulev2 = workspace 3, class:^(?!.*(lutris)).*(org.kde.kdenlive).*$
-
-#+end_src
-
-#+begin_src conf
+*** Keybindings
+Here is all the keybindings to get arround in hyprland!
+It's very easy to configure you just need to write
+bind = $mainMood,key, command. One thing I miss tho is keychords
+Which I really love for my dmenu scripts. But in hyprland I launch
+my dmenu scripts with the alt key
+#+begin_src conf :tangle hyprland.conf
 $mainMod = SUPER
 $browser1 = qutebrowser
 $browser2 = brave-browser
@@ -358,7 +368,40 @@ bind = , XF86AudioRaiseVolume, exec, /home/karl/.scripts/activated/volume-up.sh 
 #END_KEYS
 #+end_src
 
-#+begin_src conf
+
+*** Windowrule
+Here you can configure window rules like if you want them to float for example.
+Or if you want to open a program on a specific workspace. You can do all those rules here
+#+begin_src conf :tangle hyprland.conf
+windowrule = float, ^(Gimp)$
+windowrule = float, ^(org.kde.kdenlive)$
+windowrule = float, ^(virt-manager)$
+windowrule = float, ^(yad)$
+windowrule = float, ^(mpv)$
+windowrule = float, ^(wdisplays)$
+windowrule = float, ^(pavucontrol)$
+windowrule = float, ^(org.kde.polkit-kde-authentication-agent-1)$
+windowrule = float, ^(brave-plex.phoenixonline.club__-Default)$
+windowrule = float, ^(nm-connection-editor)$
+
+windowrulev2 = workspace 4, title:^(?!.*(lutris)).*(Steam).*$
+windowrulev2 = workspace 4, title:^(?!.*(lutris)).*(Lutris).*$
+windowrulev2 = workspace 5, class:^(?!.*(lutris)).*(heroic).*$
+windowrulev2 = workspace 3, class:^(?!.*(lutris)).*(Gimp).*$
+windowrulev2 = workspace 7, class:^(?!.*(lutris)).*(discord).*$
+windowrulev2 = workspace 6, class:^(?!.*(lutris)).*(whatsapp-nativefier-d40211).*$
+windowrulev2 = workspace 3, class:^(?!.*(lutris)).*(org.kde.kdenlive).*$
+
+#+end_src
+
+*** Workspace Rules
+Since hyprland doesn't really share workspaces accross monitors.
+I decided to give 5 workspaces to each monitor I use. Since I always
+want the same workspace to appear in the same monitor otherwise I get confused.
+One thing I miss from qtile is that the monitors share workspaces. You can kinda
+get the same effect in hyprland but it works a bit diffrent. The workflow took
+some getting used to but I really enjoy it.
+#+begin_src conf :tangle hyprland.conf
 wsbind=1,DP-2
 wsbind=2,DP-2
 wsbind=3,DP-2
