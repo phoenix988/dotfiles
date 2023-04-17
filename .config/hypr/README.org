@@ -243,7 +243,7 @@ bind = $mainMod, return, exec, kitty                                            
 
 
 # Launch program mod + Shift + key
-bind = $mainMod SHIFT, return, exec, thunar                                  #Launch filemanager
+bind = $mainMod SHIFT, return, exec, pcmanfm                                 #Launch filemanager
 bind = $mainMod SHIFT, E, exec, emacsclient -c -a '' --eval '(dired nil)'    #Launch terminal filemanager
 bind = $mainMod SHIFT, V, exec, virt-manager                                 #Launch virt-manager
 bind = $mainMod SHIFT, I, exec, xfce4-appearance-settings                    #Launch xfce4-appearance-settings
