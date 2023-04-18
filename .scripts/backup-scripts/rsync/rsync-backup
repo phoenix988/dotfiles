@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#This script will create rsync backups
-#use main to run it
-
 backup_path="$HOME/Yandex.Disk/Scripts"
 
 declare -a options=(

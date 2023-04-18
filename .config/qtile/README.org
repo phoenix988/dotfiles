@@ -21,6 +21,7 @@
 - [[Layouts]]
 - [[Widgets]]
   - [[Slice]]
+- [[Mouse Settings]]
 - [[Floating Rules]]
 - [[Startup Hook]]
 
@@ -73,7 +74,7 @@ can add it here.
 mod = "mod4"
 
 # Terminals
-MYTERM = "kitty -e /usr/bin/myscripts/create-tmux-session.sh"
+MYTERM = "kitty -e zsh"
 MYTERM_NORMAL = "kitty -e zsh"
 SYSMON = "kitty --class=btop -e btop"
 
@@ -685,6 +686,10 @@ Pretty straight forward works the same way as in windows for example
                  lazy.spawn(DMENU_PATH + "/dm-pass"),
                  desc='Script for pass'
                  ),
+             Key([], "y", #Script to manage tmux session
+                 lazy.spawn(DMENU_PATH + "/dm-tmux"),
+                 desc='Script to manage tmux session'
+                 ),
              Key([], "p", #menu to control music
                  lazy.spawn(DMENU_PATH + "/dm-play-pause"),
                  desc='menu to control music'
@@ -1216,7 +1221,8 @@ def init_widgets_list():
 #+END_SRC
 *** Slice
 Since the Systray can only be available on one monitor I slice them here
-Remember if you do any major changes to the widgets you need to change this
+Remember if you do any major changes to the widgets you need to change this.
+Here I also configure the size and the margin of the Qtile bar.
 #+BEGIN_SRC python :tangle config.py
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
@@ -1229,9 +1235,9 @@ def init_widgets_screen1():
     return widgets_screen1                 # Monitor 1 will display all widgets in widgets_list
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=23, margin=3 )),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=23, margin=3)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=26, margin=3))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=23, margin=8 )),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=23, margin=8)),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=26, margin=8))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
@@ -1265,7 +1271,12 @@ def switch_screens(qtile):
     i = qtile.screens.index(qtile.current_screen)
     group = qtile.screens[i - 1].group
     qtile.current_screen.set_group(group)
+#+END_SRC
 
+*** Mouse Action
+These settings let you resize the window using the mouse.
+Usually dont need to configure these
+#+BEGIN_SRC python :tangle config.py
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(),
          start=lazy.window.get_position()),

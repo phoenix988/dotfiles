@@ -15,6 +15,7 @@
   - [[Init]]
   - [[Bootstrap]]
   - [[Standard Remaps]]
+  - [[Plugin Remaps]]
   - [[Standard Sets]]
   - [[Packer]]
   - [[Plugins]]
@@ -89,8 +90,8 @@ Source all my lua files
 #+begin_src lua :tangle init.lua
 require("karl.bootstrap")
 require("karl.packer")
-require("karl.set")
 require("karl.remap")
+require("karl.set")
 #+end_src
 
 ** Bootstrap
@@ -107,15 +108,23 @@ end
 #+end_src
 
 ** Standard Remaps
-Sets some standard keybindings here. I will also set all my keyboards
-for the various plugins I have too I found it too confusing to have multiple files for
-all my keybindings this is easier to manage and modify
+Sets some standard keybindings here. That is built in within vim.
+Also sets the spacebar as leaderkey
 #+begin_src lua :tangle lua/karl/remap.lua
 -- Space set as Leader Key
 vim.g.mapleader = " "
 
--- File explorers in neovim
+-- Built in File explorer in neovim
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+
+-- Source a file
+vim.keymap.set("n", "<leader>hs", vim.cmd.so)
+
+#+end_src
+
+** Plugin Remaps
+This is all my keybindings for all my diffrent plugins that I have installed.
+#+BEGIN_SRC lua :tangle after/plugin/keymap.lua
 vim.keymap.set("n", "<leader>.", vim.cmd.Vifm)
 vim.api.nvim_set_keymap('n', '<Leader>fb', ':Telescope file_browser<CR>', { noremap = true, silent = true })
 
@@ -124,12 +133,12 @@ vim.api.nvim_set_keymap('n', '<Leader>fb', ':Telescope file_browser<CR>', { nore
 vim.keymap.set("n", "<leader>bn", vim.cmd.BufferNext)
 vim.keymap.set("n", "<leader>bp", vim.cmd.BufferPrevious)
 vim.keymap.set("n", "<leader>bk", vim.cmd.BufferClose)
-vim.keymap.set("n", "gt", vim.cmd.BufferNext)
-vim.keymap.set("n", "gT", vim.cmd.BufferPrevious)
 vim.keymap.set("n", "<Leader>tn", vim.cmd.tabnew)
 vim.keymap.set("n", "<Leader>td", vim.cmd.tabclose)
 vim.keymap.set("n", "<Leader>ch", vim.cmd.HighlightColorsToggle)
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+vim.keymap.set("n", "gt", vim.cmd.BufferNext)
+vim.keymap.set("n", "gT", vim.cmd.BufferPrevious)
 vim.api.nvim_set_keymap('n', '<Leader>gp', ':Git push<CR>', { noremap = true, silent = true })
 
 -- Neotree keybindings
@@ -145,11 +154,8 @@ vim.api.nvim_set_keymap('n', '<Leader>nc', ':Neotree ~/.config<CR>', { noremap =
 vim.api.nvim_set_keymap('n', '<Leader>nn', ':Neotree ~/.config/nvim<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>n.', ':Neotree .<CR>', { noremap = true, silent = true })
 
--- Update plugins
+-- Update plugins using packer
 vim.keymap.set("n", "<leader>hr", vim.cmd.PackerSync)
-
--- Source a file
-vim.keymap.set("n", "<leader>hs", vim.cmd.so)
 
 -- Keybindings for Harpoon
 local mark = require("harpoon.mark")
@@ -184,7 +190,6 @@ vim.keymap.set('n', '<Leader>ht', builtin.colorscheme, {})
 vim.keymap.set('n', '<Leader>ps', function()
 builtin.grep_string({ search = vim.fn.input("Grep >") } );
 
-
 end)
 
 require("telescope").load_extension("recent_files")
@@ -196,8 +201,7 @@ vim.api.nvim_set_keymap("n", "<Leader>fr",
 require("telescope").load_extension "file_browser"
 
 
-#+end_src
-
+#+END_SRC
 
 ** Standard Sets
 Some standard neovim settings based on your prefrence
@@ -205,7 +209,6 @@ like line numbers,save undo after session etc
 #+begin_src lua :tangle lua/karl/set.lua
 vim.wo.relativenumber = true
 vim.opt.nu = true
-
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -375,7 +378,7 @@ end)
 #+end_src
 
 ** Plugins
-This is all my configs for the various Plugins I have installed
+This is all my configs for the various Plugins I have installed.
 
 *** Colors
 Sets colorscheme inside of neovim and configure neovim highlight

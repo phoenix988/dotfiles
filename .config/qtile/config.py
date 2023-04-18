@@ -26,7 +26,7 @@ from qtile_extras.widget.decorations import RectDecoration, PowerLineDecoration,
 mod = "mod4"
 
 # Terminals
-MYTERM = "kitty -e /usr/bin/myscripts/create-tmux-session.sh"
+MYTERM = "kitty -e zsh"
 MYTERM_NORMAL = "kitty -e zsh"
 SYSMON = "kitty --class=btop -e btop"
 
@@ -493,6 +493,10 @@ keys = [
              Key([], "j", #Script for pass
                  lazy.spawn(DMENU_PATH + "/dm-pass"),
                  desc='Script for pass'
+                 ),
+             Key([], "y", #Script to manage tmux session
+                 lazy.spawn(DMENU_PATH + "/dm-tmux"),
+                 desc='Script to manage tmux session'
                  ),
              Key([], "p", #menu to control music
                  lazy.spawn(DMENU_PATH + "/dm-play-pause"),
@@ -1012,9 +1016,9 @@ def init_widgets_screen1():
     return widgets_screen1                 # Monitor 1 will display all widgets in widgets_list
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=23, margin=3 )),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=23, margin=3)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=26, margin=3))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=23, margin=8 )),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=23, margin=8)),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=26, margin=8))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()

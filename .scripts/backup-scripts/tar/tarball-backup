@@ -10,7 +10,7 @@ date_for_backup=$(date +%d-%h-%Y-%H-%M )
 dmenu_conf_files=$(sed -n '/declare/,/)/p' ~/.dmenu/dm-editconfig | grep -v ^declare | sed -e 's/"//g' -e '/)/d' -e '/^$/d' | grep -v "#" | grep -v if | awk -F "=" '{print $NF}' | sed -e "s|\$HOME|$HOME|g" )
 
 #location to store the backups
-backuplocation="$HOME/Yandex.Disk/tars"
+backuplocation="$HOME/Yandex.Disk/Tars"
 
 #Creates the array add the folders you want to backup here
 declare -a options=(

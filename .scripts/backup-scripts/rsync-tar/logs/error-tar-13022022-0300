@@ -1,5 +1,0 @@
-tar: Removing leading `/' from member names
-tar: Removing leading `/' from hard link targets
-tar: /media/cloud_storage$HOME/scripts/activated/file_backups/logs/tar-13022022-0300: file changed as we read it
-tar: /etc/autofs/autofs_ldap_auth.conf: Cannot open: Permission denied
-tar: Exiting with failure status due to previous errors

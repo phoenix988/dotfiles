@@ -11,12 +11,7 @@ GREEN=$(tput setaf 2)
 declare -A files
 
 files[$HOME/.dmenu]="$DMSCRIPTS_REPO_PATH/.dmenu"
-
-files[$HOME/.scripts/activated]="$DOTFILES_REPO_PATH/.scripts/activated"
-files[$HOME/.scripts/restart]="$DOTFILES_REPO_PATH/.scripts/restart"
-files[$HOME/.scripts/sync]="$DOTFILES_REPO_PATH/.scripts/sync"
-files[$HOME/.scripts/backup-scripts/btrfs]="$DOTFILES_REPO_PATH/.scripts/backup-scripts/btrfs"
-files[$HOME/.scripts/backup-scripts/yandex-script]="$DOTFILES_REPO_PATH/.scripts/yandex-script"
+files[$HOME/.scripts]="$DOTFILES_REPO_PATH/.scripts"
 
 files[$HOME/.zshrc]="$DOTFILES_REPO_PATH/.zshrc"
 files[$HOME/.bashrc]="$DOTFILES_REPO_PATH/.bashrc"

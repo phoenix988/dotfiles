@@ -231,11 +231,10 @@ alias qm="cd /home/karl/.config/qtile/"
 alias xm="cd /home/karl/.xmonad/"
 alias xbm="cd /home/karl/.config/xmobar/"
 alias omfm="cd /home/karl/.config/fish/conf.d"
-alias movies="cd /mnt/movies"
 alias dmove="cd ~/.dmenu"
 alias backup="cd /mnt/backup"
 alias bhome="cd /mnt/backup/home"
-alias media="cd /mnt/autofs/music/videos/"
+alias media="cd /media/"
 alias cbak="cd ~/Yandex.Disk/Backups/"
 alias app="cd /usr/share/applications/"
 alias localapp="cd ~/.local/share/applications/"
@@ -252,20 +251,19 @@ alias mhypr="cd ~/.config/hypr/"
 alias mdoom="cd ~/.config/doom/"
 alias mway="cd ~/.config/waybar/"
 alias learn="cd ~/myrepos/azla"
+alias az="cd ~/myrepos/azla/"
 alias vm="cd /media/vm"
 alias yandex="cd /media/cloud-storage/Yandex.Disk/"
-alias games="cd /media/games_1"
-alias games2="cd /media/games_/"
+alias games="cd /media/games/games-1/"
+alias games2="cd /media/games/games-2"
 alias steam1="cd ~/Games/Steam/steamapps/"
 alias steam2="/mnt/ntfs/SteamLibrary/steamapps/"
-alias mwine="cd ~/wine"
-alias autofs="cd /mnt/autofs"
-alias mgit="cd ~/git-reps"
 alias mdmenu="cd ~/.dmenu"
+alias mgit="cd ~/myrepos"
 alias iso="cd ~/iso"
-alias setup="cd ~/myrepos/setup"
-alias dmscripts="cd ~/myrepos/dmscripts/.dmenu"
-alias dotfiles="cd ~/myrepos/dotfiles"
+alias set="cd ~/myrepos/setup"
+alias dms="cd ~/myrepos/dmscripts/.dmenu"
+alias dotf="cd ~/myrepos/dotfiles"
 
 # checks the values of mouse/keyboards clicks
 alias keycheck="xev"
@@ -300,13 +298,11 @@ alias rmr="rm -r"
 alias rmrf="rm -rf"
 
 # vim for important configuration files
-alias vaw="vim ~/.config/awesome/rc.lua"
-alias vqt="vim ~/.config/qtile/config.py"
 alias qE="vim ~/.config/qtile/config.py"
 alias qe="vim ~/.config/qtile/config.py"
-alias xe="vim ~/.xmonad/xmonad.hs"
-alias vxe="vim ~/.xmonad/xmonad.hs"
-alias omfe="vim ~/.config/fish/conf.d/omf.fish"
+alias hy="vim ~/.config/hypr/hyprland.conf"
+alias ways="vim ~/.config/waybar/style.css"
+alias wayc="vim ~/.config/waybar/config.jsonc"
 alias fa="vim ~/.config/fish/config.fish"
 alias hostfile="sudo vim /etc/hosts"
 alias ec="dm-editconfig"
@@ -320,30 +316,20 @@ alias vconfgrub="sudo vim /boot/grub/grub.cfg"
 alias vmkinitcpio="sudo vim /etc/mkinitcpio.conf"
 alias vmirrorlist="sudo vim /etc/pacman.d/mirrorlist"
 alias vali="vim ~/.config/alias-zsh-bash"
-alias vzrc="vim ~/.zshrc"
 alias vzsh="vim ~/.zshrc"
-alias vfis="vim ~/.config/fish/config.fish"
+alias vdot="vim ~/myrepos/dotfiles"
 
 # Gui editor
 alias nv="neovide"
+alias emacs="emacsclient -c -a 'emacs'"
 
 # SSH
-alias mediaserver="ssh karl@192.168.1.30"
-alias gameserver="ssh karl@192.168.1.31"
-alias router="ssh root@10.1.0.1"
-alias phoe01="ssh karl@phoe01"
-alias phoe02="ssh karl@phoe02"
-alias phoe03="ssh karl@10.1.0.55"
-alias phoe04="ssh karl@10.1.0.55"
-alias phoeserver01="ssh karl@10.1.0.50"
 alias kssh="kitty +kitten ssh"
 
 # git aliases
 alias genc="git clone https://notabug.org/Krock/GI-on-Linux.git"
 alias mgen="cd /media/vg_games/genshin-impact/drive_c/Program\ Files/Genshin\ Impact/Genshin\ Impact\ game"
 
-# games legendary
-alias gta="legendary launch 9d2d0eb64d5c44529cece33fe2a46482"
 
 # default browser
 alias defaultbrowser="xdg-settings set default-web-browser"
@@ -364,4 +350,5 @@ export qt=/home/karl/.config/qtile/config.py
 export github='https://github.com'
 export date_for_backup=$(date +%d-%h-%Y-%H-%M )
 
-# export DOCKER_HOST=ssh://karl@192.168.1.31
+# Docker host config
+export DOCKER_HOST=ssh://karl@192.168.1.31
