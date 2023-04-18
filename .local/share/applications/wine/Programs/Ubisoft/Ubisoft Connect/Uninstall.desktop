@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=Uninstall
-Exec=env WINEPREFIX="/home/karl/Games/assassins-creed-valhalla" /home/ubuntu/buildbot/runners/wine/lutris-ge-6.16-1-x86_64/bin/wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/karl/Games/assassins-creed-valhalla/dosdevices/c:/users/karl/AppData/Roaming/Microsoft/Windows/Start\\ Menu/Programs/Ubisoft/Ubisoft\\ Connect/Uninstall.lnk
-Type=Application
-StartupNotify=true
-Path=/home/karl/Games/assassins-creed-valhalla/dosdevices/c:/Program Files (x86)/Ubisoft/Ubisoft Game Launcher
-Icon=9D00_Uninstall.0
-StartupWMClass=uninstall.exe
