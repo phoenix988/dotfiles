@@ -1,7 +1,0 @@
-#!/bin/bash
-
-back=$(cat ~/.config/kitty/theme.conf | grep background | awk '{print $NF}')
-fore=$(cat ~/.config/kitty/theme.conf | grep selection_background | awk '{print $NF}')
-
-sed -n '/START_KEYS/,/END_KEYS/p' ~/.config/hypr/hyprland.conf  | grep -v "^#bind" | grep -v START_KEYS | grep -v END_KEYS | sed -e 's/bind = //g' -e 's/$mainMod/super/g' -e 's/,/ +/' -e 's/exec. *//g'| sed -e 's/#/,/g' -e 's/^,//' -e 's/^ //' -e 's/^+//' -e 's/,//g'|  \
-          yad --text-info  --back=$back --fore=$fore --geometry=1200x800 
