@@ -219,7 +219,9 @@ my dmenu scripts with the alt key
 #+begin_src conf :tangle hyprland.conf
 $mainMod = SUPER
 $browser1 = qutebrowser
-$browser2 = brave-browser
+$browser2 = librewolf
+$term = kitty
+$script_path = $HOME/.scripts
 
 
 #START_KEYS
@@ -239,7 +241,7 @@ bind = $mainMod, U, exec, $HOME/.config/hypr/hyprland-keys            #Shows thi
 
 
 # Lock Screen
-bind = CTRL ALT, L, exec, /home/karl/.scripts/activated/swaylock      #Lock the screen using swaylock
+bind = CTRL ALT, L, exec, $script_path/activated/swaylock      #Lock the screen using swaylock
 
 
 # Launch programs Mod + key
@@ -248,8 +250,8 @@ bind = $mainMod, O, exec, obs                                                   
 bind = $mainMod, B, exec, $browser1                                                     #Launch browser1
 bind = $mainMod, I, exec, lxappearance                                                  #Launch lxappearance
 bind = $mainMod, S, exec, grim -g "$(slurp)" - | wl-copy                                #Take screenshot
-bind = $mainMod, T, exec, kitty -e $HOME/.scripts/activated/create-tmux-session.sh      #Open the terminal with tmux
-bind = $mainMod, return, exec, kitty                                                    #Open the terminal
+bind = $mainMod, T, exec, $term -e $HOME/.scripts/activated/create-tmux-session.sh      #Open the terminal with tmux
+bind = $mainMod, return, exec, $term                                                    #Open the terminal
 
 
 # Launch program mod + Shift + key
@@ -259,7 +261,7 @@ bind = $mainMod SHIFT, V, exec, virt-manager                                 #La
 bind = $mainMod SHIFT, I, exec, xfce4-appearance-settings                    #Launch xfce4-appearance-settings
 bind = $mainMod SHIFT, Y, exec, kitty -e "mutt"                              #Launch mutt email client
 bind = $mainMod SHIFT, T, exec, kitty -e "btop"                              #Launch btop
-bind = $mainMod SHIFT, W, exec, librewolf                                    #Launch librewolf
+bind = $mainMod SHIFT, W, exec, $browser2                                    #Launch browser2
 bind = $mainMod SHIFT, G, exec, kdenlive                                     #Launch Kdenlive
 bind = $mainMod SHIFT, D, exec, emacsclient -c -a "emacs"                    #Launch emacs
 
@@ -270,8 +272,8 @@ bind = ALT CTRL, B, exec, gparted                                #Launch gparted
 bind = ALT CTRL, T, exec, lxtask                                 #Launch lxtask
 
 # F keys bindings
-bind = $mainMod, F12, exec, $HOME/.scripts/activated/set-random-bg-wayland              #Set random bg
-bind = $mainMod, F11, exec, $HOME/.scripts/restart/restart-waybar                       #Restart waybar
+bind = $mainMod, F12, exec, $script_path/activated/set-random-bg-wayland              #Set random bg
+bind = $mainMod, F11, exec, $script_path/restart/restart-waybar                       #Restart waybar
 
 
 # Move focus with mainMod + arrow keys
@@ -330,8 +332,8 @@ binde=ALT,B, exec, $HOME/.dmenu/dm-timeshift                    #Dmenu script to
 binde=ALT,F, exec, $HOME/.dmenu/dm-openweb-fullscreen           #Dmenu script to open websites in fullscreen
 binde=ALT,S, exec, $HOME/.dmenu/dm-search                       #Dmenu script for some search engines
 binde=ALT,V, exec, $HOME/.dmenu/dm-nordvpn                      #Dmenu script to connect to a vpn
-binde=ALT,W, exec, /home/karl/.dmenu/dm-set-wallpaper           #Dmenu script to set wallpaper
-binde=ALT,O, exec, /home/karl/.dmenu/dm-openweb                 #Dmenu script to open bookmarked websites
+binde=ALT,W, exec, $HOME/.dmenu/dm-set-wallpaper           #Dmenu script to set wallpaper
+binde=ALT,O, exec, $HOME/.dmenu/dm-openweb                 #Dmenu script to open bookmarked websites
 binde=ALT,L, exec, $HOME/.dmenu/dm-layout                       #Dmenu script to change keyboard layout
 binde=ALT,T, exec, $HOME/.dmenu/dm-kittychangetheme             #Dmenu script to change kitty theme
 binde=ALT,A, exec, $HOME/.dmenu/dm-audioset                     #Dmenu script to change audio source
@@ -339,32 +341,30 @@ binde=ALT,K, exec, $HOME/.dmenu/dm-kill                         #Dmenu script to
 binde=ALT,Q, exec, $HOME/.dmenu/dm-virt-manager                 #Dmenu script to open virtual machines
 binde=ALT,P, exec, $HOME/.dmenu/dm-play-pause                   #Dmenu script to control media
 binde=ALT,N, exec, $HOME/.dmenu/dm-ssh                   #Dmenu script to control media
-binde=ALT,R, exec, $HOME/.dmenu/dm-tmux                   #Dmenu script to control media
+binde=$mainMod,Y, exec, $HOME/.dmenu/dm-tmux                   #Dmenu script to control media
 
 
 # Tmux keybindings
-bind = CTRL ALT, 1, exec, tmux select-window -t karl:1                             # Move to tmux window 1
-bind = CTRL ALT, 2, exec, tmux select-window -t karl:2                             # Move to tmux window 2
-bind = CTRL ALT, 3, exec, tmux select-window -t karl:3                             # Move to tmux window 3
-bind = CTRL ALT, 4, exec, tmux select-window -t karl:4                             # Move to tmux window 4
-bind = CTRL ALT, 5, exec, tmux select-window -t karl:5                             # Move to tmux window 5
-bind = CTRL ALT, 6, exec, tmux select-window -t karl:6                             # Move to tmux window 6
-bind = CTRL ALT, 7, exec, tmux select-window -t karl:7                             # Move to tmux window 7
-bind = CTRL ALT, 8, exec, tmux select-window -t karl:8                             # Move to tmux window 8
-bind = CTRL ALT, 9, exec, tmux select-window -t karl:9                             # Move to tmux window 9
-bind = CTRL ALT, S, exec, tmux splitw -v                                           # Split the window vertically
-bind = CTRL ALT, V, exec, tmux splitw -h                                           # split the window horizontinally
-bind = CTRL ALT, X, exec, tmux kill-pane -t karl                                   # kill the current pane
-bind = CTRL ALT, C, exec, tmux new-window -t karl                                  # create a new tmux pane
+bind = CTRL ALT, 1, exec, $script_path/tmux/window-1                             # Move to tmux window 1
+bind = CTRL ALT, 2, exec, $script_path/tmux/window-2                             # Move to tmux window 2
+bind = CTRL ALT, 3, exec, $script_path/tmux/window-3                             # Move to tmux window 3
+bind = CTRL ALT, 4, exec, $script_path/tmux/window-4                             # Move to tmux window 4
+bind = CTRL ALT, 5, exec, $script_path/tmux/window-5                             # Move to tmux window 5
+bind = CTRL ALT, 6, exec, $script_path/tmux/window-6                             # Move to tmux window 6
+bind = CTRL ALT, 7, exec, $script_path/tmux/window-7                             # Move to tmux window 7
+bind = CTRL ALT, 8, exec, $script_path/tmux/window-8                             # Move to tmux window 8
+bind = CTRL ALT, 9, exec, $script_path/tmux/window-9                             # Move to tmux window 9
+bind = CTRL ALT, S, exec, tmux splitw -v                                                # Split the window vertically
+bind = CTRL ALT, V, exec, tmux splitw -h                                                # split the window horizontinally
 
 
 # Media controls
-bind = , XF86AudioPlay, exec, /home/karl/.scripts/activated/mediaplay                 # Media play/pause
-bind = , XF86AudioNext, exec, /home/karl/.scripts/activated/medianext                 # Media next
-bind = , XF86AudioPrev, exec, /home/karl/.scripts/activated/mediaprev                 # Media prev
-bind = , XF86AudioMute, exec, /home/karl/.scripts/activated/mute-unmute.sh            # Media mute/unmute
-bind = , XF86AudioLowerVolume, exec, /home/karl/.scripts/activated/volume-down.sh     # Media lower volume
-bind = , XF86AudioRaiseVolume, exec, /home/karl/.scripts/activated/volume-up.sh       # Media raise volume
+bind = , XF86AudioPlay, exec, $script_path/activated/mediaplay                 # Media play/pause
+bind = , XF86AudioNext, exec, $script_path/activated/medianext                 # Media next
+bind = , XF86AudioPrev, exec, $script_path/activated/mediaprev                 # Media prev
+bind = , XF86AudioMute, exec, $script_path/activated/mute-unmute.sh            # Media mute/unmute
+bind = , XF86AudioLowerVolume, exec, $script_path/activated/volume-down.sh     # Media lower volume
+bind = , XF86AudioRaiseVolume, exec, $script_path/activated/volume-up.sh       # Media raise volume
 #END_KEYS
 #+end_src
 
