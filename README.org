@@ -41,7 +41,6 @@ since I have used them
 |-----------+---------+----------|
 | Qtile     | Xmonad  | Hyprland |
 | SpectreWM | Awesome |          |
-|-----------+---------+----------|
 
 *** Text Editors
 Well the only text editor I use is Doom emacs and Neovim
@@ -51,7 +50,6 @@ So I store the configs of my favorite text editor here in my dotfiles
 
 |------------+--------|
 | Doom Emacs | NeoVim |
-|------------+--------|
 
 *** Other Configs
 Here is some other random config files I store here
@@ -63,7 +61,6 @@ like diffrent shells terminals, run prompt etc
 | Picom   | Qutebrowser | wofi      |
 | Rofi    | vifm        | Starship  |
 | Wlogout | Tmux        | Dunst     |
-|---------+-------------+-----------|
 
 ** Scripts
 I also store some of my custom scripts here that I used
@@ -73,21 +70,21 @@ This is a script that I use to quickly sync some
 of my most popular scripts and configs to my repos.
 So everytime I modify a config locally on my pc then
 when this script run it will sync it
-|---------------+--------------------------|
-| [[.scripts/sync]] | [[.script/sync/sync-script]] |
-|---------------+--------------------------|
+|---------------+-------------------------------|
+| [[.scripts/sync]] | [[.scripts/sync/sync-script.org]] |
+|---------------+-------------------------------|
 **** Tmux Session
 Script for tmux that will create a session if it doesnt exist already.
 If it does exist this script will attach that session. Use it to Quickly
 Create some tmux windows
-|---------------------+------------------------------------------|
-| [[.scripts/activated/]] | [[.script/activated/create-tmux-session.sh]] |
-|---------------------+------------------------------------------|
+|---------------------+-------------------------------------------|
+| [[.scripts/activated/]] | [[.scripts/activated/create-tmux-session.sh]] |
+|---------------------+-------------------------------------------|
 **** Tmux Jump
 Some simple tmux script I wrote so I can create a keybinding in my windowmanager
 to quickly jump between tabs within a tmux session
 |---------------+---------------------------|
-| [[.scripts/tmux]] | [[.script/tmux/window-(1-9)]] |
+| [[.scripts/tmux]] | [[.scripts/tmux/window-(1-9)]] |
 |---------------+---------------------------|
 **** Others
 Also has some other scripts to set random wallpapers, control volume so I can bind
@@ -95,10 +92,10 @@ it to my window manager easily as a keybinding.
 
 ***** Media Scripts
 |---------------------+----------------------------------|
-| [[.scripts/activated/]] | [[.script/activated/medianext]]      |
-| [[.scripts/activated/]] | [[.script/activated/mediaprev]]      |
-| [[.scripts/activated/]] | [[.script/activated/mediaplay]]      |
-| [[.scripts/activated/]] | [[.script/activated/mute-unmute.sh]] |
-| [[.scripts/activated/]] | [[.script/activated/volume-up.sh]]   |
-| [[.scripts/activated/]] | [[.script/activated/volume-down.sh]] |
+| [[.scripts/activated/]] | [[.scripts/activated/medianext]]     |
+| [[.scripts/activated/]] | [[.scripts/activated/mediaprev]]     |
+| [[.scripts/activated/]] | [[.scripts/activated/mediaplay]]     |
+| [[.scripts/activated/]] | [[.scripts/activated/mute-unmute.sh]] |
+| [[.scripts/activated/]] | [[.scripts/activated/volume-up.sh]]  |
+| [[.scripts/activated/]] | [[.scripts/activated/volume-down.sh]] |
 |---------------------+----------------------------------|
