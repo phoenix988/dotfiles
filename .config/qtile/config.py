@@ -42,13 +42,14 @@ BROWSER1  = "librewolf"
 EDITOR = "emacsclient -c -a emacs"
 
 # Utilities
-VIRTMAN = "virt-manager"   #Hypervisor of choice
-BACKUP = "sudo timeshift-gtk"   #Backup utility
-LOCKSCREEN =  "slock"   #My lockscreen of choice
+VIRTMAN = "virt-manager"
+BACKUP = "sudo timeshift-gtk"
+LOCKSCREEN =  "slock"
 
 # My custom scripts
-DMENU_PATH = "/home/karl/.dmenu" #Path to my dmenu scripts
-SCRIPT_PATH = "/home/karl/.scripts/activated" #Path to my scripts
+DMENU_PATH = "/home/karl/.dmenu"
+SCRIPT_PATH = "/home/karl/.scripts/activated"
+TMUX_PATH = "/home/karl/.scripts/tmux"
 
 #START_KEYS
 keys = [
@@ -355,31 +356,31 @@ keys = [
 
          #KEYS_GROUP keybindings to control tmux without keychords
          Key(["control", "mod1"], "1", #Move to tmux window 1
-             lazy.spawn("tmux select-window -t karl:1"),
+             lazy.spawn(TMUX_PATH + "/window-1"),
              ),
          Key(["control", "mod1"], "2", #Move to tmux window 2
-             lazy.spawn("tmux select-window -t karl:2"),
+             lazy.spawn(TMUX_PATH + "/window-2"),
              ),
          Key(["control", "mod1"], "3", #Move to tmux window 3
-             lazy.spawn("tmux select-window -t karl:3"),
+             lazy.spawn(TMUX_PATH + "/window-3"),
              ),
          Key(["control", "mod1"], "4", #Move to tmux window 4
-             lazy.spawn("tmux select-window -t karl:4"),
+             lazy.spawn(TMUX_PATH + "/window-4"),
              ),
          Key(["control", "mod1"], "5", #Move to tmux window 5
-             lazy.spawn("tmux select-window -t karl:5"),
+             lazy.spawn(TMUX_PATH + "/window-5"),
              ),
          Key(["control", "mod1"], "6", #Move to tmux window 6
-             lazy.spawn("tmux select-window -t karl:6"),
+             lazy.spawn(TMUX_PATH + "/window-6"),
              ),
          Key(["control", "mod1"], "7", #Move to tmux window 7
-             lazy.spawn("tmux select-window -t karl:7"),
+             lazy.spawn(TMUX_PATH + "/window-7"),
              ),
          Key(["control", "mod1"], "8", #Move to tmux window 8
-             lazy.spawn("tmux select-window -t karl:8"),
+             lazy.spawn(TMUX_PATH + "/window-8"),
              ),
          Key(["control", "mod1"], "9", #Move to tmux window 9
-             lazy.spawn("tmux select-window -t karl:9"),
+             lazy.spawn(TMUX_PATH + "/window-9"),
              ),
          Key(["control", "mod1"], "x", #kill tmux pane
              lazy.spawn("tmux kill-pane -t karl"),
