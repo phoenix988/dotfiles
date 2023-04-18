@@ -31,16 +31,15 @@ MYTERM_NORMAL = "kitty -e zsh"
 SYSMON = "kitty --class=btop -e btop"
 
 # Filemanagers
-FILE_MANAGER = "kitty --class=vifm -e vifm"
-GUI_FILE_MANAGER = "krusader"
+FILE_MANAGER = "emacsclient -c -a '' --eval '(dired nil)'"
+GUI_FILE_MANAGER = "pcmanfm"
 
 # Browsers
 BROWSER2  = "brave-browser --new-window --app=https://duckduckgo.com"
 BROWSER1  = "librewolf"
 
 # Text editors
-GUI_EDITOR = "emacs -c -a emacs"
-EDITOR = "kitty --class vim -e vim"
+EDITOR = "emacsclient -c -a emacs"
 
 # Utilities
 VIRTMAN = "virt-manager"   #Hypervisor of choice
@@ -115,8 +114,8 @@ keys = [
 
          #KEYS_GROUP Launch applications with super + shift + key
          Key([mod, "shift"], "y", #Run Graphical Text editor
-             lazy.spawn( GUI_EDITOR ),
-             desc='Launches My Graphical Editor'
+             lazy.spawn( EDITOR ),
+             desc='Launch My Graphical Editor'
              ),
          Key([mod, "shift"], "w", #Browser 1
              lazy.spawn(BROWSER1),
@@ -128,37 +127,45 @@ keys = [
              ),
          Key([mod, "shift"], "e", #Launch your filemanager
              lazy.spawn(FILE_MANAGER),
-             desc='File Manager'
+             desc='Terminal File Manager'
              ),
-         Key([mod, "shift"], "Return", #Launch your gui filemanager
+         Key([mod, "shift"], "Return", #Launch your Graphical filemanager
              lazy.spawn(GUI_FILE_MANAGER),
-             desc='Gui FileManager'
+             desc='Launch Graphical FileManager'
              ),
          Key([mod, "shift"], "g", #Launch kdenlive
              lazy.spawn("kdenlive"),
-             desc='kdenlive'
+             desc='Launch kdenlive'
+             ),
+         Key([mod, "shift"], "d", #Launch your text editor
+             lazy.spawn(EDITOR),
+             desc='Launch Your text editor'
+             ),
+         Key([mod, "shift"], "o", #Launch gparted
+             lazy.spawn("Gparted"),
+             desc='Launch Gparted'
              ),
 
          #KEYS_GROUP Launch application with alt + control + key
          Key(["mod1", "control"], "t", #Launch TaskManager
              lazy.spawn("lxtask"),
-             desc='TaskManager'
+             desc='Launch LxTask'
              ),
          Key(["mod1", "control"], "s", #Launch Steam
              lazy.spawn("steam"),
-             desc='Steam'
+             desc='Launch Steam'
              ),
          Key(["mod1", "control"], "b", #Launch Timeshift
              lazy.spawn(BACKUP),
-             desc='Open timeshift'
+             desc='Launch timeshift'
              ),
          Key(["mod1", "control"], "p", #Launch Pavucontrol
              lazy.spawn("pavucontrol"),
-             desc='Open Pavucontrol'
+             desc='Launch Pavucontrol'
              ),
          Key(["mod1", "control"], "w", #Launch Bitwarden
-             lazy.spawn("bitwarden-desktop"),
-             desc='Bitwarden'
+             lazy.spawn("flatpak run com.bitwarden.desktop"),
+             desc='Launch Bitwarden'
              ),
 
          #KEYS_GROUP Some of my custom scripts
@@ -390,7 +397,7 @@ keys = [
          #KEYS_GROUP Launch terminal based programs using the key chord CONTROL+e followed by 'key'
          KeyChord(["control"], "e", [
              Key([], "d", #Launch dired emacs file manager
-                 lazy.spawn("emacsclient -c -a '' --eval '(dired nil)'"),
+                 lazy.spawn(FILE_MANAGER),
              desc='Open file manager in emacs'
              ),
              Key([], "s", #Launch Eshell in emacs
@@ -592,7 +599,7 @@ def init_widgets_list():
              widget.Image(
                         filename = "~/.config/qtile/icons/pop-os-nord.png",
                         scale = "False",
-                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myterm)},
+                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(MYTERM_NORMAL)},
                         padding = 10
                         ),
              widget.Sep(
@@ -887,7 +894,7 @@ def init_widgets_list():
              widget.Memory(
                        foreground = colors[3],
                        background = colors[0],
-                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(sysmon)},
+                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(SYSMON)},
                        padding = 5,
                        decorations = [
                             BorderDecoration (
@@ -929,7 +936,7 @@ def init_widgets_list():
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
-                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myterm + ' -e sudo pacman -Syu')},
+                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(MYTERM_NORMAL + ' -e sudo pacman -Syu')},
                      background = colors[0]
                        ),
              widget.TextBox(

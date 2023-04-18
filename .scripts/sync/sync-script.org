@@ -61,6 +61,7 @@ if it detects that it has changed
 | $HOME/.config/starship.toml          | $DOTFILES_REPO_PATH/.config/starship.toml          |
 | $HOME/.config/qtile/config.py        | $DOTFILES_REPO_PATH/.config/qtile/config.py        |
 | $HOME/.config/qtile/autostart.sh     | $DOTFILES_REPO_PATH/.config/qtile/autostart.sh     |
+| $HOME/.config/qtile/README.org       | $DOTFILES_REPO_PATH/.config/qtile/README.org       |
 | $HOME/.config/qtile/themes           | $DOTFILES_REPO_PATH/.config/qtile/themes           |
 | $HOME/.config/hypr                   | $DOTFILES_REPO_PATH/.config/hypr                   |
 | $HOME/.config/waybar/config.jsonc    | $DOTFILES_REPO_PATH/.config/waybar/config.jsonc    |
@@ -125,7 +126,7 @@ files[$HOME/.config/kitty/kitty.conf]="$DOTFILES_REPO_PATH/.config/kitty/kitty.c
 files[$HOME/.config/alacritty]="$DOTFILES_REPO_PATH/.config/alacritty"
 files[$HOME/.config/starship.toml]="$DOTFILES_REPO_PATH/.config/starship.toml"
 files[$HOME/.config/qtile/config.py]="$DOTFILES_REPO_PATH/.config/qtile/config.py"
-files[$HOME/.config/qtile/README.org]="$DOTFILES_REPO_PATH/.config/qtile/config.py"
+files[$HOME/.config/qtile/README.org]="$DOTFILES_REPO_PATH/.config/qtile/README.org"
 files[$HOME/.config/qtile/autostart.sh]="$DOTFILES_REPO_PATH/.config/qtile/autostart.sh"
 files[$HOME/.config/qtile/themes]="$DOTFILES_REPO_PATH/.config/qtile/themes"
 files[$HOME/.config/hypr]="$DOTFILES_REPO_PATH/.config/hypr"
