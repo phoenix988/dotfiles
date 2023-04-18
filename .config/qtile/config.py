@@ -1,7 +1,7 @@
-##____  _                      _      
+##____  _                      _
 #|  _ \| |__   ___   ___ _ __ (_)_  __
 #| |_) | '_ \ / _ \ / _ \ '_ \| \ \/ /
-#|  __/| | | | (_) |  __/ | | | |>  < 
+#|  __/| | | | (_) |  __/ | | | |>  <
 #|_|   |_| |_|\___/ \___|_| |_|_/_/\_\
 # -*- coding: utf-8 -*-
 import os
@@ -21,7 +21,6 @@ from color import colors, layout_colors
 # Importing qtile_extras libaries
 from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration, PowerLineDecoration, BorderDecoration
-
 
 # Define super key as variable
 mod = "mod4"
@@ -71,7 +70,7 @@ keys = [
               lazy.spawn("/home/karl/.config/kitty/kitty-keys.sh"),
               desc='Run Help Menu for kitty'
               ),
-         Key([mod, "control" ], "i", #Lock the computer
+         Key(["control", "mod1" ], "l", #Lock the computer
               lazy.spawn(LOCKSCREEN),
               desc='Lock computer'
               ),
@@ -79,24 +78,12 @@ keys = [
               lazy.spawn(SCRIPT_PATH + "/layout-switcher"),
               desc='switch between Keyboard layouts'
              ),
-
-         #KEYS_GROUP Keybindings for scratchpads
-         Key(["mod1", ], "o", #show scratchpad vifm
-              lazy.group['scratchpad'].dropdown_toggle('vifm'),
-              desc='show scratchpad vifm'
-             ),
-
-         #KEYS_GROUP keybinding for Minimizing windows
-         Key(["mod1", ], "m", #Minimize window
-              lazy.spawn("Qminimize -m"),
-              desc='Minimize window'
-             ),
-
-         #KEYS_GROUP Launch applications with super + key
          Key([mod, ], "r", #Run Rofi
               lazy.spawn("rofi -show drun -show-icons -display-drun \"Run : \" -drun-display-format \"{name}\""),
               desc='Run rofi'
              ),
+
+         #KEYS_GROUP Launch applications with super + key
          Key([mod, ], "s", #Take Screenshot
              lazy.spawn("flameshot gui"),
              desc='flameshot'
@@ -113,7 +100,7 @@ keys = [
              lazy.spawn("obs"),
              desc='OBS studio'
              ),
-         Key([mod, ], "t", #Launch Kitty
+         Key([mod, ], "t", #Launch Terminal
              lazy.spawn( MYTERM_NORMAL ),
              desc='kitty terminal'
              ),
@@ -281,6 +268,10 @@ keys = [
              lazy.layout.maximize(),
              desc='toggle window between minimum and maximum sizes'
              ),
+         Key(["mod1", ], "m", #Minimize window
+              lazy.spawn("Qminimize -m"),
+              desc='Minimize window'
+             ),
          Key([mod], "f", #Toggle fullscreen
              lazy.window.toggle_fullscreen(),
              desc='toggle fullscreen'
@@ -355,7 +346,6 @@ keys = [
              desc='Toggle between split and unsplit sides of stack'
              ),
 
-
          #KEYS_GROUP keybindings to control tmux without keychords
          Key(["control", "mod1"], "1", #Move to tmux window 1
              lazy.spawn("tmux select-window -t karl:1"),
@@ -396,34 +386,32 @@ keys = [
          Key(["control", "mod1"], "s", #create vertical split
              lazy.spawn("tmux splitw -v"),
              ),
-         Key(["control", "mod1"], "h", #prev pane
-             lazy.spawn(SCRIPT_PATH + "/next-tmux-pane.sh"),
-             ),
-         Key(["control", "mod1"], "l", #next pane
-             lazy.spawn(SCRIPT_PATH + "/prev-tmux-pane.sh"),
-             ),
 
          #KEYS_GROUP Launch terminal based programs using the key chord CONTROL+e followed by 'key'
-         KeyChord([mod], "z", [
-             Key([], "e", #Launch vifm
-                 lazy.spawn(FILE_MANAGER),
-             desc='Open vifm file manager'
+         KeyChord(["control"], "e", [
+             Key([], "d", #Launch dired emacs file manager
+                 lazy.spawn("emacsclient -c -a '' --eval '(dired nil)'"),
+             desc='Open file manager in emacs'
+             ),
+             Key([], "s", #Launch Eshell in emacs
+                 lazy.spawn("emacsclient -c -a '' --eval '(eshell)'"),
+             desc='Launch Eshell in emacs'
              ),
              Key([], "h", #Launch htop
                  lazy.spawn(SYSMON),
-             desc='Open HTOP'
+             desc='Launch HTOP'
              ),
              Key([], "r", #Launch ranger
                  lazy.spawn("kitty --class=ranger -e ranger"),
-             desc='Open RANGER'
+             desc='Launch Ranger'
              ),
-             Key([], "v", #Launch your terminal editor
-                 lazy.spawn(EDITOR),
-             desc='launch your terminal editor'
+             Key([], "e", #Launch Emacs
+                 lazy.spawn("emacsclient -c -a 'emacs'"),
+             desc='Launch Emacs'
              ),
              Key([], "t", #Change rofi theme
                  lazy.spawn("rofi-theme-selector"),
-             desc='change rofi theme'
+             desc='Change Rofi Theme'
              ),],
 
          name="Action: "),
@@ -434,20 +422,16 @@ keys = [
                  lazy.spawn(DMENU_PATH + "/dm-editconfig"),
                  desc='Choose a config file to edit'
                  ),
-             Key([], "m", #Change the fan Mode of my laptop 
+             Key([], "m", #Mount some of my filesystems
                  lazy.spawn(DMENU_PATH + "/dm-mount"),
-                 desc='Mount some harddrives using dmenu'
-                 ),
-             Key([], "c", #Change RGB color on my asus laptop
-                 lazy.spawn(DMENU_PATH + "/dm-keyboard-color"),
                  desc='Mount some harddrives using dmenu'
                  ),
              Key([], "k", #Kill a process
                  lazy.spawn(DMENU_PATH + "/dm-kill"),
                  desc='Kill processes via dmenu'
                  ),
-             Key([], "r", #Sudo config files
-                 lazy.spawn("sudo /home/karl/.dmenu/dm-editconfig"),
+             Key([], "n", #Ssh script
+                 lazy.spawn("sudo /home/karl/.dmenu/dm-ssh"),
                  desc='Config a file that requires root'
                  ),
              Key([], "w", #Set wallpaper
@@ -478,19 +462,15 @@ keys = [
                  lazy.spawn(DMENU_PATH + "/dm-nordvpn"),
                  desc='Choose your VPN server for NordVPN'
                  ),
-             Key([], "s", #search the web requires qutebrowser 
+             Key([], "s", #search the web requires qutebrowser
                  lazy.spawn(DMENU_PATH + "/dm-search"),
                  desc='search the web'
-                 ),
-             Key([], "y", #print an emoji to the clipboard 
-                 lazy.spawn(DMENU_PATH + "/dm-emojis"),
-                 desc='print an emoji to the clipboard'
                  ),
              Key([], "g", #Change the overall system theme
                 lazy.spawn(DMENU_PATH + "/change-theme"),
                 desc='Change the overall system theme'
                 ),
-             Key([], "f", #opens my favorite websites in fullscreen mode with minimal UI 
+             Key([], "f", #opens my favorite websites in fullscreen mode with minimal UI
                  lazy.spawn(DMENU_PATH + "/dm-openweb-fullscreen"),
                  desc='open a website in fullscreen'
                  ),
@@ -498,7 +478,7 @@ keys = [
                  lazy.spawn(DMENU_PATH + "/dm-timeshift"),
                  desc='creates or remove timeshift backup'
                  ),
-             Key([], "q", #Opens a VM of your choice in KVM 
+             Key([], "q", #Opens a VM of your choice in KVM
                  lazy.spawn(DMENU_PATH + "/dm-open-virt-cons"),
                  desc='Opens a VM of your choice in KVM'
                  ),
@@ -949,7 +929,7 @@ def init_widgets_list():
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
-                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myterm + ' -e sudo nala upgrade')},
+                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myterm + ' -e sudo pacman -Syu')},
                      background = colors[0]
                        ),
              widget.TextBox(
@@ -1104,7 +1084,6 @@ floating_layout = layout.Floating(float_rules=[
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 
-
 @hook.subscribe.startup_once
 def start_once():
     home = os.path.expanduser('~')
@@ -1121,6 +1100,3 @@ def start_once():
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
-
-
-

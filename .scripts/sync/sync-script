@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
+DATE=$(date +%d-%h-%Y-%H-%M)
+
 DOTFILES_REPO_PATH="$HOME/myrepos/dotfiles"
 DMSCRIPTS_REPO_PATH="$HOME/myrepos/dmscripts"
 
 RED=$(tput setaf 1)
 GREEN=$(tput setaf 2)
-
-
 
 declare -A files
 
@@ -18,8 +18,6 @@ files[$HOME/.scripts/sync]="$DOTFILES_REPO_PATH/.scripts/sync"
 files[$HOME/.scripts/backup-scripts/btrfs]="$DOTFILES_REPO_PATH/.scripts/backup-scripts/btrfs"
 files[$HOME/.scripts/backup-scripts/yandex-script]="$DOTFILES_REPO_PATH/.scripts/yandex-script"
 
-files[$HOME/.scripts/docker]="$DOTFILES_REPO_PATH/.scripts/docker"
-
 files[$HOME/.zshrc]="$DOTFILES_REPO_PATH/.zshrc"
 files[$HOME/.bashrc]="$DOTFILES_REPO_PATH/.bashrc"
 files[$HOME/.config/bash]="$DOTFILES_REPO_PATH/.config/bash"
@@ -27,6 +25,7 @@ files[$HOME/.config/kitty/kitty.conf]="$DOTFILES_REPO_PATH/.config/kitty/kitty.c
 files[$HOME/.config/alacritty]="$DOTFILES_REPO_PATH/.config/alacritty"
 files[$HOME/.config/starship.toml]="$DOTFILES_REPO_PATH/.config/starship.toml"
 files[$HOME/.config/qtile/config.py]="$DOTFILES_REPO_PATH/.config/qtile/config.py"
+files[$HOME/.config/qtile/README.org]="$DOTFILES_REPO_PATH/.config/qtile/config.py"
 files[$HOME/.config/qtile/autostart.sh]="$DOTFILES_REPO_PATH/.config/qtile/autostart.sh"
 files[$HOME/.config/qtile/themes]="$DOTFILES_REPO_PATH/.config/qtile/themes"
 files[$HOME/.config/hypr]="$DOTFILES_REPO_PATH/.config/hypr"
@@ -94,7 +93,7 @@ if cmp --quiet $DEST $SOURCE_LOOP ; then
        if [ "$flag" = 'true' ] ; then
 
 
-             [ -z $DEST ] && echo "" &> /dev/null || echo -e "${RED}-- No Change Detected: ${COMPARE}"
+             [ -z $DEST ] && echo "" &> /dev/null || echo -e "${RED}-- No Change Detected: ${DEST}"
        fi
 
     fi
@@ -139,7 +138,7 @@ fi
 
 done
 
-elif [ -f $COMPARE ] && [ $COMPARE_SRC ] ; then
+elif [ -f $COMPARE ] && [ -f $COMPARE_SRC ] ; then
 
 
       COMPARE_WITH=$(printf '%s\n' "${files["${COMPARE}"]}")
@@ -157,7 +156,7 @@ if cmp --quiet $COMPARE $COMPARE_WITH ; then
 
        if [ "$flag" = 'true' ] ; then
 
-      [ -z $COMPARE ] && echo "" &> /dev/null || echo -e "-- No Change Detected: ${COMPARE}"
+      [ -z $COMPARE ] && echo "" &> /dev/null || echo -e "${RED}-- No Change Detected: ${COMPARE}"
 
 
        fi
