@@ -1,51 +1,49 @@
-# Changing "ls" to "exa"
-alias ls exa --color=always --group-directories-first $*
-alias la exa -a --color=always --group-directories-first $*
-alias lla exa -la --color=always --group-directories-first $*
-alias ll exa -l --color=always --group-directories-first $*
-alias lt exa -aT --color=always --group-directories-first $*
-
-
-alias pacman sudo pacman $*
-alias update sudo pacman -Syyu $*
-alias remove sudo pacman -Rns $*
-
-alias htop btop $*
-
-alias hg 'history | grep $1'
-
-alias dec gpg --decrypt
-alias enc gpg --encrypt -r karlfredin@gmail.com
+alias ff find-file $1
+alias dot cd /home/karl/myrepos/dotfiles
+alias dms cd /home/karl/myrepos/dmscripts/.dmenu
+alias set cd /home/karl/myrepos/setup
+alias iso cd /home/karl/iso
+alias a cd /home/karl/myrepos/azla
+alias mgit cd /home/karl/myrepos
+alias yandex cd /media/cloud-storage/Yandex.Disk/
+alias vm cd /mnt/vm
+alias learn cd /home/karl/myrepos/azla
+alias mal cd /home/karl/.config/doom/eshell
+alias mdo cd /home/karl/.config/doom/
+alias mway cd /home/karl/.config/waybar/
+alias mhypr cd /home/karl/.config/hypr/
+alias mkitty cd /home/karl/.config/kitty/
+alias mzsh cd /home/karl/.config/oh-my-zsh/
+alias mvideo cd /home/karl/Videos
+alias mpic cd /home/karl/Pictures
+alias mconky cd /home/karl/.config/conky
+alias mqute cd /home/karl/.config/qutebrowser
+alias mm cd /home/karl/.local/share/mail/karlfredin@gmail.com
+alias script cd /home/karl/.scripts/activated
+alias localapp cd /home/karl/.local/share/applications/
+alias app cd /usr/share/applications/
+alias backup-home cd /mnt/backup/home
+alias backup cd /mnt/backup
+alias dmove cd /home/karl/.dmenu
+alias movies cd /mnt/movies
+alias omfm cd /home/karl/.config/fish/conf.d
+alias xbm cd /home/karl/.config/xmobar/
+alias xm cd /home/karl/.xmonad/
+alias qm cd /home/karl/.config/qtile/
+alias awem cd /home/karl/.config/awesome/
 alias gpgk gpg --list-secret-keys --keyid-format LONG
-
-alias awem cd /home/karl/.config/awesome/ $*
-alias qm cd /home/karl/.config/qtile/ $*
-alias xm cd /home/karl/.xmonad/ $*
-alias xbm cd /home/karl/.config/xmobar/ $*
-alias omfm cd /home/karl/.config/fish/conf.d $*
-alias movies cd /mnt/movies $*
-alias dmove cd ~/.dmenu $*
-alias backup cd /mnt/backup $*
-alias backup-home cd /mnt/backup/home $*
-alias app cd /usr/share/applications/ $*
-alias localapp cd ~/.local/share/applications/ $*
-alias script cd ~/.scripts/activated $*
-alias mm cd /home/karl/.local/share/mail/karlfredin@gmail.com $*
-alias mqute cd ~/.config/qutebrowser $*
-alias mconky cd ~/.config/conky $*
-alias mpic cd ~/Pictures $*
-alias mvideo cd ~/Videos $*
-alias mzsh cd ~/.config/oh-my-zsh/ $*
-alias mkitty cd ~/.config/kitty/ $*
-alias mhypr cd ~/.config/hypr/ $*
-alias mway cd ~/.config/waybar/ $*
-alias learn cd ~/myrepos/azla $*
-alias vm cd /mnt/vm $*
-alias yandex cd /media/cloud-storage/Yandex.Disk/ $*
-alias mgit cd ~/myrepos $*
-alias iso cd ~/iso $*
-alias setup cd ~/myrepos/setup $*
-alias dmscripts cd ~/myrepos/dmscripts/.dmenu $*
-alias dotfiles cd ~/myrepos/dotfiles $*
-
-alias ff 'find-file $1'
+alias enc gpg --encrypt -r karlfredin@gmail.com
+alias dec gpg --decrypt
+alias hg history | grep $1
+alias htop btop
+alias remove sudo pacman -Rns
+alias update sudo pacman -Syyu
+alias pacman sudo pacman
+alias lt exa -aT --color=always --group-directories-first
+alias ll exa -l --color=always --group-directories-first
+alias lla exa -la --color=always --group-directories-first
+alias la exa -a --color=always --group-directories-first
+alias ls exa --color=always --group-directories-first
+alias setup cd /home/karl/myrepos/setup
+alias dmscripts cd /home/karl/myrepos/dmscripts/.dmenu
+alias dotfiles cd /home/karl/myrepos/dotfiles

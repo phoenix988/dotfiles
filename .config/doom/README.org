@@ -289,10 +289,23 @@ to see the exact line number of the file. But I always prefer relative
 
 
 ** Shell
-Settings for the various shells inside of emacs
+Settings for the various shells inside of emacs. For example I set the alias file for eshell
 #+begin_src emacs-lisp :tangle config.el
 (setq shell-file-name "/bin/zsh"
       vterm-max-scrollback 5000)
+
+(setq shell-file-name "/bin/zsh"
+      vterm-max-scrollback 5000)
+
+(setq eshell-rc-script "~/.config/doom/eshell/profile"
+      eshell-aliases-file "~/.config/doom/eshell/aliases"
+      eshell-history-size 5000
+      eshell-buffer-maximum-lines 5000
+      eshell-hist-ignoredups t
+      eshell-scroll-to-bottom-on-input t
+      eshell-destroy-buffer-when-process-dies t
+      eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
+
 #+end_src
 
 ** Start Page
