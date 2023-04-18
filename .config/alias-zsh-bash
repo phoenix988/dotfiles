@@ -287,7 +287,7 @@ alias pp="sxiv /var/pictures/backgrounds/*"
 alias virsh="virsh -c qemu:///system"
 
 # Alias for vifm to add more functionality
-alias vifm="vifmrun"
+command_exist vifmrun && alias vifm="vifmrun"
 
 # Clear command
 alias cls="clear"
