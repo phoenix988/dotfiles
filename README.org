@@ -6,6 +6,7 @@
 
 * TABLE OF CONTENTS
 - [[Neovim]]
+- [[Install]]
 - [[Keybindings]]
   - [[File Management]]
   - [[Theme]]
@@ -35,6 +36,25 @@ to make changes to the config when you have multiple files to play around with.
 And also Im not sure if the auto install works with this config so you might get a bunch of errors
 if you just clone this config and try and run this config
 
+** Install
+To get my config quickly you can run these commands. Remember to backup your nvim
+configs if you have. and then launch neovim and plugins should install automatically.
+But sometimes it doesnt't work and then you need to do command PackerSync and restart nvim
+#+BEGIN_SRC sh
+
+# Creating backup of existing config if you have
+cp -r $HOME/.config/nvim $HOME/.config/nvim.bak
+
+# Obs this will remove your neovim config
+rm -rf $HOME/.config/nvim
+
+# Remove meta date to avoid problems
+rm rf $HOME/.local/share/nvim
+rm -rf $HOME/.cache/nvim
+
+git clone -b neovim https://github.com/phoenix988/dotfiles.git ~/.config/nvim
+
+#+END_SRC
 
 ** Keybindings
 This is all my custome keybindings atleast most of the important ones.
