@@ -291,6 +291,7 @@ command_exist vifmrun && alias vifm="vifmrun"
 
 # Clear command
 alias cls="clear"
+alias c="clear"
 
 # RM aliases
 alias rm="rm -i"
