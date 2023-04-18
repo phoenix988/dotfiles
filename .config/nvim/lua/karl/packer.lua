@@ -8,8 +8,8 @@ if fn.empty(fn.glob(install_path)) > 0 then
     "clone",
     "--depth",
     "1",
-    "https://github.com/wbthomason/packer.nvim", 
-    install_path, 
+    "https://github.com/wbthomason/packer.nvim",
+    install_path,
     }
     print "Installing packer close and reopen Neovim..."
 	vim.cmd([[packadd packer.nvim]])
@@ -17,19 +17,16 @@ end
 
 vim.cmd [[
   augroup packer_user_config
-    autocmd! 
+    autocmd!
     autocmd BufWritePost packer.lua source <afile> | PackerSync
-  augroup end  
+  augroup end
 ]]
 
-
-
-
+-- Don't now if I did this if statement wrong because it doesnt seem to do anything
 local status_ok, packer = pcall(require, "packer")
-if not status_ok then 
+if not status_ok then
     return
-end    
-
+end
 
 -- Have Packer use a popup window
 packer.init {
@@ -39,7 +36,6 @@ packer.init {
        end,
     },
  }
-
 
 return require('packer').startup(function(use)
   -- Packer can manage itself
