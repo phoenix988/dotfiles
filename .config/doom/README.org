@@ -6,33 +6,33 @@
 
 
 * TABLE OF CONTENT
-- [[About My Doom][About]]
-- [[Autocompletion]]
-- [[Beacon][Beacon]]
-- [[Centaur Tabs][Centaur Tabs]]
-- [[Fonts][Fonts]]
-- [[Workspaces][Keybindings]]
-  - [[Workspaces][Workspaces]]
-    - [[Splits][Splits]]
-    - [[Tabs][Tabs]]
-  - [[File Management][File Management]]
-    - [[Dired][Dired]]
-    - [[Neotree][Neotree]]
-    - [[Terminal][Term]]
-  - [[Harpoon]]
-- [[Line Numbers][Line Numbers]]
-- [[Shell][Shell]]
-- [[Start Page][Start Page]]
-- [[Themes][Themes]]
+- [[ABOUT My Doom][ABOUT]]
+- [[AUTOCOMPLETION]]
+- [[BEACON][BEACON]]
+- [[CENTAUR Tabs][CENTAUR Tabs]]
+- [[FONTS][FONTS]]
+- [[WORKSPACES][KEYBINDINGS]]
+  - [[WORKSPACES][WORKSPACES]]
+    - [[SPLITS][SPLITS]]
+    - [[TABS][TABS]]
+  - [[FILE MANAGEMENT]]
+    - [[DIRED][DIRED]]
+    - [[NEOTREE][NEOTREE]]
+    - [[TERMINAL][TERM]]
+  - [[HARPOON]]
+- [[LINE Numbers][LINE NUMBERS]]
+- [[SHELL][SHELL]]
+- [[START Page][START PAGE]]
+- [[THEMES][THEMES]]
 
 
 
-** About My Doom
+** ABOUT MY DOOM
 This is my personal Doom Emacs config that I have written using emacs org mode
 so that I can easily make comments inside the document so it's easier to read and
 know whats going on. In order to use this config you need to have Doom Emacs installed.
 
-** Autocompletion
+** AUTOCOMPLETION
 Adding company backends for autocompletion
 #+begin_src emacs-lisp :tangle config.el
 (add-hook 'after-init-hook 'global-company-mode)
@@ -41,7 +41,7 @@ Adding company backends for autocompletion
 #+end_src
 
 
-** Beacon
+** BEACON
 Never lose your cursor! Beacon makes your cursor shine when you scroll
 #+begin_src emacs-lisp :tangle config.el
 
@@ -49,7 +49,7 @@ Never lose your cursor! Beacon makes your cursor shine when you scroll
 
 #+end_src
 
-** Centaur Tabs
+** CENTAUR TABS
 settings for centaur tabs if you want, change here if
 you dont want the tabs to be visible
 and change over if you want the tabs to be at the bottom
@@ -66,7 +66,7 @@ Keybinding I have set for it for disable the tabs
 ;;(centaur-tabs-mode t)
 #+end_src
 
-** Fonts
+** FONTS
 The various font settings for doom emacs. If you want to change the font
 Family and size you can do that here. you can set italic font,big font and normal font.
 #+begin_src emacs-lisp :tangle config.el
@@ -83,15 +83,15 @@ Family and size you can do that here. you can set italic font,big font and norma
 
 
 
-** Keybindings
+** KEYBINDINGS
 This is my custom keybindings I prefer to use. For various task
 You can do inside of emacs
-*** Workspaces
+*** WORKSPACES
 Keybindings to manipulate workspaces/tabs. To switch work space you can
 just do ctrl plus number of workspace you want to move to in order to switch
 fast and efficent
 
-**** Splits
+**** SPLITS
 Custom keybidning to move cursor between splits
 I prefer to be able to just move with CTRL + the vim keys
 
@@ -110,7 +110,7 @@ I prefer to be able to just move with CTRL + the vim keys
 #+end_src
 
 
-**** Tabs
+**** TABS
 My keybinding for creating new workspaces and switching between them
 
 | Command                | Description                         | Keybindings    |
@@ -165,11 +165,11 @@ My keybinding for creating new workspaces and switching between them
 (map! "C-9" #'+workspace/switch-to-8)
 #+end_src
 
-*** File Management
+*** FILE MANAGEMENT
 Keybindings for file management inside emacs
 using dired and neotree.
 
-**** Dired
+**** DIRED
 Bindings for Dired which is the emacs filemanager
 This configuration allows me to use the vim keys inside of dired
 
@@ -194,7 +194,7 @@ This configuration allows me to use the vim keys inside of dired
 #+end_src
 
 
-**** Neotree
+**** NEOTREE
 Keybindings to quickly access the neotree in emacs
 neotree is very similar to Nerdtree in vim
 
@@ -217,7 +217,7 @@ neotree is very similar to Nerdtree in vim
 (map! "<f5>" #'neotree-toggle)
 #+end_src
 
-*** Harpoon
+*** HARPOON
 Keybinds for harpoon which lets you quickly access commonly used files
 with only one keystroke. Which can really speed up your workflow.
 I first discovered this plugin in neovim and wanted the same kind of
@@ -259,7 +259,7 @@ thing in emacs
 #+end_src
 
 
-*** Terminal
+*** TERMINAL
 Custom keybindings to open termninals within emacs
 thins like term,vterm and eshell
 
@@ -279,7 +279,7 @@ thins like term,vterm and eshell
        :desc "Eshell Popup" "E" #'+eshell/toggle
        :desc "Vterm" "V" #'vterm))
 #+end_src
-** Line Numbers
+** LINE NUMBERS
 Settings for line numbers change relative to example absolute if you want
 to see the exact line number of the file. But I always prefer relative
 #+begin_src emacs-lisp :tangle config.el
@@ -288,7 +288,7 @@ to see the exact line number of the file. But I always prefer relative
 #+end_src
 
 
-** Shell
+** SHELL
 Settings for the various shells inside of emacs. For example I set the alias file for eshell
 #+begin_src emacs-lisp :tangle config.el
 (setq shell-file-name "/bin/zsh"
@@ -308,7 +308,7 @@ Settings for the various shells inside of emacs. For example I set the alias fil
 
 #+end_src
 
-** Start Page
+** START PAGE
 #+begin_src emacs-lisp :tangle config.el
 ;;(setq initial-buffer-choice "~/.config/doom/start.org")
 ;;
@@ -330,28 +330,31 @@ Settings for the various shells inside of emacs. For example I set the alias fil
 #+end_src
 
 
-** Themes
+** THEMES
 Here you can set your prefered theme, I load my themes with the package doom-themes
 So I have various themes to choose from. If you want to change theme change the variable
 Load-theme to the prefered them you can also do 'SPC h' + t to change theme on the fly
 But to make it permanent you need to modify config.el
 #+begin_src emacs-lisp :tangle config.el
+
 (use-package doom-themes
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (load-theme 'doom-nord-aurora t)
 
   (doom-themes-visual-bell-config)
 
   (doom-themes-neotree-config)
 
-  (setq doom-themes-treemacs-theme "doom-nord")
+  (setq doom-themes-treemacs-theme "doom-tokyo-night")
 
   (doom-themes-treemacs-config)
 
   (doom-themes-org-config))
+
+
+  (load-theme 'doom-tokyo-night t)
+
+
+
 #+end_src
-
-
-

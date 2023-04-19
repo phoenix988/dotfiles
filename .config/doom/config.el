@@ -137,14 +137,16 @@
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (load-theme 'doom-nord-aurora t)
 
   (doom-themes-visual-bell-config)
 
   (doom-themes-neotree-config)
 
-  (setq doom-themes-treemacs-theme "doom-nord")
+  (setq doom-themes-treemacs-theme "doom-tokyo-night")
 
   (doom-themes-treemacs-config)
 
   (doom-themes-org-config))
+
+
+  (load-theme 'doom-tokyo-night t)

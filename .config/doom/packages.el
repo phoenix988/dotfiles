@@ -53,3 +53,10 @@
 (package! company)
 (package! evil-tabs)
 (package! harpoon)
+(package! autothemer)
+(package! ssh)
+
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+
+
