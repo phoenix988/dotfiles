@@ -158,8 +158,8 @@ use('tpope/vim-fugitive')
 -- Save files as sudo
 use('lambdalisue/suda.vim')
 
-if packer_bootstrap then
-		packer.sync()
+if PACKER_BOOTSTRAP then
+		require("packer").sync()
 	end
 
 end)
