@@ -183,5 +183,6 @@ ex ()
 date=$(date +%d-%h-%Y-%H-%M)
 
 
-#[ $DISPLAY = ":1"  ] || Hyprland
+source ~/.config/fzf/rose-pine-moon.sh
+
 
