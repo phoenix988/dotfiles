@@ -131,7 +131,6 @@ vim.keymap.set("n", "<leader>hs", vim.cmd.so)
 This is all my keybindings for all my diffrent plugins that I have installed.
 #+BEGIN_SRC lua :tangle after/plugin/keymap.lua
 vim.keymap.set("n", "<leader>.", vim.cmd.Vifm)
-vim.api.nvim_set_keymap('n', '<Leader>fb', ':Telescope file_browser<CR>', { noremap = true, silent = true })
 
 
 -- Quickly move between windows
@@ -141,9 +140,13 @@ vim.api.nvim_set_keymap("n", "<leader>bk", ':BufferClose<CR>', { noremap = true,
 vim.api.nvim_set_keymap("n", "<Leader>tn", ':tabnew<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>td", ':tabclose<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>ch", ':HighlightColorsToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>gs", ':Git<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gt", ':BufferNext<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gT", ':BufferPrevious<CR>', { noremap = true, silent = true })
+
+
+-- Git commands
+vim.api.nvim_set_keymap("n", "<leader>gs", ':Git<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>gg", ':Git<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>gp', ':Git push<CR>', { noremap = true, silent = true })
 
 -- Neotree keybindings
@@ -151,6 +154,7 @@ vim.api.nvim_set_keymap("n", "<F5>", ':NeoTreeFocusToggle<CR>', { noremap = true
 vim.api.nvim_set_keymap("n", "<F6>", ':Neotree<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<F4>", ':NERDTreeToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>ft", ':NeoTreeFocusToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>nf", ':NeoTreeFloat<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>ns', ':Neotree ~/myrepos/setup<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>na', ':Neotree ~/myrepos/azla<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>nd', ':Neotree ~/myrepos/dotfiles<CR>', { noremap = true, silent = true })
@@ -189,10 +193,11 @@ vim.api.nvim_set_keymap('n', '<Leader>d', ':Dashboard<CR>', { noremap = true, si
 
 -- Keybindings for telescope
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<Leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<Leader>gf', builtin.git_files, {})
-vim.keymap.set('n', '<Leader>ht', builtin.colorscheme, {})
-vim.keymap.set('n', '<Leader>ps', function()
+vim.api.nvim_set_keymap('n', '<Leader>ff', ':Telescope find_files<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>gf', ':Telescope git_files<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>ht', ':Telescope colorscheme<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>fb', ':Telescope file_browser<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>fg', function()
 builtin.grep_string({ search = vim.fn.input("Grep >") } );
 
 end)
