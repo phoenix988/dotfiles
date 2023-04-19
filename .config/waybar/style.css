@@ -13,7 +13,7 @@ window#waybar {
 }
 
 tooltip {
-    background: #1e1e2e;
+    background: #191724;
     border-radius: 10px;
     border-width: 2px;
     border-style: solid;
@@ -28,7 +28,7 @@ tooltip {
 
 #workspaces button.active {
     color: #2E3440;
-    background: #81A1C1;
+    background: #EBBCBA;
     border-radius: 15px 15px 15px 15px;
 }
 
@@ -40,13 +40,13 @@ tooltip {
 
 #workspaces button.urgent {
     color: #11111b;
-    background: #a6e3a1;
+    background: #EB6f92;
     border-radius: 10px;
 }
 
 #workspaces button:hover {
-    background: #0087BD;
-    color: #D8DEE9;
+    background: #9CCFD8;
+    color: #191724;
     border-radius: 15px;
 }
 
@@ -63,7 +63,7 @@ tooltip {
 #workspaces,
 #tray,
 #backlight {
-    background: #1e1e2e;
+    background: #191724;
     padding: 0px 10px;
     margin: 3px 0px;
     margin-top: 10px;
@@ -76,7 +76,7 @@ tooltip {
 }
 
 #workspaces {
-    background: #1e1e2e;
+    background: #191724;
     border-radius: 10px;
     margin-left: 10px;
     padding-right: 0px;
@@ -91,7 +91,7 @@ tooltip {
 }
 
 #custom-updates {
-    color: #f5c2e7;
+    color: #9CCFC8;
     border-left: 0px;
     border-right: 0px;
     border-radius: 10px 0px 0px 10px;;
@@ -104,19 +104,19 @@ tooltip {
 }
 
 #cpu {
-    color: #f38ba8;
+    color: #EBBCBA;
     border-radius: 10px 0px 0px 10px;
     margin-left: 10px;
     border-right: 0px;
-    background: #1e1e2e;
+    background: #191724;
     }
 
 #memory {
-    color: #f38ba8;
+    color: #EBBCBA;
     border-radius: 0px 10px 10px 0px;
     margin-left: 0px;
     border-right: 0px;
-    background: #1e1e2e;
+    background: #191724;
     }
 
 #clock {
@@ -124,7 +124,7 @@ tooltip {
     border-radius: 10px 10px 10px 10px;
     margin-left: 5px;
     border-right: 0px;
-    background: #1e1e2e;
+    background: #191724;
 }
 
 
@@ -135,19 +135,19 @@ tooltip {
 }
 
 #temperature {
-    color: #f38ba8;
+    color: #EBBCBA;
     border-left: 0px;
     border-right: 0px;
 }
 
 #pulseaudio {
-    color: #89b4fa;
+    color: #c4a7e7;
     border-left: 0px;
     border-right: 0px;
 }
 
 #pulseaudio.microphone {
-    color: #cba6f7;
+    color: #c4a7e7;
     margin-right: 5px;
     border-radius: 0 10px 10px 0;
 }
@@ -163,6 +163,6 @@ tooltip {
     border-radius: 10px 10px 10px 10px;
     border-right: 0px;
     margin-left: 10px;
-    color: #FFFACD;
+    color: #F6C177;
 
 }
