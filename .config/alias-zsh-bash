@@ -264,6 +264,7 @@ alias iso="cd ~/iso"
 alias set="cd ~/myrepos/setup"
 alias dms="cd ~/myrepos/dmscripts/.dmenu"
 alias dotf="cd ~/myrepos/dotfiles"
+alias mvn="cd ~/.config/nvim"
 
 # checks the values of mouse/keyboards clicks
 alias keycheck="xev"
@@ -352,3 +353,14 @@ export date_for_backup=$(date +%d-%h-%Y-%H-%M )
 
 # Docker host config
 export DOCKER_HOST=ssh://karl@192.168.1.31
+
+
+
+t() {
+tmux attach -t $1
+}
+
+ta() {
+tmux new
+}
+
