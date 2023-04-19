@@ -131,26 +131,30 @@ vim.keymap.set("n", "<leader>hs", vim.cmd.so)
 This is all my keybindings for all my diffrent plugins that I have installed.
 #+BEGIN_SRC lua :tangle after/plugin/keymap.lua
 vim.keymap.set("n", "<leader>.", vim.cmd.Vifm)
-vim.api.nvim_set_keymap('n', '<Leader>fb', ':Telescope file_browser<CR>', { noremap = true, silent = true })
 
 
 -- Quickly move between windows
-vim.keymap.set("n", "<leader>bn", vim.cmd.BufferNext)
-vim.keymap.set("n", "<leader>bp", vim.cmd.BufferPrevious)
-vim.keymap.set("n", "<leader>bk", vim.cmd.BufferClose)
-vim.keymap.set("n", "<Leader>tn", vim.cmd.tabnew)
-vim.keymap.set("n", "<Leader>td", vim.cmd.tabclose)
-vim.keymap.set("n", "<Leader>ch", vim.cmd.HighlightColorsToggle)
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
-vim.keymap.set("n", "gt", vim.cmd.BufferNext)
-vim.keymap.set("n", "gT", vim.cmd.BufferPrevious)
+vim.api.nvim_set_keymap("n", "<leader>bn", ':BufferNext' ,{ noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>bp", ':BufferPrevious<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>bk", ':BufferClose<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>tn", ':tabnew<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>td", ':tabclose<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>ch", ':HighlightColorsToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "gt", ':BufferNext<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "gT", ':BufferPrevious<CR>', { noremap = true, silent = true })
+
+
+-- Git commands
+vim.api.nvim_set_keymap("n", "<leader>gs", ':Git<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>gg", ':Git<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>gp', ':Git push<CR>', { noremap = true, silent = true })
 
 -- Neotree keybindings
-vim.keymap.set("n", "<F5>", vim.cmd.NeoTreeFocusToggle)
-vim.keymap.set("n", "<F6>", vim.cmd.Neotree)
-vim.keymap.set("n", "<F4>", vim.cmd.NERDTreeToggle)
-vim.keymap.set("n", "<Leader>ft", vim.cmd.NeoTreeFocusToggle)
+vim.api.nvim_set_keymap("n", "<F5>", ':NeoTreeFocusToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<F6>", ':Neotree<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<F4>", ':NERDTreeToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>ft", ':NeoTreeFocusToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>nf", ':NeoTreeFloat<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>ns', ':Neotree ~/myrepos/setup<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>na', ':Neotree ~/myrepos/azla<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>nd', ':Neotree ~/myrepos/dotfiles<CR>', { noremap = true, silent = true })
@@ -160,7 +164,7 @@ vim.api.nvim_set_keymap('n', '<Leader>nn', ':Neotree ~/.config/nvim<CR>', { nore
 vim.api.nvim_set_keymap('n', '<Leader>n.', ':Neotree .<CR>', { noremap = true, silent = true })
 
 -- Update plugins using packer
-vim.keymap.set("n", "<leader>hr", vim.cmd.PackerSync)
+vim.api.nvim_set_keymap('n', '<Leader>hr', ':PackerSync<CR>', { noremap = true, silent = true })
 
 -- Keybindings for Harpoon
 local mark = require("harpoon.mark")
@@ -179,20 +183,21 @@ vim.keymap.set("n", "<C-8>", function() ui.nav_file(8) end)
 vim.keymap.set("n", "<C-9>", function() ui.nav_file(9) end)
 
 -- Keybinding to save as sudo
-vim.keymap.set('n', '<Leader>fs', vim.cmd.SudaWrite)
+vim.api.nvim_set_keymap('n', '<Leader>fs', ':SudaWrite<CR>', { noremap = true, silent = true })
 
 -- Keybinding to open UndoTree
-vim.keymap.set("n", "<Leader>u", vim.cmd.UndotreeToggle)
+vim.api.nvim_set_keymap("n", "<Leader>u", ':UndotreeToggle<CR>', { noremap = true, silent = true })
 
 -- Jump back to your dashboard
-vim.keymap.set('n', '<Leader>d', vim.cmd.Dashboard)
+vim.api.nvim_set_keymap('n', '<Leader>d', ':Dashboard<CR>', { noremap = true, silent = true })
 
 -- Keybindings for telescope
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<Leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<Leader>gf', builtin.git_files, {})
-vim.keymap.set('n', '<Leader>ht', builtin.colorscheme, {})
-vim.keymap.set('n', '<Leader>ps', function()
+vim.api.nvim_set_keymap('n', '<Leader>ff', ':Telescope find_files<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>gf', ':Telescope git_files<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>ht', ':Telescope colorscheme<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>fb', ':Telescope file_browser<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>fg', function()
 builtin.grep_string({ search = vim.fn.input("Grep >") } );
 
 end)
@@ -412,8 +417,8 @@ use('tpope/vim-fugitive')
 -- Save files as sudo
 use('lambdalisue/suda.vim')
 
-if packer_bootstrap then
-		packer.sync()
+if PACKER_BOOTSTRAP then
+		require("packer").sync()
 	end
 
 end)
@@ -428,7 +433,7 @@ Sets colorscheme inside of neovim and configure neovim highlight
 color plugin
 #+begin_src lua  :tangle after/plugin/colors.lua
 function ColorMyPencils(color)
-         color = color or "nord"
+         color = color or "rose-pine"
 	 vim.cmd.colorscheme(color)
         -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
         -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
