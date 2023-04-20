@@ -179,9 +179,7 @@ ex ()
        fi  
 }
 
-
 date=$(date +%d-%h-%Y-%H-%M)
-
 
 source ~/.config/fzf/rose-pine-moon.sh
 
