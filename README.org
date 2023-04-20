@@ -48,7 +48,7 @@ cp -r $HOME/.config/nvim $HOME/.config/nvim.bak
 # Obs this will remove your neovim config
 rm -rf $HOME/.config/nvim
 
-# Remove meta date to avoid problems
+# Remove meta data to avoid problems
 rm rf $HOME/.local/share/nvim
 rm -rf $HOME/.cache/nvim
 
