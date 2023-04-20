@@ -2,6 +2,8 @@
 #+author: Karl Fredin
 #+DESCRIPTION: My custom Qtile config
 
+[[file:./images/qtile.png]]
+
 
 * TABLE OF CONTENT
 - [[About]]
