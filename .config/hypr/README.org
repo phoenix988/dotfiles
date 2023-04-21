@@ -37,6 +37,8 @@ you will need some additonal software, like wofi,swaybg,grim waybar etc.
 Also the terminal in this config is kitty so make sure to change that to your
 prefered terminal so you can open a terminal in this windowmanager.
 
+[[file:./images/hyprland-desktop.png]]
+
 *** IMPORTANT KEYBINDINGS
 This is just a quick recap of one of the most important
 keybindings to know in order to use this config.
@@ -335,7 +337,7 @@ bind = ALT CTRL, W, exec, flatpak run com.bitwarden.desktop      # Launch bitwar
 # Custom Scripts
 bind = , F12, exec, $script_path/activated/set-random-bg-wayland              # Set random bg
 bind = , F11, exec, $script_path/restart/waybar-restart                       # Restart waybar
-bind = , F3, exec, $script_path/sync/sync-script                              # Runs Sync script
+bind = , F3, exec,  $script_path/sync/sync-script                             # Runs Sync script
 
 #+END_SRC
 
