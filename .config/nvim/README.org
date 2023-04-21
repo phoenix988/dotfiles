@@ -31,17 +31,17 @@
 
 
 * NEOVIM
-My neovim config written in lua. I wrote it using org mode because it makes it easier
-to make changes to the config when you have multiple files to play around with.
-And also Im not sure if the auto install works with this config so you might get a bunch of errors
-if you just clone this config and try and run this config
+My neovim config written in lua. I wrote this config using org mode because it makes it easier
+to update the config when you have multiple files to play around with. And org mode is fantastic for making alot of comments.
+If you use this config it should install all the plugins automatically. But I'm not sure if the auto install works with this config so you might get a bunch of errors
+when you first launch nvim with my config. But it should autoinstall when you ignore all the errors. And then do a quick restart of nvim and you should be good
 
 ** INSTALL
-To get my config quickly you can run these commands. Remember to backup your nvim
-configs if you have. and then launch neovim and plugins should install automatically.
-But sometimes it doesnt't work and then you need to do command PackerSync and restart nvim
+To install my config. Run these commands. Remember to backup your current nvim
+configs if you have it. And then launch neovim and plugins should install automatically.
+But if it doesnt't work then you need to run the command PackerSync and restart nvim.
+You can also do SPC h r to quickly do a packersync. Done!
 #+BEGIN_SRC sh
-
 # Creating backup of existing config if you have
 cp -r $HOME/.config/nvim $HOME/.config/nvim.bak
 
@@ -53,14 +53,15 @@ rm rf $HOME/.local/share/nvim
 rm -rf $HOME/.cache/nvim
 
 git clone -b neovim https://github.com/phoenix988/dotfiles.git ~/.config/nvim
-
 #+END_SRC
 
 ** KEYBINDINGS
-This is all my custom keybindings for most of the important ones to know.
-Of course neovim has more builtin commands but I dont list them here.
+This is some of the most important keybindings to know. Of course you also
+Need to know the most basic vim commands too which I dont list here but I assume you
+already know them.
 
 *** FILE MANAGEMENT
+Commands to quickly move around files in neovim
 | Command                | Description                     | Keybinding |
 |------------------------+---------------------------------+------------|
 | Ex                     | Open built in explorer          | SPC p v    |
@@ -78,37 +79,41 @@ Of course neovim has more builtin commands but I dont list them here.
 | Neotree ~              | Open Neotree in home            | SPC n h    |
 
 *** THEME
+Commands to change theme plus highlight colors
 | Command               | Description            | Keybinding |
 |-----------------------+------------------------+------------|
 | HighlightColorsToggle | Toggle color highlight | SPC c h    |
 | Telescope colorscheme | change colorscheme     | SPC h t    |
 
 *** SOURCE
+Update plugins and source new config using these commands
 | Command    | Description     | Keybinding |
 |------------+-----------------+------------|
 | PackerSync | Sync Plugins    | SPC h r    |
 | Source     | Source lua file | SPC h s    |
 
 *** WINDOW
-| Command     | Description       | Keybinding |   |   |   |
-|-------------+-------------------+------------+---+---+---|
-| BufferNext  | Next buffer       | SPC b n    |   |   |   |
-| BufferPrev  | Previous Buffer   | SPC b p    |   |   |   |
-| BufferClose | Kill buffer       | SPC b k    |   |   |   |
-| Tabnew      | Open new tab      | SPC t n    |   |   |   |
-| Tabclose    | close current tab | SPC t n    |   |   |   |
-| Dashboard   | Move to dashboard | SPC d      |   |   |   |
+Create new tabs and manipulate buffers using these commands
+| Command     | Description       | Keybinding |
+|-------------+-------------------+------------+-
+| BufferNext  | Next buffer       | SPC b n    |
+| BufferPrev  | Previous Buffer   | SPC b p    |
+| BufferClose | Kill buffer       | SPC b k    |
+| Tabnew      | Open new tab      | SPC t n    |
+| Tabclose    | close current tab | SPC t n    |
+| Dashboard   | Move to dashboard | SPC d      |
 
 *** GIT
+Open fugitive to manage git repos. OBS you need to be in a git repository for it to work
 | Command             | Description              | Keybinding |
 |---------------------+--------------------------+------------|
 | Telescope git_files | Find files in a git repo | SPC g f    |
-| Git                 | Open git status          | SPC g s    |
+| Git                 | Open git status          | SPC g g    |
 
 
 * CONFIG
 ** INIT
-Source all my lua files
+Source all my lua files. I keep this config very light
 #+begin_src lua :tangle init.lua
 require("karl.packer")
 require("karl.remap")
@@ -131,11 +136,10 @@ vim.keymap.set("n", "<leader>hs", vim.cmd.so)
 #+end_src
 
 ** PLUGIN REMAPS
-Here I set various keybindings for all my plugins that I have installed
-I choose to do it all here so I have it all in one place its easier to manage for me
+Here I set various keybindings for all my plugins that I have installed.
+I choose to do it all here so I have it all in one place because it's easier to manage for me
 #+BEGIN_SRC lua :tangle after/plugin/keymap.lua
 vim.keymap.set("n", "<leader>.", vim.cmd.Vifm)
-
 
 -- Quickly move between windows
 vim.api.nvim_set_keymap("n", "<leader>bn", ':BufferNext' ,{ noremap = true, silent = true })
@@ -146,7 +150,6 @@ vim.api.nvim_set_keymap("n", "<Leader>td", ':tabclose<CR>', { noremap = true, si
 vim.api.nvim_set_keymap("n", "<Leader>ch", ':HighlightColorsToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gt", ':BufferNext<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gT", ':BufferPrevious<CR>', { noremap = true, silent = true })
-
 
 -- Git commands
 vim.api.nvim_set_keymap("n", "<leader>gs", ':Git<CR>', { noremap = true, silent = true })
@@ -220,7 +223,8 @@ require("telescope").load_extension "file_browser"
 
 ** STANDARD SETS
 Some standard neovim settings based on your prefrence
-like line numbers,save undo after session etc
+like line numbers,save undo after session etc.
+Read documentation for some more settings you can do
 #+begin_src lua :tangle lua/karl/set.lua
 vim.wo.relativenumber = true
 vim.opt.nu = true
@@ -260,7 +264,7 @@ vim.o.modifiable = true
 Install all my plugins using packer. Bootstraping aka autoinstall is also configured
 when you first launch neovim. But you still get a ton of errors at first launch
 seems like my code doesn't completly work but all you need to do is to ignore the errors
-and the plugins will install. and then you restart neovim and all should be good
+and the plugins will install. Then you restart neovim and all should be good.
 #+begin_src lua :tangle lua/karl/packer.lua
 local fn = vim.fn
 
@@ -431,11 +435,12 @@ end)
 #+end_src
 
 ** PLUGINS
-This is all my configs for the various Plugins I have installed.
+Here is all my configs for the various Plugins I have installed.
 
 *** COLORS
-Sets colorscheme inside of neovim and configure neovim highlight
-color plugin
+Sets colorscheme inside of neovim and configure neovim highlights.
+Neovim highlights is a life saver when working with new colorschemes.
+It is an absolute most have for me. Just do SPC c h to toggle it on and off
 #+begin_src lua  :tangle after/plugin/colors.lua
 function ColorMyPencils(color)
          color = color or "rose-pine"
@@ -454,8 +459,8 @@ ColorMyPencils()
 
 
 *** LASTPLACE
-Lastplace never starts at the top of your files again
-if you exit a file and come back to it this will remeber your last location
+Lastplace never starts at the top of your files again.
+If you exit a file and come back this plugin will remeber your last location
 #+begin_src lua :tangle after/plugin/lastplace.lua
 require'nvim-lastplace'.setup {
     lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
@@ -465,8 +470,8 @@ require'nvim-lastplace'.setup {
 
 #+end_src
 *** LSP-ZERO
-Configure LSP zero for autocompletion and a ton of other features
-check there github for more info you can do a ton with this plugin
+Configure LSP zero for autocompletion and a ton of other features.
+Check it's github for more info because you can do a ton with this plugin.
 #+begin_src lua :tangle after/plugin/lsp.lua
 local lsp = require('lsp-zero')
 
@@ -545,6 +550,7 @@ require('lualine').setup {
 
 #+end_src
 *** NEOTREE
+Some configurations for neotree
 #+begin_src lua :tangle after/plugin/neotree.lua
 
 vim.g.neotree_auto_open = 1
@@ -553,8 +559,8 @@ vim.g.neotree_hide_dotfiles = 0
 
 #+end_src
 *** ORGMODE
-Settings for orgmode inside of Neovim so you get syntax highlightning inside of Neovim
-Similar to emacs but please keep in mind that you wont have the same features as in emacs
+Settings for orgmode inside of Neovim so you get syntax highlightning inside of Neovim in orgmode.
+Similar to emacs but please keep in mind that you wont have the same features as in emacs.
 #+begin_src lua :tangle after/plugin/orgmode.lua
 -- init.lua
 
@@ -582,8 +588,7 @@ require('orgmode').setup({
 #+end_src
 
 *** TREESITTER
-Treesitter config this makes colors inside your files way better
-Syntax highlighning is way better with this plugin
+Syntax highlighning is way better with this plugin activated
 #+begin_src lua :tangle after/plugin/treesitter.lua
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
@@ -612,7 +617,8 @@ require'nvim-treesitter.configs'.setup {
 *** WHICHKEY
 Settings for whichkey which is what you see when your
 press your leader key and wait for a few seconds.
-It's very similar to the one you see in emacs but les useful imo
+It's very similar to the one you see in emacs but less useful in my opninion.
+Because there is just less keybindings to remember in vim
 #+begin_src lua :tangle after/plugin/whichkey.lua
 local status, which_key = pcall(require, "which-key")
 if not status then
@@ -626,9 +632,9 @@ which_key.setup({
 #+end_src
 
 *** DASHBOARD
-Dashboard settings so you can customize the settings of your dashboard
-It has a ton of settings so check there github for the settings that you can use.
-Also set a keybinding so I can quickly access my dashboard
+Dashboard settings, This is what you see when you launch Neovim with no arguments
+It has a ton of settings so check it's github for more info. I'm basically using default settings.
+Because I can't get my configuration to work properly for some reason
 #+begin_src lua :tangle after/plugin/dashboard.lua
 vim.g.dashboard_default_executive = 'telescope'
 vim.g.default_banner = {
@@ -641,6 +647,4 @@ vim.g.default_banner = {
 	[[,                                                      ]],
 	[[TIP: To exit Neovim, just power off your computer.     ]],
  }
-
-
 #+end_src
