@@ -79,21 +79,21 @@ to make my life a little bit easier
 **** SYNC SCRIPT
 This is a script that I use to quickly sync some
 of my most popular scripts and configs to my repos.
-So everytime I modify a config locally on my pc then
-when this script run it will sync it
+So everytime. I modify a config locally on my pc then
+when this script run it will sync it.
 |---------------+-------------------------------|
 | [[.scripts/sync]] | [[.scripts/sync/sync-script.org]] |
 |---------------+-------------------------------|
 **** TMUX SESSION
 Script for tmux that will create a session if it doesnt exist already.
 If it does exist this script will attach that session. Use it to Quickly
-Create some tmux windows
+Create some tmux windows.
 |---------------------+-------------------------------------------|
 | [[.scripts/activated/]] | [[.scripts/activated/create-tmux-session.sh]] |
 |---------------------+-------------------------------------------|
 **** TMUX JUMP
 Some simple tmux script I wrote so I can create a keybinding in my windowmanager
-to quickly jump between tabs within a tmux session
+to quickly jump between tabs within a tmux session.
 |---------------+---------------------------|
 | [[.scripts/tmux]] | [[.scripts/tmux/window-(1-9)]] |
 |---------------+---------------------------|
