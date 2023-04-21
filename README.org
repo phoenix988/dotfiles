@@ -94,14 +94,14 @@ Update plugins and source new config using these commands
 
 *** WINDOW
 Create new tabs and manipulate buffers using these commands
-| Command     | Description       | Keybinding |   |   |   |
-|-------------+-------------------+------------+---+---+---|
-| BufferNext  | Next buffer       | SPC b n    |   |   |   |
-| BufferPrev  | Previous Buffer   | SPC b p    |   |   |   |
-| BufferClose | Kill buffer       | SPC b k    |   |   |   |
-| Tabnew      | Open new tab      | SPC t n    |   |   |   |
-| Tabclose    | close current tab | SPC t n    |   |   |   |
-| Dashboard   | Move to dashboard | SPC d      |   |   |   |
+| Command     | Description       | Keybinding |
+|-------------+-------------------+------------+-
+| BufferNext  | Next buffer       | SPC b n    |
+| BufferPrev  | Previous Buffer   | SPC b p    |
+| BufferClose | Kill buffer       | SPC b k    |
+| Tabnew      | Open new tab      | SPC t n    |
+| Tabclose    | close current tab | SPC t n    |
+| Dashboard   | Move to dashboard | SPC d      |
 
 *** GIT
 Open fugitive to manage git repos. OBS you need to be in a git repository for it to work
