@@ -33,15 +33,15 @@
 Hyprland is a windowmanager manager based on the wayland compositer
 and in my opinion it's a fantastic window manager. This is my configuration file for it
 where you will see all my keybindings I prefer to use. In order to use this config fully
-you will need some programs, like wofi,swaybg,swayshot waybar etc.
+you will need some additonal software, like wofi,swaybg,grim waybar etc.
 Also the terminal in this config is kitty so make sure to change that to your
-prefered terminal
+prefered terminal so you can open a terminal in this windowmanager.
 
 *** IMPORTANT KEYBINDINGS
 This is just a quick recap of one of the most important
-keybindings to know in order to use this config. In order
-to get around quickly. If you know these keybindings
-then you will have no problem to get around in my hyprland.
+keybindings to know in order to use this config.
+To get around quickly. If you know these keybindings
+then you will have no problem to get around in my Hyprland.
 
 | Keybinding | DESCRIPTION       |
 |------------+-------------------|
@@ -74,9 +74,9 @@ then you will have no problem to get around in my hyprland.
 | SUPER + SHIFT + D     | Open Emacs       |
 
 *** CONFIGS YOU NEED
-If you want to use my config there is some otherthings
-that you need also. Of course you don't need these but then you
-need to customize my config
+If you want to use my config there is some things
+that you will need to install. Of course you don't need them and install
+your prefered software but then you need to customize my config.
 + Grim  (For screenshots)
 + Swaybg  (Setting Wallpaper)
 + Swaylock  (To lock the screen)
@@ -84,15 +84,14 @@ need to customize my config
 
 
 *** SOURCE
-source some file here to use in my config
-for example theme that contains colors
+Here I am sourcing some additonal config files
 #+begin_src conf :tangle hyprland.conf
+# Sourcing some rose-pine colors
 source=~/.config/hypr/themes/rose-pine.conf
 #+end_src
 
 *** CURSOR
-Here you can configure mouse settings
-Like size and sensetivity like I have in my config
+Here I am configuring mouse setting
 **** SIZE
 #+begin_src conf :tangle hyprland.conf
 env = XCURSOR_SIZE,24
@@ -105,10 +104,10 @@ device:epic mouse V1 {
 #+end_src
 
 *** GENERAL
-Some General settings in the window manager like gaps etc
-Check hyprland docs for more info what you can do
-Can also change border color arround the window here
-And also set default layout here. I prefer dwindle layout
+Some General settings in the window manager, like gaps etc.
+Check hyprland docs for more info on what you can do.
+You can also change border color around the window here
+And set default layout. I prefer dwindle layout
 #+begin_src conf :tangle hyprland.conf
 general {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
@@ -132,8 +131,7 @@ general {
 #+end_src
 
 *** INPUT
-Here you can configure inputs
-Like you can change your keyboard layout here if you desire
+Here I am configuring some inputs settings, like keyboard layout and stuff.
 #+begin_src conf :tangle hyprland.conf
 input {
     kb_layout = us,se,az
@@ -153,7 +151,7 @@ input {
 #+end_src
 
 *** LAYOUT
-The two layouts in hyprland dwindle and master you can configure them here
+Here you can set some settings for the diffrent layouts in Hyprland
 #+begin_src conf :tangle hyprland.conf
 dwindle {
     pseudotile = true
@@ -173,8 +171,8 @@ monitor=DP-3,1920x1080@60,2560x0,1
 #+END_SRC
 
 *** STYLING
-Here you can configure the fancy part of hyprland. Like you can configure the animation here
-and the decoration. Again check the docks for more info if you like
+Here you can configure the fancy part of hyprland. You can configure the animation
+and the decoration. Again check the docks for more info if you like. RTFM :D
 #+begin_src conf :tangle hyprland.conf
 decoration {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
@@ -219,10 +217,11 @@ exec-once = nm-applet --indicator &
 #+end_src
 
 *** KEYBINDINGS
-Here is all the keybindings to get arround in hyprland!
+Probably one of the most important section of any window manager KEYBINDINGS!
+Here is all my keybindings to get around in hyprland!
 It's very easy to configure you just need to write
 bind = $mainMood,key, command. One thing I miss tho is keychords
-Which I really love for my dmenu scripts. But in hyprland I launch
+which I really love for my dmenu scripts. But in hyprland I launch
 my dmenu scripts with the alt key
 **** GENERAL KEYBINDINGS
 General bindings like how to exit hyprland and kill active windows
@@ -266,7 +265,7 @@ bind = CTRL ALT, L, exec, $script_path/activated/swaylock      #Lock the screen 
 #+END_SRC
 
 **** SOFTWARE
-Bindings to open various software I use
+Bindings to open various software I use.
 
 | Keybinding            | DESCRIPTION                   |
 |-----------------------+-------------------------------|
@@ -342,7 +341,7 @@ bind = , F3, exec, $script_path/sync/sync-script                              # 
 
 
 **** WINDOW CONTROL
-Bindings to manipulate your windows
+Bindings to manipulate your windows.
 
 | Keybinding        | DESCRIPTION                |
 |-------------------+----------------------------|
@@ -426,7 +425,7 @@ bind = $mainMod, W, workspace, e-1                     # Scroll through all the 
 #+END_SRC
 
 **** RUN SCRIPTS
-My various run scripts that I find very useful
+My various run scripts that I find very useful.
 
 | keybinding | description                                  |
 |------------+----------------------------------------------|
@@ -470,7 +469,7 @@ binde=$mainMod,Y, exec, $HOME/.dmenu/dm-tmux                                #Dme
 
 **** TMUX
 Quick keybindings for tmux for actions I use often
-most of the actions are just easy scripts I wrote
+most of the actions are just easy scripts that I wrote.
 
 | keybinding      | description                 |
 |-----------------+-----------------------------|
@@ -511,8 +510,8 @@ bind = , XF86AudioRaiseVolume, exec, $script_path/activated/volume-up.sh       #
 #+end_src
 
 *** WINDOWRULES
-Here you can configure window rules like if you want them to float for example.
-Or if you want to open a program on a specific workspace. You can do all those rules here
+Here you can configure window rules for example if you want some application to always float.
+Or if you want to open a application on a specific workspace. You can set all those rules here
 #+begin_src conf :tangle hyprland.conf
 windowrule = float, ^(Gimp)$
 windowrule = float, ^(org.kde.kdenlive)$
@@ -538,7 +537,7 @@ windowrulev2 = workspace 3, class:^(?!.*(lutris)).*(org.kde.kdenlive).*$
 *** WORKSPACE RULES
 Since hyprland doesn't really share workspaces accross monitors.
 I decided to give 5 workspaces to each monitor I use. Since I always
-want the same workspace to appear in the same monitor otherwise I get confused.
+want the same workspace to appear on the same monitor otherwise I get confused.
 One thing I miss from qtile is that the monitors share workspaces. You can kinda
 get the same effect in hyprland but it works a bit diffrent. The workflow took
 some getting used to but I really enjoy it.

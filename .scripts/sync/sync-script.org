@@ -5,7 +5,7 @@
 #+STARTUP: showeverything
 
 * TABLE OF CONTENT
-- [[ABOUT]]
+- [[ABOUT THIS SCRIPT][ABOUT]]
 - [[EXAMPLE]]
 - [[VARIABLES]]
   - [[SCRIPT PATHS]]
@@ -34,8 +34,7 @@ bash sync-script -v
 #+END_SRC
 
 *** VARIABLES
-This is the Config files that this script will sync
-if it detects that it has changed
+All the config files I declare in the array
 **** SCRIPT PATHS
 |---------------------------------------------+---------------------------------------------------|
 | Scripts Home                                | Scripts Repo                                      |
@@ -55,9 +54,7 @@ if it detects that it has changed
 
 
 **** OTHER VARIABLES
-Other Variables that we set that we use later in the script
-We specity the paths to our dotfiles repos and then we specify
-some colors that we want our output to be when we specify -v
+Some other variables I set. Like paths and color
 |---------------------+------------------------|
 | Variable            | Value                  |
 |---------------------+------------------------|
@@ -103,9 +100,9 @@ files[$HOME/.tmux.conf.local]="$DOTFILES_REPO_PATH/.tmux.conf.local"
 
 **** CASES
 This lets us specify -f (file) and -v (verbose)
-as options in the script. -f requires an argument
+as options in the script, -f requires an argument.
+-c will only output the files that have changed.
 if you dont specify a switch then it will simply not output anything
-
 #+BEGIN_SRC sh :tangle sync-script
 while getopts ":f:vc" opt; do
   case $opt in
@@ -130,8 +127,8 @@ while getopts ":f:vc" opt; do
 done
 #+END_SRC
 **** FUNCTIONS
-Makes some functions that I will use
-later in the script for the output
+Makes some functions that I will use later in the script for the output this script does.
+just using echo to accomplish this
 #+BEGIN_SRC sh :tangle sync-script
 NO_CHANGE() {
 echo -e "${1}-- No Change Detected: ${DEST}"
@@ -143,13 +140,17 @@ echo -e "${1}++ Moving: ${LATEST} to ${OLDEST}"
 #+END_SRC
 
 **** MAIN
-This is the main function that makes this script work
-Bascially first if detects if the target is a directory or file
-if its a directory then its gonna search the directory recusivly
-and then compare all the files inside that directory to detects a diffrent
-and if it's just a file then it will simply compare the 2 files to detect a diffrent
+This is the main function that makes this script work.
+Bascially first if it detects the target is a directory or file.
+If its a directory then its gonna search the directory recusivly
+and then compare all the files inside that directory to detects a diffrent.
+If it's just a file then it will simply compare the 2 files to detect a diffrent.
 I'm creating a few loops to loop through the array and directories.
-And then I'm using an IF statement to compare the file using diff
+And then I'm using an IF statement to compare the file using diff.
+Also I mainly use this for the .config directory to keep it up to date with my
+dotfiles repository. And I made it so I don't need to add every single directory under config
+I wan't to sync, in the array manually. I just need to add .config folder. And It will loop
+through all the directories and skip all the folders that is not in the dotfiles repo
 #+BEGIN_SRC sh :tangle sync-script
 for COMPARE in $(printf '%s\n' "${!files[@]}") ; do
 
@@ -232,10 +233,11 @@ for COMPARE in $(printf '%s\n' "${!files[@]}") ; do
         
 #+END_SRC
 
+This is the if statement it runs when it detects a file and not a folder.
+It runs when both the variable exist and are text files.
 #+BEGIN_SRC sh :tangle sync-script
-   elif [ -f $COMPARE ] && [ -f $COMPARE_SRC ] ; then
-   
-   
+   elif [ -f "$COMPARE" ] && [ -f "$COMPARE_SRC" ] ; then
+
          COMPARE_WITH=$(printf '%s\n' "${files["${COMPARE}"]}")
    
          DEST=$COMPARE

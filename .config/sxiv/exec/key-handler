@@ -11,18 +11,33 @@
 # The key combo argument has the following form: "[C-][M-][S-]KEY",
 # where C/M/S indicate Ctrl/Meta(Alt)/Shift modifier states and KEY is the X
 # keysym as listed in /usr/include/X11/keysymdef.h without the "XK_" prefix.
+if [ $XDG_SESSION_TYPE = "wayland" ] ; then
+        while read file
+        do
+        	case "$1" in
+        		"C-d")
+        			   mv "$file" ~/.trash ;;
+        		"C-r")
+        			   convert -rotate 90 "$file" "$file" ;;
+        		"C-c")
+        			   echo -n "$file" | xclip -selection clipboard ;;
+        		"C-w") 
+        			  swaybg -i "$file" && image=$(cat ~/.fehbg | awk '{print $NF}' | tail -n1) && sed -i "s|$image|$file|g" ~/.fehbg ;;
+                 esac
+        done
 
-
-while read file
-do
-	case "$1" in
-		"C-d")
-			   mv "$file" ~/.trash ;;
-		"C-r")
-			   convert -rotate 90 "$file" "$file" ;;
-		"C-c")
-			   echo -n "$file" | xclip -selection clipboard ;;
-		"C-w") 
-			  swaybg -i "$file" && image=$(cat ~/.fehbg | awk '{print $NF}' | tail -n1) && sed -i "s|$image|$file|g" ~/.fehbg ;;
-         esac
-done
+else
+      while read file
+      do
+      	case "$1" in
+      		"C-d")
+      			   mv "$file" ~/.trash ;;
+      		"C-r")
+      			   convert -rotate 90 "$file" "$file" ;;
+      		"C-c")
+      			   echo -n "$file" | xclip -selection clipboard ;;
+      		"C-w") 
+      			  feh --no-fehbg --bg-fill "$file" && image=$(cat ~/.fehbg | awk '{print $NF}' | tail -n1) && sed -i "s|$image|$file|g" ~/.fehbg ;;
+               esac
+      done
+fi
