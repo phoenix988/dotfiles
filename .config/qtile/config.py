@@ -62,11 +62,11 @@ keys = [
               lazy.shutdown(),
               desc='Shutdown Qtile'
               ),
-         Key([mod, ], "u", #Show all the keybindings
+         Key([mod, ], "F2", #Show all the keybindings
               lazy.spawn("/home/karl/.config/qtile/qtile-keys.sh"),
               desc='Run Help Menu'
               ),
-         Key([mod, ], "y", #show kitty bindings
+         Key([mod, ], "F1", #show kitty bindings
               lazy.spawn("/home/karl/.config/kitty/kitty-keys.sh"),
               desc='Run Help Menu for kitty'
               ),
@@ -152,7 +152,7 @@ keys = [
              lazy.spawn("lxtask"),
              desc='Launch LxTask'
              ),
-         Key(["mod1", "control"], "s", #Launch Steam
+         Key(["mod1", "control"], "g", #Launch Steam
              lazy.spawn("steam"),
              desc='Launch Steam'
              ),
@@ -355,38 +355,32 @@ keys = [
              ),
 
          #KEYS_GROUP keybindings to control tmux without keychords
-         Key(["control", "mod1"], "1", #Move to tmux window 1
+         Key(["mod1",], "1", #Move to tmux window 1
              lazy.spawn(TMUX_PATH + "/window-1"),
              ),
-         Key(["control", "mod1"], "2", #Move to tmux window 2
+         Key(["mod1",], "2", #Move to tmux window 2
              lazy.spawn(TMUX_PATH + "/window-2"),
              ),
-         Key(["control", "mod1"], "3", #Move to tmux window 3
+         Key(["mod1"], "3", #Move to tmux window 3
              lazy.spawn(TMUX_PATH + "/window-3"),
              ),
-         Key(["control", "mod1"], "4", #Move to tmux window 4
+         Key(["mod1",], "4", #Move to tmux window 4
              lazy.spawn(TMUX_PATH + "/window-4"),
              ),
-         Key(["control", "mod1"], "5", #Move to tmux window 5
+         Key(["mod1",], "5", #Move to tmux window 5
              lazy.spawn(TMUX_PATH + "/window-5"),
              ),
-         Key(["control", "mod1"], "6", #Move to tmux window 6
+         Key(["mod1",], "6", #Move to tmux window 6
              lazy.spawn(TMUX_PATH + "/window-6"),
              ),
-         Key(["control", "mod1"], "7", #Move to tmux window 7
+         Key(["mod1",], "7", #Move to tmux window 7
              lazy.spawn(TMUX_PATH + "/window-7"),
              ),
-         Key(["control", "mod1"], "8", #Move to tmux window 8
+         Key(["mod1",], "8", #Move to tmux window 8
              lazy.spawn(TMUX_PATH + "/window-8"),
              ),
-         Key(["control", "mod1"], "9", #Move to tmux window 9
+         Key(["mod1",], "9", #Move to tmux window 9
              lazy.spawn(TMUX_PATH + "/window-9"),
-             ),
-         Key(["control", "mod1"], "x", #kill tmux pane
-             lazy.spawn("tmux kill-pane -t karl"),
-             ),
-         Key(["control", "mod1"], "c", #create tmux window
-             lazy.spawn("tmux new-window -t karl"),
              ),
          Key(["control", "mod1"], "v", #create horizontal split
              lazy.spawn("tmux splitw -h"),
@@ -602,7 +596,7 @@ def init_widgets_list():
                        background = colors[0]
                        ),
              widget.Image(
-                        filename = "~/.config/qtile/icons/pop-os-nord.png",
+                        filename = "~/.config/qtile/icons/pop-os-rose-pine.png",
                         scale = "False",
                         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(MYTERM_NORMAL)},
                         padding = 10
