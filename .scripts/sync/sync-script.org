@@ -5,18 +5,19 @@
 #+STARTUP: showeverything
 
 * TABLE OF CONTENT
-- [[About This Script][About]]
-- [[Example ]]
-- [[Variables][Variables]]
-  - [[Script Paths]]
-  - [[Config Paths]]
-  - [[Other Variables]]
-- [[Script]]
-  - [[Declare]]
-  - [[Cases][Cases]]
-  - [[Function][The Function]]
+- [[ABOUT]]
+- [[EXAMPLE]]
+- [[VARIABLES]]
+  - [[SCRIPT PATHS]]
+  - [[CONFIG PATHS]]
+  - [[OTHER VARIABLES]]
+- [[SCRIPT]]
+  - [[VARIABLES]]
+  - [[CASES]]
+  - [[FUNCTIONS]]
+  - [[MAIN]]
 
-** About This Script
+** ABOUT THIS SCRIPT
 This is a script I wrote to make it easier to keep my gitrepos up to date.
 Basically this script will compare 2 files that you specify in the files array
 And if it detecs that there is a diffrent in the 2 files or folders this script
@@ -26,65 +27,34 @@ this script are overwriting or if there is no change detected. you can also
 specify -f to specify a file where you want to store the output in case you want to
 inspect it later. You can also combine the two switches
 
-** Example
+** EXAMPLE
 This Example here will show you the which files it syncs
 #+BEGIN_SRC
-
 bash sync-script -v
-
 #+END_SRC
 
-*** Variables
+*** VARIABLES
 This is the Config files that this script will sync
 if it detects that it has changed
-****  Script Paths
+**** SCRIPT PATHS
 |---------------------------------------------+---------------------------------------------------|
 | Scripts Home                                | Scripts Repo                                      |
 |---------------------------------------------+---------------------------------------------------|
 | $HOME/.dmenu                                | $DMSCRIPTS_REPO_PATH/.dmenu                       |
-| $HOME/.scripts/activated                    | $DOTFILES_REPO_PATH/.scripts/activated            |
-| $HOME/.scripts/restart                      | $DOTFILES_REPO_PATH/.scripts/restart              |
-| $HOME/.scripts/backup-scripts/sync          | $DOTFILES_REPO_PATH/.scripts/backup-scripts/sync  |
-| $HOME/.scripts/backup-scripts/btrfs         | $DOTFILES_REPO_PATH/.scripts/backup-scripts/btrfs |
-| $HOME/.scripts/backup-scripts/yandex-script | $DOTFILES_REPO_PATH/.scripts/yandex-script        |
-| $HOME/.scripts/docker                       | $DOTFILES_REPO_PATH/.scripts/docker               |
+| $HOME/.scripts                              | $DOTFILES_REPO_PATH/.scripts                      |
 
-**** Config Paths
-|--------------------------------------+----------------------------------------------------|
-| Config Path Home                     | Config Path Repos                                  |
-|--------------------------------------+----------------------------------------------------|
-| $HOME/.zshrc                         | $DOTFILES_REPO_PATH/.zshrc                         |
-| $HOME/.bashrc                        | $DOTFILES_REPO_PATH/.bashrc                        |
-| $HOME/.config/bash                   | $DOTFILES_REPO_PATH/.config/bash                   |
-| $HOME/.config/kitty/kitty.conf       | $DOTFILES_REPO_PATH/.config/kitty/kitty.conf       |
-| $HOME/.config/alacritty              | $DOTFILES_REPO_PATH/.config/alacritty              |
-| $HOME/.config/starship.toml          | $DOTFILES_REPO_PATH/.config/starship.toml          |
-| $HOME/.config/qtile/config.py        | $DOTFILES_REPO_PATH/.config/qtile/config.py        |
-| $HOME/.config/qtile/autostart.sh     | $DOTFILES_REPO_PATH/.config/qtile/autostart.sh     |
-| $HOME/.config/qtile/README.org       | $DOTFILES_REPO_PATH/.config/qtile/README.org       |
-| $HOME/.config/qtile/themes           | $DOTFILES_REPO_PATH/.config/qtile/themes           |
-| $HOME/.config/hypr                   | $DOTFILES_REPO_PATH/.config/hypr                   |
-| $HOME/.config/waybar/config.jsonc    | $DOTFILES_REPO_PATH/.config/waybar/config.jsonc    |
-| $HOME/.config/waybar/style.css       | $DOTFILES_REPO_PATH/.config/waybar/style.css       |
-| $HOME/.config/vifm/vifmrc            | $DOTFILES_REPO_PATH/.config/vifm/vifmrc            |
-| $HOME/.config/wlogout                | $DOTFILES_REPO_PATH/.config/wlogout                |
-| $HOME/.config/rofi/themes            | $DOTFILES_REPO_PATH/.config/rofi/themes            |
-| $HOME/.config/rofi/config.rasi       | $DOTFILES_REPO_PATH/.config/rofi/config.rasi       |
-| $HOME/.config/wofi                   | $DOTFILES_REPO_PATH/.config/wofi                   |
-| $HOME/.config/doom                   | $DOTFILES_REPO_PATH/.config/doom                   |
-| $HOME/.config/doom/eshell            | $DOTFILES_REPO_PATH/.config/doom/eshell            |
-| $HOME/.config/nvim/init.lua          | $DOTFILES_REPO_PATH/.config/nvim/init.lua          |
-| $HOME/.config/nvim/lua/karl          | $DOTFILES_REPO_PATH/.config/nvim/lua/karl          |
-| $HOME/.config/nvim/after/plugin      | $DOTFILES_REPO_PATH/.config/nvim/after/plugin      |
-| $HOME/.config/alias-zsh-bash         | $DOTFILES_REPO_PATH/.config/alias-zsh-bash         |
-| $HOME/.config/fish/conf.d/alias.fish | $DOTFILES_REPO_PATH/.config/fish/conf.d/alias.fish |
-| $HOME/.config/fish/config.fish       | $DOTFILES_REPO_PATH/.config/fish/config.fish       |
-| $HOME/.tmux.conf.local               | $DOTFILES_REPO_PATH/.tmux.conf.local               |
-| $HOME/.config/qutebrowser/config.py  | $DOTFILES_REPO_PATH/.config/qutebrowser/config.py  |
-| $HOME/.config/qutebrowser/quickmarks | $DOTFILES_REPO_PATH/.config/qutebrowser/quickmarks |
+**** CONFIG PATHS
+|------------------------+--------------------------------------|
+| Config Path Home       | Config Path Repos                    |
+|------------------------+--------------------------------------|
+| $HOME/.zshrc           | $DOTFILES_REPO_PATH/.zshrc           |
+| $HOME/.bashrc          | $DOTFILES_REPO_PATH/.bashrc          |
+| $HOME/.tmux.conf.local | $DOTFILES_REPO_PATH/.tmux.conf.local |
+| $HOME/.config          | $DOTFILES_REPO_PATH/.config          |
+| $HOME/.xmonad          | $DOTFILES_REPO_PATH/.xmonad          |
 
 
-**** Other Variables
+**** OTHER VARIABLES
 Other Variables that we set that we use later in the script
 We specity the paths to our dotfiles repos and then we specify
 some colors that we want our output to be when we specify -v
@@ -96,8 +66,8 @@ some colors that we want our output to be when we specify -v
 | GREEN               | tput setaf 2           |
 | RED                 | tput setaf 1           |
 
-*** Script
-**** Declare
+*** SCRIPT
+**** VARIABLES
 #+BEGIN_SRC sh :tangle sync-script
 #!/usr/bin/env bash
 
@@ -111,55 +81,42 @@ GREEN=$(tput setaf 2)
 
 declare -A files
 
+# Scripts
 files[$HOME/.dmenu]="$DMSCRIPTS_REPO_PATH/.dmenu"
 files[$HOME/.scripts]="$DOTFILES_REPO_PATH/.scripts"
+files[$HOME/.config]="$DOTFILES_REPO_PATH/.config"
+files[$HOME/.xmonad]="$DOTFILES_REPO_PATH/.xmonad"
 
+
+# zshrc
 files[$HOME/.zshrc]="$DOTFILES_REPO_PATH/.zshrc"
+
+# Bashrc
 files[$HOME/.bashrc]="$DOTFILES_REPO_PATH/.bashrc"
-files[$HOME/.config/bash]="$DOTFILES_REPO_PATH/.config/bash"
-files[$HOME/.config/kitty/kitty.conf]="$DOTFILES_REPO_PATH/.config/kitty/kitty.conf"
-files[$HOME/.config/alacritty]="$DOTFILES_REPO_PATH/.config/alacritty"
-files[$HOME/.config/starship.toml]="$DOTFILES_REPO_PATH/.config/starship.toml"
-files[$HOME/.config/qtile/config.py]="$DOTFILES_REPO_PATH/.config/qtile/config.py"
-files[$HOME/.config/qtile/README.org]="$DOTFILES_REPO_PATH/.config/qtile/README.org"
-files[$HOME/.config/qtile/autostart.sh]="$DOTFILES_REPO_PATH/.config/qtile/autostart.sh"
-files[$HOME/.config/qtile/themes]="$DOTFILES_REPO_PATH/.config/qtile/themes"
-files[$HOME/.config/hypr]="$DOTFILES_REPO_PATH/.config/hypr"
-files[$HOME/.config/waybar/config.jsonc]="$DOTFILES_REPO_PATH/.config/waybar/config.jsonc"
-files[$HOME/.config/waybar/style.css]="$DOTFILES_REPO_PATH/.config/waybar/style.css"
-files[$HOME/.config/vifm/vifmrc]="$DOTFILES_REPO_PATH/.config/vifm/vifmrc"
-files[$HOME/.config/wlogout]="$DOTFILES_REPO_PATH/.config/wlogout"
-files[$HOME/.config/wofi]="$DOTFILES_REPO_PATH/.config/wofi"
-files[$HOME/.config/rofi/themes]="$DOTFILES_REPO_PATH/.config/rofi/themes"
-files[$HOME/.config/rofi/config.rasi]="$DOTFILES_REPO_PATH/.config/rofi/config.rasi"
-files[$HOME/.config/doom]="$DOTFILES_REPO_PATH/.config/doom"
-files[$HOME/.config/doom/eshell]="$DOTFILES_REPO_PATH/.config/doom/eshell"
-files[$HOME/.config/nvim/init.lua]="$DOTFILES_REPO_PATH/.config/nvim/init.lua"
-files[$HOME/.config/nvim/lua/karl]="$DOTFILES_REPO_PATH/.config/nvim/lua/karl"
-files[$HOME/.config/nvim/README.org]="$DOTFILES_REPO_PATH/.config/nvim/README.org"
-files[$HOME/.config/nvim/after/plugin]="$DOTFILES_REPO_PATH/.config/nvim/after/plugin"
-files[$HOME/.config/alias-zsh-bash]="$DOTFILES_REPO_PATH/.config/alias-zsh-bash"
-files[$HOME/.config/fish/conf.d/alias.fish]="$DOTFILES_REPO_PATH/.config/fish/conf.d/alias.fish"
-files[$HOME/.config/fish/config.fish]="$DOTFILES_REPO_PATH/.config/fish/config.fish"
+
+# Tmux
 files[$HOME/.tmux.conf.local]="$DOTFILES_REPO_PATH/.tmux.conf.local"
-files[$HOME/.config/qutebrowser/config.py]="$DOTFILES_REPO_PATH/.config/qutebrowser/config.py"
-files[$HOME/.config/qutebrowser/quickmarks]="$DOTFILES_REPO_PATH/.config/qutebrowser/quickmarks"
+
+
 #+END_SRC
 
 
-**** Cases
+**** CASES
 This lets us specify -f (file) and -v (verbose)
 as options in the script. -f requires an argument
 if you dont specify a switch then it will simply not output anything
 
 #+BEGIN_SRC sh :tangle sync-script
-while getopts ":f:v" opt; do
+while getopts ":f:vc" opt; do
   case $opt in
      f)
       file="$OPTARG"
       ;;
      v)
       flag=true
+      ;;
+     c)
+      only_change=true
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
@@ -172,8 +129,20 @@ while getopts ":f:v" opt; do
   esac
 done
 #+END_SRC
+**** FUNCTIONS
+Makes some functions that I will use
+later in the script for the output
+#+BEGIN_SRC sh :tangle sync-script
+NO_CHANGE() {
+echo -e "${1}-- No Change Detected: ${DEST}"
+}
 
-**** Function
+YES_CHANGE() {
+echo -e "${1}++ Moving: ${LATEST} to ${OLDEST}"
+}
+#+END_SRC
+
+**** MAIN
 This is the main function that makes this script work
 Bascially first if detects if the target is a directory or file
 if its a directory then its gonna search the directory recusivly
@@ -184,142 +153,151 @@ And then I'm using an IF statement to compare the file using diff
 #+BEGIN_SRC sh :tangle sync-script
 for COMPARE in $(printf '%s\n' "${!files[@]}") ; do
 
-COMPARE_SRC=$(printf '%s\n' "${files[$COMPARE]}")
+   COMPARE_SRC=$(printf '%s\n' "${files[$COMPARE]}")
 
-if [ -d $COMPARE ] && [ -d $COMPARE_SRC ] ; then
+   if [ -d $COMPARE ] && [ -d $COMPARE_SRC ] ; then
 
-       SOURCE=$(printf '%s\n' $(printf '%s\n' "${files["${COMPARE}"]}") )
+      SOURCE=$(printf '%s\n' $(printf '%s\n' "${files["${COMPARE}"]}") )
 
-for SOURCE_LOOP in $(find  $SOURCE/* -type f ) ; do
+      for SOURCE_LOOP in $(find  $SOURCE/* -type f ) ; do
 
-       DEST=$(echo $SOURCE_LOOP | sed -e "s|$DMSCRIPTS_REPO_PATH|$HOME|"  -e "s|$DOTFILES_REPO_PATH|$HOME|" )
+         DEST=$(echo $SOURCE_LOOP | sed -e "s|$DMSCRIPTS_REPO_PATH|$HOME|"  -e "s|$DOTFILES_REPO_PATH|$HOME|" )
 
-if cmp --quiet $DEST $SOURCE_LOOP ; then
+         if cmp --quiet $DEST $SOURCE_LOOP ; then
 
-    if [ -z $DEST  ] ; then
+            if [ -z $DEST  ] ; then
 
-       echo "" &> /dev/null
+               echo "" &> /dev/null
 
-    else
-          [ -z $file ] || echo -e "-- No Change Detected: ${COMPARE}" >> $file
+            else
 
+               [ -z $file ] || NO_CHANGE >> $file
 
-       if [ "$flag" = 'true' ] ; then
 
+               if [ "$flag" = 'true' ] ; then
 
-             [ -z $DEST ] && echo "" &> /dev/null || echo -e "${RED}-- No Change Detected: ${DEST}"
-       fi
+                   [ "$only_change" = "true" ] || [ -z $DEST ] && echo "" &> /dev/null || NO_CHANGE $RED
 
-    fi
+               fi
 
-else
+            fi
 
-       CHECK_FOR_LATEST=$(ls -lt  $DEST $SOURCE_LOOP 2> /dev/null | head -n1 | awk '{print $NF}')
+         else
 
-if [ "$CHECK_FOR_LATEST" = "$DEST" ] ; then
+            CHECK_FOR_LATEST=$(ls -lt  $DEST $SOURCE_LOOP 2> /dev/null | head -n1 | awk '{print $NF}')
 
-       LATEST=$(echo $CHECK_FOR_LATEST)
-       OLDEST=$(echo $SOURCE_LOOP)
+            if [ "$CHECK_FOR_LATEST" = "$DEST" ] ; then
 
-elif [ "$CHECK_FOR_LATEST" = "$SOURCE_LOOP" ] ; then
+                LATEST=$(echo $CHECK_FOR_LATEST)
+                OLDEST=$(echo $SOURCE_LOOP)
 
-       LATEST=$(echo $CHECK_FOR_LATEST)
-       OLDEST=$(echo $DEST)
+            elif [ "$CHECK_FOR_LATEST" = "$SOURCE_LOOP" ] ; then
 
-fi
+                 LATEST=$(echo $CHECK_FOR_LATEST)
+                 OLDEST=$(echo $DEST)
 
-       SAME_NAME_OLDEST=$(echo $OLDEST | awk  -F / '{print $NF}')
-       SAME_NAME_LATEST=$(echo $LATEST | awk  -F / '{print $NF}')
+            fi
 
+                 SAME_NAME_OLDEST=$(echo $OLDEST | awk  -F / '{print $NF}')
+                 SAME_NAME_LATEST=$(echo $LATEST | awk  -F / '{print $NF}')
 
-if [ "$SAME_NAME_OLDEST" = "$SAME_NAME_LATEST" ] ; then
 
-       cp -r $LATEST $OLDEST 2> /dev/null
+            if [ "$SAME_NAME_OLDEST" = "$SAME_NAME_LATEST" ] ; then
 
-       [ -z $file ] ||  echo -e "++ Moving: ${LATEST} to ${OLDEST}" >> $file
+            if [ -f "$OLDEST" ] && [ -f "$LATEST" ]; then
 
-        if [ "$flag" = 'true' ] ; then
+               cp -r $LATEST $OLDEST 2> /dev/null
 
-       [ -z $LATEST ] && echo "" &> /dev/null || echo -e "${GREEN}++ Moving: ${LATEST} to ${OLDEST}"
+               [ -z $file ] ||  YES_CHANGE >> $file
 
-        sleep 1
+               if [ "$flag" = 'true' ] ; then
 
-       fi
-fi
+                   [ -z $LATEST ] && echo "" &> /dev/null || YES_CHANGE $GREEN
 
-fi
+                   sleep 1
 
+               fi
 
-done
+            else
+                   echo "" &> /dev/null
 
-elif [ -f $COMPARE ] && [ -f $COMPARE_SRC ] ; then
+            fi
 
+         fi
 
-      COMPARE_WITH=$(printf '%s\n' "${files["${COMPARE}"]}")
+      fi
+   
+   
+      done
+        
+#+END_SRC
 
-if cmp --quiet $COMPARE $COMPARE_WITH ; then
+#+BEGIN_SRC sh :tangle sync-script
+   elif [ -f $COMPARE ] && [ -f $COMPARE_SRC ] ; then
+   
+   
+         COMPARE_WITH=$(printf '%s\n' "${files["${COMPARE}"]}")
+   
+         DEST=$COMPARE
+   
+   if cmp --quiet $COMPARE $COMPARE_WITH ; then
+   
+       if [ -z $COMPARE  ] ; then
 
+           echo "" &> /dev/null
 
-    if [ -z $COMPARE  ] ; then
+        else
 
-       echo "" &> /dev/null
+          [ -z $file ] || NO_CHANGE >> $file
 
-    else
+          if [ "$flag" = 'true' ] ; then
 
-      [ -z $file ] || echo -e "-- No Change Detected: ${COMPARE}" >> $file
+             [ "$only_change" = "true" ] || [ -z $COMPARE ] && echo "" &> /dev/null || NO_CHANGE $RED
 
-       if [ "$flag" = 'true' ] ; then
+        fi
 
-      [ -z $COMPARE ] && echo "" &> /dev/null || echo -e "${RED}-- No Change Detected: ${COMPARE}"
+      fi
 
+   else
 
-       fi
+         CHECK_FOR_LATEST=$(ls -lt  $COMPARE_WITH $COMPARE 2> /dev/null | head -n1 | awk '{print $NF}')
 
-    fi
+   if [ "$CHECK_FOR_LATEST" = "$COMPARE" ] ; then
 
+         LATEST=$(echo $CHECK_FOR_LATEST)
+         OLDEST=$(echo $COMPARE_WITH)
 
-else
+   elif [ "$CHECK_FOR_LATEST" = "$COMPARE_WITH" ] ; then
 
-      CHECK_FOR_LATEST=$(ls -lt  $COMPARE_WITH $COMPARE 2> /dev/null | head -n1 | awk '{print $NF}')
+         LATEST=$(echo $CHECK_FOR_LATEST)
+         OLDEST=$(echo $COMPARE)
 
-if [ "$CHECK_FOR_LATEST" = "$COMPARE" ] ; then
+   fi
 
-      LATEST=$(echo $CHECK_FOR_LATEST)
-      OLDEST=$(echo $COMPARE_WITH)
+         SAME_NAME_OLDEST=$(echo $OLDEST | awk  -F / '{print $NF}')
+         SAME_NAME_LATEST=$(echo $LATEST | awk  -F / '{print $NF}')
 
-elif [ "$CHECK_FOR_LATEST" = "$COMPARE_WITH" ] ; then
 
-      LATEST=$(echo $CHECK_FOR_LATEST)
-      OLDEST=$(echo $COMPARE)
+         if [ "$SAME_NAME_OLDEST" = "$SAME_NAME_LATEST" ] ; then
 
-fi
+             cp -r $LATEST $OLDEST 2> /dev/null
 
-      SAME_NAME_OLDEST=$(echo $OLDEST | awk  -F / '{print $NF}')
-      SAME_NAME_LATEST=$(echo $LATEST | awk  -F / '{print $NF}')
+             [ -z $file ] ||  YES_CHANGE >> $file
 
 
-if [ "$SAME_NAME_OLDEST" = "$SAME_NAME_LATEST" ] ; then
+             if [ "$flag" = 'true' ] ; then
 
-     cp -r $LATEST $OLDEST 2> /dev/null
+                [ -z $LATEST ] && echo "" &> /dev/null || YES_CHANGE $GREEN
 
-          [ -z $file ] ||  echo -e "++ Moving: ${LATEST} to ${OLDEST}" >> $file
+                 sleep 1
 
+           fi
 
-        if [ "$flag" = 'true' ] ; then
+         fi
 
+      fi
 
-          [ -z $LATEST ] && echo "" &> /dev/null || echo -e "${GREEN}++ Moving: ${LATEST} to ${OLDEST}"
-
-          sleep 1
-
-       fi
-
-
-fi
-
-fi
-
-fi
+   fi
 
 done
 #+END_SRC
