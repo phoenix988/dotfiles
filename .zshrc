@@ -131,20 +131,14 @@ doom_exist=$(echo $PATH | sed 's/:/\n/g' | grep $add_doom)
 [ -z "$doom_exist" ] &&  PATH="$PATH:$add_doom"
 
 
-
-
 [ "$TERM" = "xterm-color" ] && export TERM=xterm-256color
-
-
 
 
 source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH/zsh-autosuggestions/zsh-autosuggestions.zsh
 #source $ZSH/zsh-vim-mode/zsh-vim-mode.plugin.zsh
 
-
 bindkey '^ ' autosuggest-accept
-
 
 ZSH_HIGHLIGHT_STYLES[default]='fg=3'
 ZSH_HIGHLIGHT_STYLES[precommand]='fg=5,underline'

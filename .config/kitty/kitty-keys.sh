@@ -1,7 +1,7 @@
 #!/bin/bash
 
 back=$(cat ~/.config/kitty/theme.conf | grep background | awk '{print $NF}')
-fore=$(cat ~/.config/kitty/theme.conf | grep selection_background | awk '{print $NF}')
+fore=$(cat ~/.config/kitty/theme.conf | grep foreground | awk '{print $NF}')
 
  sed -n '/Keyboard shortcuts/,/End Keyboard shortcut/p' ~/.config/kitty/kitty.conf | \
        grep -v ^# | \

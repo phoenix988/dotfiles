@@ -339,7 +339,9 @@ tmux_conf_copy_to_os_clipboard=false
 
  unbind C-a
  unbind C-b
+ set -g prefix C-Space
  set -g prefix M-u
+ bind C-Space send-prefix
  bind M-u send-prefix
 
  unbind '"'
@@ -427,6 +429,4 @@ set -g @plugin "arcticicestudio/nord-tmux
 #
 # "$@"
 # # /!\ do not remove the previous line
-
-
 
