@@ -9,7 +9,7 @@
 - [[ABOUT My Doom][ABOUT]]
 - [[AUTOCOMPLETION]]
 - [[BEACON][BEACON]]
-- [[CENTAUR Tabs][CENTAUR Tabs]]
+- [[CENTAUR TABS][CENTAUR TABS]]
 - [[FONTS][FONTS]]
 - [[WORKSPACES][KEYBINDINGS]]
   - [[WORKSPACES][WORKSPACES]]
@@ -305,7 +305,6 @@ Settings for the various shells inside of emacs. For example I set the alias fil
       eshell-scroll-to-bottom-on-input t
       eshell-destroy-buffer-when-process-dies t
       eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
-
 #+end_src
 
 ** START PAGE
@@ -355,6 +354,6 @@ But to make it permanent you need to modify config.el
 
   (load-theme 'doom-tokyo-night t)
 
-
-
 #+end_src
+
+
