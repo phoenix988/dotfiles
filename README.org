@@ -37,7 +37,8 @@ Qtile config and tweaked some keybindings I didn't like and styled it a little b
 All the Window Manager configs I have
 But the only Two I have played around with and kept up to date
 is hyprland and qtile the other configs might be a bit out of date
-since I have used them
+since I have used them. So if you pull down my xmonad,awesome and specrteWM
+config they might be broken so keep that in mind.
 |-----------+---------+----------|
 | Qtile     | Xmonad  | Hyprland |
 | SpectreWM | Awesome |          |
@@ -55,6 +56,9 @@ So I store the configs of my favorite text editor here in my dotfiles
 **** NEOVIM
 [[file:./.images/nvim.png]]
 
+**** DOOM EMACS
+[[file:./.images/doom.jpeg]]
+
 *** OTHER CONFIGS
 Here is some other random config files I store here
 like diffrent shells terminals, run prompt etc
@@ -62,8 +66,8 @@ like diffrent shells terminals, run prompt etc
 |---------+-------------+-----------|
 | Waybar  | Zsh         | Bash      |
 | Fish    | Kitty       | Alacritty |
-| Picom   | Qutebrowser | wofi      |
-| Rofi    | vifm        | Starship  |
+| Picom   | Qutebrowser | Wofi      |
+| Rofi    | Vifm        | Starship  |
 | Wlogout | Tmux        | Dunst     |
 
 **** KITTY
