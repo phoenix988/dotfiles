@@ -20,7 +20,6 @@
 - [[STARTUP APPS]]
 - [[KEYBINDINGS]]
   - [[GENERAL KEYBINDINGS]]
-  - [[UTILITIES]]
   - [[SOFTWARE]]
   - [[WINDOW CONTROL]]
   - [[RUN SCRIPTS]]
@@ -226,6 +225,7 @@ bind = $mainMood,key, command. One thing I miss tho is keychords
 Which I really love for my dmenu scripts. But in hyprland I launch
 my dmenu scripts with the alt key
 **** GENERAL KEYBINDINGS
+General bindings like how to exit hyprland and kill active windows
 
 | Keybinding        | DESCRIPTION         |
 |-------------------+---------------------|
@@ -234,9 +234,9 @@ my dmenu scripts with the alt key
 | SUPER + SHIFT + Q | Quit Hyprland       |
 | SUPER + M         | Logout Meny         |
 | SUPER + R         | Run menu            |
+| CTRL + ALT + L    | Lock the screen     |
 | F1                | Help menu kitty     |
 | F2                | Help menu hyprland  |
-| CTRL + ALT + L    | Lock the screen     |
 
 #+begin_src conf :tangle hyprland.conf
 $mainMod = SUPER
@@ -268,47 +268,75 @@ bind = CTRL ALT, L, exec, $script_path/activated/swaylock      #Lock the screen 
 **** SOFTWARE
 Bindings to open various software I use
 
-| Keybinding    | DESCRIPTION     |
-|---------------+-----------------|
-| SUPER + G     | Gimp            |
-| SUPER + O     | OBS             |
-| SUPER + B     | Browser1        |
-| SUPER + I     | lxappearance    |
-| SUPER + S     | Take Screenshot |
-| SUPER + T     | Terminal        |
-| SUPER + Enter | Terminal        |
+| Keybinding            | DESCRIPTION                   |
+|-----------------------+-------------------------------|
+| SUPER + G             | Gimp                          |
+| SUPER + O             | OBS                           |
+| SUPER + B             | Browser1                      |
+| SUPER + I             | lxappearance                  |
+| SUPER + S             | Take Screenshot               |
+| SUPER + T             | Terminal                      |
+| SUPER + Enter         | Terminal                      |
+
+
+| Keybinding            | DESCRIPTION                   |
+|-----------------------+-------------------------------|
+| SUPER + SHIFT + Y     | Neomutt                       |
+| SUPER + SHIFT + W     | Browser2                      |
+| SUPER + SHIFT + V     | Launch Virt-Manager           |
+| SUPER + SHIFT + E     | Launch Terminal file manager  |
+| SUPER + SHIFT + Enter | Launch Graphical file manager |
+| SUPER + SHIFT + G     | Launch Kdenlive               |
+| SUPER + SHIFT + D     | Launch Doom Emacs             |
+
+| Keybinding        | DESCRIPTION         |
+|-------------------+---------------------|
+| Alt + Control + T | Launch Task Manager |
+| Alt + Control + G | Launch Steam        |
+| Alt + Control + B | Launch Gparted      |
+| Alt + Control + P | Launch Pavucontrol  |
+| Alt + Control + W | Launch Bitwarden    |
+
+| Keybinding | DESCRIPTION    |
+|------------+----------------|
+| F11        | Restart Waybar |
+| F12        | Set random bg  |
+| F3         | Sync script    |
 
 #+begin_src conf :tangle hyprland.conf
 # Launch programs Mod + key
-bind = $mainMod, G, exec, gimp                                                          #Launch Gimp
-bind = $mainMod, O, exec, obs                                                           #Launch OBS
-bind = $mainMod, B, exec, $browser1                                                     #Launch browser1
-bind = $mainMod, I, exec, lxappearance                                                  #Launch lxappearance
-bind = $mainMod, S, exec, grim -g "$(slurp)" - | wl-copy                                #Take screenshot
-bind = $mainMod, T, exec, $term -e $HOME/.scripts/activated/create-tmux-session.sh      #Open the terminal with tmux
-bind = $mainMod, return, exec, $term                                                    #Open the terminal
+bind = $mainMod, G, exec, gimp                                                           # Launch Gimp
+bind = $mainMod, O, exec, obs                                                            # Launch OBS
+bind = $mainMod, B, exec, $browser1                                                      # Launch browser1
+bind = $mainMod, I, exec, lxappearance                                                   # Launch lxappearance
+bind = $mainMod, S, exec, grim -g "$(slurp)" - | wl-copy                                 # Take screenshot
+bind = $mainMod, T, exec, $term                                                          # Open the terminal
+bind = $mainMod, return, exec, $term                                                     # Open the terminal
 
 
 # Launch program mod + Shift + key
-bind = $mainMod SHIFT, return, exec, pcmanfm                                 #Launch filemanager
-bind = $mainMod SHIFT, E, exec, emacsclient -c -a '' --eval '(dired nil)'    #Launch terminal filemanager
-bind = $mainMod SHIFT, V, exec, virt-manager                                 #Launch virt-manager
-bind = $mainMod SHIFT, I, exec, xfce4-appearance-settings                    #Launch xfce4-appearance-settings
-bind = $mainMod SHIFT, Y, exec, kitty -e "mutt"                              #Launch mutt email client
-bind = $mainMod SHIFT, T, exec, kitty -e "btop"                              #Launch btop
-bind = $mainMod SHIFT, W, exec, $browser2                                    #Launch browser2
-bind = $mainMod SHIFT, G, exec, kdenlive                                     #Launch Kdenlive
-bind = $mainMod SHIFT, D, exec, emacsclient -c -a "emacs"                    #Launch emacs
+bind = $mainMod SHIFT, return, exec, pcmanfm                                 # Launch filemanager
+bind = $mainMod SHIFT, E, exec, emacsclient -c -a '' --eval '(dired nil)'    # Launch terminal filemanager
+bind = $mainMod SHIFT, V, exec, virt-manager                                 # Launch virt-manager
+bind = $mainMod SHIFT, I, exec, xfce4-appearance-settings                    # Launch xfce4-appearance-settings
+bind = $mainMod SHIFT, Y, exec, kitty -e "mutt"                              # Launch mutt email client
+bind = $mainMod SHIFT, T, exec, kitty -e "btop"                              # Launch btop
+bind = $mainMod SHIFT, W, exec, $browser2                                    # Launch browser2
+bind = $mainMod SHIFT, G, exec, kdenlive                                     # Launch Kdenlive
+bind = $mainMod SHIFT, D, exec, emacsclient -c -a "emacs"                    # Launch emacs
 
 # Launch Program shift + ctrl + key
-bind = ALT CTRL, S, exec, steam                                  #Launch Steam
-bind = ALT CTRL, P, exec, pavucontrol                            #Launch Pavucontrol
-bind = ALT CTRL, B, exec, gparted                                #Launch gparted
-bind = ALT CTRL, T, exec, lxtask                                 #Launch lxtask
+bind = ALT CTRL, G, exec, steam                                  # Launch Steam
+bind = ALT CTRL, P, exec, pavucontrol                            # Launch Pavucontrol
+bind = ALT CTRL, B, exec, gparted                                # Launch gparted
+bind = ALT CTRL, T, exec, lxtask                                 # Launch lxtask
+bind = ALT CTRL, W, exec, flatpak run com.bitwarden.desktop      # Launch bitwarden
+
 
 # Custom Scripts
-bind = , F12, exec, $script_path/activated/set-random-bg-wayland              #Set random bg
-bind = , F11, exec, $script_path/restart/waybar-restart                       #Restart waybar
+bind = , F12, exec, $script_path/activated/set-random-bg-wayland              # Set random bg
+bind = , F11, exec, $script_path/restart/waybar-restart                       # Restart waybar
+bind = , F3, exec, $script_path/sync/sync-script                              # Runs Sync script
 
 #+END_SRC
 

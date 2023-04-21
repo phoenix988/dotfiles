@@ -1,6 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR __fish_initialized:3100
+SETUVAR __fish_initialized:3400
 SETUVAR _fish_abbr_app:cd\x20/usr/share/applications/
 SETUVAR _fish_abbr_aur:paru
 SETUVAR _fish_abbr_aweE:vim\x20\x7e/\x2econfig/awesome/rc\x2elua
@@ -37,14 +37,14 @@ SETUVAR _fish_abbr_jctl:journalctl\x20\x2dp\x203\x20\x2dxb
 SETUVAR _fish_abbr_kc:killall\x20conky
 SETUVAR _fish_abbr_keycheck:xev
 SETUVAR _fish_abbr_kssh:kitty\x20\x2bkitten\x20ssh
-SETUVAR _fish_abbr_l:lsd
-SETUVAR _fish_abbr_lA:lsd\x20\x2dA
-SETUVAR _fish_abbr_l_2E_:lsd\x20\x2dA\x20\x7c\x20egrep\x20\x27\x5e\x5c\x2e\x27
-SETUVAR _fish_abbr_la:lsd\x20\x2da
-SETUVAR _fish_abbr_ld:lsd\x20\x2dl\x20\x7c\x20grep\x20\x5ed
-SETUVAR _fish_abbr_ll:lsd\x20\x2dl
-SETUVAR _fish_abbr_lla:lsd\x20\x2dla
-SETUVAR _fish_abbr_ls:lsd\x20\x2d\x2dcolor\x20auto
+SETUVAR _fish_abbr_l:exa
+SETUVAR _fish_abbr_lA:exa\x20\x2dA
+SETUVAR _fish_abbr_l_2E_:exa\x20\x2dA\x20\x7c\x20egrep\x20\x27\x5e\x5c\x2e\x27
+SETUVAR _fish_abbr_la:exa\x20\x2da
+SETUVAR _fish_abbr_ld:exa\x20\x2dl\x20\x7c\x20grep\x20\x5ed
+SETUVAR _fish_abbr_ll:exa\x20\x2dl
+SETUVAR _fish_abbr_lla:exa\x20\x2dla
+SETUVAR _fish_abbr_ls:exa\x20\x2d\x2dcolor\x20auto
 SETUVAR _fish_abbr_mbas:cd\x20\x7e/\x2econfig/bash
 SETUVAR _fish_abbr_media:cd\x20/mnt/autofs/music/videos/
 SETUVAR _fish_abbr_merge:xrdb\x20\x2dmerge\x20\x7e/\x2eXresources
@@ -166,4 +166,5 @@ SETUVAR fish_pager_color_completion:\x1d
 SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
+SETUVAR fish_pager_color_selected_background:\x2dr
 SETUVAR fish_user_paths:/home/karl/\x2elocal/bin\x1e/home/karl/Applications

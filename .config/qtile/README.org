@@ -1,33 +1,33 @@
 #+title: Qtile
 #+author: Karl Fredin
-#+DESCRIPTION: My custom Qtile config
+#+DESCRIPTION: MY CUSTOME QTILE CONFIG
 
 [[file:./images/qtile.png]]
 
 
 * TABLE OF CONTENT
-- [[About]]
-- [[Imports]]
-- [[Variables]]
-- [[Keybindings]]
-  - [[General]]
-  - [[Applications]]
-  - [[Scripts]]
-  - [[Media Control]]
-  - [[Monitor Control]]
-  - [[Window Control]]
-  - [[Tmux]]
-  - [[Emacs]]
-  - [[Run Scripts]]
-- [[Workspaces]]
-- [[Layouts]]
-- [[Widgets]]
-  - [[Slice]]
-- [[Mouse Settings]]
-- [[Floating Rules]]
-- [[Startup Hook]]
+- [[ABOUT]]
+- [[IMPORTS]]
+- [[VARIABLES]]
+- [[KEYBINDINGS]]
+  - [[GENERAL]]
+  - [[APPLICATIONS]]
+  - [[SCRIPTS]]
+  - [[MEDIA CONTROL]]
+  - [[MONITOR CONTROL]]
+  - [[WINDOW CONTROL]]
+  - [[TMUX]]
+  - [[EMACS]]
+  - [[RUN Scripts]]
+- [[WORKSPACES]]
+- [[LAYOUTS]]
+- [[WIDGETS]]
+  - [[SLICE]]
+- [[MOUSE ACTION]]
+- [[FLOATING RULES]]
+- [[STARTUP HOOK]]
 
-** About
+** ABOUT
 This is my qtile configuration. Qtile is a Window Manager written in python.
 So in order to configure this you need to write python code but its not very difficult
 to understand an config thats already written. It's very begginner friendly an easy to understand
@@ -35,7 +35,7 @@ What all options are doing. But of course if you know python you can do alot of 
 With this Window Manager. It was my favorite Window Manager but now since I tried hyprland that issues
 my new all time favorite window manager
 
-** Imports
+** IMPORTS
 Here is all the libaries I import that are used later in the config
 Also imports the color theme I will use. which is just a color.py file
 #+BEGIN_SRC python :tangle config.py
@@ -65,7 +65,7 @@ from qtile_extras.widget.decorations import RectDecoration, PowerLineDecoration,
 
 #+END_SRC
 
-** Variables
+** VARIABLES
 Here is all my variables used later in the script. So in case
 I wanna make changes all I need to do is to modify a variable.
 Like change terminal for example. So if you want to add a variable your
@@ -103,18 +103,18 @@ TMUX_PATH = "/home/karl/.scripts/tmux"
 #+END_SRC
 
 
-** Keybindings
+** KEYBINDINGS
 Here you will configure all your prefered keybindings
-*** General
+*** GENERAL
 | Keybinding        | DESCRIPTION            |
 |-------------------+------------------------|
-| SUPER + SHIFT + r | Restart Qtile          |
-| SUPER + SHIFT + q | Exit qtile             |
-| SUPER + u         | Qtile Help             |
-| SUPER + y         | Kitty help             |
-| SUPER + r         | Run Menu               |
+| SUPER + R         | Run Menu               |
 | SUPER + SPC       | Switch keyboard layout |
-| Alt + Control + l | Lock your screen       |
+| SUPER + SHIFT + R | Restart Qtile          |
+| SUPER + SHIFT + Q | Exit qtile             |
+| ALT + CONTROL + L | Lock your screen       |
+| SUPER + F1        | Kitty help             |
+| SUPER + F2        | Qtile Help             |
 
 #+BEGIN_SRC python :tangle config.py
 #START_KEYS
@@ -128,11 +128,11 @@ keys = [
               lazy.shutdown(),
               desc='Shutdown Qtile'
               ),
-         Key([mod, ], "u", #Show all the keybindings
+         Key([mod, ], "F2", #Show all the keybindings
               lazy.spawn("/home/karl/.config/qtile/qtile-keys.sh"),
               desc='Run Help Menu'
               ),
-         Key([mod, ], "y", #show kitty bindings
+         Key([mod, ], "F1", #show kitty bindings
               lazy.spawn("/home/karl/.config/kitty/kitty-keys.sh"),
               desc='Run Help Menu for kitty'
               ),
@@ -149,36 +149,36 @@ keys = [
               desc='Run rofi'
              ),
 #+END_SRC
-*** Applications
+*** APPLICATIONS
 
 | Keybinding        | DESCRIPTION      |
 |-------------------+------------------|
-| SUPER + s         | Restart Qtile    |
-| SUPER + b         | Exit qtile       |
-| SUPER + i         | Qtile Help       |
-| SUPER + o         | Kitty help       |
-| SUPER +  g        | Laynch Gimp      |
+| SUPER + S         | Restart Qtile    |
+| SUPER + B         | Exit qtile       |
+| SUPER + I         | Qtile Help       |
+| SUPER + O         | Kitty help       |
+| SUPER +  G        | Laynch Gimp      |
 | SUPER + Enter     | Launch Terminal  |
 
 
 | Keybinding            | DESCRIPTION                   |
 |-----------------------+-------------------------------|
-| SUPER + SHIFT + y     | Launch Graphical Text Editor  |
-| SUPER + SHIFT + w     | Launch Browser1               |
-| SUPER + SHIFT + v     | Launch Virt-Manager           |
-| SUPER + SHIFT + e     | Launch Terminal file manager  |
+| SUPER + SHIFT + Y     | Launch Graphical Text Editor  |
+| SUPER + SHIFT + W     | Launch Browser1               |
+| SUPER + SHIFT + V     | Launch Virt-Manager           |
+| SUPER + SHIFT + E     | Launch Terminal file manager  |
 | SUPER + SHIFT + Enter | Launch Graphical file manager |
-| SUPER + SHIFT + g     | Launch Kdenlive               |
-| SUPER + SHIFT + d     | Launch Doom Emacs             |
+| SUPER + SHIFT + G     | Launch Kdenlive               |
+| SUPER + SHIFT + D     | Launch Doom Emacs             |
 
 
 | Keybinding        | DESCRIPTION         |
 |-------------------+---------------------|
-| Alt + Control + t | Launch Task Manager |
-| Alt + Control + s | Launch Steam        |
-| Alt + Control + b | Launch Timeshift    |
-| Alt + Control + p | Launch Pavucontrol  |
-| Alt + Control + w | Launch Bitwarden    |
+| ALT + CONTROL + T | Launch Task Manager |
+| ALT + CONTROL + B | Launch Timeshift    |
+| ALT + CONTROL + P | Launch Pavucontrol  |
+| ALT + CONTROL + W | Launch Bitwarden    |
+| ALT + CONTROL + G | Launch Steam        |
 
 
 
@@ -252,7 +252,7 @@ keys = [
              lazy.spawn("lxtask"),
              desc='Launch LxTask'
              ),
-         Key(["mod1", "control"], "s", #Launch Steam
+         Key(["mod1", "control"], "g", #Launch Steam
              lazy.spawn("steam"),
              desc='Launch Steam'
              ),
@@ -269,12 +269,12 @@ keys = [
              desc='Launch Bitwarden'
              ),
 #+END_SRC
-*** Scripts
+*** SCRIPTS
 
 | Keybinding        | DESCRIPTION         |
 |-------------------+---------------------|
-| Super + F12 | Set Random Wallpaper |
-| Super + F11 | Restart Picom       |
+| SUPER + F12 | Set Random Wallpaper |
+| SUPER + F11 | Restart Picom       |
 
 #+BEGIN_SRC python :tangle config.py
          #KEYS_GROUP Some of my custom scripts
@@ -291,7 +291,7 @@ keys = [
              desc='Change Display layout, I use it when I connect external Screens to my laptop'
              ),
 #+END_SRC
-*** Media Control
+*** MEDIA CONTROL
 This is just so all your standard media buttons on your keyboard will work
 Pretty straight forward works the same way as in windows for example
 #+BEGIN_SRC python :tangle config.py
@@ -321,14 +321,14 @@ Pretty straight forward works the same way as in windows for example
              desc='Previous'
              ),
 #+END_SRC
-*** Monitor Control
+*** MONITOR CONTROL
 | Keybinding          | DESCRIPTION          |
 |---------------------+----------------------|
-| Super + w           | Move to Monitor 1    |
-| Super +  e          | Move to Monitor 2    |
-| Super + Control + r | Move to Monitor 3    |
-| Super +  .          | Move to Next Monitor |
-| Super +  ,          | Move to Prev Monitor |
+| SUPER + W           | Move to Monitor 1    |
+| SUPER +  E          | Move to Monitor 2    |
+| SUPER + CONTROL + R | Move to Monitor 3    |
+| SUPER +  .          | Move to Next Monitor |
+| SUPER +  ,          | Move to Prev Monitor |
 
 #+BEGIN_SRC python :tangle config.py
          #KEYS_GROUP Switch focus to specific monitor (out of two)
@@ -355,25 +355,25 @@ Pretty straight forward works the same way as in windows for example
              desc='Move focus to prev monitor'
              ),
 #+END_SRC
-*** Window Control
+*** WINDOW CONTROL
 | Keybinding          | DESCRIPTION          |
 |---------------------+----------------------|
-| Super + h           | Move Left            |
-| Super + l           | Move Right           |
-| Super + j           | Move Down            |
-| Super + k           | Move Up              |
-| Super + Shift + h   | Move Window Left     |
-| Super + Shift + l   | Move Window Right    |
-| Super + Shift + j   | Move Window Down     |
-| Super + Shift + k   | Move Window Up       |
-| Super + Alt + h     | Mirror Windows Left  |
-| Super + Alt + l     | Mirror Windows Right |
-| Super + Alt + j     | Mirror Windows Down  |
-| Super + Alt + k     | Mirror Windows Up    |
-| Super + Control + h | Resize Left          |
-| Super + Control + l | Resize Right         |
-| Super + Control + j | Resize Down          |
-| Super + Control + k | Resize Up            |
+| SUPER + H           | Move Left            |
+| SUPER + L           | Move Right           |
+| SUPER + J           | Move Down            |
+| SUPER + K           | Move Up              |
+| SUPER + SHIFT + H   | Move Window Left     |
+| SUPER + SHIFT + L   | Move Window Right    |
+| SUPER + SHIFT + J   | Move Window Down     |
+| SUPER + SHIFT + K   | Move Window Up       |
+| SUPER + ALT + H     | Mirror Windows Left  |
+| SUPER + ALT + L     | Mirror Windows Right |
+| SUPER + ALT + J     | Mirror Windows Down  |
+| SUPER + ALT + K     | Mirror Windows Up    |
+| SUPER + CONTROL + H | Resize Left          |
+| SUPER + CONTROL + L | Resize Right         |
+| SUPER + CONTROL + J | Resize Down          |
+| SUPER + CONTROL + K | Resize Up            |
 
 
 
@@ -501,57 +501,49 @@ Pretty straight forward works the same way as in windows for example
              ),
 
 #+END_SRC
-*** Tmux
+*** TMUX
 | Keybinding        | DESCRIPTION           |
 |-------------------+-----------------------|
-| Control + Alt + 1 | Move to tmux window 1 |
-| Control + Alt + 2 | Move to tmux window 2 |
-| Control + Alt + 3 | Move to tmux window 3 |
-| Control + Alt + 4 | Move to tmux window 4 |
-| Control + Alt + 5 | Move to tmux window 5 |
-| Control + Alt + 6 | Move to tmux window 6 |
-| Control + Alt + 7 | Move to tmux window 7 |
-| Control + Alt + 8 | Move to tmux window 8 |
-| Control + Alt + 9 | Move to tmux window 9 |
-| Control + Alt + c | Create tmux window    |
-| Control + Alt + x | Kill tmux window      |
-| Control + Alt + s | Vertical Split        |
-| Control + Alt + v | Horizontal Split      |
+| CONTROL + ALT + 1 | Move to tmux window 1 |
+| CONTROL + ALT + 2 | Move to tmux window 2 |
+| CONTROL + ALT + 3 | Move to tmux window 3 |
+| CONTROL + ALT + 4 | Move to tmux window 4 |
+| CONTROL + ALT + 5 | Move to tmux window 5 |
+| CONTROL + ALT + 6 | Move to tmux window 6 |
+| CONTROL + ALT + 7 | Move to tmux window 7 |
+| CONTROL + ALT + 8 | Move to tmux window 8 |
+| CONTROL + ALT + 9 | Move to tmux window 9 |
+| CONTROL + ALT + S | Vertical Split        |
+| CONTROL + ALT + V | Horizontal Split      |
 
 #+BEGIN_SRC python :tangle config.py
          #KEYS_GROUP keybindings to control tmux without keychords
-         Key(["control", "mod1"], "1", #Move to tmux window 1
+         Key(["mod1",], "1", #Move to tmux window 1
              lazy.spawn(TMUX_PATH + "/window-1"),
              ),
-         Key(["control", "mod1"], "2", #Move to tmux window 2
+         Key(["mod1",], "2", #Move to tmux window 2
              lazy.spawn(TMUX_PATH + "/window-2"),
              ),
-         Key(["control", "mod1"], "3", #Move to tmux window 3
+         Key(["mod1"], "3", #Move to tmux window 3
              lazy.spawn(TMUX_PATH + "/window-3"),
              ),
-         Key(["control", "mod1"], "4", #Move to tmux window 4
+         Key(["mod1",], "4", #Move to tmux window 4
              lazy.spawn(TMUX_PATH + "/window-4"),
              ),
-         Key(["control", "mod1"], "5", #Move to tmux window 5
+         Key(["mod1",], "5", #Move to tmux window 5
              lazy.spawn(TMUX_PATH + "/window-5"),
              ),
-         Key(["control", "mod1"], "6", #Move to tmux window 6
+         Key(["mod1",], "6", #Move to tmux window 6
              lazy.spawn(TMUX_PATH + "/window-6"),
              ),
-         Key(["control", "mod1"], "7", #Move to tmux window 7
+         Key(["mod1",], "7", #Move to tmux window 7
              lazy.spawn(TMUX_PATH + "/window-7"),
              ),
-         Key(["control", "mod1"], "8", #Move to tmux window 8
+         Key(["mod1",], "8", #Move to tmux window 8
              lazy.spawn(TMUX_PATH + "/window-8"),
              ),
-         Key(["control", "mod1"], "9", #Move to tmux window 9
+         Key(["mod1",], "9", #Move to tmux window 9
              lazy.spawn(TMUX_PATH + "/window-9"),
-             ),
-         Key(["control", "mod1"], "x", #kill tmux pane
-             lazy.spawn("tmux kill-pane -t karl"),
-             ),
-         Key(["control", "mod1"], "c", #create tmux window
-             lazy.spawn("tmux new-window -t karl"),
              ),
          Key(["control", "mod1"], "v", #create horizontal split
              lazy.spawn("tmux splitw -h"),
@@ -560,15 +552,15 @@ Pretty straight forward works the same way as in windows for example
              lazy.spawn("tmux splitw -v"),
              ),
 #+END_SRC
-*** Emacs
+*** EMACS
 | Keybinding    | DESCRIPTION            |
 |---------------+------------------------|
-| Control e + e | Launch Emacs           |
-| Control e + d | Launch Dired in Emacs  |
-| Control e + s | Launch Eshell in Emacs |
-| Control e + h | Launch Htop            |
-| Control e + r | Launch Ranger          |
-| Control e + t | Change Rofi Theme      |
+| CONTROL E + w | Launch Emacs           |
+| CONTROL E + d | Launch Dired in Emacs  |
+| CONTROL E + s | Launch Eshell in Emacs |
+| CONTROL E + h | Launch Htop            |
+| CONTROL E + r | Launch Ranger          |
+| CONTROL E + t | Change Rofi Theme      |
 #+BEGIN_SRC python :tangle config.py
          #KEYS_GROUP Launch terminal based programs using the key chord CONTROL+e followed by 'key'
          KeyChord(["control"], "e", [
@@ -599,24 +591,25 @@ Pretty straight forward works the same way as in windows for example
 
          name="Action: "),
 #+END_SRC
-*** Run Scripts
+*** RUN SCRIPTS
 
 | Keybinding  | DESCRIPTION                              |
 |-------------+------------------------------------------|
-| Super p + e | Edit config files                        |
-| Super p + m | Mount file systems                       |
-| Super p + k | Kill a process                           |
-| Super p + n | Connect via ssh                          |
-| Super p + w | Change wallpaper                         |
-| Super p + a | Change audio Source                      |
-| Super p + o | Open website                             |
-| Super p + f | Open website in Application mode         |
-| Super p + s | Search The Web                           |
-| Super p + b | Timeshift Backup                         |
-| Super p + q | List of virtual machines in virt-manager |
-| Super p + j | List of your passwords in pass           |
-| Super p + v | Connect to Vpn                           |
-| Super p + t | Change theme for kitty                   |
+| Super P + e | Edit config files                        |
+| Super P + m | Mount file systems                       |
+| Super P + k | Kill a process                           |
+| Super P + n | Connect via ssh                          |
+| Super P + w | Change wallpaper                         |
+| Super P + a | Change audio Source                      |
+| Super P + o | Open website                             |
+| Super P + f | Open website in Application mode         |
+| Super P + s | Search The Web                           |
+| Super P + b | Timeshift Backup                         |
+| Super P + q | List of virtual machines in virt-manager |
+| Super P + j | List of your passwords in pass           |
+| Super P + v | Connect to Vpn                           |
+| Super P + t | Change theme for kitty                   |
+| Super P + y | Control Tmux Sessions                    |
 #+BEGIN_SRC python :tangle config.py
          #KEYS_GROUP Dmenu scripts launched using the key chord SUPER+p followed by 'key'
          KeyChord([mod], "p", [
@@ -705,7 +698,7 @@ Pretty straight forward works the same way as in windows for example
 #END_KEYS
 
 #+END_SRC
-** Workspaces
+** WORKSPACES
 Here you configure your workspaces and configure default layout
 For each workspace. The ones I mainly use is bsp layout, max layout and floating.
 You can also configure application rules here. Like if you want
@@ -730,7 +723,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
 
 #+END_SRC
-** Layouts
+** LAYOUTS
 Here you choose which layouts you want to be availble for use
 I mostly use bsp layout cause its my favorite kind of layout
 #+BEGIN_SRC python :tangle config.py
@@ -794,7 +787,7 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 #+END_SRC
 
-** Widgets
+** WIDGETS
 Here you configure all your widgets that you have in your Qtile bar!
 So if you want to make qtile look fancy this is what you want to configure
 #+BEGIN_SRC python :tangle config.py
@@ -1221,7 +1214,7 @@ def init_widgets_list():
     return widgets_list
 
 #+END_SRC
-*** Slice
+*** SLICE
 Since the Systray can only be available on one monitor I slice them here
 Remember if you do any major changes to the widgets you need to change this.
 Here I also configure the size and the margin of the Qtile bar.
@@ -1275,7 +1268,7 @@ def switch_screens(qtile):
     qtile.current_screen.set_group(group)
 #+END_SRC
 
-*** Mouse Action
+** MOUSE ACTION
 These settings let you resize the window using the mouse.
 Usually dont need to configure these
 #+BEGIN_SRC python :tangle config.py
@@ -1296,7 +1289,7 @@ cursor_warp = False
 
 #+END_SRC
 
-** Floating Rules
+** FLOATING RULES
 Here you configure all applications that you always want to float
 #+BEGIN_SRC python :tangle config.py
 
@@ -1328,7 +1321,7 @@ floating_layout = layout.Floating(float_rules=[
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 #+END_SRC
-** Startup Hook
+** STARTUP HOOK
 This is just a startup hook that launch a script called autostart.sh located in qtill directory
 So if you want to configure startup items you need to configure the autostart script
 So this is just a hook and you don't need to configure this. This is just so the script runs on login

@@ -9,6 +9,7 @@
 # List of applications to run
 APPS=(
     picom -c $HOME/.config/picom/picom-jona.conf
+    $HOME/.fehbg
     )
 
 # Some applications start child applications that need to be killed on reload
