@@ -1,0 +1,8 @@
+#+title: WOFI
+
+
+* ROSE PINE THEME
+
+[[file:../../.images/wofi-rose-pine.png]]
+
+* NORD THEME
