@@ -157,7 +157,7 @@ keys = [
 | SUPER + B         | Exit qtile       |
 | SUPER + I         | Qtile Help       |
 | SUPER + O         | Kitty help       |
-| SUPER +  G        | Laynch Gimp      |
+| SUPER +  G        | Launch Gimp      |
 | SUPER + Enter     | Launch Terminal  |
 
 
