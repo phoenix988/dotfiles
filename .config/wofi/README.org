@@ -5,4 +5,7 @@
 
 [[file:../../.images/wofi-rose-pine.png]]
 
+
 * NORD THEME
+
+[[file:../../.images/wofi-nord.png]]
