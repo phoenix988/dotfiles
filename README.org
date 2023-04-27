@@ -11,13 +11,13 @@
     - [[.config/hypr][HYPRLAND]]
     - [[.config/awesome][AWESOME]]
     - [[.xmonad][XMONAD]]
-    - [[.config/specrteWM][SPECTREWM]]
+    - [[.config/spectrwm][SPECTRWM]]
   - [[TEXT EDITORS]]
     - [[.config/doom][DOOM EMACS]]
     - [[.config/nvim][NEOVIM]]
   - [[OTHER CONFIGS]]
 - [[SCRIPTS]]
-  - [[SYNC SCRIPT]]
+  - [[.scripts/sync][SYNC SCRIPTS]]
   - [[TMUX SESSION]]
   - [[TMUX JUMP]]
   - [[OTHERS]]
@@ -39,9 +39,9 @@ But the only Two I have played around with and kept up to date
 is hyprland and qtile the other configs might be a bit out of date
 since I have used them. So if you pull down my xmonad,awesome and specrteWM
 config they might be broken so keep that in mind.
-|-----------+---------+----------|
-| Qtile     | Xmonad  | Hyprland |
-| SpectreWM | Awesome |          |
+|----------+---------+----------|
+| [[.config/qtile][Qtile]]    | [[.xmonad][Xmonad]]  | [[.config/hypr][Hyprland]] |
+| [[.config/spectrwm][SpectrWM]] | [[.config/awesome][Awesome]] |          |
 
 *** TEXT EDITORS
 Well the only text editor I use is Doom emacs and Neovim
@@ -50,7 +50,7 @@ motions completly changed the way I use my computer it's fantastic.
 So I store the configs of my favorite text editor here in my dotfiles
 
 |------------+--------|
-| Doom Emacs | NeoVim |
+| [[.config/doom][Doom Emacs]] | [[.config/nvim][NeoVim]] |
 
 
 **** NEOVIM
@@ -63,12 +63,12 @@ So I store the configs of my favorite text editor here in my dotfiles
 Here is some other random config files I store here
 like diffrent shells terminals, run prompt etc
 
-|---------+-------------+-----------|
-| Waybar  | Zsh         | Bash      |
-| Fish    | Kitty       | Alacritty |
-| Picom   | Qutebrowser | Wofi      |
-| Rofi    | Vifm        | Starship  |
-| Wlogout | Tmux        | Dunst     |
+|-------------+-------+-----------|
+| [[.config/waybar][Waybar]]      | Zsh   | Bash      |
+| [[.config/fish][Fish]]        | [[.config/kitty][Kitty]] | [[.config/alacritty][Alacritty]] |
+| [[.config/qutebrowser][Qutebrowser]] | [[.config/wofi][Wofi]]  | [[.config/picom][Picom]]     |
+| [[.config/rofi][Rofi]]        | [[.config/vifm][Vifm]]  | Starship  |
+| [[.config/wlogout][Wlogout]]     | Tmux  | [[.config/dunst][Dunst]]     |
 
 **** KITTY
 [[file:./.images/kitty.png]]
