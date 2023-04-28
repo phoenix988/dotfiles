@@ -1,3 +1,9 @@
+##____  _                      _
+#|  _ \| |__   ___   ___ _ __ (_)_  __
+#| |_) | '_ \ / _ \ / _ \ '_ \| \ \/ /
+#|  __/| | | | (_) |  __/ | | | |>  <
+#|_|   |_| |_|\___/ \___|_| |_|_/_/\_\
+# -*- coding: utf-8 -*-
 ### EXPORT ###
 set fish_greeting                                 # Supresses fish's intro message
 set TERM "xterm-256color"                         # Sets the terminal type

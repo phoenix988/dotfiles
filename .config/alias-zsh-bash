@@ -361,6 +361,7 @@ export VISUAL=vim
 export omf=/home/karl/.config/fish/conf.d/omf.fish
 export awe=/home/karl/.config/awesome/rc.lua
 export qt=/home/karl/.config/qtile/config.py
+export dotc=$HOME/myrepos/dotfiles/.config
 export github='https://github.com'
 export date_for_backup=$(date +%d-%h-%Y-%H-%M )
 
@@ -368,7 +369,7 @@ export date_for_backup=$(date +%d-%h-%Y-%H-%M )
 export DOCKER_HOST=ssh://karl@192.168.1.31
 
 
-
+# quickly connect to tmux sessions
 t() {
 tmux attach -t $1
 }
