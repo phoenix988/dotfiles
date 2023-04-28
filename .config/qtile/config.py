@@ -461,7 +461,7 @@ keys = [
                  desc='Choose your keyboardlayout'
                  ),
              Key([], "v", #Connect to a vpn server using vpn
-                 lazy.spawn(DMENU_PATH + "/dm-nordvpn"),
+                 lazy.spawn(DMENU_PATH + "/dm-vpn"),
                  desc='Choose your VPN server for NordVPN'
                  ),
              Key([], "s", #search the web requires qutebrowser
