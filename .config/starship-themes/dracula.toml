@@ -1,0 +1,21 @@
+format = """
+[\uE0B6](fg:#d6acff)[$directory](bg:#d6acff)[\uE0B0](fg:#d6acff bg:#BD93F9)$git_branch[\uE0B0](fg:#BD93F9 bg:#FF92DF)$git_status[\uE0B0](#FF92DF bg:#FF79C6)$time[\uE0B0](#FF79C6 bg:none) $all$character """
+
+
+add_newline = true
+
+[directory]
+style = "bg:#d6acff fg:#1E1F28"
+
+[git_branch]
+format = "[ $symbol$branch ]($style)"
+style = "bg:#BD93F9 fg:#1E1F28"
+
+[git_status]
+format = "[ $all_status$ahead_behind ]($style)"
+style = "bg:#FF92DF fg:white"
+
+[time]
+disabled = false
+format = "[ $time ]($style)"
+style = "bg:#FF79C6 fg:white"
