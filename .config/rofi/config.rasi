@@ -1,12 +1,1 @@
-configuration {
-  show-icons:         true;
-  icon-theme:         "Papirus";
-}
-//@theme "/usr/share/rofi/themes/sidebar.rasi"
-//@theme "/home/karl/.config/rofi/themes/sidebar-iceberg.rasi"
-//@theme "/home/karl/.config/rofi/themes/sidebar-nord.rasi"
-//@theme "/home/karl/.config/rofi/themes/sidebar-nord.rasi"
-//@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
-//@theme "/home/karl/.config/rofi/themes/sidebar-nord.rasi"
-//@theme "/home/karl/.config/rofi/themes/rose-pine-moon.rasi"
-@theme "/home/karl/.config/rofi/themes/rose-pine-moon.rasi"
+@theme "/home/karl/.config/rofi/themes/rose-pine.rasi"

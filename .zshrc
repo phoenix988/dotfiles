@@ -23,7 +23,6 @@ command_exist() {
 command_exist starship && eval "$(starship init zsh)"
 #ZSH_THEME='nord'
 
-
 # aliases
 [ -f $HOME/.config/alias-zsh-bash ] && source $HOME/.config/alias-zsh-bash
 
@@ -87,7 +86,7 @@ ex ()
        fi  
 }
 
-date=$(date +%d-%h-%Y-%H-%M)
+export date=$(date +%d-%h-%Y-%H-%M)
 
 source ~/.config/fzf/rose-pine-moon.sh
 
