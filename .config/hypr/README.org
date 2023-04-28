@@ -431,21 +431,21 @@ My various run scripts that I find very useful.
 
 | keybinding | description                                  |
 |------------+----------------------------------------------|
-| ALT + E | edit config files                            |
-| ALT + J | copy a password/username from password store |
-| ALT + B | timeshift backups                            |
-| ALT + F | open website in application mode             |
-| ALT + S | search various engines                       |
-| ALT + W | change wallpaper                             |
-| ALT + V | connect to nordvpn                           |
-| ALT + O | open a website                               |
-| ALT + T | change theme for kitty                       |
-| ALT + A | change audio source                          |
-| ALT + K | kill a process                               |
-| ALT + Q | open a virtual machine in virt+manager       |
-| ALT + P | media control                                |
-| ALT + N | connect to ssh server                        |
-| SUPER + Y | attach tmux sessions                         |
+| ALT + E    | edit config files                            |
+| ALT + J    | copy a password/username from password store |
+| ALT + B    | timeshift backups                            |
+| ALT + F    | open website in application mode             |
+| ALT + S    | search various engines                       |
+| ALT + W    | change wallpaper                             |
+| ALT + V    | connect to a vpn                             |
+| ALT + O    | open a website                               |
+| ALT + T    | change theme for kitty                       |
+| ALT + A    | change audio source                          |
+| ALT + K    | kill a process                               |
+| ALT + Q    | open a virtual machine in virt+manager       |
+| ALT + P    | media control                                |
+| ALT + N    | connect to ssh server                        |
+| SUPER + Y  | attach tmux sessions                         |
 
 
 
@@ -456,7 +456,7 @@ binde=ALT,J, exec, $HOME/.dmenu/dm-pass                                     #Dme
 binde=ALT,B, exec, $HOME/.dmenu/dm-timeshift                                #Dmenu script to take timeshift snapshots
 binde=ALT,F, exec, $HOME/.dmenu/dm-openweb-fullscreen                       #Dmenu script to open websites in fullscreen
 binde=ALT,S, exec, $HOME/.dmenu/dm-search                                   #Dmenu script for some search engines
-binde=ALT,V, exec, $HOME/.dmenu/dm-nordvpn                                  #Dmenu script to connect to a vpn
+binde=ALT,V, exec, $HOME/.dmenu/dm-vpn                                      #Dmenu script to connect to a vpn
 binde=ALT,W, exec, $HOME/.dmenu/dm-set-wallpaper                            #Dmenu script to set wallpaper
 binde=ALT,O, exec, $HOME/.dmenu/dm-openweb                                  #Dmenu script to open bookmarked websites
 binde=ALT,T, exec, $HOME/.dmenu/dm-kittychangetheme                         #Dmenu script to change kitty theme
