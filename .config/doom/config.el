@@ -150,3 +150,11 @@
 
 
   (load-theme 'doom-tokyo-night t)
+
+(use-package autothemer :ensure t)
+
+(straight-use-package
+ '(rose-pine-emacs
+   :host github
+   :repo "phoenix988/rose-pine-emacs"
+   :branch "master"))
