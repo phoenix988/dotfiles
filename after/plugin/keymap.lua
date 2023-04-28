@@ -1,6 +1,5 @@
 vim.keymap.set("n", "<leader>.", vim.cmd.Vifm)
 
-
 -- Quickly move between windows
 vim.api.nvim_set_keymap("n", "<leader>bn", ':BufferNext' ,{ noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>bp", ':BufferPrevious<CR>', { noremap = true, silent = true })
@@ -10,7 +9,6 @@ vim.api.nvim_set_keymap("n", "<Leader>td", ':tabclose<CR>', { noremap = true, si
 vim.api.nvim_set_keymap("n", "<Leader>ch", ':HighlightColorsToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gt", ':BufferNext<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gT", ':BufferPrevious<CR>', { noremap = true, silent = true })
-
 
 -- Git commands
 vim.api.nvim_set_keymap("n", "<leader>gs", ':Git<CR>', { noremap = true, silent = true })

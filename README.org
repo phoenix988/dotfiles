@@ -323,6 +323,9 @@ use {
 -- Install prefefered colorschemes
 use({ 'shaunsingh/nord.nvim', as = 'nord' })
 use({ 'rose-pine/neovim', as = 'rose-pine' })
+use({ 'Mofiqul/dracula.nvim' , as = 'dracula'})
+use({ 'folke/tokyonight.nvim' , as = 'tokyo-night'})
+
 
 -- Tresitter to improve colors in your files
 use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
