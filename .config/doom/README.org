@@ -345,14 +345,13 @@ But to make it permanent you need to modify config.el
 
   (doom-themes-neotree-config)
 
-  (setq doom-themes-treemacs-theme "doom-tokyo-night")
+  (setq doom-themes-treemacs-theme "doom-horizon")
 
   (doom-themes-treemacs-config)
 
   (doom-themes-org-config))
 
-
-  (load-theme 'doom-tokyo-night t)
+  (load-theme 'doom-horizon t)
 
 (use-package autothemer :ensure t)
 
@@ -361,5 +360,6 @@ But to make it permanent you need to modify config.el
    :host github
    :repo "phoenix988/rose-pine-emacs"
    :branch "master"))
+
 
 #+end_src

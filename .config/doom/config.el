@@ -142,14 +142,13 @@
 
   (doom-themes-neotree-config)
 
-  (setq doom-themes-treemacs-theme "doom-tokyo-night")
+  (setq doom-themes-treemacs-theme "doom-horizon")
 
   (doom-themes-treemacs-config)
 
   (doom-themes-org-config))
 
-
-  (load-theme 'doom-tokyo-night t)
+  (load-theme 'doom-horizon t)
 
 (use-package autothemer :ensure t)
 
