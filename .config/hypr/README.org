@@ -216,6 +216,7 @@ exec-once = nextcloud --background &
 exec-once = emacs --daemon &
 exec-once = blueman-applet &
 exec-once = nm-applet --indicator &
+exec-once = mullvad-vpn &
 #+end_src
 
 *** KEYBINDINGS
