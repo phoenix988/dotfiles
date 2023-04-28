@@ -117,6 +117,11 @@ _G.packer_plugins = {
     path = "/home/karl/.local/share/nvim/site/pack/packer/opt/dashboard-nvim",
     url = "https://github.com/glepnir/dashboard-nvim"
   },
+  dracula = {
+    loaded = true,
+    path = "/home/karl/.local/share/nvim/site/pack/packer/start/dracula",
+    url = "https://github.com/Mofiqul/dracula.nvim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/home/karl/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -242,6 +247,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/karl/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
+  },
+  ["tokyo-night"] = {
+    loaded = true,
+    path = "/home/karl/.local/share/nvim/site/pack/packer/start/tokyo-night",
+    url = "https://github.com/folke/tokyonight.nvim"
   },
   undotree = {
     loaded = true,
