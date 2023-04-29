@@ -4,9 +4,6 @@
 
 (beacon-mode 1)
 
-;;(setq centaur-tabs-set-bar 'over)
-;;(centaur-tabs-mode t)
-
 (setq doom-font (font-spec :family "JetBrains Mono" :size 15)
       doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15)
       doom-big-font (font-spec :family "JetBrains Mono" :size 24))
@@ -56,13 +53,52 @@
 (map! :leader
       (:prefix ("d". "buffer")
        :desc "Make file in Dired" "c" #'dired-create-empty-file
-       :desc "Make directory in Dired" "D" #'dired-create-directory))
+       :desc "Make directory in Dired" "D" #'dired-create-directory)
+      (:after dired
+       (:map dired-mode-map
+        :desc "Peep-dired image previes" "d p" #'peep-dired)))
 
 
 (evil-define-key 'normal peep-dired-mode-map
   (kbd "j") 'peep-dired-next-file
   (kbd "k") 'peep-dired-prev-file)
   (add-hook 'peep-dired-hook 'evil-normalize-keymaps)
+
+
+(evil-define-key 'normal dired-mode-map
+  (kbd "M-RET") 'dired-display-file
+  (kbd "h") 'dired-up-directory
+  (kbd "l") 'dired-find-file ; use dired-find-file instead of dired-open.
+  (kbd "m") 'dired-mark
+  (kbd "t") 'dired-toggle-marks
+  (kbd "u") 'dired-unmark
+  (kbd "C") 'dired-do-copy
+  (kbd "D") 'dired-do-delete
+  (kbd "J") 'dired-goto-file
+  (kbd "M") 'dired-do-chmod
+  (kbd "O") 'dired-do-chown
+  (kbd "P") 'dired-do-print
+  (kbd "R") 'dired-do-rename
+  (kbd "T") 'dired-create-empty-file
+  (kbd "Y") 'dired-copy-filenamecopy-filename-as-kill ; copies filename to kill ring.
+  (kbd "Z") 'dired-do-compress
+  (kbd "+") 'dired-create-directory
+  (kbd "-") 'dired-do-kill-lines
+  (kbd "% l") 'dired-downcase
+  (kbd "% m") 'dired-mark-files-regexp
+  (kbd "% u") 'dired-upcase
+  (kbd "* %") 'dired-mark-files-regexp
+  (kbd "* .") 'dired-mark-extension
+  (kbd "* /") 'dired-mark-directories
+  (kbd "; d") 'epa-dired-do-decrypt
+  (kbd "; e") 'epa-dired-do-encrypt)
+;; With dired-open plugin, you can launch external programs for certain extensions
+;; For example, I set all .png files to open in 'sxiv' and all .mp4 files to open in 'mpv'
+(setq dired-open-extensions '(("gif" . "sxiv")
+                              ("jpg" . "sxiv")
+                              ("png" . "sxiv")
+                              ("mkv" . "mpv")
+                              ("mp4" . "mpv")))
 
 (map! :leader
       (:prefix ("d". "buffer")
@@ -115,24 +151,6 @@
       eshell-destroy-buffer-when-process-dies t
       eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
 
-;;(setq initial-buffer-choice "~/.config/doom/start.org")
-;;
-;;(define-minor-mode start-mode
-;;  "Provide functions for custom start page."
-;;  :lighter " start"
-;;  :keymap (let ((map (make-sparse-keymap)))
-;;          ;;(define-key map (kbd "M-z") 'eshell)
-;;            (evil-define-key 'normal start-mode-map
-;;              (kbd "1") '(lambda () (interactive) (find-file "~/.config/doom/README.org"))
-;;              (kbd "2") '(lambda () (interactive) (find-file "~/.config/doom/init.el"))
-;;              (kbd "3") '(lambda () (interactive) (find-file "~/.config/doom/packages.el"))
-;;              (kbd "4") '(lambda () (interactive) (find-file "~/.config/hypr/hyprland.conf"))
-;;              (kbd "5") '(lambda () (interactive) (find-file "~/.scripts/sync/sync-script.org")))
-;;          map))
-;;
-;;(add-hook 'start-mode-hook 'read-only-mode) ;; make start.org read-only; use 'SPC t r' to toggle off read-only.
-;;(provide 'start-mode)
-
 (use-package doom-themes
   :config
   (setq doom-themes-enable-bold t
@@ -142,18 +160,12 @@
 
   (doom-themes-neotree-config)
 
-  (setq doom-themes-treemacs-theme "doom-horizon")
+  (setq doom-themes-treemacs-theme "doom-iceberg")
 
   (doom-themes-treemacs-config)
 
   (doom-themes-org-config))
 
-  (load-theme 'doom-horizon t)
+  (load-theme 'doom-iceberg t)
 
 (use-package autothemer :ensure t)
-
-(straight-use-package
- '(rose-pine-emacs
-   :host github
-   :repo "phoenix988/rose-pine-emacs"
-   :branch "master"))
