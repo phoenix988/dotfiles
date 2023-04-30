@@ -6,8 +6,9 @@
 
 * TABLE OF CONTENT
 - [[About My Hyprland][ABOUT MY HYPRLAND]]
-  - [[IMPORTANT KEYBINDINGS]]
   - [[CONFIGS YOU NEED]]
+    - [[INSTALLATION]]
+  - [[IMPORTANT KEYBINDINGS]]
 - [[SOURCE]]
 - [[CURSOR]]
   - [[SIZE]]
@@ -38,6 +39,27 @@ Also the terminal in this config is kitty so make sure to change that to your
 prefered terminal so you can open a terminal in this windowmanager.
 
 [[file:./images/hyprland-desktop.png]]
+
+*** CONFIGS YOU NEED
+If you want to use my config there is some things
+that you will need to install. Of course you don't need them and install
+your prefered software but then you need to customize my config.
++ Grim  (For screenshots)
++ Swaybg  (Setting Wallpaper)
++ Swaylock  (To lock the screen)
++ Waybar (For the bar)
++ Wofi (Run launcher)
+
+**** INSTALLATION
+Install all the packages I need to get started with this config
+#+begin_src sh
+
+# I'm using paru but feel free to use any aur helper if you are on arch
+ paru -S --needed --noconfirm waybar-hyprland-git hyprland-bin swaylock swaybg grim wofi kitty lxappearance qt5ct qt6ct kvantum awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono
+
+#+end_src
+
+
 
 *** IMPORTANT KEYBINDINGS
 This is just a quick recap of one of the most important
@@ -75,15 +97,6 @@ then you will have no problem to get around in my Hyprland.
 | SUPER + R             | Run Wofi         |
 | SUPER + SHIFT + D     | Open Emacs       |
 
-*** CONFIGS YOU NEED
-If you want to use my config there is some things
-that you will need to install. Of course you don't need them and install
-your prefered software but then you need to customize my config.
-+ Grim  (For screenshots)
-+ Swaybg  (Setting Wallpaper)
-+ Swaylock  (To lock the screen)
-+ Waybar (For the bar)
-
 
 *** SOURCE
 Here I am sourcing some additonal config files
@@ -116,7 +129,7 @@ general {
 
     gaps_in = 3
     gaps_out = 10
-    border_size = 2
+    border_size = 3
 
     # Blue border
     # col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
