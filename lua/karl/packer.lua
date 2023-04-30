@@ -57,7 +57,6 @@ use({ 'shaunsingh/nord.nvim', as = 'nord' })
 use({ 'rose-pine/neovim', as = 'rose-pine' })
 use({ 'Mofiqul/dracula.nvim' , as = 'dracula'})
 use({ 'folke/tokyonight.nvim' , as = 'tokyo-night'})
-use({ 'cocopon/iceberg.vim' , as = 'iceberg'})
 
 
 -- Tresitter to improve colors in your files
