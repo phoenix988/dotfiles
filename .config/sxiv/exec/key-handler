@@ -20,9 +20,11 @@ if [ $XDG_SESSION_TYPE = "wayland" ] ; then
         		"C-r")
         			   convert -rotate 90 "$file" "$file" ;;
         		"C-c")
-        			   echo -n "$file" | xclip -selection clipboard ;;
+        			   echo -n "$file" | wl-copy  ;;
         		"C-w") 
-        			  swaybg -i "$file" && image=$(cat ~/.fehbg | awk '{print $NF}' | tail -n1) && sed -i "s|$image|$file|g" ~/.fehbg ;;
+                      killall swaybg
+        			  swaybg -i "$file" & 
+                      image=$(cat ~/.fehbg | awk '{print $NF}' | tail -n1) && sed -i "s|$image|$file|g" ~/.fehbg ;;
                  esac
         done
 

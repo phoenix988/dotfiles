@@ -13,9 +13,9 @@ style = "bg:#BD93F9 fg:#1E1F28"
 
 [git_status]
 format = "[ $all_status$ahead_behind ]($style)"
-style = "bg:#FF92DF fg:white"
+style = "bg:#FF92DF fg:#1E1F28"
 
 [time]
 disabled = false
 format = "[ $time ]($style)"
-style = "bg:#FF79C6 fg:white"
+style = "bg:#FF79C6 fg:#1E1F28"
