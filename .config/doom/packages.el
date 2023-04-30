@@ -55,6 +55,7 @@
 (package! harpoon)
 (package! autothemer)
 (package! ssh)
+(package! rainbow-mode)
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))

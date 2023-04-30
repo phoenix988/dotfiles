@@ -52,6 +52,7 @@
     (red        '("#F6C177" "#F6C177" "red"          ))
     (orange     '("#F6C177" "#F6C177" "brightred"    ))
     (green      '("#9CCFD8" "#9CCFD8" "green"        ))
+    (lightgreen '("#31748F" "#31748F" "lightgreen"        ))
     (teal       '("#EB6F92" "#EB6F92" "brightgreen"  ))
     (yellow     '("#E2A478" "#E2A478" "yellow"       ))
     (blue       '("#d36486" "#d36486" "brightblue"   ))
@@ -74,11 +75,11 @@
     (comments       (if doom-rose-pine-brighter-comments magenta hor-highlight-bright))
     (doc-comments   yellow)
     (constants      orange)
-    (functions      teal)
+    (functions      magenta)
     (keywords       violet)
     (methods        magenta)
     (operators      teal)
-    (type           teal)
+    (type           lightgreen)
     (strings        yellow)
     (variables      red)
     (numbers        orange)
@@ -251,7 +252,8 @@
 
    ;; Highlight line
    (hl-line :background "#21202E" )
-   
+
+
    ;; rjsx-mode
    (rjsx-tag :foreground red)
    (rjsx-tag-bracket-face :foreground red)

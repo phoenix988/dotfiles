@@ -219,7 +219,7 @@
     ;; magit
     (magit-section-heading :foreground red)
     (magit-branch-remote   :foreground orange)
-    (magit-diff-removed-highlight :background "#E98989" :foreground "#4C566A" )
+    (magit-diff-removed-highlight :background lightred :foreground "#4C566A" )
 
     ;; --- extra variables ---------------------
     ;; basics
@@ -262,6 +262,8 @@
   ;; Search
   (evil-ex-search :background red :foreground bg)
 
+   ;; Neotree
+   (doom-themes-neotree-executable-file-face :foreground cyan)
 
    ;; rjsx-mode
    (rjsx-tag :foreground red)
