@@ -360,7 +360,7 @@ bind -r m resize-pane -Z
 
 set -g mouse on
 
-
+set-option -g mode-style "bg=#5E81AC"
 
 
 # move status line to top
