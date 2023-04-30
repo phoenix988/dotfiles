@@ -132,11 +132,6 @@ _G.packer_plugins = {
     path = "/home/karl/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/ThePrimeagen/harpoon"
   },
-  iceberg = {
-    loaded = true,
-    path = "/home/karl/.local/share/nvim/site/pack/packer/start/iceberg",
-    url = "https://github.com/cocopon/iceberg.vim"
-  },
   ["lsp-zero.nvim"] = {
     loaded = true,
     path = "/home/karl/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",

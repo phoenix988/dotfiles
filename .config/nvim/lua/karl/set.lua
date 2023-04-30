@@ -30,3 +30,6 @@ vim.opt.updatetime = 50
 vim.opt.updatetime = 50
 
 vim.o.modifiable = true
+
+vim.opt.clipboard:append("unnamedplus")
+vim.opt.paste = true
