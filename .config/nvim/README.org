@@ -450,7 +450,7 @@ Neovim highlights is a life saver when working with new colorschemes.
 It is an absolute most have for me. Just do SPC c h to toggle it on and off
 #+begin_src lua  :tangle after/plugin/colors.lua
 function ColorMyPencils(color)
-         color = color or "rose-pine"
+         color = color or "iceberg"
 	 vim.cmd.colorscheme(color)
         -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
         -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
