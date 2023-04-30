@@ -83,342 +83,342 @@ keys = [
               desc='Run rofi'
              ),
 
-         #KEYS_GROUP Launch applications with super + key
-         Key([mod, ], "s", #Take Screenshot
-             lazy.spawn("flameshot gui"),
-             desc='flameshot'
-             ),
-         Key([mod, ], "b", #Brave fullscreen
-             lazy.spawn(BROWSER2),
-             desc='Launch browser2'
-             ),
-         Key([mod, ], "i", #lxappearance
-             lazy.spawn("lxappearance"),
-             desc='theme settings'
-             ),
-         Key([mod, ], "o", #Launch OBS
-             lazy.spawn("obs"),
-             desc='OBS studio'
-             ),
-         Key([mod, ], "t", #Launch Terminal
-             lazy.spawn( MYTERM_NORMAL ),
-             desc='kitty terminal'
-             ),
-         Key([mod, ], "g", #Launch Gimp
-             lazy.spawn( "gimp" ),
-             desc='run gimp'
-             ),
-         Key([mod], "Return", #Run Terminal
-             lazy.spawn( MYTERM ),
-             desc='Launches My Terminal'
-              ),
+#KEYS_GROUP Launch applications with super + key
+Key([mod, ], "s", #Take Screenshot
+    lazy.spawn("flameshot gui"),
+    desc='flameshot'
+    ),
+Key([mod, ], "b", #Brave fullscreen
+    lazy.spawn(BROWSER2),
+    desc='Launch browser2'
+    ),
+Key([mod, ], "i", #lxappearance
+    lazy.spawn("lxappearance"),
+    desc='theme settings'
+    ),
+Key([mod, ], "o", #Launch OBS
+    lazy.spawn("obs"),
+    desc='OBS studio'
+    ),
+Key([mod, ], "t", #Launch Terminal
+    lazy.spawn( MYTERM_NORMAL ),
+    desc='kitty terminal'
+    ),
+Key([mod, ], "g", #Launch Gimp
+    lazy.spawn( "gimp" ),
+    desc='run gimp'
+    ),
+Key([mod], "Return", #Run Terminal
+    lazy.spawn( MYTERM ),
+    desc='Launches My Terminal'
+     ),
 
-         #KEYS_GROUP Launch applications with super + shift + key
-         Key([mod, "shift"], "y", #Run Graphical Text editor
-             lazy.spawn( EDITOR ),
-             desc='Launch My Graphical Editor'
-             ),
-         Key([mod, "shift"], "w", #Browser 1
-             lazy.spawn(BROWSER1),
-             desc='Launch browser1'
-             ),
-         Key([mod, "shift"], "v", #Launch Virt-Manager
-             lazy.spawn(VIRTMAN),
-             desc='virt-manager'
-             ),
-         Key([mod, "shift"], "e", #Launch your filemanager
-             lazy.spawn(FILE_MANAGER),
-             desc='Terminal File Manager'
-             ),
-         Key([mod, "shift"], "Return", #Launch your Graphical filemanager
-             lazy.spawn(GUI_FILE_MANAGER),
-             desc='Launch Graphical FileManager'
-             ),
-         Key([mod, "shift"], "g", #Launch kdenlive
-             lazy.spawn("kdenlive"),
-             desc='Launch kdenlive'
-             ),
-         Key([mod, "shift"], "d", #Launch your text editor
-             lazy.spawn(EDITOR),
-             desc='Launch Your text editor'
-             ),
-         Key([mod, "shift"], "o", #Launch gparted
-             lazy.spawn("Gparted"),
-             desc='Launch Gparted'
-             ),
+#KEYS_GROUP Launch applications with super + shift + key
+Key([mod, "shift"], "y", #Run Graphical Text editor
+    lazy.spawn( EDITOR ),
+    desc='Launch My Graphical Editor'
+    ),
+Key([mod, "shift"], "w", #Browser 1
+    lazy.spawn(BROWSER1),
+    desc='Launch browser1'
+    ),
+Key([mod, "shift"], "v", #Launch Virt-Manager
+    lazy.spawn(VIRTMAN),
+    desc='virt-manager'
+    ),
+Key([mod, "shift"], "e", #Launch your filemanager
+    lazy.spawn(FILE_MANAGER),
+    desc='Terminal File Manager'
+    ),
+Key([mod, "shift"], "Return", #Launch your Graphical filemanager
+    lazy.spawn(GUI_FILE_MANAGER),
+    desc='Launch Graphical FileManager'
+    ),
+Key([mod, "shift"], "g", #Launch kdenlive
+    lazy.spawn("kdenlive"),
+    desc='Launch kdenlive'
+    ),
+Key([mod, "shift"], "d", #Launch your text editor
+    lazy.spawn(EDITOR),
+    desc='Launch Your text editor'
+    ),
+Key([mod, "shift"], "o", #Launch gparted
+    lazy.spawn("Gparted"),
+    desc='Launch Gparted'
+    ),
 
-         #KEYS_GROUP Launch application with alt + control + key
-         Key(["mod1", "control"], "t", #Launch TaskManager
-             lazy.spawn("lxtask"),
-             desc='Launch LxTask'
-             ),
-         Key(["mod1", "control"], "g", #Launch Steam
-             lazy.spawn("steam"),
-             desc='Launch Steam'
-             ),
-         Key(["mod1", "control"], "b", #Launch Timeshift
-             lazy.spawn(BACKUP),
-             desc='Launch timeshift'
-             ),
-         Key(["mod1", "control"], "p", #Launch Pavucontrol
-             lazy.spawn("pavucontrol"),
-             desc='Launch Pavucontrol'
-             ),
-         Key(["mod1", "control"], "w", #Launch Bitwarden
-             lazy.spawn("flatpak run com.bitwarden.desktop"),
-             desc='Launch Bitwarden'
-             ),
+#KEYS_GROUP Launch application with alt + control + key
+Key(["mod1", "control"], "t", #Launch TaskManager
+    lazy.spawn("lxtask"),
+    desc='Launch LxTask'
+    ),
+Key(["mod1", "control"], "g", #Launch Steam
+    lazy.spawn("steam"),
+    desc='Launch Steam'
+    ),
+Key(["mod1", "control"], "b", #Launch Timeshift
+    lazy.spawn(BACKUP),
+    desc='Launch timeshift'
+    ),
+Key(["mod1", "control"], "p", #Launch Pavucontrol
+    lazy.spawn("pavucontrol"),
+    desc='Launch Pavucontrol'
+    ),
+Key(["mod1", "control"], "w", #Launch Bitwarden
+    lazy.spawn("flatpak run com.bitwarden.desktop"),
+    desc='Launch Bitwarden'
+    ),
 
-         #KEYS_GROUP Some of my custom scripts
-         Key([mod, ],"F12", #Set a Random wallpaper
-             lazy.spawn(SCRIPT_PATH + "/set-random-bg"),
-             desc='Set a random wallpaper'
-             ),
-         Key([mod, ],"F11", #Kills and starts picom compositor
-             lazy.spawn(SCRIPT_PATH + "/picom-control"),
-             desc='kills and start picom'
-             ),
-         Key([mod, ],"F10", #Change display layout,for my laptop when I connect external Screens
-             lazy.spawn(SCRIPT_PATH + "/change-display-layout.sh"),
-             desc='Change Display layout, I use it when I connect external Screens to my laptop'
-             ),
+#KEYS_GROUP Some of my custom scripts
+Key([mod, ],"F12", #Set a Random wallpaper
+    lazy.spawn(SCRIPT_PATH + "/set-random-bg"),
+    desc='Set a random wallpaper'
+    ),
+Key([mod, ],"F11", #Kills and starts picom compositor
+    lazy.spawn(SCRIPT_PATH + "/picom-control"),
+    desc='kills and start picom'
+    ),
+Key([mod, ],"F10", #Change display layout,for my laptop when I connect external Screens
+    lazy.spawn(SCRIPT_PATH + "/change-display-layout.sh"),
+    desc='Change Display layout, I use it when I connect external Screens to my laptop'
+    ),
 
-         #KEYS_GROUP Media control
-         Key([ ],"XF86AudioPlay", #Resume/Stop
-             lazy.spawn(SCRIPT_PATH + "/mediaplay"),
-             desc='Pause'
-             ),
-         Key([ ],"XF86AudioNext", #Next
-             lazy.spawn(SCRIPT_PATH + "/medianext"),
-             desc='Next'
-             ),
-         Key([ ],"XF86AudioPrev", #Prev
-             lazy.spawn(SCRIPT_PATH + "/mediaprev"),
-             desc='Previous'
-             ),
-         Key([ ],"XF86AudioMute", #Mute Audio
-             lazy.spawn(SCRIPT_PATH + "/mute-unmute.sh"),
-             desc='Previous'
-             ),
-         Key([ ],"XF86AudioLowerVolume", #Lower Volume
-             lazy.spawn(SCRIPT_PATH + "/volume-down.sh"),
-             desc='Previous'
-             ),
-         Key([ ],"XF86AudioRaiseVolume", #Raise Volume``
-             lazy.spawn(SCRIPT_PATH + "/volume-up.sh"),
-             desc='Previous'
-             ),
+#KEYS_GROUP Media control
+Key([ ],"XF86AudioPlay", #Resume/Stop
+    lazy.spawn(SCRIPT_PATH + "/mediaplay"),
+    desc='Pause'
+    ),
+Key([ ],"XF86AudioNext", #Next
+    lazy.spawn(SCRIPT_PATH + "/medianext"),
+    desc='Next'
+    ),
+Key([ ],"XF86AudioPrev", #Prev
+    lazy.spawn(SCRIPT_PATH + "/mediaprev"),
+    desc='Previous'
+    ),
+Key([ ],"XF86AudioMute", #Mute Audio
+    lazy.spawn(SCRIPT_PATH + "/mute-unmute.sh"),
+    desc='Previous'
+    ),
+Key([ ],"XF86AudioLowerVolume", #Lower Volume
+    lazy.spawn(SCRIPT_PATH + "/volume-down.sh"),
+    desc='Previous'
+    ),
+Key([ ],"XF86AudioRaiseVolume", #Raise Volume``
+    lazy.spawn(SCRIPT_PATH + "/volume-up.sh"),
+    desc='Previous'
+    ),
 
-         #KEYS_GROUP Switch focus to specific monitor (out of two)
-         Key([mod], "w", #Move focus to monitor 1
-             lazy.to_screen(0),
-             desc='Keyboard focus to monitor 1'
-             ),
-         Key([mod], "e", #Move focus to moinitor 2
-             lazy.to_screen(1),
-             desc='Keyboard focus to monitor 2'
-             ),
-         Key([mod, "control"], "r",  #Move focus to moinitor 3
-             lazy.to_screen(2),
-             desc='Keyboard focus to monitor 3'
-             ),
+#KEYS_GROUP Switch focus to specific monitor (out of two)
+Key([mod], "w", #Move focus to monitor 1
+    lazy.to_screen(0),
+    desc='Keyboard focus to monitor 1'
+    ),
+Key([mod], "e", #Move focus to moinitor 2
+    lazy.to_screen(1),
+    desc='Keyboard focus to monitor 2'
+    ),
+Key([mod, "control"], "r",  #Move focus to moinitor 3
+    lazy.to_screen(2),
+    desc='Keyboard focus to monitor 3'
+    ),
 
-         #Switch focus of monitors
-         Key([mod], "period", #Move focus to the next monitor
-             lazy.next_screen(),
-             desc='Move focus to next monitor'
-             ),
-         Key([mod], "comma", #Move focus to the prev monitor
-             lazy.prev_screen(),
-             desc='Move focus to prev monitor'
-             ),
+#Switch focus of monitors
+Key([mod], "period", #Move focus to the next monitor
+    lazy.next_screen(),
+    desc='Move focus to next monitor'
+    ),
+Key([mod], "comma", #Move focus to the prev monitor
+    lazy.prev_screen(),
+    desc='Move focus to prev monitor'
+    ),
 
-         #KEYS_GROUP Treetab controls
-         Key([mod, "control"], "h", #Move up a section in treetab
-             lazy.layout.move_left(),
-             desc='Move up a section in treetab'
-             ),
-         Key([mod, "shift"], "l", #Move up a section in treetab
-             lazy.layout.move_right(),
-             desc='Move down a section in treetab'
-             ),
+#KEYS_GROUP Treetab controls
+Key([mod, "control"], "h", #Move up a section in treetab
+    lazy.layout.move_left(),
+    desc='Move up a section in treetab'
+    ),
+Key([mod, "shift"], "l", #Move up a section in treetab
+    lazy.layout.move_right(),
+    desc='Move down a section in treetab'
+    ),
 
-         #KEYS_GROUP Window controls
-         Key([mod], "Tab", #Toggle through layouts
-             lazy.next_layout(),
-             desc='Toggle through layouts'
-             ),
-         Key([mod,], "q", #Close window
-             lazy.window.kill(),
-             desc='Kill active window'
-             ),
-         Key([mod], "k", #Move focus down a pane
-             lazy.layout.up(),
-             desc='Move focus down in current stack pane'
-             ),
-         Key([mod], "j", #Move focus up a pane
-             lazy.layout.down(),
-             desc='Move focus up in current stack pane'
-             ),
-         Key([mod], "h", #Shrink window in tilling layout
-             lazy.layout.left(),
-             desc='Shrink window (MonadTall), decrease number in master pane (Tile)'
-             ),
-         Key([mod], "l", #Expand window in tilling layout
-             lazy.layout.right(),
-             desc='Expand window (MonadTall), increase number in master pane (Tile)'
-             ),
-         Key([mod], "n", #Normalize window size ratio
-             lazy.layout.normalize(),
-             desc='normalize window size ratios'
-             ),
-         Key([mod], "m", #Toggle window between minimum and maximum size
-             lazy.layout.maximize(),
-             desc='toggle window between minimum and maximum sizes'
-             ),
-         Key(["mod1", ], "m", #Minimize window
-              lazy.spawn("Qminimize -m"),
-              desc='Minimize window'
-             ),
-         Key([mod], "f", #Toggle fullscreen
-             lazy.window.toggle_fullscreen(),
-             desc='toggle fullscreen'
-             ),
-         Key([mod, "shift"], "j", #Move windows down in current stack
-             lazy.layout.shuffle_down(),
-             lazy.layout.section_jown(),
-             desc='Move windows down in current stack'
-             ),
-         Key([mod, "shift"], "k", #Move widnows up in current stack
-             lazy.layout.shuffle_up(),
-             lazy.layout.section_up(),
-             desc='Move windows up in current stack'
-             ),
-         Key([mod, "shift"], "l", #Move windows down in current stack
-             lazy.layout.shuffle_right(),
-             desc='Move windows down in current stack'
-             ),
-         Key([mod, "shift"], "h", #Move widnows up in current stack
-             lazy.layout.shuffle_left(),
-             desc='Move windows up in current stack'
-             ),
-         Key([mod, "shift"], "f", #Toggle floating
-             lazy.window.toggle_floating(),
-             desc='toggle floating'
-             ),
-         Key([mod, "mod1"], "l", #change the position of the window to the right
-             lazy.layout.flip_right(),
-             desc='change the position of the window to the right'
-             ),
-         Key([mod, "mod1"], "h", #change the position of the window to the left
-             lazy.layout.flip_left(),
-             desc='change the position of the window to the left'
-             ),
-         Key([mod, "mod1"], "j", #change the position of the window down
-             lazy.layout.flip_down(),
-             desc='change the position of the window down'
-             ),
-         Key([mod, "mod1"], "k", #change the position of the window up
-             lazy.layout.flip_up(),
-             desc='change the position of the window up'
-             ),
-         Key([mod, "control"], "h", #increase the size of the window to the left
-             lazy.layout.grow_left(),
-             desc='increase the size of the window to the left'
-             ),
-         Key([mod, "control"], "l", #increase the size of the window to the left
-             lazy.layout.grow_right(),
-             desc='increase the size of the window to the left'
-             ),
-         Key([mod, "control"], "j", #increase the size of the window downwards
-             lazy.layout.grow_down(),
-             desc='increase the size of the window downwards'
-             ),
-         Key([mod, "control"], "k", #increase the size of the window upwards
-             lazy.layout.grow_up(),
-             desc='increase the size of the window upwards'
-             ),
+#KEYS_GROUP Window controls
+Key([mod], "Tab", #Toggle through layouts
+    lazy.next_layout(),
+    desc='Toggle through layouts'
+    ),
+Key([mod,], "q", #Close window
+    lazy.window.kill(),
+    desc='Kill active window'
+    ),
+Key([mod], "k", #Move focus down a pane
+    lazy.layout.up(),
+    desc='Move focus down in current stack pane'
+    ),
+Key([mod], "j", #Move focus up a pane
+    lazy.layout.down(),
+    desc='Move focus up in current stack pane'
+    ),
+Key([mod], "h", #Shrink window in tilling layout
+    lazy.layout.left(),
+    desc='Shrink window (MonadTall), decrease number in master pane (Tile)'
+    ),
+Key([mod], "l", #Expand window in tilling layout
+    lazy.layout.right(),
+    desc='Expand window (MonadTall), increase number in master pane (Tile)'
+    ),
+Key([mod], "n", #Normalize window size ratio
+    lazy.layout.normalize(),
+    desc='normalize window size ratios'
+    ),
+Key([mod], "m", #Toggle window between minimum and maximum size
+    lazy.layout.maximize(),
+    desc='toggle window between minimum and maximum sizes'
+    ),
+Key(["mod1", ], "m", #Minimize window
+     lazy.spawn("Qminimize -m"),
+     desc='Minimize window'
+    ),
+Key([mod], "f", #Toggle fullscreen
+    lazy.window.toggle_fullscreen(),
+    desc='toggle fullscreen'
+    ),
+Key([mod, "shift"], "j", #Move windows down in current stack
+    lazy.layout.shuffle_down(),
+    lazy.layout.section_jown(),
+    desc='Move windows down in current stack'
+    ),
+Key([mod, "shift"], "k", #Move widnows up in current stack
+    lazy.layout.shuffle_up(),
+    lazy.layout.section_up(),
+    desc='Move windows up in current stack'
+    ),
+Key([mod, "shift"], "l", #Move windows down in current stack
+    lazy.layout.shuffle_right(),
+    desc='Move windows down in current stack'
+    ),
+Key([mod, "shift"], "h", #Move widnows up in current stack
+    lazy.layout.shuffle_left(),
+    desc='Move windows up in current stack'
+    ),
+Key([mod, "shift"], "f", #Toggle floating
+    lazy.window.toggle_floating(),
+    desc='toggle floating'
+    ),
+Key([mod, "mod1"], "l", #change the position of the window to the right
+    lazy.layout.flip_right(),
+    desc='change the position of the window to the right'
+    ),
+Key([mod, "mod1"], "h", #change the position of the window to the left
+    lazy.layout.flip_left(),
+    desc='change the position of the window to the left'
+    ),
+Key([mod, "mod1"], "j", #change the position of the window down
+    lazy.layout.flip_down(),
+    desc='change the position of the window down'
+    ),
+Key([mod, "mod1"], "k", #change the position of the window up
+    lazy.layout.flip_up(),
+    desc='change the position of the window up'
+    ),
+Key([mod, "control"], "h", #increase the size of the window to the left
+    lazy.layout.grow_left(),
+    desc='increase the size of the window to the left'
+    ),
+Key([mod, "control"], "l", #increase the size of the window to the left
+    lazy.layout.grow_right(),
+    desc='increase the size of the window to the left'
+    ),
+Key([mod, "control"], "j", #increase the size of the window downwards
+    lazy.layout.grow_down(),
+    desc='increase the size of the window downwards'
+    ),
+Key([mod, "control"], "k", #increase the size of the window upwards
+    lazy.layout.grow_up(),
+    desc='increase the size of the window upwards'
+    ),
 
-         #KEYS_GROUP Stack controls
-         Key([mod, "shift"], "Tab", #Switch which side main pane occupies, XmonadTall
-             lazy.layout.rotate(),
-             lazy.layout.flip(),
-             desc='Switch which side main pane occupies (XmonadTall)'
-             ),
-         Key([mod, "control"], "space", #Switch window focus to other panes of stack
-             lazy.layout.next(),
-             desc='Switch window focus to other pane(s) of stack'
-             ),
-         Key([mod, "shift"], "space", #Toggle between split and unsplit sides of stack
-             lazy.layout.toggle_split(),
-             desc='Toggle between split and unsplit sides of stack'
-             ),
+#KEYS_GROUP Stack controls
+Key([mod, "shift"], "Tab", #Switch which side main pane occupies, XmonadTall
+    lazy.layout.rotate(),
+    lazy.layout.flip(),
+    desc='Switch which side main pane occupies (XmonadTall)'
+    ),
+Key([mod, "control"], "space", #Switch window focus to other panes of stack
+    lazy.layout.next(),
+    desc='Switch window focus to other pane(s) of stack'
+    ),
+Key([mod, "shift"], "space", #Toggle between split and unsplit sides of stack
+    lazy.layout.toggle_split(),
+    desc='Toggle between split and unsplit sides of stack'
+    ),
 
-         #KEYS_GROUP keybindings to control tmux without keychords
-         Key(["mod1",], "1", #Move to tmux window 1
-             lazy.spawn(TMUX_PATH + "/window-1"),
-             ),
-         Key(["mod1",], "2", #Move to tmux window 2
-             lazy.spawn(TMUX_PATH + "/window-2"),
-             ),
-         Key(["mod1"], "3", #Move to tmux window 3
-             lazy.spawn(TMUX_PATH + "/window-3"),
-             ),
-         Key(["mod1",], "4", #Move to tmux window 4
-             lazy.spawn(TMUX_PATH + "/window-4"),
-             ),
-         Key(["mod1",], "5", #Move to tmux window 5
-             lazy.spawn(TMUX_PATH + "/window-5"),
-             ),
-         Key(["mod1",], "6", #Move to tmux window 6
-             lazy.spawn(TMUX_PATH + "/window-6"),
-             ),
-         Key(["mod1",], "7", #Move to tmux window 7
-             lazy.spawn(TMUX_PATH + "/window-7"),
-             ),
-         Key(["mod1",], "8", #Move to tmux window 8
-             lazy.spawn(TMUX_PATH + "/window-8"),
-             ),
-         Key(["mod1",], "9", #Move to tmux window 9
-             lazy.spawn(TMUX_PATH + "/window-9"),
-             ),
-         Key(["control", "mod1"], "v", #create horizontal split
-             lazy.spawn("tmux splitw -h"),
-             ),
-         Key(["control", "mod1"], "s", #create vertical split
-             lazy.spawn("tmux splitw -v"),
-             ),
+#KEYS_GROUP keybindings to control tmux without keychords
+Key(["mod1",], "1", #Move to tmux window 1
+    lazy.spawn(TMUX_PATH + "/window-1"),
+    ),
+Key(["mod1",], "2", #Move to tmux window 2
+    lazy.spawn(TMUX_PATH + "/window-2"),
+    ),
+Key(["mod1"], "3", #Move to tmux window 3
+    lazy.spawn(TMUX_PATH + "/window-3"),
+    ),
+Key(["mod1",], "4", #Move to tmux window 4
+    lazy.spawn(TMUX_PATH + "/window-4"),
+    ),
+Key(["mod1",], "5", #Move to tmux window 5
+    lazy.spawn(TMUX_PATH + "/window-5"),
+    ),
+Key(["mod1",], "6", #Move to tmux window 6
+    lazy.spawn(TMUX_PATH + "/window-6"),
+    ),
+Key(["mod1",], "7", #Move to tmux window 7
+    lazy.spawn(TMUX_PATH + "/window-7"),
+    ),
+Key(["mod1",], "8", #Move to tmux window 8
+    lazy.spawn(TMUX_PATH + "/window-8"),
+    ),
+Key(["mod1",], "9", #Move to tmux window 9
+    lazy.spawn(TMUX_PATH + "/window-9"),
+    ),
+Key(["control", "mod1"], "v", #create horizontal split
+    lazy.spawn("tmux splitw -h"),
+    ),
+Key(["control", "mod1"], "s", #create vertical split
+    lazy.spawn("tmux splitw -v"),
+    ),
 
-         #KEYS_GROUP Launch terminal based programs using the key chord CONTROL+e followed by 'key'
-         KeyChord(["control"], "e", [
-             Key([], "d", #Launch dired emacs file manager
-                 lazy.spawn(FILE_MANAGER),
-             desc='Open file manager in emacs'
-             ),
-             Key([], "s", #Launch Eshell in emacs
-                 lazy.spawn("emacsclient -c -a '' --eval '(eshell)'"),
-             desc='Launch Eshell in emacs'
-             ),
-             Key([], "h", #Launch htop
-                 lazy.spawn(SYSMON),
-             desc='Launch HTOP'
-             ),
-             Key([], "r", #Launch ranger
-                 lazy.spawn("kitty --class=ranger -e ranger"),
-             desc='Launch Ranger'
-             ),
-             Key([], "e", #Launch Emacs
-                 lazy.spawn("emacsclient -c -a 'emacs'"),
-             desc='Launch Emacs'
-             ),
-             Key([], "t", #Change rofi theme
-                 lazy.spawn("rofi-theme-selector"),
-             desc='Change Rofi Theme'
-             ),],
+#KEYS_GROUP Launch terminal based programs using the key chord CONTROL+e followed by 'key'
+KeyChord(["control"], "e", [
+    Key([], "d", #Launch dired emacs file manager
+        lazy.spawn(FILE_MANAGER),
+    desc='Open file manager in emacs'
+    ),
+    Key([], "s", #Launch Eshell in emacs
+        lazy.spawn("emacsclient -c -a '' --eval '(eshell)'"),
+    desc='Launch Eshell in emacs'
+    ),
+    Key([], "h", #Launch htop
+        lazy.spawn(SYSMON),
+    desc='Launch HTOP'
+    ),
+    Key([], "r", #Launch ranger
+        lazy.spawn("kitty --class=ranger -e ranger"),
+    desc='Launch Ranger'
+    ),
+    Key([], "e", #Launch Emacs
+        lazy.spawn("emacsclient -c -a 'emacs'"),
+    desc='Launch Emacs'
+    ),
+    Key([], "t", #Change rofi theme
+        lazy.spawn("rofi-theme-selector"),
+    desc='Change Rofi Theme'
+    ),],
 
-         name="Action: "),
+name="Action: "),
 
-         #KEYS_GROUP Dmenu scripts launched using the key chord SUPER+p followed by 'key'
+#KEYS_GROUP Dmenu scripts launched using the key chord SUPER+p followed by 'key'
          KeyChord([mod], "p", [
              Key([], "e", #Choose config file to edit
                  lazy.spawn(DMENU_PATH + "/dm-editconfig"),
@@ -469,7 +469,7 @@ keys = [
                  desc='search the web'
                  ),
              Key([], "g", #Change the overall system theme
-                lazy.spawn(DMENU_PATH + "/change-theme"),
+                lazy.spawn(DMENU_PATH + "/dm-theme"),
                 desc='Change the overall system theme'
                 ),
              Key([], "f", #opens my favorite websites in fullscreen mode with minimal UI
@@ -481,7 +481,7 @@ keys = [
                  desc='creates or remove timeshift backup'
                  ),
              Key([], "q", #Opens a VM of your choice in KVM
-                 lazy.spawn(DMENU_PATH + "/dm-open-virt-cons"),
+                 lazy.spawn(DMENU_PATH + "/dm-virt-manager"),
                  desc='Opens a VM of your choice in KVM'
                  ),
              Key([], "j", #Script for pass
@@ -568,6 +568,7 @@ layouts = [
          section_padding = 10,
          level_shift = 8,
          vspace = 5,
+
          margin_y = 20,
          panel_width = 150
          ),
@@ -578,15 +579,6 @@ layouts = [
 
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
-##### DEFAULT WIDGET SETTINGS #####
-widget_defaults = dict(
-    font="Ubuntu Mono",
-    fontsize = 13,
-    padding = 2,
-    background=colors[2]
-)
-extension_defaults = widget_defaults.copy()
-
 def init_widgets_list():
     widgets_list = [
              widget.Sep(
@@ -596,7 +588,7 @@ def init_widgets_list():
                        background = colors[0]
                        ),
              widget.Image(
-                        filename = "~/.config/qtile/icons/pop-os-rose-pine.png",
+                        filename = "~/.config/qtile/icons/pop-os-iceberg.png",
                         scale = "False",
                         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(MYTERM_NORMAL)},
                         padding = 10
@@ -614,7 +606,7 @@ def init_widgets_list():
                        margin_x = 0,
                        padding_y = 5,
                        padding_x = 3,
-                       borderwidth = 3,
+                       borderwidth = 2,
                        active = colors[5],
                        inactive = colors[1],
                        rounded = "true",
@@ -695,30 +687,30 @@ def init_widgets_list():
              widget.TextBox(
                        text = '',
                        background = colors[0],
-                       foreground = colors[4],
+                       foreground = colors[2],
                        padding = -1,
                        fontsize = 45
                        ),
              widget.Clock(
                        foreground = colors[0],
-                       background = colors[4],
+                       background = colors[2],
                        format = "  %A, %B %d/%Y - %H:%M ",
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("yad --calendar")},
                        ),
              widget.KeyboardLayout(
                        foreground = colors[0],
-                       background = colors[4],
+                       background = colors[2],
                        configured_keyboards = ['us', 'se', 'az'],
                        padding = 10,
                        ),
              widget.NvidiaSensors(
                        foreground = colors[0],
-                       background = colors[4],
+                       background = colors[2],
                        threshold = 85,
                        ),
              widget.TextBox(
                        text = '',
-                       background = colors[4],
+                       background = colors[2],
                        foreground = colors[0],
                        padding = -1,
                        fontsize = 45
@@ -761,13 +753,13 @@ def init_widgets_list():
                        ),
              widget.OpenWeather(
                        background = colors[0],
-                       foreground = colors[5],
+                       foreground = colors[9],
                        cityid = "598316",
                        format = '{location_city}: {main_temp} {units_temperature}°  {weather_details}',
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("brave-browser https://openweathermap.org/city/598316")},
                        decorations = [
                             BorderDecoration (
-                            colour = colors[5],
+                            colour = colors[9],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
@@ -816,23 +808,23 @@ def init_widgets_list():
              widget.TextBox(
                        text = '★',
                        background = colors[0],
-                       foreground = colors[2],
+                       foreground = colors[9],
                        padding = -1,
                        decorations = [
                             BorderDecoration (
-                            colour = colors[2],
+                            colour = colors[9],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
                        ),
              widget.CPU(
-                         foreground = colors[2],
+                         foreground = colors[9],
                          background = colors[0],
                          padding = 8,
                          format = '{load_percent}%',
                          decorations = [
                             BorderDecoration (
-                            colour = colors[2],
+                            colour = colors[9],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
@@ -844,28 +836,28 @@ def init_widgets_list():
                        padding = -1,
                        fontsize = 45
                        ),
-                         widget.TextBox(
-                         text = " 🌡",
-                         padding = 6,
-                         foreground = colors[6],
-                         background = colors[0],
-                         fontsize = 11,
-                         tag_sensor =  "temp1",
-                         decorations = [
-                            BorderDecoration (
-                            colour = colors[6],
-                            border_width = [0, 0, 2, 0],
-                            padding_x = 0, )
-                            ],
+             widget.TextBox(
+                       text = " 🌡",
+                       padding = 6,
+                       foreground = colors[8],
+                       background = colors[0],
+                       fontsize = 11,
+                       tag_sensor =  "temp1",
+                       decorations = [
+                          BorderDecoration (
+                          colour = colors[8],
+                          border_width = [0, 0, 2, 0],
+                          padding_x = 0, )
+                          ],
                        ),
              widget.ThermalSensor(
                         background = colors[0],
-                        foreground = colors[6],
+                        foreground = colors[8],
                         tag_sensor = "Tctl",
                         threshold = 75,
                         decorations = [
                             BorderDecoration (
-                            colour = colors[6],
+                            colour = colors[8],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
@@ -879,25 +871,25 @@ def init_widgets_list():
                        ),
              widget.TextBox(
                        text = " 🖬",
-                       foreground = colors[3],
+                       foreground = colors[9],
                        background = colors[0],
                        padding = 0,
                        fontsize = 14,
                        decorations = [
                             BorderDecoration (
-                            colour = colors[3],
+                            colour = colors[9],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
                        ),
              widget.Memory(
-                       foreground = colors[3],
+                       foreground = colors[9],
                        background = colors[0],
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(SYSMON)},
                        padding = 5,
                        decorations = [
                             BorderDecoration (
-                            colour = colors[3],
+                            colour = colors[9],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
@@ -912,12 +904,12 @@ def init_widgets_list():
              widget.TextBox(
                      text = " ⟳",
                      padding = 2,
-                     foreground = colors[5],
+                     foreground = colors[8],
                      background = colors[0],
                      fontsize = 14,
                      decorations = [
                             BorderDecoration (
-                            colour = colors[5],
+                            colour = colors[8],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
@@ -926,12 +918,12 @@ def init_widgets_list():
                      update_interval = 1800,
                      distro = "Arch",
                      display_format = "{updates} Updates",
-                     colour_have_updates = colors[5],
-                     colour_no_updates = colors[5],
-                     foreground = colors[5],
+                     colour_have_updates = colors[8],
+                     colour_no_updates = colors[8],
+                     foreground = colors[8],
                      decorations = [
                             BorderDecoration (
-                            colour = colors[5],
+                            colour = colors[8],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
@@ -947,24 +939,24 @@ def init_widgets_list():
                        ),
              widget.TextBox(
                       text = "♫  Vol:",
-                      foreground = colors[4],
+                      foreground = colors[9],
                       background = colors[0],
                       padding = 0,
                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("pavucontrol")},
                       decorations = [
                             BorderDecoration (
-                            colour = colors[4],
+                            colour = colors[9],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
                        ),
              widget.Volume(
-                      foreground = colors[4],
+                      foreground = colors[9],
                       background = colors[0],
                       padding = 5,
                       decorations = [
                             BorderDecoration (
-                            colour = colors[4],
+                            colour = colors[9],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
@@ -979,12 +971,12 @@ def init_widgets_list():
              widget.TextBox(
                         text = '',
                         background = colors[0],
-                        foreground = colors[2],
+                        foreground = colors[8],
                         padding = 4,
                         fontsize = 15,
                         decorations = [
                             BorderDecoration (
-                            colour = colors[2],
+                            colour = colors[8],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],

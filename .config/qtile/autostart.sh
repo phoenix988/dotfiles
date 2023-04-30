@@ -28,6 +28,7 @@ steam -silent -no-browser &
 discord &
 lutris &
 blueman-applet &
+mullvad-vpn &
 
 
 

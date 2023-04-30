@@ -7,12 +7,13 @@ layout_colors = [["#EBBCBA", "#EBBCBA"],
 
 colors = [["#191724", "#191724"],
           ["#6E6A86", "#6E6A86"],
-          ["#C4A7E7", "#C4A7E7"],
+          ["#EBBCBA", "#EBBCBA"],
           ["#31748F", "#31748F"],
-          ["#EB6F92", "#EB6F92"],
+          ["#AB355A", "#AB355A"],
           ["#EBBCBA", "#EBBCBA"],
-          ["#9CCFD8", "#9CCFD8"],
           ["#EBBCBA", "#EBBCBA"],
+          ["#EBBCBA", "#EBBCBA"],
+          ["#C4A7E7", "#C4A7E7"],
           ["#EB6F92", "#EB6F92"]]
 
 

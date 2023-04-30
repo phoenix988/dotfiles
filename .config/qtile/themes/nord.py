@@ -10,9 +10,10 @@ colors = [["#2E3440", "#2E3440"],
           ["#B48EAD", "#B48EAD"],
           ["#A3BE8C", "#A3BE8C"],
           ["#81A1C1", "#81A1C1"],
-          ["#EBCB8B", "#EBCB8B"],
+          ["#FFFACD", "#FFFACD"],
           ["#88C0D0", "#88C0D0"],
           ["#ecbbfb", "#ecbbfb"],
-          ["#BF616A", "#BF616A"]]
+          ["#FFFACD", "#FFFACD"],
+          ["#FFFACD", "#FFFACD"]]
 
 
