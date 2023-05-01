@@ -1,44 +1,3 @@
-#+title: Qtile
-#+author: Karl Fredin
-#+DESCRIPTION: MY CUSTOME QTILE CONFIG
-
-[[file:./images/qtile.png]]
-
-
-* TABLE OF CONTENT
-- [[ABOUT]]
-- [[IMPORTS]]
-- [[VARIABLES]]
-- [[KEYBINDINGS]]
-  - [[GENERAL]]
-  - [[APPLICATIONS]]
-  - [[SCRIPTS]]
-  - [[MEDIA CONTROL]]
-  - [[MONITOR CONTROL]]
-  - [[WINDOW CONTROL]]
-  - [[TMUX]]
-  - [[EMACS]]
-  - [[RUN SCRIPTS]]
-- [[WORKSPACES]]
-- [[LAYOUTS]]
-- [[WIDGETS]]
-  - [[SLICE]]
-- [[MOUSE ACTION]]
-- [[FLOATING RULES]]
-- [[STARTUP HOOK]]
-
-** ABOUT
-This is my qtile configuration. Qtile is a Window Manager written in python.
-So in order to configure this you need to write python code but its not very difficult
-to understand an config thats already written. It's very begginner friendly an easy to understand
-What all options are doing. But of course if you know python you can do alot of customizations
-With this Window Manager. It was my favorite Window Manager but now since I tried hyprland that issues
-my new all time favorite window manager
-
-** IMPORTS
-Here is all the libaries I import that are used later in the config
-Also imports the color theme I will use. which is just a color.py file
-#+BEGIN_SRC python :tangle config.py
 ##____  _                      _
 #|  _ \| |__   ___   ___ _ __ (_)_  __
 #| |_) | '_ \ / _ \ / _ \ '_ \| \ \/ /
@@ -62,15 +21,6 @@ from color import colors, layout_colors
 # Importing qtile_extras libaries
 from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration, PowerLineDecoration, BorderDecoration
-
-#+END_SRC
-
-** VARIABLES
-Here is all my variables used later in the script. So in case
-I wanna make changes all I need to do is to modify a variable.
-Like change terminal for example. So if you want to add a variable your
-can add it here.
-#+BEGIN_SRC python :tangle config.py
 
 # Define super key as variable
 mod = "mod4"
@@ -100,23 +50,7 @@ LOCKSCREEN =  "slock"
 DMENU_PATH = "/home/karl/.dmenu"
 SCRIPT_PATH = "/home/karl/.scripts/activated"
 TMUX_PATH = "/home/karl/.scripts/tmux"
-#+END_SRC
 
-
-** KEYBINDINGS
-Here you will configure all your prefered keybindings
-*** GENERAL
-| Keybinding        | DESCRIPTION            |
-|-------------------+------------------------|
-| SUPER + R         | Run Menu               |
-| SUPER + SPC       | Switch keyboard layout |
-| SUPER + SHIFT + R | Restart Qtile          |
-| SUPER + SHIFT + Q | Exit qtile             |
-| ALT + CONTROL + L | Lock your screen       |
-| SUPER + F1        | Kitty help             |
-| SUPER + F2        | Qtile Help             |
-
-#+BEGIN_SRC python :tangle config.py
 #START_KEYS
 keys = [
          #KEYS_GROUP Qtile
@@ -148,470 +82,343 @@ keys = [
               lazy.spawn("rofi -show drun -show-icons -display-drun \"Run : \" -drun-display-format \"{name}\""),
               desc='Run rofi'
              ),
-#+END_SRC
-*** APPLICATIONS
 
-| Keybinding        | DESCRIPTION      |
-|-------------------+------------------|
-| SUPER + S         | Restart Qtile    |
-| SUPER + B         | Exit qtile       |
-| SUPER + I         | Qtile Help       |
-| SUPER + O         | Kitty help       |
-| SUPER +  G        | Launch Gimp      |
-| SUPER + Enter     | Launch Terminal  |
+#KEYS_GROUP Launch applications with super + key
+Key([mod, ], "s", #Take Screenshot
+    lazy.spawn("flameshot gui"),
+    desc='flameshot'
+    ),
+Key([mod, ], "b", #Brave fullscreen
+    lazy.spawn(BROWSER2),
+    desc='Launch browser2'
+    ),
+Key([mod, ], "i", #lxappearance
+    lazy.spawn("lxappearance"),
+    desc='theme settings'
+    ),
+Key([mod, ], "o", #Launch OBS
+    lazy.spawn("obs"),
+    desc='OBS studio'
+    ),
+Key([mod, ], "t", #Launch Terminal
+    lazy.spawn( MYTERM_NORMAL ),
+    desc='kitty terminal'
+    ),
+Key([mod, ], "g", #Launch Gimp
+    lazy.spawn( "gimp" ),
+    desc='run gimp'
+    ),
+Key([mod], "Return", #Run Terminal
+    lazy.spawn( MYTERM ),
+    desc='Launches My Terminal'
+     ),
 
+#KEYS_GROUP Launch applications with super + shift + key
+Key([mod, "shift"], "y", #Run Graphical Text editor
+    lazy.spawn( EDITOR ),
+    desc='Launch My Graphical Editor'
+    ),
+Key([mod, "shift"], "w", #Browser 1
+    lazy.spawn(BROWSER1),
+    desc='Launch browser1'
+    ),
+Key([mod, "shift"], "v", #Launch Virt-Manager
+    lazy.spawn(VIRTMAN),
+    desc='virt-manager'
+    ),
+Key([mod, "shift"], "e", #Launch your filemanager
+    lazy.spawn(FILE_MANAGER),
+    desc='Terminal File Manager'
+    ),
+Key([mod, "shift"], "Return", #Launch your Graphical filemanager
+    lazy.spawn(GUI_FILE_MANAGER),
+    desc='Launch Graphical FileManager'
+    ),
+Key([mod, "shift"], "g", #Launch kdenlive
+    lazy.spawn("kdenlive"),
+    desc='Launch kdenlive'
+    ),
+Key([mod, "shift"], "d", #Launch your text editor
+    lazy.spawn(EDITOR),
+    desc='Launch Your text editor'
+    ),
+Key([mod, "shift"], "o", #Launch gparted
+    lazy.spawn("Gparted"),
+    desc='Launch Gparted'
+    ),
 
-| Keybinding            | DESCRIPTION                   |
-|-----------------------+-------------------------------|
-| SUPER + SHIFT + Y     | Launch Graphical Text Editor  |
-| SUPER + SHIFT + W     | Launch Browser1               |
-| SUPER + SHIFT + V     | Launch Virt-Manager           |
-| SUPER + SHIFT + E     | Launch Terminal file manager  |
-| SUPER + SHIFT + Enter | Launch Graphical file manager |
-| SUPER + SHIFT + G     | Launch Kdenlive               |
-| SUPER + SHIFT + D     | Launch Doom Emacs             |
+#KEYS_GROUP Launch application with alt + control + key
+Key(["mod1", "control"], "t", #Launch TaskManager
+    lazy.spawn("lxtask"),
+    desc='Launch LxTask'
+    ),
+Key(["mod1", "control"], "g", #Launch Steam
+    lazy.spawn("steam"),
+    desc='Launch Steam'
+    ),
+Key(["mod1", "control"], "b", #Launch Timeshift
+    lazy.spawn(BACKUP),
+    desc='Launch timeshift'
+    ),
+Key(["mod1", "control"], "p", #Launch Pavucontrol
+    lazy.spawn("pavucontrol"),
+    desc='Launch Pavucontrol'
+    ),
+Key(["mod1", "control"], "w", #Launch Bitwarden
+    lazy.spawn("flatpak run com.bitwarden.desktop"),
+    desc='Launch Bitwarden'
+    ),
 
+#KEYS_GROUP Some of my custom scripts
+Key([mod, ],"F12", #Set a Random wallpaper
+    lazy.spawn(SCRIPT_PATH + "/set-random-bg"),
+    desc='Set a random wallpaper'
+    ),
+Key([mod, ],"F11", #Kills and starts picom compositor
+    lazy.spawn(SCRIPT_PATH + "/picom-control"),
+    desc='kills and start picom'
+    ),
+Key([mod, ],"F10", #Change display layout,for my laptop when I connect external Screens
+    lazy.spawn(SCRIPT_PATH + "/change-display-layout.sh"),
+    desc='Change Display layout, I use it when I connect external Screens to my laptop'
+    ),
 
-| Keybinding        | DESCRIPTION         |
-|-------------------+---------------------|
-| ALT + CONTROL + T | Launch Task Manager |
-| ALT + CONTROL + B | Launch Timeshift    |
-| ALT + CONTROL + P | Launch Pavucontrol  |
-| ALT + CONTROL + W | Launch Bitwarden    |
-| ALT + CONTROL + G | Launch Steam        |
+#KEYS_GROUP Media control
+Key([ ],"XF86AudioPlay", #Resume/Stop
+    lazy.spawn(SCRIPT_PATH + "/mediaplay"),
+    desc='Pause'
+    ),
+Key([ ],"XF86AudioNext", #Next
+    lazy.spawn(SCRIPT_PATH + "/medianext"),
+    desc='Next'
+    ),
+Key([ ],"XF86AudioPrev", #Prev
+    lazy.spawn(SCRIPT_PATH + "/mediaprev"),
+    desc='Previous'
+    ),
+Key([ ],"XF86AudioMute", #Mute Audio
+    lazy.spawn(SCRIPT_PATH + "/mute-unmute.sh"),
+    desc='Previous'
+    ),
+Key([ ],"XF86AudioLowerVolume", #Lower Volume
+    lazy.spawn(SCRIPT_PATH + "/volume-down.sh"),
+    desc='Previous'
+    ),
+Key([ ],"XF86AudioRaiseVolume", #Raise Volume``
+    lazy.spawn(SCRIPT_PATH + "/volume-up.sh"),
+    desc='Previous'
+    ),
 
+#KEYS_GROUP Switch focus to specific monitor (out of two)
+Key([mod], "w", #Move focus to monitor 1
+    lazy.to_screen(0),
+    desc='Keyboard focus to monitor 1'
+    ),
+Key([mod], "e", #Move focus to moinitor 2
+    lazy.to_screen(1),
+    desc='Keyboard focus to monitor 2'
+    ),
+Key([mod, "control"], "r",  #Move focus to moinitor 3
+    lazy.to_screen(2),
+    desc='Keyboard focus to monitor 3'
+    ),
 
+#Switch focus of monitors
+Key([mod], "period", #Move focus to the next monitor
+    lazy.next_screen(),
+    desc='Move focus to next monitor'
+    ),
+Key([mod], "comma", #Move focus to the prev monitor
+    lazy.prev_screen(),
+    desc='Move focus to prev monitor'
+    ),
 
-#+BEGIN_SRC python :tangle config.py
-         #KEYS_GROUP Launch applications with super + key
-         Key([mod, ], "s", #Take Screenshot
-             lazy.spawn("flameshot gui"),
-             desc='flameshot'
-             ),
-         Key([mod, ], "b", #Brave fullscreen
-             lazy.spawn(BROWSER2),
-             desc='Launch browser2'
-             ),
-         Key([mod, ], "i", #lxappearance
-             lazy.spawn("lxappearance"),
-             desc='theme settings'
-             ),
-         Key([mod, ], "o", #Launch OBS
-             lazy.spawn("obs"),
-             desc='OBS studio'
-             ),
-         Key([mod, ], "t", #Launch Terminal
-             lazy.spawn( MYTERM_NORMAL ),
-             desc='kitty terminal'
-             ),
-         Key([mod, ], "g", #Launch Gimp
-             lazy.spawn( "gimp" ),
-             desc='run gimp'
-             ),
-         Key([mod], "Return", #Run Terminal
-             lazy.spawn( MYTERM ),
-             desc='Launches My Terminal'
-              ),
+#KEYS_GROUP Treetab controls
+Key([mod, "control"], "h", #Move up a section in treetab
+    lazy.layout.move_left(),
+    desc='Move up a section in treetab'
+    ),
+Key([mod, "shift"], "l", #Move up a section in treetab
+    lazy.layout.move_right(),
+    desc='Move down a section in treetab'
+    ),
 
-         #KEYS_GROUP Launch applications with super + shift + key
-         Key([mod, "shift"], "y", #Run Graphical Text editor
-             lazy.spawn( EDITOR ),
-             desc='Launch My Graphical Editor'
-             ),
-         Key([mod, "shift"], "w", #Browser 1
-             lazy.spawn(BROWSER1),
-             desc='Launch browser1'
-             ),
-         Key([mod, "shift"], "v", #Launch Virt-Manager
-             lazy.spawn(VIRTMAN),
-             desc='virt-manager'
-             ),
-         Key([mod, "shift"], "e", #Launch your filemanager
-             lazy.spawn(FILE_MANAGER),
-             desc='Terminal File Manager'
-             ),
-         Key([mod, "shift"], "Return", #Launch your Graphical filemanager
-             lazy.spawn(GUI_FILE_MANAGER),
-             desc='Launch Graphical FileManager'
-             ),
-         Key([mod, "shift"], "g", #Launch kdenlive
-             lazy.spawn("kdenlive"),
-             desc='Launch kdenlive'
-             ),
-         Key([mod, "shift"], "d", #Launch your text editor
-             lazy.spawn(EDITOR),
-             desc='Launch Your text editor'
-             ),
-         Key([mod, "shift"], "o", #Launch gparted
-             lazy.spawn("Gparted"),
-             desc='Launch Gparted'
-             ),
+#KEYS_GROUP Window controls
+Key([mod], "Tab", #Toggle through layouts
+    lazy.next_layout(),
+    desc='Toggle through layouts'
+    ),
+Key([mod,], "q", #Close window
+    lazy.window.kill(),
+    desc='Kill active window'
+    ),
+Key([mod], "k", #Move focus down a pane
+    lazy.layout.up(),
+    desc='Move focus down in current stack pane'
+    ),
+Key([mod], "j", #Move focus up a pane
+    lazy.layout.down(),
+    desc='Move focus up in current stack pane'
+    ),
+Key([mod], "h", #Shrink window in tilling layout
+    lazy.layout.left(),
+    desc='Shrink window (MonadTall), decrease number in master pane (Tile)'
+    ),
+Key([mod], "l", #Expand window in tilling layout
+    lazy.layout.right(),
+    desc='Expand window (MonadTall), increase number in master pane (Tile)'
+    ),
+Key([mod], "n", #Normalize window size ratio
+    lazy.layout.normalize(),
+    desc='normalize window size ratios'
+    ),
+Key([mod], "m", #Toggle window between minimum and maximum size
+    lazy.layout.maximize(),
+    desc='toggle window between minimum and maximum sizes'
+    ),
+Key(["mod1", ], "m", #Minimize window
+     lazy.spawn("Qminimize -m"),
+     desc='Minimize window'
+    ),
+Key([mod], "f", #Toggle fullscreen
+    lazy.window.toggle_fullscreen(),
+    desc='toggle fullscreen'
+    ),
+Key([mod, "shift"], "j", #Move windows down in current stack
+    lazy.layout.shuffle_down(),
+    lazy.layout.section_jown(),
+    desc='Move windows down in current stack'
+    ),
+Key([mod, "shift"], "k", #Move widnows up in current stack
+    lazy.layout.shuffle_up(),
+    lazy.layout.section_up(),
+    desc='Move windows up in current stack'
+    ),
+Key([mod, "shift"], "l", #Move windows down in current stack
+    lazy.layout.shuffle_right(),
+    desc='Move windows down in current stack'
+    ),
+Key([mod, "shift"], "h", #Move widnows up in current stack
+    lazy.layout.shuffle_left(),
+    desc='Move windows up in current stack'
+    ),
+Key([mod, "shift"], "f", #Toggle floating
+    lazy.window.toggle_floating(),
+    desc='toggle floating'
+    ),
+Key([mod, "mod1"], "l", #change the position of the window to the right
+    lazy.layout.flip_right(),
+    desc='change the position of the window to the right'
+    ),
+Key([mod, "mod1"], "h", #change the position of the window to the left
+    lazy.layout.flip_left(),
+    desc='change the position of the window to the left'
+    ),
+Key([mod, "mod1"], "j", #change the position of the window down
+    lazy.layout.flip_down(),
+    desc='change the position of the window down'
+    ),
+Key([mod, "mod1"], "k", #change the position of the window up
+    lazy.layout.flip_up(),
+    desc='change the position of the window up'
+    ),
+Key([mod, "control"], "h", #increase the size of the window to the left
+    lazy.layout.grow_left(),
+    desc='increase the size of the window to the left'
+    ),
+Key([mod, "control"], "l", #increase the size of the window to the left
+    lazy.layout.grow_right(),
+    desc='increase the size of the window to the left'
+    ),
+Key([mod, "control"], "j", #increase the size of the window downwards
+    lazy.layout.grow_down(),
+    desc='increase the size of the window downwards'
+    ),
+Key([mod, "control"], "k", #increase the size of the window upwards
+    lazy.layout.grow_up(),
+    desc='increase the size of the window upwards'
+    ),
 
-         #KEYS_GROUP Launch application with alt + control + key
-         Key(["mod1", "control"], "t", #Launch TaskManager
-             lazy.spawn("lxtask"),
-             desc='Launch LxTask'
-             ),
-         Key(["mod1", "control"], "g", #Launch Steam
-             lazy.spawn("steam"),
-             desc='Launch Steam'
-             ),
-         Key(["mod1", "control"], "b", #Launch Timeshift
-             lazy.spawn(BACKUP),
-             desc='Launch timeshift'
-             ),
-         Key(["mod1", "control"], "p", #Launch Pavucontrol
-             lazy.spawn("pavucontrol"),
-             desc='Launch Pavucontrol'
-             ),
-         Key(["mod1", "control"], "w", #Launch Bitwarden
-             lazy.spawn("flatpak run com.bitwarden.desktop"),
-             desc='Launch Bitwarden'
-             ),
-#+END_SRC
-*** SCRIPTS
+#KEYS_GROUP Stack controls
+Key([mod, "shift"], "Tab", #Switch which side main pane occupies, XmonadTall
+    lazy.layout.rotate(),
+    lazy.layout.flip(),
+    desc='Switch which side main pane occupies (XmonadTall)'
+    ),
+Key([mod, "control"], "space", #Switch window focus to other panes of stack
+    lazy.layout.next(),
+    desc='Switch window focus to other pane(s) of stack'
+    ),
+Key([mod, "shift"], "space", #Toggle between split and unsplit sides of stack
+    lazy.layout.toggle_split(),
+    desc='Toggle between split and unsplit sides of stack'
+    ),
 
-| Keybinding        | DESCRIPTION         |
-|-------------------+---------------------|
-| SUPER + F12 | Set Random Wallpaper |
-| SUPER + F11 | Restart Picom       |
+#KEYS_GROUP keybindings to control tmux without keychords
+Key(["mod1",], "1", #Move to tmux window 1
+    lazy.spawn(TMUX_PATH + "/window-1"),
+    ),
+Key(["mod1",], "2", #Move to tmux window 2
+    lazy.spawn(TMUX_PATH + "/window-2"),
+    ),
+Key(["mod1"], "3", #Move to tmux window 3
+    lazy.spawn(TMUX_PATH + "/window-3"),
+    ),
+Key(["mod1",], "4", #Move to tmux window 4
+    lazy.spawn(TMUX_PATH + "/window-4"),
+    ),
+Key(["mod1",], "5", #Move to tmux window 5
+    lazy.spawn(TMUX_PATH + "/window-5"),
+    ),
+Key(["mod1",], "6", #Move to tmux window 6
+    lazy.spawn(TMUX_PATH + "/window-6"),
+    ),
+Key(["mod1",], "7", #Move to tmux window 7
+    lazy.spawn(TMUX_PATH + "/window-7"),
+    ),
+Key(["mod1",], "8", #Move to tmux window 8
+    lazy.spawn(TMUX_PATH + "/window-8"),
+    ),
+Key(["mod1",], "9", #Move to tmux window 9
+    lazy.spawn(TMUX_PATH + "/window-9"),
+    ),
+Key(["control", "mod1"], "v", #create horizontal split
+    lazy.spawn("tmux splitw -h"),
+    ),
+Key(["control", "mod1"], "s", #create vertical split
+    lazy.spawn("tmux splitw -v"),
+    ),
 
-#+BEGIN_SRC python :tangle config.py
-         #KEYS_GROUP Some of my custom scripts
-         Key([mod, ],"F12", #Set a Random wallpaper
-             lazy.spawn(SCRIPT_PATH + "/set-random-bg"),
-             desc='Set a random wallpaper'
-             ),
-         Key([mod, ],"F11", #Kills and starts picom compositor
-             lazy.spawn(SCRIPT_PATH + "/picom-control"),
-             desc='kills and start picom'
-             ),
-         Key([mod, ],"F10", #Change display layout,for my laptop when I connect external Screens
-             lazy.spawn(SCRIPT_PATH + "/change-display-layout.sh"),
-             desc='Change Display layout, I use it when I connect external Screens to my laptop'
-             ),
-#+END_SRC
-*** MEDIA CONTROL
-This is just so all your standard media buttons on your keyboard will work
-Pretty straight forward works the same way as in windows for example
-#+BEGIN_SRC python :tangle config.py
-         #KEYS_GROUP Media control
-         Key([ ],"XF86AudioPlay", #Resume/Stop
-             lazy.spawn(SCRIPT_PATH + "/mediaplay"),
-             desc='Pause'
-             ),
-         Key([ ],"XF86AudioNext", #Next
-             lazy.spawn(SCRIPT_PATH + "/medianext"),
-             desc='Next'
-             ),
-         Key([ ],"XF86AudioPrev", #Prev
-             lazy.spawn(SCRIPT_PATH + "/mediaprev"),
-             desc='Previous'
-             ),
-         Key([ ],"XF86AudioMute", #Mute Audio
-             lazy.spawn(SCRIPT_PATH + "/mute-unmute.sh"),
-             desc='Previous'
-             ),
-         Key([ ],"XF86AudioLowerVolume", #Lower Volume
-             lazy.spawn(SCRIPT_PATH + "/volume-down.sh"),
-             desc='Previous'
-             ),
-         Key([ ],"XF86AudioRaiseVolume", #Raise Volume``
-             lazy.spawn(SCRIPT_PATH + "/volume-up.sh"),
-             desc='Previous'
-             ),
-#+END_SRC
-*** MONITOR CONTROL
-| Keybinding          | DESCRIPTION          |
-|---------------------+----------------------|
-| SUPER + W           | Move to Monitor 1    |
-| SUPER +  E          | Move to Monitor 2    |
-| SUPER + CONTROL + R | Move to Monitor 3    |
-| SUPER +  .          | Move to Next Monitor |
-| SUPER +  ,          | Move to Prev Monitor |
+#KEYS_GROUP Launch terminal based programs using the key chord CONTROL+e followed by 'key'
+KeyChord(["control"], "e", [
+    Key([], "d", #Launch dired emacs file manager
+        lazy.spawn(FILE_MANAGER),
+    desc='Open file manager in emacs'
+    ),
+    Key([], "s", #Launch Eshell in emacs
+        lazy.spawn("emacsclient -c -a '' --eval '(eshell)'"),
+    desc='Launch Eshell in emacs'
+    ),
+    Key([], "h", #Launch htop
+        lazy.spawn(SYSMON),
+    desc='Launch HTOP'
+    ),
+    Key([], "r", #Launch ranger
+        lazy.spawn("kitty --class=ranger -e ranger"),
+    desc='Launch Ranger'
+    ),
+    Key([], "e", #Launch Emacs
+        lazy.spawn("emacsclient -c -a 'emacs'"),
+    desc='Launch Emacs'
+    ),
+    Key([], "t", #Change rofi theme
+        lazy.spawn("rofi-theme-selector"),
+    desc='Change Rofi Theme'
+    ),],
 
-#+BEGIN_SRC python :tangle config.py
-         #KEYS_GROUP Switch focus to specific monitor (out of two)
-         Key([mod], "w", #Move focus to monitor 1
-             lazy.to_screen(0),
-             desc='Keyboard focus to monitor 1'
-             ),
-         Key([mod], "e", #Move focus to moinitor 2
-             lazy.to_screen(1),
-             desc='Keyboard focus to monitor 2'
-             ),
-         Key([mod, "control"], "r",  #Move focus to moinitor 3
-             lazy.to_screen(2),
-             desc='Keyboard focus to monitor 3'
-             ),
+name="Action: "),
 
-         #Switch focus of monitors
-         Key([mod], "period", #Move focus to the next monitor
-             lazy.next_screen(),
-             desc='Move focus to next monitor'
-             ),
-         Key([mod], "comma", #Move focus to the prev monitor
-             lazy.prev_screen(),
-             desc='Move focus to prev monitor'
-             ),
-#+END_SRC
-*** WINDOW CONTROL
-| Keybinding          | DESCRIPTION          |
-|---------------------+----------------------|
-| SUPER + H           | Move Left            |
-| SUPER + L           | Move Right           |
-| SUPER + J           | Move Down            |
-| SUPER + K           | Move Up              |
-| SUPER + SHIFT + H   | Move Window Left     |
-| SUPER + SHIFT + L   | Move Window Right    |
-| SUPER + SHIFT + J   | Move Window Down     |
-| SUPER + SHIFT + K   | Move Window Up       |
-| SUPER + ALT + H     | Mirror Windows Left  |
-| SUPER + ALT + L     | Mirror Windows Right |
-| SUPER + ALT + J     | Mirror Windows Down  |
-| SUPER + ALT + K     | Mirror Windows Up    |
-| SUPER + CONTROL + H | Resize Left          |
-| SUPER + CONTROL + L | Resize Right         |
-| SUPER + CONTROL + J | Resize Down          |
-| SUPER + CONTROL + K | Resize Up            |
-
-
-
-
-#+BEGIN_SRC python :tangle config.py
-         #KEYS_GROUP Treetab controls
-         Key([mod, "control"], "h", #Move up a section in treetab
-             lazy.layout.move_left(),
-             desc='Move up a section in treetab'
-             ),
-         Key([mod, "shift"], "l", #Move up a section in treetab
-             lazy.layout.move_right(),
-             desc='Move down a section in treetab'
-             ),
-
-         #KEYS_GROUP Window controls
-         Key([mod], "Tab", #Toggle through layouts
-             lazy.next_layout(),
-             desc='Toggle through layouts'
-             ),
-         Key([mod,], "q", #Close window
-             lazy.window.kill(),
-             desc='Kill active window'
-             ),
-         Key([mod], "k", #Move focus down a pane
-             lazy.layout.up(),
-             desc='Move focus down in current stack pane'
-             ),
-         Key([mod], "j", #Move focus up a pane
-             lazy.layout.down(),
-             desc='Move focus up in current stack pane'
-             ),
-         Key([mod], "h", #Shrink window in tilling layout
-             lazy.layout.left(),
-             desc='Shrink window (MonadTall), decrease number in master pane (Tile)'
-             ),
-         Key([mod], "l", #Expand window in tilling layout
-             lazy.layout.right(),
-             desc='Expand window (MonadTall), increase number in master pane (Tile)'
-             ),
-         Key([mod], "n", #Normalize window size ratio
-             lazy.layout.normalize(),
-             desc='normalize window size ratios'
-             ),
-         Key([mod], "m", #Toggle window between minimum and maximum size
-             lazy.layout.maximize(),
-             desc='toggle window between minimum and maximum sizes'
-             ),
-         Key(["mod1", ], "m", #Minimize window
-              lazy.spawn("Qminimize -m"),
-              desc='Minimize window'
-             ),
-         Key([mod], "f", #Toggle fullscreen
-             lazy.window.toggle_fullscreen(),
-             desc='toggle fullscreen'
-             ),
-         Key([mod, "shift"], "j", #Move windows down in current stack
-             lazy.layout.shuffle_down(),
-             lazy.layout.section_jown(),
-             desc='Move windows down in current stack'
-             ),
-         Key([mod, "shift"], "k", #Move widnows up in current stack
-             lazy.layout.shuffle_up(),
-             lazy.layout.section_up(),
-             desc='Move windows up in current stack'
-             ),
-         Key([mod, "shift"], "l", #Move windows down in current stack
-             lazy.layout.shuffle_right(),
-             desc='Move windows down in current stack'
-             ),
-         Key([mod, "shift"], "h", #Move widnows up in current stack
-             lazy.layout.shuffle_left(),
-             desc='Move windows up in current stack'
-             ),
-         Key([mod, "shift"], "f", #Toggle floating
-             lazy.window.toggle_floating(),
-             desc='toggle floating'
-             ),
-         Key([mod, "mod1"], "l", #change the position of the window to the right
-             lazy.layout.flip_right(),
-             desc='change the position of the window to the right'
-             ),
-         Key([mod, "mod1"], "h", #change the position of the window to the left
-             lazy.layout.flip_left(),
-             desc='change the position of the window to the left'
-             ),
-         Key([mod, "mod1"], "j", #change the position of the window down
-             lazy.layout.flip_down(),
-             desc='change the position of the window down'
-             ),
-         Key([mod, "mod1"], "k", #change the position of the window up
-             lazy.layout.flip_up(),
-             desc='change the position of the window up'
-             ),
-         Key([mod, "control"], "h", #increase the size of the window to the left
-             lazy.layout.grow_left(),
-             desc='increase the size of the window to the left'
-             ),
-         Key([mod, "control"], "l", #increase the size of the window to the left
-             lazy.layout.grow_right(),
-             desc='increase the size of the window to the left'
-             ),
-         Key([mod, "control"], "j", #increase the size of the window downwards
-             lazy.layout.grow_down(),
-             desc='increase the size of the window downwards'
-             ),
-         Key([mod, "control"], "k", #increase the size of the window upwards
-             lazy.layout.grow_up(),
-             desc='increase the size of the window upwards'
-             ),
-
-         #KEYS_GROUP Stack controls
-         Key([mod, "shift"], "Tab", #Switch which side main pane occupies, XmonadTall
-             lazy.layout.rotate(),
-             lazy.layout.flip(),
-             desc='Switch which side main pane occupies (XmonadTall)'
-             ),
-         Key([mod, "control"], "space", #Switch window focus to other panes of stack
-             lazy.layout.next(),
-             desc='Switch window focus to other pane(s) of stack'
-             ),
-         Key([mod, "shift"], "space", #Toggle between split and unsplit sides of stack
-             lazy.layout.toggle_split(),
-             desc='Toggle between split and unsplit sides of stack'
-             ),
-
-#+END_SRC
-*** TMUX
-| Keybinding        | DESCRIPTION           |
-|-------------------+-----------------------|
-| CONTROL + ALT + 1 | Move to tmux window 1 |
-| CONTROL + ALT + 2 | Move to tmux window 2 |
-| CONTROL + ALT + 3 | Move to tmux window 3 |
-| CONTROL + ALT + 4 | Move to tmux window 4 |
-| CONTROL + ALT + 5 | Move to tmux window 5 |
-| CONTROL + ALT + 6 | Move to tmux window 6 |
-| CONTROL + ALT + 7 | Move to tmux window 7 |
-| CONTROL + ALT + 8 | Move to tmux window 8 |
-| CONTROL + ALT + 9 | Move to tmux window 9 |
-| CONTROL + ALT + S | Vertical Split        |
-| CONTROL + ALT + V | Horizontal Split      |
-
-#+BEGIN_SRC python :tangle config.py
-         #KEYS_GROUP keybindings to control tmux without keychords
-         Key(["mod1",], "1", #Move to tmux window 1
-             lazy.spawn(TMUX_PATH + "/window-1"),
-             ),
-         Key(["mod1",], "2", #Move to tmux window 2
-             lazy.spawn(TMUX_PATH + "/window-2"),
-             ),
-         Key(["mod1"], "3", #Move to tmux window 3
-             lazy.spawn(TMUX_PATH + "/window-3"),
-             ),
-         Key(["mod1",], "4", #Move to tmux window 4
-             lazy.spawn(TMUX_PATH + "/window-4"),
-             ),
-         Key(["mod1",], "5", #Move to tmux window 5
-             lazy.spawn(TMUX_PATH + "/window-5"),
-             ),
-         Key(["mod1",], "6", #Move to tmux window 6
-             lazy.spawn(TMUX_PATH + "/window-6"),
-             ),
-         Key(["mod1",], "7", #Move to tmux window 7
-             lazy.spawn(TMUX_PATH + "/window-7"),
-             ),
-         Key(["mod1",], "8", #Move to tmux window 8
-             lazy.spawn(TMUX_PATH + "/window-8"),
-             ),
-         Key(["mod1",], "9", #Move to tmux window 9
-             lazy.spawn(TMUX_PATH + "/window-9"),
-             ),
-         Key(["control", "mod1"], "v", #create horizontal split
-             lazy.spawn("tmux splitw -h"),
-             ),
-         Key(["control", "mod1"], "s", #create vertical split
-             lazy.spawn("tmux splitw -v"),
-             ),
-#+END_SRC
-*** EMACS
-| Keybinding    | DESCRIPTION            |
-|---------------+------------------------|
-| CONTROL E + w | Launch Emacs           |
-| CONTROL E + d | Launch Dired in Emacs  |
-| CONTROL E + s | Launch Eshell in Emacs |
-| CONTROL E + h | Launch Htop            |
-| CONTROL E + r | Launch Ranger          |
-| CONTROL E + t | Change Rofi Theme      |
-#+BEGIN_SRC python :tangle config.py
-         #KEYS_GROUP Launch terminal based programs using the key chord CONTROL+e followed by 'key'
-         KeyChord(["control"], "e", [
-             Key([], "d", #Launch dired emacs file manager
-                 lazy.spawn(FILE_MANAGER),
-             desc='Open file manager in emacs'
-             ),
-             Key([], "s", #Launch Eshell in emacs
-                 lazy.spawn("emacsclient -c -a '' --eval '(eshell)'"),
-             desc='Launch Eshell in emacs'
-             ),
-             Key([], "h", #Launch htop
-                 lazy.spawn(SYSMON),
-             desc='Launch HTOP'
-             ),
-             Key([], "r", #Launch ranger
-                 lazy.spawn("kitty --class=ranger -e ranger"),
-             desc='Launch Ranger'
-             ),
-             Key([], "e", #Launch Emacs
-                 lazy.spawn("emacsclient -c -a 'emacs'"),
-             desc='Launch Emacs'
-             ),
-             Key([], "t", #Change rofi theme
-                 lazy.spawn("rofi-theme-selector"),
-             desc='Change Rofi Theme'
-             ),],
-
-         name="Action: "),
-#+END_SRC
-*** RUN SCRIPTS
-
-| Keybinding  | DESCRIPTION                              |
-|-------------+------------------------------------------|
-| Super P + e | Edit config files                        |
-| Super P + m | Mount file systems                       |
-| Super P + k | Kill a process                           |
-| Super P + n | Connect via ssh                          |
-| Super P + w | Change wallpaper                         |
-| Super P + a | Change audio Source                      |
-| Super P + o | Open website                             |
-| Super P + f | Open website in Application mode         |
-| Super P + s | Search The Web                           |
-| Super P + b | Timeshift Backup                         |
-| Super P + q | List of virtual machines in virt-manager |
-| Super P + j | List of your passwords in pass           |
-| Super P + v | Connect to Vpn                           |
-| Super P + t | Change theme for kitty                   |
-| Super P + y | Control Tmux Sessions                    |
-#+BEGIN_SRC python :tangle config.py
-         #KEYS_GROUP Dmenu scripts launched using the key chord SUPER+p followed by 'key'
+#KEYS_GROUP Dmenu scripts launched using the key chord SUPER+p followed by 'key'
          KeyChord([mod], "p", [
              Key([], "e", #Choose config file to edit
                  lazy.spawn(DMENU_PATH + "/dm-editconfig"),
@@ -697,14 +504,6 @@ Pretty straight forward works the same way as in windows for example
 
 #END_KEYS
 
-#+END_SRC
-** WORKSPACES
-Here you configure your workspaces and configure default layout
-For each workspace. The ones I mainly use is bsp layout, max layout and floating.
-You can also configure application rules here. Like if you want
-certain apps to always open on one specific workspace
-#+BEGIN_SRC python :tangle config.py
-
 group_names = [("WWW", {'layout': 'bsp' ,'matches':[Match(wm_class=["Brave-browser-nightly", "Chromium" , "librewolf"])]}),
                ("DEV", {'layout': 'bsp','matches':[Match(wm_class=["neo"])]}),
                ("SYS", {'layout': 'bsp', 'matches':[Match(wm_class=["TeamViewer"])]}),
@@ -721,12 +520,6 @@ groups = [Group(name, **kwargs) for name, kwargs in group_names]
 for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod], str(i), lazy.group[name].toscreen()))        # Switch to another group
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
-
-#+END_SRC
-** LAYOUTS
-Here you choose which layouts you want to be availble for use
-I mostly use bsp layout cause its my favorite kind of layout
-#+BEGIN_SRC python :tangle config.py
 
 #My default layout theme
 #and if you want to activate a layout just uncomment them
@@ -785,13 +578,6 @@ layouts = [
 ]
 
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
-
-#+END_SRC
-
-** WIDGETS
-Here you configure all your widgets that you have in your Qtile bar!
-So if you want to make qtile look fancy this is what you want to configure
-#+BEGIN_SRC python :tangle config.py
 
 def init_widgets_list():
     widgets_list = [
@@ -1205,13 +991,6 @@ def init_widgets_list():
 
     return widgets_list
 
-
-#+END_SRC
-*** SLICE
-Since the Systray can only be available on one monitor I slice them here
-Remember if you do any major changes to the widgets you need to change this.
-Here I also configure the size and the margin of the Qtile bar.
-#+BEGIN_SRC python :tangle config.py
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
     del widgets_screen2[18:23]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
@@ -1259,12 +1038,7 @@ def switch_screens(qtile):
     i = qtile.screens.index(qtile.current_screen)
     group = qtile.screens[i - 1].group
     qtile.current_screen.set_group(group)
-#+END_SRC
 
-** MOUSE ACTION
-These settings let you resize the window using the mouse.
-Usually dont need to configure these
-#+BEGIN_SRC python :tangle config.py
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(),
          start=lazy.window.get_position()),
@@ -1279,12 +1053,6 @@ main = None
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
-
-#+END_SRC
-
-** FLOATING RULES
-Here you configure all applications that you always want to float
-#+BEGIN_SRC python :tangle config.py
 
 floating_layout = layout.Floating(float_rules=[
     # Run the utility of `xprop` to see the wm class and name of an X client.
@@ -1313,13 +1081,7 @@ floating_layout = layout.Floating(float_rules=[
 
 auto_fullscreen = True
 focus_on_window_activation = "smart"
-#+END_SRC
-** STARTUP HOOK
-This is just a startup hook that launch a script called autostart.sh located in qtill directory
-So if you want to configure startup items you need to configure the autostart script
-So this is just a hook and you don't need to configure this. This is just so the script runs on login
 
-#+BEGIN_SRC python :tangle config.py
 @hook.subscribe.startup_once
 def start_once():
     home = os.path.expanduser('~')
@@ -1336,4 +1098,3 @@ def start_once():
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
-#+END_SRC
