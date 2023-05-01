@@ -1,6 +1,0 @@
-#!/bin/bash
-
-mediaplayers=$(playerctl -l)
-
-
-playerctl play-pause $mediaplayers[1]

@@ -1,6 +1,0 @@
-#!/bin/bash
-#
-
-attached_session=$(tmux ls | grep attached | awk -F ":" '{print $1}')
-
-tmux select-window -t $attached_session:6
