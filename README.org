@@ -38,8 +38,7 @@ when you first launch nvim with my config. But it should autoinstall when you ig
 ** INSTALL
 To install my config. Run these commands. Remember to backup your current nvim
 configs if you have it. And then launch neovim and plugins should install automatically.
-But if it doesnt't work then you need to run the command PackerSync and restart nvim.
-You can also do SPC h r to quickly do a packersync. Done!
+I am using lazyvim as plugin manager.
 #+BEGIN_SRC sh
 # Creating backup of existing config if you have
 cp -r $HOME/.config/nvim $HOME/.config/nvim.bak
