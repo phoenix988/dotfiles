@@ -14,6 +14,7 @@
   - [[WINDOW]]
 - [[CONFIG]]
   - [[INIT]]
+  - [[LAZY]]
   - [[STANDARD REMAPS]]
   - [[PLUGIN REMAPS]]
   - [[STANDARD SETS]]
@@ -111,11 +112,19 @@ Open fugitive to manage git repos. OBS you need to be in a git repository for it
 
 * CONFIG
 ** INIT
-Source all my lua files. I keep this config very light
+Source all my lua files and set my leaderkey. I keep this config very light
 #+begin_src lua :tangle init.lua
+-- set space as leader
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+require("karl.lazy")
+require("karl.remap")
+require("karl.set")
+#+end_src
+
+** LAZY
+#+begin_src lua :tangle lua/karl/lazy.lua
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -316,12 +325,9 @@ require('lazy').setup({
   --
   --    An additional note is that if you only copied in the `init.lua`, you can just comment this line
   --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
-  { import = 'custom.plugins' },
 }, {})
 
 
-require("karl.remap")
-require("karl.set")
 
 #+end_src
 
@@ -329,8 +335,6 @@ require("karl.set")
 Sets some standard keybindings here. These keybindings are builtin
 and doesnt requre the any plugins to be installed. Also sets the spacebar as leaderkey
 #+begin_src lua :tangle lua/karl/remap.lua
--- Space set as Leader Key
-vim.g.mapleader = " "
 
 -- Built in File explorer in neovim
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
