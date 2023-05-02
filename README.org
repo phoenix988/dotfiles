@@ -1,0 +1,685 @@
+#+TITLE: Neovim
+#+DESCRIPTION: This is my configuration file for NVIM written in lua
+#+AUTHOR: Karl Fredin
+
+[[file:./images/Neovim-logo.svg.png]]
+
+* TABLE OF CONTENTS
+- [[NEOVIM]]
+- [[INSTALL]]
+- [[KEYBINDINGS]]
+  - [[FILE MANAGEMENT]]
+  - [[THEME]]
+  - [[SOURCE]]
+  - [[WINDOW]]
+- [[CONFIG]]
+  - [[INIT]]
+  - [[STANDARD REMAPS]]
+  - [[PLUGIN REMAPS]]
+  - [[STANDARD SETS]]
+  - [[PLUGINS]]
+    - [[COLORS]]
+    - [[LASTPLACE]]
+    - [[LSP-ZERO]]
+    - [[LUALINE]]
+    - [[NERDTREE]]
+    - [[ORGMODE]]
+    - [[TREESITTER]]
+    - [[WHICHKEY]]
+    - [[DASHBOARD]]
+
+
+* NEOVIM
+My neovim config written in lua. I wrote this config using org mode because it makes it easier
+to update the config when you have multiple files to play around with. And org mode is fantastic for making alot of comments.
+If you use this config it should install all the plugins automatically. But I'm not sure if the auto install works with this config so you might get a bunch of errors
+when you first launch nvim with my config. But it should autoinstall when you ignore all the errors. And then do a quick restart of nvim and you should be good
+
+** INSTALL
+To install my config. Run these commands. Remember to backup your current nvim
+configs if you have it. And then launch neovim and plugins should install automatically.
+But if it doesnt't work then you need to run the command PackerSync and restart nvim.
+You can also do SPC h r to quickly do a packersync. Done!
+#+BEGIN_SRC sh
+# Creating backup of existing config if you have
+cp -r $HOME/.config/nvim $HOME/.config/nvim.bak
+
+# Obs this will remove your neovim config
+rm -rf $HOME/.config/nvim
+
+# Remove meta data to avoid problems
+rm rf $HOME/.local/share/nvim
+rm -rf $HOME/.cache/nvim
+
+git clone -b neovim https://github.com/phoenix988/dotfiles.git ~/.config/nvim
+#+END_SRC
+
+** KEYBINDINGS
+This is some of the most important keybindings to know. Of course you also
+Need to know the most basic vim commands too which I dont list here but I assume you
+already know them.
+
+*** FILE MANAGEMENT
+Commands to quickly move around files in neovim
+| Command                | Description                     | Keybinding |
+|------------------------+---------------------------------+------------|
+| Ex                     | Open built in explorer          | SPC p v    |
+| Vifm                   | Open vifm file manager          | SPC .      |
+| Telescope find_files   | Find files in telescope         | SPC f f    |
+| Telescope recent_files | Find recent files               | SPC f r    |
+| mark.add_file          | Add a file in harpoon           | SPC a      |
+| ui.toggle_quick_menu   | Open harpoon menu               | C-e        |
+| ui.nav_file(1-9)       | Navigate the harpoon files      | C-(1-9)    |
+| Grep                   | Grep a string of text in a file | SPC p s    |
+| NerdTreeToggleFocus    | Focus NerdTree                  | F6         |
+| NeoTreeToggle          | Toggle NeoTree                  | SPC f t    |
+| NeoTreeFloat           | Toggle NeoTree in floating mode | SPC n f    |
+| Neotree .              | Open Neotree in current dir     | SPC n .    |
+| Neotree ~              | Open Neotree in home            | SPC n h    |
+
+*** THEME
+Commands to change theme plus highlight colors
+| Command               | Description            | Keybinding |
+|-----------------------+------------------------+------------|
+| HighlightColorsToggle | Toggle color highlight | SPC c h    |
+| Telescope colorscheme | change colorscheme     | SPC h t    |
+
+*** SOURCE
+Update plugins and source new config using these commands
+| Command    | Description     | Keybinding |
+|------------+-----------------+------------|
+| PackerSync | Sync Plugins    | SPC h r    |
+| Source     | Source lua file | SPC h s    |
+
+*** WINDOW
+Create new tabs and manipulate buffers using these commands
+| Command     | Description       | Keybinding |
+|-------------+-------------------+------------+-
+| BufferNext  | Next buffer       | SPC b n    |
+| BufferPrev  | Previous Buffer   | SPC b p    |
+| BufferClose | Kill buffer       | SPC b k    |
+| Tabnew      | Open new tab      | SPC t n    |
+| Tabclose    | close current tab | SPC t n    |
+| Dashboard   | Move to dashboard | SPC d      |
+
+*** GIT
+Open fugitive to manage git repos. OBS you need to be in a git repository for it to work
+| Command             | Description              | Keybinding |
+|---------------------+--------------------------+------------|
+| Telescope git_files | Find files in a git repo | SPC g f    |
+| Git                 | Open git status          | SPC g g    |
+
+
+* CONFIG
+** INIT
+Source all my lua files. I keep this config very light
+#+begin_src lua :tangle init.lua
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+-- Install package manager
+--    https://github.com/folke/lazy.nvim
+--    `:help lazy.nvim.txt` for more info
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system {
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  }
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- NOTE: Here is where you install your plugins.
+--  You can configure plugins using the `config` key.
+--
+--  You can also configure plugins after the setup call,
+--    as they will be available in your neovim runtime.
+require('lazy').setup({
+  -- NOTE: First, some plugins that don't require any configuration
+
+  -- Git related plugins
+  'tpope/vim-fugitive',
+  'tpope/vim-rhubarb',
+
+  -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-sleuth',
+
+
+ { 'VonHeikemen/lsp-zero.nvim', requires = {'neovim/nvim-lspconfig'} },
+ {'williamboman/mason-lspconfig.nvim'},
+
+  -- NOTE: This is where your plugins related to LSP can be installed.
+  --  The configuration is done below. Search for lspconfig to find it below.
+  { -- LSP Configuration & Plugins
+    'neovim/nvim-lspconfig',
+    dependencies = {
+      -- Automatically install LSPs to stdpath for neovim
+      { 'williamboman/mason.nvim', config = true },
+      'williamboman/mason-lspconfig.nvim',
+
+      -- Useful status updates for LSP
+      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+      { 'j-hui/fidget.nvim', opts = {} },
+
+      -- Additional lua configuration, makes nvim stuff amazing!
+      'folke/neodev.nvim',
+    },
+  },
+
+  { -- Autocompletion
+    'hrsh7th/nvim-cmp',
+    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+  },
+    {'hrsh7th/cmp-nvim-lsp'},     -- Required
+    {'hrsh7th/cmp-buffer'},       -- Optional
+    {'hrsh7th/cmp-path'},         -- Optional
+    {'saadparwaiz1/cmp_luasnip'}, -- Optional
+    {'hrsh7th/cmp-nvim-lua'},     -- Optional
+
+  -- Snippets
+    {'L3MON4D3/LuaSnip'},             -- Required
+    {'rafamadriz/friendly-snippets'}, -- Optional
+
+  -- Startscreen
+   {
+     'glepnir/dashboard-nvim',
+     event = 'VimEnter',
+     config = function()
+       require('dashboard').setup {
+         -- config
+       }
+     end,
+       dependencies = {'nvim-tree/nvim-web-devicons'}
+   },
+
+
+  -- Highlight colors inside of vim
+   {'brenoprata10/nvim-highlight-colors'},
+
+   { 'nvim-orgmode/orgmode' },
+
+   { "jreybert/vimagit" },
+
+   {'lambdalisue/suda.vim'},
+
+  -- Useful plugin to show you pending keybinds.
+  { 'folke/which-key.nvim', opts = {} },
+  { -- Adds git releated signs to the gutter, as well as utilities for managing changes
+    'lewis6991/gitsigns.nvim',
+    opts = {
+      -- See `:help gitsigns.txt`
+      signs = {
+        add = { text = '+' },
+        change = { text = '~' },
+        delete = { text = '_' },
+        topdelete = { text = '‾' },
+        changedelete = { text = '~' },
+      },
+    },
+  },
+
+  { -- Theme inspired by Atom
+    'navarasu/onedark.nvim',
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'iceberg'
+    end,
+  },
+
+  {
+  'cocopon/iceberg.vim',
+  'rose-pine/neovim',
+  'Mofiqul/dracula.nvim',
+  'folke/tokyonight.nvim',
+  'shaunsingh/nord.nvim',
+  },
+
+  { -- Set lualine as statusline
+    'nvim-lualine/lualine.nvim',
+    -- See `:help lualine.txt`
+    opts = {
+      options = {
+        icons_enabled = false,
+        component_separators = '|',
+        section_separators = '',
+      },
+    },
+  },
+
+  { -- Add indentation guides even on blank lines
+    'lukas-reineke/indent-blankline.nvim',
+    -- Enable `lukas-reineke/indent-blankline.nvim`
+    -- See `:help indent_blankline.txt`
+    opts = {
+      char = '┊',
+      show_trailing_blankline_indent = false,
+    },
+  },
+
+  -- "gc" to comment visual regions/lines
+  { 'numToStr/Comment.nvim', opts = {} },
+
+  -- Fuzzy Finder (files, lsp, etc)
+  { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
+  { 'smartpde/telescope-recent-files'},
+  { 'nvim-telescope/telescope-file-browser.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
+
+ -- Harpoon
+  { 'ThePrimeagen/harpoon' },
+  { 'vifm/vifm.vim' },
+  { 'mbbill/undotree' },
+  {'nvim-tree/nvim-web-devicons'},
+  { 'nvim-neo-tree/neo-tree.nvim', dependencies = { "nvim-lua/plenary.nvim",
+                                                    "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+                                                    "MunifTanjim/nui.nvim", } },
+  { 'folke/which-key.nvim' },
+  { 'romgrk/barbar.nvim', dependencies = { 'nvim-web-devicons' } },
+
+
+  {'ethanholz/nvim-lastplace'},
+
+  -- Fuzzy Finder Algorithm which requires local dependencies to be built.
+  -- Only load if `make` is available. Make sure you have the system
+  -- requirements installed.
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    -- NOTE: If you are having trouble with this installation,
+    --       refer to the README for telescope-fzf-native for more instructions.
+    build = 'make',
+    cond = function()
+      return vim.fn.executable 'make' == 1
+    end,
+  },
+
+  { -- Highlight, edit, and navigate code
+    'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+    },
+    build = ":TSUpdate",
+  },
+
+  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
+  --       These are some example plugins that I've included in the kickstart repository.
+  --       Uncomment any of the lines below to enable them.
+  -- require 'kickstart.plugins.autoformat',
+  -- require 'kickstart.plugins.debug',
+
+  -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
+  --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
+  --    up-to-date with whatever is in the kickstart repo.
+  --
+  --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
+  --
+  --    An additional note is that if you only copied in the `init.lua`, you can just comment this line
+  --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
+  { import = 'custom.plugins' },
+}, {})
+
+
+require("karl.remap")
+require("karl.set")
+
+#+end_src
+
+** STANDARD REMAPS
+Sets some standard keybindings here. These keybindings are builtin
+and doesnt requre the any plugins to be installed. Also sets the spacebar as leaderkey
+#+begin_src lua :tangle lua/karl/remap.lua
+-- Space set as Leader Key
+vim.g.mapleader = " "
+
+-- Built in File explorer in neovim
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+
+-- Source a file
+vim.keymap.set("n", "<leader>hs", vim.cmd.so)
+
+#+end_src
+
+** PLUGIN REMAPS
+Here I set various keybindings for all my plugins that I have installed.
+I choose to do it all here so I have it all in one place because it's easier to manage for me
+#+BEGIN_SRC lua :tangle after/plugin/keymap.lua
+vim.keymap.set("n", "<leader>.", vim.cmd.Vifm)
+
+-- Quickly move between windows
+vim.api.nvim_set_keymap("n", "<leader>bn", ':BufferNext' ,{ noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>bp", ':BufferPrevious<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>bk", ':BufferClose<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>tn", ':tabnew<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>td", ':tabclose<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>ch", ':HighlightColorsToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "gt", ':BufferNext<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "gT", ':BufferPrevious<CR>', { noremap = true, silent = true })
+
+-- Git commands
+vim.api.nvim_set_keymap("n", "<leader>gs", ':Git<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>gg", ':Git<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>gp', ':Git push<CR>', { noremap = true, silent = true })
+
+-- Neotree keybindings
+vim.api.nvim_set_keymap("n", "<F5>", ':NeoTreeFocusToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<F6>", ':Neotree<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<F4>", ':NERDTreeToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>ft", ':NeoTreeFocusToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>nf", ':NeoTreeFloat<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>ns', ':Neotree ~/myrepos/setup<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>na', ':Neotree ~/myrepos/azla<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>nd', ':Neotree ~/myrepos/dotfiles<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>ng', ':Neotree ~/myrepos<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>nc', ':Neotree ~/.config<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>nn', ':Neotree ~/.config/nvim<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>nh', ':Neotree ~<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>n.', ':Neotree .<CR>', { noremap = true, silent = true })
+
+-- Update plugins using packer
+vim.api.nvim_set_keymap('n', '<Leader>hr', ':PackerSync<CR>', { noremap = true, silent = true })
+
+-- Keybindings for Harpoon
+local mark = require("harpoon.mark")
+local ui = require("harpoon.ui")
+
+vim.keymap.set("n", "<leader>a", mark.add_file)
+vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
+vim.keymap.set("n", "<C-1>", function() ui.nav_file(1) end)
+vim.keymap.set("n", "<C-2>", function() ui.nav_file(2) end)
+vim.keymap.set("n", "<C-3>", function() ui.nav_file(3) end)
+vim.keymap.set("n", "<C-4>", function() ui.nav_file(4) end)
+vim.keymap.set("n", "<C-5>", function() ui.nav_file(5) end)
+vim.keymap.set("n", "<C-6>", function() ui.nav_file(6) end)
+vim.keymap.set("n", "<C-7>", function() ui.nav_file(7) end)
+vim.keymap.set("n", "<C-8>", function() ui.nav_file(8) end)
+vim.keymap.set("n", "<C-9>", function() ui.nav_file(9) end)
+
+-- Keybinding to save as sudo
+vim.api.nvim_set_keymap('n', '<Leader>fs', ':SudaWrite<CR>', { noremap = true, silent = true })
+
+-- Keybinding to open UndoTree
+vim.api.nvim_set_keymap("n", "<Leader>u", ':UndotreeToggle<CR>', { noremap = true, silent = true })
+
+-- Jump back to your dashboard
+vim.api.nvim_set_keymap('n', '<Leader>d', ':Dashboard<CR>', { noremap = true, silent = true })
+
+-- Keybindings for telescope
+local builtin = require('telescope.builtin')
+vim.api.nvim_set_keymap('n', '<Leader>ff', ':Telescope find_files<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>gf', ':Telescope git_files<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>ht', ':Telescope colorscheme<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>fb', ':Telescope file_browser<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>fg', function()
+builtin.grep_string({ search = vim.fn.input("Grep >") } );
+
+end)
+
+require("telescope").load_extension("recent_files")
+
+vim.api.nvim_set_keymap("n", "<Leader>fr",
+  [[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]],
+  {noremap = true, silent = true})
+
+require("telescope").load_extension "file_browser"
+
+
+#+END_SRC
+
+** STANDARD SETS
+Some standard neovim settings based on your prefrence
+like line numbers,save undo after session etc.
+Read documentation for some more settings you can do
+#+begin_src lua :tangle lua/karl/set.lua
+vim.wo.relativenumber = true
+vim.opt.nu = true
+
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.expandtab = true
+
+vim.opt.smartindent = true
+
+vim.opt.wrap = false
+
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
+
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+
+vim.opt.termguicolors = true
+
+vim.opt.scrolloff = 8
+vim.opt.signcolumn = "yes"
+vim.opt.isfname:append("@-@")
+
+vim.opt.updatetime = 50
+--
+vim.opt.updatetime = 50
+
+vim.o.modifiable = true
+
+vim.opt.clipboard:append("unnamedplus")
+vim.opt.paste = true
+#+end_src
+
+** PLUGINS
+Here is all my configs for the various Plugins I have installed.
+
+*** COLORS
+Sets colorscheme inside of neovim and configure neovim highlights.
+Neovim highlights is a life saver when working with new colorschemes.
+It is an absolute most have for me. Just do SPC c h to toggle it on and off
+#+begin_src lua  :tangle after/plugin/colors.lua
+function ColorMyPencils(color)
+         color = color or "iceberg"
+	 vim.cmd.colorscheme(color)
+        -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+        -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+end
+
+require("nvim-highlight-colors").turnOff()
+require("nvim-highlight-colors").turnOn()
+require("nvim-highlight-colors").toggle()
+
+
+ColorMyPencils()
+#+end_src
+
+
+*** LASTPLACE
+Lastplace never starts at the top of your files again.
+If you exit a file and come back this plugin will remeber your last location
+#+begin_src lua :tangle after/plugin/lastplace.lua
+require'nvim-lastplace'.setup {
+    lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
+    lastplace_ignore_filetype = {"gitcommit", "gitrebase", "svn", "hgcommit"},
+    lastplace_open_folds = true
+}
+
+#+end_src
+*** LSP-ZERO
+Configure LSP zero for autocompletion and a ton of other features.
+Check it's github for more info because you can do a ton with this plugin.
+#+begin_src lua :tangle after/plugin/lsp.lua
+local lsp = require('lsp-zero')
+
+lsp.preset('recommended')
+
+
+lsp.on_attach(function(client, bufnr)
+  lsp.default_keymaps({buffer = bufnr})
+end)
+
+-- When you don't have mason.nvim installed
+-- You'll need to list the servers installed in your system
+lsp.setup_servers({'tsserver', 'eslint'})
+
+lsp.set_preferences({
+	sign_icons = { }
+})
+
+local cmp = require('cmp')
+local cmp_select = {behavior = cmp.SelectBehavior.Select}
+local cmp_mappings = lsp.defaults.cmp_mappings({
+	['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+	['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+	['<C-y>'] = cmp.mapping.confirm({ select = true }),
+	['<C-Space>'] = cmp.mapping.complete(),
+})
+
+
+lsp.setup()
+
+#+end_src
+*** LUALINE
+Settings for lualine which is the status bar you see att the bottom of neovim.
+Here you can customize it to your liking
+#+begin_src lua :tangle after/plugin/lualine.lua
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'auto',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
+    ignore_focus = {},
+    always_divide_middle = true,
+    globalstatus = false,
+    refresh = {
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
+    }
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {}
+}
+
+#+end_src
+*** NEOTREE
+Some configurations for neotree
+#+begin_src lua :tangle after/plugin/neotree.lua
+
+vim.g.neotree_auto_open = 1
+vim.g.neotree_quit_on_open = 1
+vim.g.neotree_hide_dotfiles = 0
+
+#+end_src
+*** ORGMODE
+Settings for orgmode inside of Neovim so you get syntax highlightning inside of Neovim in orgmode.
+Similar to emacs but please keep in mind that you wont have the same features as in emacs.
+#+begin_src lua :tangle after/plugin/orgmode.lua
+-- init.lua
+
+-- Load custom treesitter grammar for org filetype
+require('orgmode').setup_ts_grammar()
+
+-- Treesitter configuration
+require('nvim-treesitter.configs').setup {
+  -- If TS highlights are not enabled at all, or disabled via `disable` prop,
+  -- highlighting will fallback to default Vim syntax highlighting
+  highlight = {
+    enable = true,
+    -- Required for spellcheck, some LaTex highlights and
+    -- code block highlights that do not have ts grammar
+    additional_vim_regex_highlighting = {'org'},
+  },
+  ensure_installed = {'org'}, -- Or run :TSUpdate org
+}
+
+require('orgmode').setup({
+  org_agenda_files = {'~/Dropbox/org/*', '~/my-orgs/**/*'},
+  org_default_notes_file = '~/Dropbox/org/refile.org',
+})
+
+#+end_src
+
+*** TREESITTER
+Syntax highlighning is way better with this plugin activated
+#+begin_src lua :tangle after/plugin/treesitter.lua
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all" (the five listed parsers should always be installed)
+ ensure_installed = { "javascript", "typescript", "c", "lua", "vim", "vimdoc", "query" },
+
+ -- Install parsers synchronously (only applied to `ensure_installed`)
+ sync_install = false,
+
+ -- Automatically install missing parsers when entering buffer
+ -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+ auto_install = true,
+
+ highlight = {
+   enable = true,
+
+   -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+   -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+   -- Using this option may slow down your editor, and you may see some duplicate highlights.
+   -- Instead of true it can also be a list of languages
+   additional_vim_regex_highlighting = false,
+ },
+}
+#+end_src
+
+
+*** WHICHKEY
+Settings for whichkey which is what you see when your
+press your leader key and wait for a few seconds.
+It's very similar to the one you see in emacs but less useful in my opninion.
+Because there is just less keybindings to remember in vim
+#+begin_src lua :tangle after/plugin/whichkey.lua
+local status, which_key = pcall(require, "which-key")
+if not status then
+	return
+end
+
+which_key.setup({
+-- your configuration comes here
+	-- or leave it empty to use the default settings
+})
+#+end_src
+
+*** DASHBOARD
+Dashboard settings, This is what you see when you launch Neovim with no arguments
+It has a ton of settings so check it's github for more info. I'm basically using default settings.
+Because I can't get my configuration to work properly for some reason
+#+begin_src lua :tangle after/plugin/dashboard.lua
+vim.g.dashboard_default_executive = 'telescope'
+vim.g.default_banner = {
+	[[ ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗]],
+	[[ ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║]],
+	[[ ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║]],
+	[[ ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║]],
+	[[ ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║]],
+	[[ ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝]],
+	[[,                                                      ]],
+	[[TIP: To exit Neovim, just power off your computer.     ]],
+ }
+#+end_src
