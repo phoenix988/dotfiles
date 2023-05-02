@@ -31,7 +31,7 @@ vim.api.nvim_set_keymap('n', '<Leader>nh', ':Neotree ~<CR>', { noremap = true, s
 vim.api.nvim_set_keymap('n', '<Leader>n.', ':Neotree .<CR>', { noremap = true, silent = true })
 
 -- Update plugins using packer
-vim.api.nvim_set_keymap('n', '<Leader>hr', ':PackerSync<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>hr', ':Lazy<CR>', { noremap = true, silent = true })
 
 -- Keybindings for Harpoon
 local mark = require("harpoon.mark")
