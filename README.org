@@ -22,11 +22,12 @@
   - [[TMUX JUMP]]
   - [[OTHERS]]
     - [[MEDIA SCRIPTS]]
+  - [[CREDITS]]
 
-[[file:./.images/hyprland-desktop.png]]
 
 ** ABOUT MY DOTFILES
-This repo is for all my personal config files for Software I use daily
+[[file:./.images/hyprland-desktop.png]]
+This repo is for all my personal config files for Software I use daily.
 Alot of my configs are based of other peoples configs to make it easy for me.
 I just tweak them to my liking. For example my qtile config I based off Distro Tubes
 Qtile config and tweaked some keybindings I didn't like and styled it a little bit
@@ -110,3 +111,6 @@ it to my window manager easily as a keybinding.
 | [[.scripts/activated/]] | [[.scripts/activated/volume-up.sh]]  |
 | [[.scripts/activated/]] | [[.scripts/activated/volume-down.sh]] |
 |---------------------+----------------------------------|
+
+**** CREDITS
+Credits to the people that wrote the config files that I used as base
