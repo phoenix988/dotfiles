@@ -14,27 +14,26 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- NOTE: Here is where you install your plugins.
---  You can configure plugins using the `config` key.
---
---  You can also configure plugins after the setup call,
---    as they will be available in your neovim runtime.
 require('lazy').setup({
-  -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
+  "jreybert/vimagit",
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+  -- Startscreen
+  {"mhinz/vim-startify"},
 
- { 'VonHeikemen/lsp-zero.nvim', requires = {'neovim/nvim-lspconfig'} },
- {'williamboman/mason-lspconfig.nvim'},
+ { "startup-nvim/startup.nvim",
+  dependencies = {"nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim"} },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
+ { 'VonHeikemen/lsp-zero.nvim', dependencies = {'neovim/nvim-lspconfig'} },
+ {'williamboman/mason-lspconfig.nvim'},
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -65,26 +64,14 @@ require('lazy').setup({
     {'L3MON4D3/LuaSnip'},             -- Required
     {'rafamadriz/friendly-snippets'}, -- Optional
 
-  -- Startscreen
-   {
-     'glepnir/dashboard-nvim',
-     event = 'VimEnter',
-     config = function()
-       require('dashboard').setup {
-         -- config
-       }
-     end,
-       dependencies = {'nvim-tree/nvim-web-devicons'}
-   },
-
 
   -- Highlight colors inside of vim
    {'brenoprata10/nvim-highlight-colors'},
 
+ -- Orgmode
    { 'nvim-orgmode/orgmode' },
 
-   { "jreybert/vimagit" },
-
+  -- Save as sudo
    {'lambdalisue/suda.vim'},
 
   -- Useful plugin to show you pending keybinds.
@@ -111,7 +98,7 @@ require('lazy').setup({
     end,
   },
 
-  {
+  { -- Some more themes
   'cocopon/iceberg.vim',
   'rose-pine/neovim',
   'Mofiqul/dracula.nvim',
@@ -151,16 +138,23 @@ require('lazy').setup({
 
  -- Harpoon
   { 'ThePrimeagen/harpoon' },
+ -- Vifm file manager
   { 'vifm/vifm.vim' },
+ -- Undotree to see history of a file
   { 'mbbill/undotree' },
+
+ -- Neotree
   {'nvim-tree/nvim-web-devicons'},
   { 'nvim-neo-tree/neo-tree.nvim', dependencies = { "nvim-lua/plenary.nvim",
                                                     "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
                                                     "MunifTanjim/nui.nvim", } },
+ -- Which key gives hint about keybindings
   { 'folke/which-key.nvim' },
+
+ -- Barbar better tabs
   { 'romgrk/barbar.nvim', dependencies = { 'nvim-web-devicons' } },
 
-
+ -- Lastplace remeber your last posisition
   {'ethanholz/nvim-lastplace'},
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
@@ -184,18 +178,4 @@ require('lazy').setup({
     build = ":TSUpdate",
   },
 
-  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-  --       These are some example plugins that I've included in the kickstart repository.
-  --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
-
-  -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
-  --    up-to-date with whatever is in the kickstart repo.
-  --
-  --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  --
-  --    An additional note is that if you only copied in the `init.lua`, you can just comment this line
-  --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
 }, {})
