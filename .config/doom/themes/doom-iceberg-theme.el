@@ -200,6 +200,7 @@
     (solaire-header-line-face :background bg-alt :foreground fg)
     (header-line :background base2 :foreground fg)
     (org-meta-line :foreground fg-alt)
+    (org-macro :foreground dark-blue)
     (org-level-1 :foreground "#84A0C6")
     (org-level-2 :foreground "#A093C7")
     (org-level-3 :foreground "#8FBCBB")
