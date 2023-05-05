@@ -14,6 +14,7 @@ vim.api.nvim_set_keymap("n", "gT", ':BufferPrevious<CR>', { noremap = true, sile
 vim.api.nvim_set_keymap("n", "<leader>gs", ':Git<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>gg", ':Git<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>gp', ':Git push<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>gd', ':Gdiff %<CR>', { noremap = true, silent = true })
 
 -- Neotree keybindings
 vim.api.nvim_set_keymap("n", "<F5>", ':NeoTreeFocusToggle<CR>', { noremap = true, silent = true })
@@ -30,8 +31,11 @@ vim.api.nvim_set_keymap('n', '<Leader>nn', ':Neotree ~/.config/nvim<CR>', { nore
 vim.api.nvim_set_keymap('n', '<Leader>nh', ':Neotree ~<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>n.', ':Neotree .<CR>', { noremap = true, silent = true })
 
--- Update plugins using packer
+-- Update plugins using lazy
 vim.api.nvim_set_keymap('n', '<Leader>hr', ':Lazy<CR>', { noremap = true, silent = true })
+
+-- Terminal
+vim.api.nvim_set_keymap('n', '<Leader>ot', ':terminal<CR>', { noremap = true, silent = true })
 
 -- Keybindings for Harpoon
 local mark = require("harpoon.mark")
