@@ -927,7 +927,7 @@ def init_widgets_list():
                        background = colors[0],
                        padding = 0,
                        margin = 5,
-                       border = colors[4],
+                       border = colors[6],
                        borderwidth = 1,
                        urgent_alert_method = "text",
                        urgent_border = colors[2]
@@ -1847,8 +1847,8 @@ colors = [["#161821", "#161821"], # 0 -- BG color
           ["#5C6370", "#5C6370"], # 1
           ["#91ACD1", "#91ACD1"], # 2
           ["#C0CA8E", "#C0CA8E"], # 3
-          ["#5C8299", "#5C8299"], # 4
-          ["#eceff4", "#eceff4"], # 5
+          ["#425E86", "#425E86"], # 4
+          ["#C9A6CD", "#C9A6CD"], # 5
           ["#81A1C1", "#81A1C1"], # 6
           ["#8FC1C3", "#8FC1C3"], # 7
           ["#E9B189", "#E9B189"], # 8  -- weather widget

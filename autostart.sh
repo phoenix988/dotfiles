@@ -2,8 +2,8 @@
 # 
 # Using bash in the shebang rather than /bin/sh, which should
 # be avoided as non-POSIX shell users (fish) may experience errors.
-#lxsession &
-/usr/lib/polkit-kde-authentication-agent-1 &
+lxsession &
+#/usr/lib/polkit-kde-authentication-agent-1 &
 
 #Compositor
 picom -b --config  $HOME/.config/picom/picom.conf
