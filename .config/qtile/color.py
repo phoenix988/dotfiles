@@ -1,1 +1,1 @@
-themes/iceberg.py
+/home/karl/.config/qtile/themes/iceberg.py

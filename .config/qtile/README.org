@@ -2,6 +2,7 @@
 #+author: Karl Fredin
 #+DESCRIPTION: MY CUSTOME QTILE CONFIG
 
+
 [[file:./images/qtile.png]]
 
 
@@ -20,12 +21,22 @@
   - [[EMACS]]
   - [[RUN SCRIPTS]]
 - [[WORKSPACES]]
+  - [[ACTIVE]]
+  - [[ICONS]]
+  - [[NORMAL]]
 - [[LAYOUTS]]
 - [[WIDGETS]]
+  - [[DESKTOP]]
+  - [[LAPTOP]]
   - [[SLICE]]
 - [[MOUSE ACTION]]
 - [[FLOATING RULES]]
 - [[STARTUP HOOK]]
+- [[THEMES]]
+  - [[DRACULA]]
+  - [[ICEBERG]]
+  - [[NORD]]
+  - [[ROSE-PINE]]
 
 ** ABOUT
 This is my qtile configuration. Qtile is a Window Manager written in python.
@@ -703,7 +714,34 @@ Here you configure your workspaces and configure default layout
 For each workspace. The ones I mainly use is bsp layout, max layout and floating.
 You can also configure application rules here. Like if you want
 certain apps to always open on one specific workspace
+
+*** ICONS
+This sets icons to represent a workspace. If you want to use icons
+make sure this is set to config.py after :tangle
 #+BEGIN_SRC python :tangle config.py
+
+group_names = [("", {'layout': 'bsp' ,'matches':[Match(wm_class=["Brave-browser-nightly", "Chromium" , "librewolf"])]}),
+               ("", {'layout': 'bsp','matches':[Match(wm_class=["neo"])]}),
+               ("", {'layout': 'bsp', 'matches':[Match(wm_class=["TeamViewer"])]}),
+               ("", {'layout': 'max', 'matches':[Match(wm_class=["lutris" , "Steam" , "upc.exe" , "steam_proton" , "heroic"])]}),
+               ("", {'layout': 'bsp', 'matches':[Match(wm_class=["re.sonny.Tangram", "crx_cifhbcnohmdccbgoicgdjpfamggdegmo", "disk.yandex.com__client_disk"])]}),
+               ("", {'layout': 'max', 'matches':[Match(wm_class=["discord" , "Franz" , "whatsapp-nativefier-d40211" , "altus" , "whatsdesk" , "whatsapp-for-linux", "web.whatsapp.com"])]}),
+               ("", {'layout': 'bsp', 'matches':[Match(wm_class=["Spotify"])]}),
+               ("", {'layout': 'treetab', 'matches':[Match(wm_class=["nemo"  , "io.github.celluloid_player.Celluloid" , "urxvt" , "obs", "youtube.com", "netflix.com"])]}),
+               ("", {'layout': 'bsp', 'matches':[Match(wm_class=["gimp-2.10","Gimp" ,"Cinelerra","Olive", "kdenlive" , "resolve" ])]})]
+
+
+groups = [Group(name, **kwargs) for name, kwargs in group_names]
+
+for i, (name, kwargs) in enumerate(group_names, 1):
+    keys.append(Key([mod], str(i), lazy.group[name].toscreen()))        # Switch to another group
+    keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
+
+#+END_SRC
+*** NORMAL
+This is just normal text to represent workspaces. set tangle to config.py if you want to use these options
+#+BEGIN_SRC python :tangle  examples/config-workspace-normal.py
+
 
 group_names = [("WWW", {'layout': 'bsp' ,'matches':[Match(wm_class=["Brave-browser-nightly", "Chromium" , "librewolf"])]}),
                ("DEV", {'layout': 'bsp','matches':[Match(wm_class=["neo"])]}),
@@ -723,6 +761,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
 
 #+END_SRC
+
 ** LAYOUTS
 Here you choose which layouts you want to be availble for use
 I mostly use bsp layout cause its my favorite kind of layout
@@ -791,6 +830,7 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 ** WIDGETS
 Here you configure all your widgets that you have in your Qtile bar!
 So if you want to make qtile look fancy this is what you want to configure
+*** DESKTOP
 #+BEGIN_SRC python :tangle config.py
 
 def init_widgets_list():
@@ -815,7 +855,427 @@ def init_widgets_list():
                        ),
              widget.GroupBox(
                        font = "Ubuntu Bold",
-                       fontsize = 10,
+                       fontsize = 28,
+                       margin_y = 3,
+                       margin_x = 0,
+                       padding_y = 5,
+                       padding_x = 3,
+                       borderwidth = 2,
+                       active = colors[5],
+                       inactive = colors[1],
+                       rounded = "true",
+                       disable_drag = "true",
+                       highlight_color = colors[4],
+                       highlight_method = "line",
+                       this_current_screen_border = colors[4],
+                       this_screen_border = colors[4],
+                       other_current_screen_border = colors[4],
+                       other_screen_border = colors[4],
+                       urgent_border = colors[5],
+                       urgent_alert_method = "line",
+                       foreground = colors[2],
+                       background = colors[0]
+                       ),
+             widget.Prompt(
+                       prompt = prompt,
+                       font = "Ubuntu Mono",
+                       padding = 10,
+                       foreground = colors[3],
+                       background = colors[1]
+                       ),
+             widget.Sep(
+                       linewidth = 0,
+                       padding = 20,
+                       foreground = colors[2],
+                       background = colors[0]
+                       ),
+             widget.TextBox(
+                       text = '',
+                       background = colors[0],
+                       foreground = colors[4],
+                       padding = -1,
+                       fontsize = 45
+                       ),
+             widget.CurrentLayout(
+                       foreground = colors[0],
+                       background = colors[4],
+                       padding = 8,
+                       fontsize = 15
+                       ),
+             widget.CurrentLayoutIcon(
+                       background = colors[4],
+                       use_mask = "true",
+                       foreground = colors[0],
+                       scale = 0.8,
+                       padding = 10
+                       ),
+             widget.TextBox(
+                       text = '',
+                       background = colors[4],
+                       foreground = colors[0],
+                       padding = -1,
+                       fontsize = 45
+                       ),
+             widget.Sep(
+                       linewidth = 0,
+                       padding = 4,
+                       foreground = colors[2],
+                       background = colors[0]
+                       ),
+             widget.TaskList(
+                       foreground = colors[6],
+                       background = colors[0],
+                       padding = 0,
+                       margin = 5,
+                       border = colors[6],
+                       borderwidth = 1,
+                       urgent_alert_method = "text",
+                       urgent_border = colors[2]
+                       ),
+             widget.Sep(
+                       linewidth = 1,
+                       padding = 0,
+                       foreground = colors[0],
+                       background = colors[0]
+                       ),
+             widget.TextBox(
+                       text = '',
+                       background = colors[0],
+                       foreground = colors[2],
+                       padding = -1,
+                       fontsize = 45
+                       ),
+             widget.Clock(
+                       foreground = colors[0],
+                       background = colors[2],
+                       format = "  %A, %B %d/%Y - %H:%M ",
+                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("yad --calendar")},
+                       ),
+             widget.KeyboardLayout(
+                       foreground = colors[0],
+                       background = colors[2],
+                       configured_keyboards = ['us', 'se', 'az'],
+                       padding = 10,
+                       ),
+             widget.NvidiaSensors(
+                       foreground = colors[0],
+                       background = colors[2],
+                       threshold = 85,
+                       ),
+             widget.TextBox(
+                       text = '',
+                       background = colors[2],
+                       foreground = colors[0],
+                       padding = -1,
+                       fontsize = 45
+                       ),
+             widget.Sep(
+                       linewidth = 15,
+                       padding = 1,
+                       foreground = colors[0],
+                       background = colors[0]
+                       ),
+             widget.Chord(
+                       background = colors[0],
+                       foreground = colors[2],
+                       padding = 1
+                       ),
+             widget.TextBox(
+                       text = '',
+                       background = colors[0],
+                       foreground = colors[1],
+                       padding = -1,
+                       fontsize = 45
+                       ),
+             widget.Systray(
+                      background = colors[1],
+                      padding = 1
+                      ),
+             widget.TextBox(
+                       text = '',
+                       background = colors[1],
+                       foreground = colors[0],
+                       padding = -1,
+                       fontsize = 45
+                       ),
+             widget.TextBox(
+                       text = '',
+                       background = colors[0],
+                       foreground = colors[0],
+                       padding = -1,
+                       fontsize = 45
+                       ),
+             widget.OpenWeather(
+                       background = colors[0],
+                       foreground = colors[8],
+                       cityid = "598316",
+                       format = '{location_city}: {main_temp} {units_temperature}°  {weather_details}',
+                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("brave-browser https://openweathermap.org/city/598316")},
+                       decorations = [
+                            BorderDecoration (
+                            colour = colors[8],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
+                            ],
+                       ),
+             widget.TextBox(
+                       text = '',
+                       background = colors[0],
+                       foreground = colors[0],
+                       padding = -1,
+                       fontsize = 45
+                       ),
+             widget.TextBox(
+                       text = '🖴',
+                       background = colors[0],
+                       foreground = colors[9],
+                       padding = 1,
+                       fontsize = 13,
+                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("baobab")},
+                       decorations = [
+                            BorderDecoration (
+                            colour = colors[9],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
+                            ],
+                       ),
+             widget.DF(
+                        partition = "/",
+                        visible_on_warn = False,
+                        foreground = colors[9],
+                        background = colors[0],
+                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("baobab")},
+                        decorations = [
+                            BorderDecoration (
+                            colour = colors[9],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
+                            ],
+                       ),
+             widget.TextBox(
+                       text = '',
+                       background = colors[0],
+                       foreground = colors[0],
+                       padding = -1,
+                       fontsize = 45
+                       ),
+             widget.TextBox(
+                       text = '★',
+                       background = colors[0],
+                       foreground = colors[10],
+                       padding = -1,
+                       decorations = [
+                            BorderDecoration (
+                            colour = colors[10],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
+                            ],
+                       ),
+             widget.CPU(
+                         foreground = colors[10],
+                         background = colors[0],
+                         padding = 8,
+                         format = '{load_percent}%',
+                         decorations = [
+                            BorderDecoration (
+                            colour = colors[10],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
+                            ],
+                       ),
+             widget.TextBox(
+                       text='',
+                       background = colors[0],
+                       foreground = colors[0],
+                       padding = -1,
+                       fontsize = 45
+                       ),
+             widget.TextBox(
+                       text = " 🌡",
+                       padding = 6,
+                       foreground = colors[11],
+                       background = colors[0],
+                       fontsize = 11,
+                       tag_sensor =  "temp1",
+                       decorations = [
+                          BorderDecoration (
+                          colour = colors[11],
+                          border_width = [0, 0, 2, 0],
+                          padding_x = 0, )
+                          ],
+                       ),
+             widget.ThermalSensor(
+                        background = colors[0],
+                        foreground = colors[11],
+                        tag_sensor = "Tctl",
+                        threshold = 75,
+                        decorations = [
+                            BorderDecoration (
+                            colour = colors[11],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
+                            ],
+                       ),
+             widget.TextBox(
+                       text = '',
+                       background = colors[0],
+                       foreground = colors[0],
+                       padding = -1,
+                       fontsize = 45
+                       ),
+             widget.TextBox(
+                       text = " 🖬",
+                       foreground = colors[12],
+                       background = colors[0],
+                       padding = 0,
+                       fontsize = 14,
+                       decorations = [
+                            BorderDecoration (
+                            colour = colors[12],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
+                            ],
+                       ),
+             widget.Memory(
+                       foreground = colors[12],
+                       background = colors[0],
+                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(SYSMON)},
+                       padding = 5,
+                       decorations = [
+                            BorderDecoration (
+                            colour = colors[12],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
+                            ],
+                       ),
+             widget.TextBox(
+                       text='',
+                       background = colors[0],
+                       foreground = colors[0],
+                       padding = -1,
+                       fontsize = 45
+                       ),
+             widget.TextBox(
+                     text = " ⟳",
+                     padding = 2,
+                     foreground = colors[13],
+                     background = colors[0],
+                     fontsize = 14,
+                     decorations = [
+                            BorderDecoration (
+                            colour = colors[13],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
+                            ],
+                       ),
+             widget.CheckUpdates(
+                     update_interval = 1800,
+                     distro = "Arch",
+                     display_format = "{updates} Updates",
+                     colour_have_updates = colors[13],
+                     colour_no_updates = colors[13],
+                     foreground = colors[13],
+                     decorations = [
+                            BorderDecoration (
+                            colour = colors[13],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
+                            ],
+                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(MYTERM_NORMAL + ' -e sudo pacman -Syu')},
+                     background = colors[0]
+                       ),
+             widget.TextBox(
+                       text = '',
+                       background = colors[0],
+                       foreground = colors[0],
+                       padding = -1,
+                       fontsize = 45
+                       ),
+             widget.TextBox(
+                      text = "♫  Vol:",
+                      foreground = colors[14],
+                      background = colors[0],
+                      padding = 0,
+                      mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("pavucontrol")},
+                      decorations = [
+                            BorderDecoration (
+                            colour = colors[14],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
+                            ],
+                       ),
+             widget.Volume(
+                      foreground = colors[14],
+                      background = colors[0],
+                      padding = 5,
+                      decorations = [
+                            BorderDecoration (
+                            colour = colors[14],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
+                            ],
+                       ),
+             widget.TextBox(
+                       text = '',
+                       background = colors[0],
+                       foreground = colors[0],
+                       padding = -1,
+                       fontsize = 45
+                       ),
+             widget.TextBox(
+                        text = '',
+                        background = colors[0],
+                        foreground = colors[15],
+                        padding = 4,
+                        fontsize = 15,
+                        decorations = [
+                            BorderDecoration (
+                            colour = colors[15],
+                            border_width = [0, 0, 2, 0],
+                            padding_x = 0, )
+                            ],
+                       ),
+             widget.Sep(
+                       linewidth = 0,
+                       padding = 6,
+                       foreground = colors[2],
+                       background = colors[0]
+                       ),
+    ]
+
+    return widgets_list
+
+
+#+END_SRC
+Widgets to use if you are on a desktop computer
+*** LAPTOP
+Settings to use if you are on a laptop. The main diffrence is that this config
+have the battery widget active
+#+BEGIN_SRC python :tangle examples/config.py.laptop
+
+def init_widgets_list():
+    widgets_list = [
+             widget.Sep(
+                       linewidth = 0,
+                       padding = 0,
+                       foreground = colors[2],
+                       background = colors[0]
+                       ),
+             widget.Image(
+                        filename = "~/.config/qtile/icons/icon.png",
+                        scale = "False",
+                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(MYTERM_NORMAL)},
+                        padding = 10
+                        ),
+             widget.Sep(
+                       linewidth = 0,
+                       padding = 0,
+                       foreground = colors[2],
+                       background = colors[0]
+                       ),
+             widget.GroupBox(
+                       font = "Ubuntu Bold",
+                       fontsize = 28,
                        margin_y = 3,
                        margin_x = 0,
                        padding_y = 5,
@@ -967,13 +1427,13 @@ def init_widgets_list():
                        ),
              widget.OpenWeather(
                        background = colors[0],
-                       foreground = colors[9],
+                       foreground = colors[8],
                        cityid = "598316",
                        format = '{location_city}: {main_temp} {units_temperature}°  {weather_details}',
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("brave-browser https://openweathermap.org/city/598316")},
                        decorations = [
                             BorderDecoration (
-                            colour = colors[9],
+                            colour = colors[8],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
@@ -988,13 +1448,13 @@ def init_widgets_list():
              widget.TextBox(
                        text = '🖴',
                        background = colors[0],
-                       foreground = colors[8],
+                       foreground = colors[9],
                        padding = 1,
                        fontsize = 13,
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("baobab")},
                        decorations = [
                             BorderDecoration (
-                            colour = colors[8],
+                            colour = colors[9],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
@@ -1002,12 +1462,12 @@ def init_widgets_list():
              widget.DF(
                         partition = "/",
                         visible_on_warn = False,
-                        foreground = colors[8],
+                        foreground = colors[9],
                         background = colors[0],
                         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("baobab")},
                         decorations = [
                             BorderDecoration (
-                            colour = colors[8],
+                            colour = colors[9],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
@@ -1022,23 +1482,23 @@ def init_widgets_list():
              widget.TextBox(
                        text = '★',
                        background = colors[0],
-                       foreground = colors[9],
+                       foreground = colors[10],
                        padding = -1,
                        decorations = [
                             BorderDecoration (
-                            colour = colors[9],
+                            colour = colors[10],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
                        ),
              widget.CPU(
-                         foreground = colors[9],
+                         foreground = colors[10],
                          background = colors[0],
                          padding = 8,
                          format = '{load_percent}%',
                          decorations = [
                             BorderDecoration (
-                            colour = colors[9],
+                            colour = colors[10],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
@@ -1053,25 +1513,25 @@ def init_widgets_list():
              widget.TextBox(
                        text = " 🌡",
                        padding = 6,
-                       foreground = colors[8],
+                       foreground = colors[11],
                        background = colors[0],
                        fontsize = 11,
                        tag_sensor =  "temp1",
                        decorations = [
                           BorderDecoration (
-                          colour = colors[8],
+                          colour = colors[11],
                           border_width = [0, 0, 2, 0],
                           padding_x = 0, )
                           ],
                        ),
              widget.ThermalSensor(
                         background = colors[0],
-                        foreground = colors[8],
+                        foreground = colors[11],
                         tag_sensor = "Tctl",
                         threshold = 75,
                         decorations = [
                             BorderDecoration (
-                            colour = colors[8],
+                            colour = colors[11],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
@@ -1085,25 +1545,25 @@ def init_widgets_list():
                        ),
              widget.TextBox(
                        text = " 🖬",
-                       foreground = colors[9],
+                       foreground = colors[12],
                        background = colors[0],
                        padding = 0,
                        fontsize = 14,
                        decorations = [
                             BorderDecoration (
-                            colour = colors[9],
+                            colour = colors[12],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
                        ),
              widget.Memory(
-                       foreground = colors[9],
+                       foreground = colors[12],
                        background = colors[0],
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(SYSMON)},
                        padding = 5,
                        decorations = [
                             BorderDecoration (
-                            colour = colors[9],
+                            colour = colors[12],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
@@ -1118,12 +1578,12 @@ def init_widgets_list():
              widget.TextBox(
                      text = " ⟳",
                      padding = 2,
-                     foreground = colors[8],
+                     foreground = colors[13],
                      background = colors[0],
                      fontsize = 14,
                      decorations = [
                             BorderDecoration (
-                            colour = colors[8],
+                            colour = colors[13],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
@@ -1132,12 +1592,12 @@ def init_widgets_list():
                      update_interval = 1800,
                      distro = "Arch",
                      display_format = "{updates} Updates",
-                     colour_have_updates = colors[8],
-                     colour_no_updates = colors[8],
-                     foreground = colors[8],
+                     colour_have_updates = colors[13],
+                     colour_no_updates = colors[13],
+                     foreground = colors[13],
                      decorations = [
                             BorderDecoration (
-                            colour = colors[8],
+                            colour = colors[13],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
@@ -1153,24 +1613,24 @@ def init_widgets_list():
                        ),
              widget.TextBox(
                       text = "♫  Vol:",
-                      foreground = colors[9],
+                      foreground = colors[14],
                       background = colors[0],
                       padding = 0,
                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("pavucontrol")},
                       decorations = [
                             BorderDecoration (
-                            colour = colors[9],
+                            colour = colors[14],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
                        ),
              widget.Volume(
-                      foreground = colors[9],
+                      foreground = colors[14],
                       background = colors[0],
                       padding = 5,
                       decorations = [
                             BorderDecoration (
-                            colour = colors[9],
+                            colour = colors[14],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
@@ -1185,12 +1645,12 @@ def init_widgets_list():
              widget.TextBox(
                         text = '',
                         background = colors[0],
-                        foreground = colors[8],
+                        foreground = colors[15],
                         padding = 4,
                         fontsize = 15,
                         decorations = [
                             BorderDecoration (
-                            colour = colors[8],
+                            colour = colors[15],
                             border_width = [0, 0, 2, 0],
                             padding_x = 0, )
                             ],
@@ -1336,4 +1796,136 @@ def start_once():
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
+#+END_SRC
+
+** THEMES
+*** DRACULA
+#+BEGIN_SRC python :tangle themes/dracula.py
+# Dracula theme for qtile
+# Author: Karl Fredin
+layout_colors = [["#bd92f8", "#bd92f8"], #  0 -- Border color
+                 ["#2e3440", "#2e3440"], #  1
+                 ["#1e1f28", "#1e1f28"], #  2
+                 ["#000000", "#000000"], #  3
+                 ["#ecbbfb", "#ecbbfb"]] #  4
+
+
+colors = [["#1e1f28", "#1e1f28"], # 0 -- BG color
+          ["#6272A4", "#6272A4"], # 1 -- Inactive workspace
+          ["#ff78c5", "#ff78c5"], # 2
+          ["#50fa7b", "#50fa7b"], # 3
+          ["#A372D8", "#A372D8"], # 4 -- Workspace highlight
+          ["#A4FFFF", "#A4FFFF"], # 5 -- Workspace FG
+          ["#F8F8F2", "#F8F8F2"], # 6
+          ["#ecbbfb", "#ecbbfb"], # 7
+          ["#FF92DF", "#FF92DF"], # 8  -- weather widget
+          ["#D6ACFF", "#D6ACFF"], # 9  -- df widget
+          ["#69FF94", "#69FF94"], # 10 -- cpu widget
+          ["#FF6E6E", "#FF6E6E"], # 11 -- temp widget
+          ["#FF79C6", "#FF79C6"], # 12 -- memory widget
+          ["#FFFFA5", "#FFFFA5"], # 13 -- update widget
+          ["#A4FFFF", "#A4FFFF"], # 14 -- volume widget
+          ["#bd92f8", "#bd92f8"]] # 15 -- linux icon
+
+#+END_SRC
+*** ICEBERG
+#+BEGIN_SRC python :tangle themes/iceberg.py
+# Iceberg theme for qtile
+# Author: Karl Fredin
+
+# colors for borders and layouts
+
+layout_colors = [["#A093C7", "#A093C7"],
+                 ["#161821", "#161821"],
+                 ["#161821", "#161821"],
+                 ["#000000", "#000000"],
+                 ["#6b7089", "#6b7089"]]
+
+
+# Color for the qtile bar
+colors = [["#161821", "#161821"], # 0 -- BG color
+          ["#5C6370", "#5C6370"], # 1
+          ["#91ACD1", "#91ACD1"], # 2
+          ["#C0CA8E", "#C0CA8E"], # 3
+          ["#425E86", "#425E86"], # 4
+          ["#C9A6CD", "#C9A6CD"], # 5
+          ["#81A1C1", "#81A1C1"], # 6
+          ["#8FC1C3", "#8FC1C3"], # 7
+          ["#E9B189", "#E9B189"], # 8  -- weather widget
+          ["#D4D7B6", "#D4D7B6"], # 9  -- df widget
+          ["#ADA0D3", "#ADA0D3"], # 10 -- cpu widget
+          ["#E98989", "#E98989"], # 11 -- temp widget
+          ["#8FBCBB", "#8FBCBB"], # 12 -- memory widget
+          ["#b48ead", "#b48ead"], # 13 -- update widget
+          ["#91acd1", "#91acd1"], # 14 -- volume widget
+          ["#eceff4", "#eceff4"]] # 15 -- linux icon
+
+#+END_SRC
+
+*** NORD
+#+BEGIN_SRC python :tangle themes/nord.py
+# Nord theme for qtile
+# Author: Karl Fredin
+
+layout_colors = [["#88C0D0", "#88C0D0"], #  0 -- Border color
+                 ["#2e3440", "#2e3440"], #  1
+                 ["#2E3440", "#2E3440"], #  2
+                 ["#000000", "#000000"], #  3
+                 ["#6B7089", "#6B7089"]] #  4
+
+
+
+colors = [["#2E3440", "#2E3440"], # 0 -- BG color
+          ["#4C566A", "#4C566A"], # 1 -- Inactive workspace
+          ["#B48EAD", "#B48EAD"], # 2
+          ["#A3BE8C", "#A3BE8C"], # 3
+          ["#81A1C1", "#81A1C1"], # 4 -- Workspace highlight
+          ["#FFFACD", "#FFFACD"], # 5 -- Workspace FG
+          ["#88C0D0", "#88C0D0"], # 6
+          ["#ecbbfb", "#ecbbfb"], # 7
+          ["#81A1C1", "#81A1C1"], # 8  -- weather widget
+          ["#B48EAD", "#B48EAD"], # 9  -- df widget
+          ["#EBCB8B", "#EBCB8B"], # 10 -- cpu widget
+          ["#81A1C1", "#81A1C1"], # 11 -- temp widget
+          ["#B48EAD", "#B48EAD"], # 12 -- memory widget
+          ["#EBCB8B", "#EBCB8B"], # 13 -- update widget
+          ["#81A1C1", "#81A1C1"], # 14 -- volume widget
+          ["#B48EAD", "#B48EAD"]] # 15 -- linux icon
+
+
+
+#+END_SRC
+
+*** ROSE-PINE
+#+BEGIN_SRC python :tangle themes/rose-pine.py
+# Rose pine theme for qtile
+# Author: Karl Fredin
+
+# colors for borders and layouts
+layout_colors = [["#EBBCBA", "#EBBCBA"], # 0 -- Border color
+                 ["#191724", "#191724"], # 1
+                 ["#191724", "#191724"], # 2
+                 ["#000000", "#000000"], # 3
+                 ["#6b7089", "#6b7089"]] # 4
+
+
+# Color for the qtile bar
+colors = [["#191724", "#191724"], # 0 -- BG color
+          ["#6E6A86", "#6E6A86"], # 1
+          ["#EBBCBA", "#EBBCBA"], # 2
+          ["#31748F", "#31748F"], # 3
+          ["#AB355A", "#AB355A"], # 4
+          ["#EBBCBA", "#EBBCBA"], # 5
+          ["#EBBCBA", "#EBBCBA"], # 6
+          ["#EBBCBA", "#EBBCBA"], # 7
+          ["#F6C177", "#F6C177"], # 8  -- weather widget
+          ["#E0DEF4", "#E0DEF4"], # 9  -- df widget
+          ["#31748F", "#31748F"], # 10 -- cpu widget
+          ["#EB6F92", "#EB6F92"], # 11 -- temp widget
+          ["#C4A7E7", "#C4A7E7"], # 12 -- memory widget
+          ["#EBBCBA", "#EBBCBA"], # 13 -- update widget
+          ["#9CCFD8", "#9CCFD8"], # 14 -- volume widget
+          ["#F6C177", "#F6C177"]] # 15 -- linux icon
+
+
 #+END_SRC
