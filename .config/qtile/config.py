@@ -457,7 +457,7 @@ keys = [
                  desc='Change kitty theme'
                  ),
              Key([], "l", #Change keyboard layout
-                 lazy.spawn(DMENU_PATH + "/dm-layout"),
+                 lazy.spawn(DMENU_PATH + "/dm-input"),
                  desc='Choose your keyboardlayout'
                  ),
              Key([], "v", #Connect to a vpn server using vpn
