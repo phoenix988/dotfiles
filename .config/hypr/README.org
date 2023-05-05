@@ -271,8 +271,8 @@ bind = $mainMod SHIFT, Q, exit,                                                 
 # Utilities
 bind = $mainMod, M, exec, wlogout                                                          #Logout screen
 bind = $mainMod, R, exec, wofi --show drun                                                 #Run menu
-bind =, F2, exec, $HOME/.config/hypr/hyprland-keys                                         #Shows this help menu
-bind =, F1, exec, $HOME/.config/kitty/kitty-keys.sh                                        #Show keybinding for kitty terminal
+bind = $mainMod, F2, exec, $HOME/.config/hypr/hyprland-keys                                         #Shows this help menu
+bind = $mainMod, F1, exec, $HOME/.config/kitty/kitty-keys.sh                                        #Show keybinding for kitty terminal
 
 
 # Lock Screen
