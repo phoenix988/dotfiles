@@ -274,8 +274,12 @@ require('lazy').setup({
   { 'nvim-neo-tree/neo-tree.nvim', dependencies = { "nvim-lua/plenary.nvim",
                                                     "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
                                                     "MunifTanjim/nui.nvim", } },
+
+  { 'nvim-tree/nvim-tree.lua' },
+ 
  -- Which key gives hint about keybindings
   { 'folke/which-key.nvim' },
+
 
  -- Barbar better tabs
   { 'romgrk/barbar.nvim', dependencies = { 'nvim-web-devicons' } },
@@ -303,6 +307,16 @@ require('lazy').setup({
     },
     build = ":TSUpdate",
   },
+
+    {
+      "kylechui/nvim-surround",
+      config = function()
+          require("nvim-surround").setup({
+              -- Configuration here, or leave empty to use defaults
+          })
+      end
+  },
+
 
 }, {})
 
@@ -344,10 +358,9 @@ vim.api.nvim_set_keymap('n', '<Leader>gp', ':Git push<CR>', { noremap = true, si
 vim.api.nvim_set_keymap('n', '<Leader>gd', ':Gdiff %<CR>', { noremap = true, silent = true })
 
 -- Neotree keybindings
-vim.api.nvim_set_keymap("n", "<F5>", ':NeoTreeFocusToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<F6>", ':Neotree<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<F4>", ':NERDTreeToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Leader>ft", ':NeoTreeFocusToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<F4>", ':NvimTreeFocus<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<F5>", ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>ft", ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>nf", ':NeoTreeFloat<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>ns', ':Neotree ~/myrepos/setup<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>na', ':Neotree ~/myrepos/azla<CR>', { noremap = true, silent = true })
