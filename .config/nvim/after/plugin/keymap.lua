@@ -17,10 +17,9 @@ vim.api.nvim_set_keymap('n', '<Leader>gp', ':Git push<CR>', { noremap = true, si
 vim.api.nvim_set_keymap('n', '<Leader>gd', ':Gdiff %<CR>', { noremap = true, silent = true })
 
 -- Neotree keybindings
-vim.api.nvim_set_keymap("n", "<F5>", ':NeoTreeFocusToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<F6>", ':Neotree<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<F4>", ':NERDTreeToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Leader>ft", ':NeoTreeFocusToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<F4>", ':NvimTreeFocus<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<F5>", ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>ft", ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>nf", ':NeoTreeFloat<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>ns', ':Neotree ~/myrepos/setup<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>na', ':Neotree ~/myrepos/azla<CR>', { noremap = true, silent = true })

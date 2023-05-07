@@ -148,8 +148,12 @@ require('lazy').setup({
   { 'nvim-neo-tree/neo-tree.nvim', dependencies = { "nvim-lua/plenary.nvim",
                                                     "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
                                                     "MunifTanjim/nui.nvim", } },
+
+  { 'nvim-tree/nvim-tree.lua' },
+ 
  -- Which key gives hint about keybindings
   { 'folke/which-key.nvim' },
+
 
  -- Barbar better tabs
   { 'romgrk/barbar.nvim', dependencies = { 'nvim-web-devicons' } },
@@ -177,5 +181,15 @@ require('lazy').setup({
     },
     build = ":TSUpdate",
   },
+
+    {
+      "kylechui/nvim-surround",
+      config = function()
+          require("nvim-surround").setup({
+              -- Configuration here, or leave empty to use defaults
+          })
+      end
+  },
+
 
 }, {})
