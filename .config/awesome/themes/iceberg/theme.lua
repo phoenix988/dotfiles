@@ -21,16 +21,19 @@ theme.font                                      = "Droid Sans 14"
 theme.taglist_font 				= "Xirod 13"
 theme.fg_normal                                 = "#91ACD1"
 theme.fg_focus                                  = "#A093C7"
+theme.fg_alt                                    = "#93B6FF"
+theme.fg_clock                                  = "#425E86"
+theme.fg_cpu                                    = "#E9B189"
+theme.fg_mem                                    = "#B48EAD"
 theme.bg_normal                                 = "#161821"
 theme.bg_normal                                 = "#161821"
 theme.bg_focus                                  = "#161821"
 theme.fg_urgent                                 = "#161821"
 theme.bg_urgent                                 = "#E98989"
-theme.border_width                              = 1
-theme.border_normal                             = "#141414"
---theme.border_focus                              = "#93B6FF"
+theme.border_width                              = 2
+theme.border_normal                             = "#161821"
 theme.border_focus                              = "#A093C7"
-theme.taglist_fg_focus                          = "#91ACD1"
+theme.taglist_fg_focus                          = "#E9B189"
 theme.taglist_bg_focus                          = "#161821"
 theme.taglist_bg_normal                         = "#161821"
 theme.titlebar_bg_normal                        = "#161821"
@@ -98,13 +101,15 @@ local red    = "#EB8F8F"
 local green  = "#8FEB8F"
 local white	 = theme.fg_normal
 
-local mytextclock = wibox.widget.textclock(markup("#191724", " %a") .. markup("#161821", " %d ") .. markup("#191724", "%b ") ..  markup("#161821", "%I:%M "))
+-- Make the clock widget
+local mytextclock = wibox.widget.textclock(markup(theme.bg_normal, " %a") .. markup("#161821", " %d ") .. markup("#191724", "%b ") ..  markup("#161821", "%I:%M "))
 mytextclock.font = theme.font
 
-local mytextclock = wibox.container.background(mytextclock, "#425E86", gears.shape.rectangle)
+-- Set the bg color of the clock widget
+local mytextclock = wibox.container.background(mytextclock, theme.fg_clock, gears.shape.rectangle)
 
---3uptimewidget = wibox.widget.textbox()
---3vicious.register(uptimewidget, vicious.widgeet.uptime, (markup(blue, "$1") .. markup(white, " D") .. markup(blue, " $2") ..  markup(white, " h"))
+--uptimewidget = wibox.widget.textbox()
+--vicious.register(uptimewidget, vicious.widgeet.uptime, (markup(blue, "$1") .. markup(white, " D") .. markup(blue, " $2") ..  markup(white, " h"))
 
 -- Calendar
 lain.widget.calendar({
@@ -213,11 +218,12 @@ local batbg = wibox.container.background(batbar, "#474747", gears.shape.rectangl
 local batwidget = wibox.container.margin(batbg, 2, 7, 4, 4)
 
 ---- / fs
-local fsicon = wibox.widget.imagebox(theme.disk)
+--local fsicon = wibox.widget.imagebox(theme.disk)
+
 local fsbar = wibox.widget {
     forced_height    = 1,
-    forced_width     = 143,
-    color            = theme.fg_normal,
+    forced_width     = 120,
+    color            = theme.fg_focus,
     background_color = theme.bg_normal,
     margins          = 1,
     paddings         = 1,
@@ -225,14 +231,15 @@ local fsbar = wibox.widget {
     ticks_size       = 13,
     widget           = wibox.widget.progressbar,
 }
+
 theme.fs = lain.widget.fs({
     partition = "/",
 --    partition = "/",
     options = "--exclude-type=tmpfs",
-    notification_preset = { fg = theme.fg_normal, bg = theme.bg_normal, font = "Droid Sans 10.5" },
+    notification_preset = { fg = theme.fg_focus, bg = theme.bg_normal, font = "Droid Sans 10.5" },
     settings  = function()
         if tonumber(fs_now.used) < 90 then
-            fsbar:set_color(theme.fg_normal)
+            fsbar:set_color(theme.fg_focus)
         else
             fsbar:set_color("#EB8F8F")
         end
@@ -243,8 +250,14 @@ local fsbg = wibox.container.background(fsbar, "#474747", gears.shape.rectangle)
 local fswidget = wibox.container.margin(fsbg, 2, 7, 4, 4)
 
 local fswidget = wibox.container.background(fswidget, "#2E3440", gears.shape.rectangle)
-local fsicon = wibox.container.background(fsicon, "#2E3440", gears.shape.rectangle)
 
+local fsicon =  wibox.widget {
+     markup = '<span foreground="#A093C7" font="Droid Sans 10">⛁</span>',
+     widget = wibox.widget.textbox
+}
+
+local fsicon = wibox.container.margin(fsicon, 10, 7, 6, 4)
+local fsicon = wibox.container.background(fsicon, "#2E3440", gears.shape.rectangle)
 
 -- ALSA volume bar
 local volicon = wibox.widget.imagebox(theme.vol)
@@ -266,7 +279,7 @@ theme.volume = lain.widget.alsabar({
     colors = {
         background   = theme.bg_normal,
         mute         = red,
-        unmute       = theme.fg_normal
+        unmute       = theme.fg_alt
     }
 })
 theme.volume.tooltip.wibox.fg = theme.fg_focus
@@ -299,25 +312,77 @@ local volumewidget = wibox.container.background(volumewidget, "#282A36", gears.s
 local volicon = wibox.container.background(volicon, "#282A36", gears.shape.rectangle)
 
 -- Creates cpu widget
-local cpuicon = wibox.widget.imagebox(theme.cpu)
-local cpuwidget = wibox.widget.textbox()
-vicious.register(cpuwidget, vicious.widgets.cpu, "CPU: $1%", 1)
-cpuwidget.font = theme.font
+--local cpuicon = wibox.widget.imagebox(theme.cpu)
+local cpuicon =  wibox.widget {
+     markup = '<span foreground="#E9B189" font="Droid Sans 10">⧗</span>',
+     widget = wibox.widget.textbox
+}
 
--- Makes the color of the cpu widget
-local cpuwidget = wibox.container.background(cpuwidget, "#282A36")
-local cpuicon = wibox.container.background(cpuicon, "#282A36", gears.shape.rectangle)
+local cpubar = wibox.widget {
+    forced_height    = 1,
+    forced_width     = 120,
+    color            = theme.fg_cpu,
+    background_color = theme.bg_normal,
+    margins          = 1,
+    paddings         = 1,
+    ticks            = true,
+    ticks_size       = 13,
+    widget           = wibox.widget.progressbar,
+}
 
--- Makes memory widget
-local memory_widget = lain.widget.mem({
-  settings = function()
-        widget:set_markup( "MEM: " .. mem_now.used .. "MB ")
+
+theme.cpu = lain.widget.cpu({
+    settings = function()
+        --widget:set_markup(" CPU: " .. cpu_now.usage .. "% ")
+        cpubar:set_value(cpu_now.usage / 100 )
     end
 })
+
+
+local  cpubg = wibox.container.background(cpubar, "#474747", gears.shape.rectangle)
+local cpuwidget = wibox.container.margin(cpubg, 2, 7, 4, 4)
+
+-- makes the colour of the cpu widget
+local cpuwidget = wibox.container.background(cpuwidget, "#282A36", gears.shape.rectangle)
+local cpuicon = wibox.container.margin(cpuicon, 10, 7, 4, 4)
+local cpuicon = wibox.container.background(cpuicon, "#282A36", gears.shape.rectangle)
+
+-- Makes the memory widget
+local memorybar = wibox.widget {
+    forced_height    = 1,
+    forced_width     = 120,
+    color            = theme.fg_mem,
+    background_color = theme.bg_normal,
+    margins          = 1,
+    paddings         = 1,
+    ticks            = true,
+    ticks_size       = 13,
+    widget           = wibox.widget.progressbar,
+}
+
+-- Makes memory widget
+theme.mem = lain.widget.mem({
+  settings = function()
+        --widget:set_markup( "MEM: " .. mem_now.used .. "MB ")
+        memorybar:set_value(mem_now.used / mem_now.total )
+    end
+})
+
+local  memorybg = wibox.container.background(memorybar, "#474747", gears.shape.rectangle)
+local memory_widget = wibox.container.margin(memorybg, 2, 7, 4, 4)
+
 
 -- Sets the font of the memory widget
 memory_widget.font = theme.font
 
+-- Makes memory icon
+local mem_icon =  wibox.widget {
+     markup = '<span foreground="#B48EAD" font="Droid Sans 10">🖬</span>',
+     widget = wibox.widget.textbox
+}
+
+local mem_icon = wibox.container.background(mem_icon, theme.bg_normal, gears.shape.rectangle)
+local mem_icon = wibox.container.margin(mem_icon, 10, 7, 7, 4)
 
 local weather_widget = lain.widget.weather({
     city_id = 598316,
@@ -339,14 +404,15 @@ local bar_spr_small   = wibox.widget.textbox(markup.font("Droid Sans 28", "")
 local bar_spr_middle   = wibox.widget.textbox(markup.font("Droid Sans 20", " ") .. markup.fontfg(theme.font, "#161821", "                         ") .. markup.font("Droid Sans 5", " "))
 
 local linux_icon =  wibox.widget {
-     markup = '<span foreground="#EB8F8F" font="Droid Sans 14"></span>',
+     markup = '<span foreground="#8FC1C3" font="Droid Sans 14"></span>',
      widget = wibox.widget.textbox
+
 }
 
-local linux_icon = wibox.container.background(linux_icon, "#161821", gears.shape.rectangle)
+local linux_icon = wibox.container.background(linux_icon, theme.bg_normal, gears.shape.rectangle)
 
 local col_bg =  wibox.widget {
-     markup = '<span background="#161821" font="Droid Sans 25">  </span>',
+     markup = '<span background="#161821" font="Droid Sans 25"> </span>',
      widget = wibox.widget.textbox
 }
 
@@ -397,6 +463,8 @@ seperator_col:set_right(-4)
 local seperator_dif = wibox.container.margin(seperator_dif)
 seperator_dif:set_left(0)
 
+-- Seperator end
+
 -- Eminent-like task filtering
 local orig_filter = awful.widget.taglist.filter.all
 
@@ -420,9 +488,9 @@ function theme.at_screen_connect(s)
 
     -- Tag names and layouts
     --awful.tag(awful.util.tagnames, s, awful.layout.layouts)
-	local names = { "", "", "", "", "", "", "", "", "" }
+	local names = { " ", " ", " ", " ", " ", " ", " ", " ", " " }
 	local l = awful.layout.suit
-	local layouts = { l.max, l.tile.right, l.spiral, l.corner.se, l.tile.bottom, l.corner.se, l.tile.right, l.floating, l.floating, }
+	local layouts = { l.max, l.tile.right, l.spiral, l.max, l.tile.bottom, l.corner.se, l.tile.right, l.floating, l.floating, }
 	awful.tag(names, s, layouts)
 
     -- Create a promptbox for each screen
@@ -486,20 +554,20 @@ function theme.at_screen_connect(s)
             seperator,
             mytextclock,
             seperator_dif,
+            mem_icon,
             memory_widget,
-            col_bg,
             seperator_col_dif,
---            cpuicon,
+            cpuicon,
             cpuwidget,
             seperator_col,
-            --mail.widget,
---	    brightness.widget,
-	    gpmdp.widget,
-            mpdicon,
+           -- mail.widget,
+ 	   -- brightness.widget,
+	   -- gpmdp.widget,
+           -- mpdicon,
             theme.mpd.widget,
-            --baticon,
-            --batwidget,
-            --bar_spr,
+           -- baticon,
+           -- batwidget,
+           -- bar_spr,
             seperator_fs,
             fsicon,
             fswidget,
@@ -508,6 +576,7 @@ function theme.at_screen_connect(s)
             volicon,
             volumewidget,
             seperator_col,
+            col_bg,
             col_bg,
             wibox.widget.systray(),
             col_bg,

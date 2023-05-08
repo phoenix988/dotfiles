@@ -219,19 +219,21 @@ globalkeys = awful.util.table.join(
         {description="run qutebrowser", group="Applications"}),
 	awful.key({ modkey, "Shift" }, "b", function () awful.util.spawn( "firefox-bin" ) end,
         {description="run firefox", group="Applications"}),
-	awful.key({ modkey, "Shift" }, "k", function () awful.util.spawn( "xscreensaver-command -lock" ) end,
-        {description="run xscreensaver", group="Applications"}),
 	awful.key({ modkey, "Shift" }, "v", function () awful.util.spawn( "virt-manager" ) end,
         {description="run virt-manager", group="Applications"}),
 	awful.key({ modkey,}, "i", function () awful.util.spawn( "lxappearance" ) end,
         {description="run lxappearance", group="Applications"}),
 	awful.key({ altkey, "Control" }, "p", function () awful.util.spawn( "pavucontrol" ) end,
         {description="run pavucontrol", group="Applications"}),
+	awful.key({ modkey, "Shift" }, "s", function () awful.util.spawn( "flameshot gui" ) end,
+        {description="Take screenshot", group="Applications"}),
 
 
     -- Hotkeys
-    awful.key({ modkey, "Shift" }, "s",      hotkeys_popup.show_help,
+    awful.key({ modkey, }, "F1",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
+    awful.key({ modkey, }, "F2", function () awful.util.spawn("/home/karl/.config/kitty/kitty-keys.sh") end,
+              {description="show help for kitty", group="awesome"}),
     -- Tag browsing
     awful.key({ modkey, }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
@@ -630,13 +632,17 @@ awful.rules.rules = {
 --      properties = { screen = 1, tag = awful.util.names["1"] } },
 
        { rule = { class = "LibreWolf" },
-        properties = { screen = 1, tag = "" } },
+        properties = { screen = 1, tag = " " } },
 
        { rule = { class = "Steam" },
-        properties = { screen = 1, tag = "" } },
+        properties = { screen = 1, tag = " " } },
 
-    { rule = { class = "Gimp", role = "gimp-image-window" },
-          properties = { maximized = true } },
+    { rule = { class = "gimp-2.10", role = "gimp-image-window" },
+          properties = { maximized = true, tag = " " } },
+
+    { rule = { class = "Yad", role = "yad" },
+          properties = { float = true } },
+
 
        { rule = { class = "youtube.com" },
         properties = { screen = 1, tag = "" } },
