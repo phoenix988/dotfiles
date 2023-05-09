@@ -36,11 +36,12 @@ bash sync-script -v
 *** VARIABLES
 All the config files I declare in the array
 **** SCRIPT PATHS
-|---------------------------------------------+---------------------------------------------------|
-| Scripts Home                                | Scripts Repo                                      |
-|---------------------------------------------+---------------------------------------------------|
-| $HOME/.dmenu                                | $DMSCRIPTS_REPO_PATH/.dmenu                       |
-| $HOME/.scripts                              | $DOTFILES_REPO_PATH/.scripts                      |
+|------------------------------+---------------------------------------------|
+| Scripts Home                 | Scripts Repo                                |
+|------------------------------+---------------------------------------------|
+| $HOME/.dmenu                 | $DMSCRIPTS_REPO_PATH/.dmenu                 |
+| $HOME/.config/dm-script.conf | $DMSCRIPTS_REPO_PATH/.config/dm-script.conf |
+| $HOME/.scripts               | $DOTFILES_REPO_PATH/.scripts                |
 
 **** CONFIG PATHS
 |------------------------+--------------------------------------|
@@ -80,6 +81,7 @@ declare -A files
 
 # Scripts
 files[$HOME/.dmenu]="$DMSCRIPTS_REPO_PATH/.dmenu"
+files[$HOME/.config/dm-script.conf]="$DMSCRIPTS_REPO_PATH/.config/dm-script.conf"
 files[$HOME/.scripts]="$DOTFILES_REPO_PATH/.scripts"
 files[$HOME/.config]="$DOTFILES_REPO_PATH/.config"
 files[$HOME/.xmonad]="$DOTFILES_REPO_PATH/.xmonad"

@@ -65,6 +65,7 @@ local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "kitty"
 local editor       = os.getenv("EDITOR") or "nvim"
+local home         = os.getenv("HOME")
 local gui_editor   = "emacsclient -c -a emacs"
 local browser      = "librewolf"
 local guieditor    = "emacsclient -c -a emacs"
@@ -319,13 +320,6 @@ globalkeys = awful.util.table.join(
         end
     end),
 
-    -- Dynamic tagging
-    awful.key({ modkey, "Shift" }, "n", function () lain.util.add_tag() end),
-    awful.key({ modkey, "Shift" }, "r", function () lain.util.rename_tag() end),
-    awful.key({ modkey, "Shift" }, "Left", function () lain.util.move_tag(-1) end),  -- move to previous tag
-    awful.key({ modkey, "Shift" }, "Right", function () lain.util.move_tag(1) end),  -- move to next tag
-    awful.key({ modkey, "Shift" }, "d", function () lain.util.delete_tag() end),
-
     -- Standard program
     awful.key({ modkey, }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
@@ -355,39 +349,41 @@ globalkeys = awful.util.table.join(
               {description = "select previous", group = "layout"}),
 
 -- tmux bindings
-    awful.key({ altkey, }, "1", function () awful.spawn( "bash /home/karl/.scripts/tmux/window-1" ) end),
-    awful.key({ altkey, }, "2", function () awful.spawn( "bash /home/karl/.scripts/tmux/window-2" ) end),
-    awful.key({ altkey, }, "3", function () awful.spawn( "bash /home/karl/.scripts/tmux/window-3" ) end),
-    awful.key({ altkey, }, "4", function () awful.spawn( "bash /home/karl/.scripts/tmux/window-4" ) end),
-    awful.key({ altkey, }, "5", function () awful.spawn( "bash /home/karl/.scripts/tmux/window-5" ) end),
-    awful.key({ altkey, }, "6", function () awful.spawn( "bash /home/karl/.scripts/tmux/window-6" ) end),
-    awful.key({ altkey, }, "7", function () awful.spawn( "bash /home/karl/.scripts/tmux/window-7" ) end),
-    awful.key({ altkey, }, "8", function () awful.spawn( "bash /home/karl/.scripts/tmux/window-8" ) end),
-    awful.key({ altkey, }, "9", function () awful.spawn( "bash /home/karl/.scripts/tmux/window-9" ) end),
+    awful.key({ altkey, }, "1", function () awful.spawn( home .. "/.scripts/tmux/window-1" ) end),
+    awful.key({ altkey, }, "2", function () awful.spawn( home .. "/.scripts/tmux/window-2" ) end),
+    awful.key({ altkey, }, "3", function () awful.spawn( home .. "/.scripts/tmux/window-3" ) end),
+    awful.key({ altkey, }, "4", function () awful.spawn( home .. "/.scripts/tmux/window-4" ) end),
+    awful.key({ altkey, }, "5", function () awful.spawn( home .. "/.scripts/tmux/window-5" ) end),
+    awful.key({ altkey, }, "6", function () awful.spawn( home .. "/.scripts/tmux/window-6" ) end),
+    awful.key({ altkey, }, "7", function () awful.spawn( home .. "/.scripts/tmux/window-7" ) end),
+    awful.key({ altkey, }, "8", function () awful.spawn( home .. "/.scripts/tmux/window-8" ) end),
+    awful.key({ altkey, }, "9", function () awful.spawn( home .. "/.scripts/tmux/window-9" ) end),
 
     
-    awful.key({ altkey }, "e", function () awful.util.spawn("/home/karl/.dmenu/dm-editconfig") end,
+    awful.key({ altkey }, "e", function () awful.util.spawn(home .. "/.dmenu/dm-editconfig") end,
               {description = "run dm-editconfig", group = "dmenu"}),
-    awful.key({ altkey }, "v", function () awful.util.spawn("/home/karl/.dmenu/dm-vpn") end,
+    awful.key({ altkey }, "v", function () awful.util.spawn(home .. "/.dmenu/dm-vpn") end,
               {description = "run dm-vpn", group = "dmenu"}),
-    awful.key({ altkey }, "o", function () awful.util.spawn("/home/karl/.dmenu/dm-openweb") end,
+    awful.key({ altkey }, "o", function () awful.util.spawn(home .. "/.dmenu/dm-openweb") end,
               {description = "run dm-openweb", group = "dmenu"}),
-    awful.key({ altkey }, "f", function () awful.util.spawn("/home/karl/.dmenu/dm-openweb-fullscreen") end,
+    awful.key({ altkey }, "f", function () awful.util.spawn(home .. "/.dmenu/dm-openweb-fullscreen") end,
               {description = "run dm-openweb-fullscreen", group = "dmenu"}),
-    awful.key({ altkey }, "a", function () awful.util.spawn("/home/karl/.dmenu/dm-audioset") end,
+    awful.key({ altkey }, "a", function () awful.util.spawn(home .. "/.dmenu/dm-audioset") end,
               {description = "run dm-audioset", group = "dmenu"}),
-    awful.key({ altkey }, "l", function () awful.util.spawn("/home/karl/.dmenu/dm-input") end,
+    awful.key({ altkey }, "l", function () awful.util.spawn(home .. "/.dmenu/dm-input") end,
               {description = "run dm-input", group = "dmenu"}),
-    awful.key({ altkey }, "k", function () awful.util.spawn("/home/karl/.dmenu/dm-kill") end,
+    awful.key({ altkey }, "k", function () awful.util.spawn(home .. "/.dmenu/dm-kill") end,
               {description = "run dm-kill", group = "dmenu"}),
-    awful.key({ altkey }, "t", function () awful.util.spawn("/home/karl/.dmenu/dm-kittychangetheme") end,
+    awful.key({ altkey }, "t", function () awful.util.spawn(home .. "/.dmenu/dm-kittychangetheme") end,
               {description = "run dm-kittychangetheme", group = "dmenu"}),
-    awful.key({ altkey }, "w", function () awful.util.spawn("/home/karl/.dmenu/dm-set-wallpaper") end,
+    awful.key({ altkey }, "w", function () awful.util.spawn(home .. "/.dmenu/dm-set-wallpaper") end,
               {description = "run dm-set-wallpaper", group = "dmenu"}),
-    awful.key({ altkey }, "j", function () awful.util.spawn("/home/karl/.dmenu/dm-pass") end,
+    awful.key({ altkey }, "j", function () awful.util.spawn(home .. "/.dmenu/dm-pass") end,
               {description = "run dm-pass", group = "dmenu"}),
-    awful.key({ altkey }, "q", function () awful.util.spawn("/home/karl/.dmenu/dm-virt-manager") end,
+    awful.key({ altkey }, "q", function () awful.util.spawn(home .. "/.dmenu/dm-virt-manager") end,
               {description = "run dm-pass", group = "dmenu"}),
+    awful.key({ altkey }, "p", function () awful.util.spawn(home .. "/.dmenu/dm-play-pause") end,
+              {description = "run dm-play-pause", group = "dmenu"}),
 
     awful.key({ modkey, "Control" }, "n",
               function ()
@@ -440,6 +436,12 @@ globalkeys = awful.util.table.join(
             os.execute(string.format("amixer -q set %s 0%%", beautiful.volume.channel))
             beautiful.volume.update()
         end),
+    
+    -- Play/Pause/next
+     awful.key({  }, "XF86AudioPlay", function () awful.util.spawn("/home/karl/.scripts/activated/mediaplay") end),
+     awful.key({  }, "XF86AudioNext", function () awful.util.spawn("/home/karl/.scripts/activated/medianext") end),
+     awful.key({  }, "XF86AudioPrev", function () awful.util.spawn("/home/karl/.scripts/activated/mediaprev") end),
+
 
     -- MPD control
     awful.key({ altkey, "Control" }, "Up",
@@ -645,7 +647,7 @@ awful.rules.rules = {
 
 
        { rule = { class = "youtube.com" },
-        properties = { screen = 1, tag = "" } },
+        properties = { screen = 1, tag = " " } },
           
 }
 -- }}}
@@ -742,4 +744,3 @@ awful.spawn.with_shell("~/.fehbg")
 
 
 beautiful.useless_gap = 5
-

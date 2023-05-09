@@ -58,8 +58,8 @@ Never lose your cursor! Beacon makes your cursor shine when you scroll
 The various font settings for doom emacs. If you want to change the font
 Family and size you can do that here. you can set italic font,big font and normal font.
 #+begin_src emacs-lisp :tangle config.el
-(setq doom-font (font-spec :family "JetBrains Mono" :size 15)
-      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15)
+(setq doom-font (font-spec :family "JetBrains Mono" :size 16)
+      doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 16)
       doom-big-font (font-spec :family "JetBrains Mono" :size 24))
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -68,6 +68,9 @@ Family and size you can do that here. you can set italic font,big font and norma
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 #+end_src
+
+#+RESULTS:
+| doom--customize-themes-h-263 | doom--customize-themes-h-264 |
 
 
 

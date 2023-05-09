@@ -4,8 +4,8 @@
 
 (beacon-mode 1)
 
-(setq doom-font (font-spec :family "JetBrains Mono" :size 15)
-      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15)
+(setq doom-font (font-spec :family "JetBrains Mono" :size 16)
+      doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 16)
       doom-big-font (font-spec :family "JetBrains Mono" :size 24))
 (after! doom-themes
   (setq doom-themes-enable-bold t
