@@ -55,7 +55,7 @@ def init_widgets_list():
                        background = colors[0]
                        ),
              widget.TextBox(
-                       text = '',
+                       text = '',
                        background = colors[0],
                        foreground = colors[4],
                        padding = -1,
@@ -75,7 +75,7 @@ def init_widgets_list():
                        padding = 10
                        ),
              widget.TextBox(
-                       text = '',
+                       text = '',
                        background = colors[4],
                        foreground = colors[0],
                        padding = -1,
@@ -104,7 +104,7 @@ def init_widgets_list():
                        background = colors[0]
                        ),
              widget.TextBox(
-                       text = '',
+                       text = '',
                        background = colors[0],
                        foreground = colors[2],
                        padding = -1,
@@ -128,7 +128,7 @@ def init_widgets_list():
                        threshold = 85,
                        ),
              widget.TextBox(
-                       text = '',
+                       text = '',
                        background = colors[2],
                        foreground = colors[0],
                        padding = -1,
@@ -146,7 +146,7 @@ def init_widgets_list():
                        padding = 1
                        ),
              widget.TextBox(
-                       text = '',
+                       text = '',
                        background = colors[0],
                        foreground = colors[1],
                        padding = -1,
@@ -157,14 +157,14 @@ def init_widgets_list():
                       padding = 1
                       ),
              widget.TextBox(
-                       text = '',
+                       text = '',
                        background = colors[1],
                        foreground = colors[0],
                        padding = -1,
                        fontsize = 45
                        ),
              widget.TextBox(
-                       text = '',
+                       text = '',
                        background = colors[0],
                        foreground = colors[0],
                        padding = -1,
@@ -184,7 +184,7 @@ def init_widgets_list():
                             ],
                        ),
              widget.TextBox(
-                       text = '',
+                       text = '',
                        background = colors[0],
                        foreground = colors[0],
                        padding = -1,
@@ -218,7 +218,7 @@ def init_widgets_list():
                             ],
                        ),
              widget.TextBox(
-                       text = '',
+                       text = '',
                        background = colors[0],
                        foreground = colors[0],
                        padding = -1,
@@ -249,7 +249,7 @@ def init_widgets_list():
                             ],
                        ),
              widget.TextBox(
-                       text='',
+                       text='',
                        background = colors[0],
                        foreground = colors[0],
                        padding = -1,
@@ -282,7 +282,7 @@ def init_widgets_list():
                             ],
                        ),
              widget.TextBox(
-                       text = '',
+                       text = '',
                        background = colors[0],
                        foreground = colors[0],
                        padding = -1,
@@ -314,7 +314,7 @@ def init_widgets_list():
                             ],
                        ),
              widget.TextBox(
-                       text='',
+                       text='',
                        background = colors[0],
                        foreground = colors[0],
                        padding = -1,
@@ -350,7 +350,7 @@ def init_widgets_list():
                      background = colors[0]
                        ),
              widget.TextBox(
-                       text = '',
+                       text = '',
                        background = colors[0],
                        foreground = colors[0],
                        padding = -1,
@@ -381,7 +381,7 @@ def init_widgets_list():
                             ],
                        ),
              widget.TextBox(
-                       text = '',
+                       text = '',
                        background = colors[0],
                        foreground = colors[0],
                        padding = -1,
