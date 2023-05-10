@@ -22,7 +22,7 @@ ckb-next -b &
 #xfce4-screensaver &
 xfce4-power-manager &
 volumeicon &
-conky -c /home/karl/.config/conky/main &
+#conky -c /home/karl/.config/conky/main &
 flameshot &
 steam -silent -no-browser &
 discord &
