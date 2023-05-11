@@ -173,6 +173,7 @@ def init_widgets_list():
              widget.Battery(
                        background = colors[0],
                        foreground = colors[8],
+                       cityid = "598316",
                        decorations = [
                             BorderDecoration (
                             colour = colors[8],
@@ -222,7 +223,7 @@ def init_widgets_list():
                        fontsize = 45
                        ),
              widget.TextBox(
-                       text = '★',
+                       text = '',
                        background = colors[0],
                        foreground = colors[10],
                        padding = -1,
@@ -332,7 +333,7 @@ def init_widgets_list():
                        ),
              widget.CheckUpdates(
                      update_interval = 1800,
-                     distro = "Ubuntu",
+                     distro = "Arch",
                      display_format = "{updates} Updates",
                      colour_have_updates = colors[13],
                      colour_no_updates = colors[13],

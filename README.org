@@ -1249,7 +1249,8 @@ def init_widgets_list():
 #+END_SRC
 Widgets to use if you are on a desktop computer
 *** LAPTOP
-Settings to use if you are on a laptop. The main diffrence is that this config
+Settings to use if y
+ou are on a laptop. The main diffrence is that this config
 have the battery widget active
 #+BEGIN_SRC python :tangle examples/config.py.laptop
 
@@ -1425,12 +1426,10 @@ def init_widgets_list():
                        padding = -1,
                        fontsize = 45
                        ),
-             widget.OpenWeather(
+             widget.Battery(
                        background = colors[0],
                        foreground = colors[8],
                        cityid = "598316",
-                       format = '{location_city}: {main_temp} {units_temperature}°  {weather_details}',
-                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("brave-browser https://openweathermap.org/city/598316")},
                        decorations = [
                             BorderDecoration (
                             colour = colors[8],
@@ -1480,7 +1479,7 @@ def init_widgets_list():
                        fontsize = 45
                        ),
              widget.TextBox(
-                       text = '★',
+                       text = '',
                        background = colors[0],
                        foreground = colors[10],
                        padding = -1,
