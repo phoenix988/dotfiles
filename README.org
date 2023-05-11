@@ -767,7 +767,7 @@ certain apps to always open on one specific workspace
 *** ICONS
 This sets icons to represent a workspace. If you want to use icons
 make sure this is set to config.py after :tangle
-#+BEGIN_SRC python :tangle workspaces/config-icon.py
+#+BEGIN_SRC python :tangle workspaces/config_icon.py
 from libqtile import layout, bar, widget, hook
 
 group_names = [(" ", {'layout': 'bsp' ,'matches':[Match(wm_class=["Brave-browser-nightly", "Chromium" , "librewolf"])]}),
@@ -784,7 +784,7 @@ group_names = [(" ", {'layout': 'bsp' ,'matches':[Match(wm_class=["Brave-brow
 
 *** NORMAL
 This is just normal text to represent workspaces. set tangle to config.py if you want to use these options
-#+BEGIN_SRC python :tangle  workspaces/config-normal.py
+#+BEGIN_SRC python :tangle  workspaces/config_normal.py
 from libqtile import layout, bar, widget, hook
 
 group_names = [("WWW", {'layout': 'bsp' ,'matches':[Match(wm_class=["Brave-browser-nightly", "Chromium" , "librewolf"])]}),
