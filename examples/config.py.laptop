@@ -170,12 +170,9 @@ def init_widgets_list():
                        padding = -1,
                        fontsize = 45
                        ),
-             widget.OpenWeather(
+             widget.Battery(
                        background = colors[0],
                        foreground = colors[8],
-                       cityid = "598316",
-                       format = '{location_city}: {main_temp} {units_temperature}°  {weather_details}',
-                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("brave-browser https://openweathermap.org/city/598316")},
                        decorations = [
                             BorderDecoration (
                             colour = colors[8],
@@ -335,7 +332,7 @@ def init_widgets_list():
                        ),
              widget.CheckUpdates(
                      update_interval = 1800,
-                     distro = "Arch",
+                     distro = "Ubuntu",
                      display_format = "{updates} Updates",
                      colour_have_updates = colors[13],
                      colour_no_updates = colors[13],
