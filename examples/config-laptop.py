@@ -1,3 +1,21 @@
+import os
+import re
+import socket
+import subprocess
+from libqtile import qtile
+from libqtile.config import Click, Drag, Group, ScratchPad, DropDown, KeyChord, Key, Match, Screen
+from libqtile.command import lazy
+from libqtile import layout, bar, widget, hook
+from libqtile.lazy import lazy
+from typing import List  # noqa: F401
+
+from libqtile import widget
+from color import colors
+from qtile_extras import widget
+from qtile_extras.widget.decorations import RectDecoration, PowerLineDecoration, BorderDecoration
+
+prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
+
 def init_widgets_list():
     widgets_list = [
              widget.Sep(
@@ -7,7 +25,7 @@ def init_widgets_list():
                        background = colors[0]
                        ),
              widget.Image(
-                        filename = "~/.config/qtile/icons/pop-os-rose-pine.png",
+                        filename = "~/.config/qtile/icons/icon.png",
                         scale = "False",
                         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(MYTERM_NORMAL)},
                         padding = 10
@@ -92,7 +110,7 @@ def init_widgets_list():
                        background = colors[0],
                        padding = 0,
                        margin = 5,
-                       border = colors[6],
+                       border = colors[4],
                        borderwidth = 1,
                        urgent_alert_method = "text",
                        urgent_border = colors[2]
@@ -170,12 +188,10 @@ def init_widgets_list():
                        padding = -1,
                        fontsize = 45
                        ),
-             widget.OpenWeather(
+             widget.Battery(
                        background = colors[0],
                        foreground = colors[8],
                        cityid = "598316",
-                       format = '{location_city}: {main_temp} {units_temperature}°  {weather_details}',
-                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("brave-browser https://openweathermap.org/city/598316")},
                        decorations = [
                             BorderDecoration (
                             colour = colors[8],
@@ -225,10 +241,9 @@ def init_widgets_list():
                        fontsize = 45
                        ),
              widget.TextBox(
-                       text = '' ,
+                       text = '',
                        background = colors[0],
                        foreground = colors[10],
-                       fontsize = 24,
                        padding = -1,
                        decorations = [
                             BorderDecoration (
