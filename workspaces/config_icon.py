@@ -1,4 +1,5 @@
 from libqtile import layout, bar, widget, hook
+from libqtile.config import Click, Drag, Group, ScratchPad, DropDown, KeyChord, Key, Match, Screen
 
 group_names = [(" ", {'layout': 'bsp' ,'matches':[Match(wm_class=["Brave-browser-nightly", "Chromium" , "librewolf"])]}),
                (" ", {'layout': 'bsp','matches':[Match(wm_class=["neo"])]}),
