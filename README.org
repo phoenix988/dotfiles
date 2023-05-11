@@ -46,6 +46,49 @@ What all options are doing. But of course if you know python you can do alot of 
 With this Window Manager. It was my favorite Window Manager but now since I tried hyprland that issues
 my new all time favorite window manager
 
+** INSTALLATION
+
+*** ARCH
+#+begin_src sh
+paru -S --needed qtile qtile-extras rofi fzf ttf-jetbrains-mono ttf-jetbrains-mono-nerd noto-fonts ttf-iosevka-nerd awesome-terminal-fonts
+
+# clones my repositories
+git clone https://github.com/phoenix988/dotfiles.git $HOME/dotfiles
+git clone https://github.com/phoenix988/dmscripts.git $HOME/dmscripts
+
+# if you have your own scripts dont just run this if yoou dont have backups
+rm -rf $HOME/.scripts
+cp -r $HOME/dotfiles/.config/rofi $HOME/.config
+cp -r $HOME/dotfiles/.scripts $HOME/.scripts
+
+# moves my dmenu scripts to correct directory
+rm -rf $HOME/.dmenu
+cp -r $HOME/dmscripts/.dmenu $HOME/.dmenu
+#+end_src
+
+*** MY QTILE CONFIG
+Clone my git repo to get my configuration if you want to try.
+#+begin_src sh
+# remove old qtile config (dont forget to backup)
+rm -rf $HOME/.config/qtile
+
+# clone my repository
+git clone -b qtile https://github.com/phoenix988/dotfiles.git $HOME/.config/qtile
+#+end_src
+
+
+**** OPTIONAL
+If you want to install a bunch of fonts that can come in handy
+you can clone my repo where I store a collection of fonts I use for my configs
+#+begin_src sh
+# Here you clone them to your user folder
+git clone https://github.com/phoenix988/fonts.git $HOME/.local/share/fonts
+
+# But you can also choose to move them to /usr/share/fonts to make it systemwide
+sudo cp -r $HOME/fonts/* /usr/share/fonts
+#+end_src
+
+
 ** IMPORTS
 Here is all the libaries I import that are used later in the config
 Also imports the color theme I will use. which is just a color.py file
@@ -73,7 +116,6 @@ from color import colors, layout_colors
 # Importing qtile_extras libaries
 from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration, PowerLineDecoration, BorderDecoration
-
 #+END_SRC
 
 ** VARIABLES
