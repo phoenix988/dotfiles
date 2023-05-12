@@ -60,7 +60,7 @@ run_once({ "unclutter -root" }) -- entries must be comma-separated
 -- }}}
 
 -- {{{ Variable definitions
-local chosen_theme = "iceberg"
+local chosen_theme = "rose-pine"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "kitty"
@@ -384,6 +384,8 @@ globalkeys = awful.util.table.join(
               {description = "run dm-pass", group = "dmenu"}),
     awful.key({ altkey }, "p", function () awful.util.spawn(home .. "/.dmenu/dm-play-pause") end,
               {description = "run dm-play-pause", group = "dmenu"}),
+    awful.key({ altkey }, "g", function () awful.util.spawn(home .. "/.dmenu/dm-theme") end,
+              {description = "run dm-theme", group = "dmenu"}),
 
     awful.key({ modkey, "Control" }, "n",
               function ()
@@ -629,25 +631,24 @@ awful.rules.rules = {
       properties = { titlebars_enabled = false } },
 --      properties = { titlebars_enabled = true } },
 
-    -- Set Firefox to always map on the first tag on screen 1.
---    { rule = { class = "Librewolf" },
---      properties = { screen = 1, tag = awful.util.names["1"] } },
-
        { rule = { class = "LibreWolf" },
-        properties = { screen = 1, tag = " " } },
+        properties = {tag = " " } },
 
        { rule = { class = "Steam" },
-        properties = { screen = 1, tag = " " } },
+        properties = {tag = " " } },
 
-    { rule = { class = "gimp-2.10", role = "gimp-image-window" },
-          properties = { maximized = true, tag = " " } },
+    { rule = { class = "Gimp" },
+          properties = { tag = " " } },
 
-    { rule = { class = "Yad", role = "yad" },
+    { rule = { class = "Yad" },
           properties = { float = true } },
 
 
        { rule = { class = "youtube.com" },
         properties = { screen = 1, tag = " " } },
+
+       { rule = { class = "whatsapp-nativefier-d40211" },
+        properties = { tag = " " } },
           
 }
 -- }}}
@@ -740,7 +741,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- Autostart applications
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
-awful.spawn.with_shell("~/.fehbg")
+--awful.spawn.with_shell("~/.fehbg")
 
 
-beautiful.useless_gap = 5
+beautiful.useless_gap = 7

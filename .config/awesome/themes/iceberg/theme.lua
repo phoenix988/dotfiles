@@ -27,10 +27,10 @@ theme.fg_mem                                    = "#B48EAD"
 theme.fg_icon                                   = "#8FC1C3"
 theme.bg_normal                                 = "#161821"
 theme.bg_focus                                  = "#161821"
-theme.fg_urgent                                 = "#161821"
+theme.fg_urgent                                 = "#E98989"
 theme.bg_alt                                    = "#2E3440"
-theme.bg_urgent                                 = "#E98989"
-theme.border_width                              = 2
+theme.bg_urgent                                 = "#161821"
+theme.border_width                              = 3
 theme.border_normal                             = "#91ACD1"
 theme.border_focus                              = "#A093C7"
 theme.taglist_fg_focus                          = "#E9B189"
@@ -102,20 +102,21 @@ theme.layout_centerwork                         = theme.dir .. "/icons/centerwor
 local threshold = 80
 local markup = lain.util.markup
 local blue   = theme.fg_focus
-local red    = "#EB8F8F"
-local green  = "#8FEB8F"
+local red    = "#E98989"
+local green  = "#8FC1C3"
 local white	 = theme.fg_normal
 
 -- Make the clock widget
-local mytextclock = wibox.widget.textclock(markup(theme.bg_normal, "  %a") .. markup(theme.bg_alt, " %d ") .. markup(theme.bg_normal, "%b ") ..  markup(theme.bg_alt, "%I:%M "))
-mytextclock.font = theme.font
+local mytextclock = wibox.widget.textclock(markup(theme.bg_normal, "  %a") .. markup(theme.bg_alt, " %d ") .. markup(theme.bg_normal, "%b ") .. markup(theme.bg_alt, "  %I:%M "))
+mytextclock.font = "JetBrains Mono Nerd 12"
+local mytextclock = wibox.container.margin(mytextclock, 1, 1, 3, 1)
 
 -- Set the bg color of the clock widget
 local mytextclock = wibox.container.background(mytextclock, theme.fg_clock, gears.shape.rectangle)
 
 
 -- Calendar
-lain.widget.calendar({
+local mycalendar = lain.widget.calendar({
     attach_to = { mytextclock },
     notification_preset = {
         font = "Droid Sans Mono 13",
@@ -123,10 +124,13 @@ lain.widget.calendar({
         bg   = theme.bg_normal
 }})
 
+
+
 -- Launcher
 local mylauncher = awful.widget.button({image = theme.awesome_icon})
 mylauncher:connect_signal("button::press", function() awful.util.mymainmenu:toggle() end)
 
+local mylauncher = wibox.container.background(mylauncher, theme.bg_alt, gears.shape.rectangle)
 --[[ Mail IMAP check
 -- commented because it needs to be set before use
 local mail = lain.widget.imap({
@@ -149,28 +153,28 @@ local mail = lain.widget.imap({
 --]]
 
 -- MPD
-local mpdicon = wibox.widget.imagebox()
-theme.mpd = lain.widget.mpd({
-    settings = function()
-        if mpd_now.state == "play" then
-            title = mpd_now.title
-            artist  = " " .. mpd_now.artist  .. markup("#333333", " <span font='Droid Sans 2'> </span>|<span font='Droid Sans 5'> </span>")
-            mpdicon:set_image(theme.play)
-        elseif mpd_now.state == "pause" then
-            title = "mpd "
-            artist  = "paused" .. markup("#333333", " |<span font='Droid Sans 5'> </span>")
-            mpdicon:set_image(theme.pause)
-        else
-            title  = ""
-            artist = ""
-            mpdicon._private.image = nil
-            mpdicon:emit_signal("widget::redraw_needed")
-            mpdicon:emit_signal("widget::layout_changed")
-        end
-
-        widget:set_markup(markup.font(theme.font, markup(blue, title) .. artist))
-    end
-})
+--local mpdicon = wibox.widget.imagebox()
+--theme.mpd = lain.widget.mpd({
+--    settings = function()
+--        if mpd_now.state == "play" then
+--            title = mpd_now.title
+--            artist  = " " .. mpd_now.artist  .. markup("#333333", " <span font='Droid Sans 2'> </span>|<span font='Droid Sans 5'> </span>")
+--            mpdicon:set_image(theme.play)
+--        elseif mpd_now.state == "pause" then
+--            title = "mpd "
+--            artist  = "paused" .. markup("#333333", " |<span font='Droid Sans 5'> </span>")
+--            mpdicon:set_image(theme.pause)
+--        else
+--            title  = ""
+--            artist = ""
+--            mpdicon._private.image = nil
+--            mpdicon:emit_signal("widget::redraw_needed")
+--            mpdicon:emit_signal("widget::layout_changed")
+--        end
+--
+--        widget:set_markup(markup.font(theme.font, markup(blue, title) .. artist))
+--    end
+--})
 
 -- MPD widget end
 
@@ -227,7 +231,7 @@ local batwidget = wibox.container.margin(batbg, 2, 7, 4, 4)
 --local fsicon = wibox.widget.imagebox(theme.disk)
 local fsbar = wibox.widget {
     forced_height    = 1,
-    forced_width     = 120,
+    forced_width     = 100,
     color            = theme.fg_focus,
     background_color = theme.bg_normal,
     margins          = 1,
@@ -274,7 +278,7 @@ end)
 -- ALSA volume bar
 local volicon = wibox.widget.imagebox(theme.vol)
 theme.volume = lain.widget.alsabar({
-    width = 143, border_width = 0, ticks = true, ticks_size = 13,
+    width = 120, border_width = 0, ticks = true, ticks_size = 13,
     notification_preset = { font = theme.font },
     --togglechannel = "IEC958,3",
     settings = function()
@@ -342,15 +346,10 @@ local cpuicon =  wibox.widget {
 
 local tempfont = "Droid Sans 7"
 
-local tempicon =  wibox.widget {
-     markup = "<span foreground='" .. theme.fg_cpu .. "' font='" .. tempfont .. "'>🌡</span>",
-     widget = wibox.widget.textbox
-}
-
 
 local cpubar = wibox.widget {
     forced_height    = 1,
-    forced_width     = 120,
+    forced_width     = 100,
     color            = theme.fg_cpu,
     background_color = theme.bg_normal,
     margins          = 1,
@@ -371,14 +370,14 @@ theme.cpu = lain.widget.cpu({
 
 local tempbar = wibox.widget {
     forced_height    = 5,
-    forced_width     = 35,
+    forced_width     = 60,
     color            = theme.fg_cpu,
     background_color = theme.bg_normal,
     margins          = 1,
     paddings         = 1,
     shape = gears.shape.rectangle, 
     bar_shape = gears.shape.rectangle,
-    ticks            = false,
+    ticks            = true,
     ticks_size       = 13,
     widget           = wibox.widget.progressbar,
 }
@@ -387,6 +386,19 @@ local tempbar = wibox.widget {
 theme.temp = lain.widget.temp({
     tempfile = "/sys/class/hwmon/hwmon3/temp1_input",
     settings = function()
+        if coretemp_now >= threshold then
+            tempbar:set_color(red)
+            tempicon =  wibox.widget {
+            markup = "<span foreground='" .. red .. "' font='" .. tempfont .. "'>🌡</span>",
+            widget = wibox.widget.textbox}
+        else
+            tempbar:set_color(theme.fg_cpu)
+               tempicon =  wibox.widget {
+               markup = "<span foreground='" .. theme.fg_cpu .. "' font='" .. tempfont .. "'>🌡</span>",
+               widget = wibox.widget.textbox}
+
+        end
+
         tempbar:set_value(coretemp_now / 100 )
     end
 })
@@ -438,7 +450,7 @@ local cpuwidget = wibox.container.margin(cpubg, 2, 7, 4, 4)
 -- makes the colour of the cpu widget
 local cpuwidget = wibox.container.background(cpuwidget, theme.seperator_2 , gears.shape.rectangle)
 
-local cpuicon = wibox.container.margin(cpuicon, 10, 7, 4, 4)
+local cpuicon = wibox.container.margin(cpuicon, 2, 2, 2, 2)
 local cpuicon = wibox.container.background(cpuicon, theme.seperator_2 , gears.shape.rectangle)
 
 local tempicon = wibox.container.margin(tempicon, 8, 7, 4, 0)
@@ -454,7 +466,7 @@ end)
 -- Makes the memory widget
 local memorybar = wibox.widget {
     forced_height    = 1,
-    forced_width     = 120,
+    forced_width     = 100,
     color            = theme.fg_mem,
     background_color = theme.bg_normal,
     margins          = 1,
@@ -523,44 +535,48 @@ local col_bg =  wibox.widget {
      widget = wibox.widget.textbox
 }
 
-
+--
+--
 -- powerline seperators
 local seperator = wibox.widget {
-     markup = "<span foreground='" .. theme.seperator_1 .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.seperator_1 .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
 local seperator_dif = wibox.widget {
-     markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_1 .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_1 .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
-
 local seperator_col = wibox.widget {
-     markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_2 .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_2 .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
 local seperator_col_dif = wibox.widget {
-     markup = "<span foreground='" .. theme.seperator_2 .. "' background='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.seperator_2 .. "' background='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
 local seperator_fs = wibox.widget {
-     markup = "<span foreground='" .. theme.seperator_3 .. "' background='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.seperator_3 .. "' background='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
 local seperator_fs_diff = wibox.widget {
-     markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_3 .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_3 .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
 local seperator_black = wibox.widget {
-     markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
+local right_powerline = wibox.widget {
+     markup = "<span foreground='" .. theme.bg_alt .. "' background='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
+     widget = wibox.widget.textbox,
+}
 
 local seperator = wibox.container.margin(seperator)
 seperator:set_right(-1)
@@ -571,12 +587,12 @@ seperator_col:set_right(-4)
 local seperator_dif = wibox.container.margin(seperator_dif)
 seperator_dif:set_left(0)
 
--- Seperator end
+-- seperator end
 
--- Eminent-like task filtering
+-- eminent-like task filtering
 local orig_filter = awful.widget.taglist.filter.all
 
--- Taglist label functions
+-- taglist label functions
 awful.widget.taglist.filter.all = function (t, args)
     if t.selected or #t:clients() > 0 then
         return orig_filter(t, args)
@@ -584,27 +600,27 @@ awful.widget.taglist.filter.all = function (t, args)
 end
 
 function theme.at_screen_connect(s)
-    -- Quake application
+    -- quake application
     s.quake = lain.util.quake({ app = awful.util.terminal })
 
-    -- If wallpaper is a function, call it with the screen
+    -- if wallpaper is a function, call it with the screen
     local wallpaper = theme.wallpaper
     if type(wallpaper) == "function" then
         wallpaper = wallpaper(s)
     end
     gears.wallpaper.maximized(wallpaper, s, true)
     
-    -- Tag names and layouts
+    -- tag names and layouts
     --awful.tag(awful.util.tagnames, s, awful.layout.layouts)
 	local names = { " ", " ", " ", " ", " ", " ", " ", " ", " " }
 	local l = awful.layout.suit
 	local layouts = { l.max, l.tile.right, l.tile.right, l.max, l.tile.right, l.tile.right, l.tile.right, l.floating, l.floating, }
 	awful.tag(names, s, layouts)
 
-    -- Create a promptbox for each screen
+    -- create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
-    -- Create an imagebox widget which will contains an icon indicating which layout we're using.
-    -- We need one layoutbox per screen.
+    -- create an imagebox widget which will contains an icon indicating which layout we're using.
+    -- we need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
     s.mylayoutbox:buttons(awful.util.table.join(
                            awful.button({ }, 1, function () awful.layout.inc( 1) end),
@@ -612,27 +628,29 @@ function theme.at_screen_connect(s)
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
 
-    -- Create a taglist widget
+    -- create a taglist widget
     s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
 
-    -- Create a tasklist widget
+    -- create a tasklist widget
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
     s.mytasklist = wibox.container.background(s.mytasklist, "#00000000")
 
-    -- Create the horizontal wibox
+    -- create the horizontal wibox
     s.mywibox = awful.wibar({ position = "top", 
     screen = s, 
     height = 25, 
     bg = theme.bg_normal, 
     fg = theme.fg_normal })
 
-    -- Add widgets to the wibox
+    -- add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
-        { -- Left widgets
+        { -- left widgets
             mylauncher,
+            right_powerline,
             layout = wibox.layout.fixed.horizontal,
+            small_spr,
             small_spr,
             s.mylayoutbox,
             bar_spr,
@@ -642,8 +660,8 @@ function theme.at_screen_connect(s)
             s.mypromptbox,
             spr_big,
         },
-        s.mytasklist, -- Middle widget
-        { -- Right widgets
+        s.mytasklist, -- middle widget
+        { -- right widgets
             layout = wibox.layout.fixed.horizontal,
             spr_big,
             small_spr,
@@ -657,9 +675,8 @@ function theme.at_screen_connect(s)
             cpuwidget,
             tempicon,
             tempwidget,
-            temp_text,
+           -- temp_text,
             seperator_col,
-            theme.mpd.widget,
            -- baticon,
            -- batwidget,
            -- bar_spr,
