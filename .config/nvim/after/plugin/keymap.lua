@@ -14,6 +14,7 @@ vim.api.nvim_set_keymap("n", "gT", ':BufferPrevious<CR>', { noremap = true, sile
 vim.api.nvim_set_keymap("n", "<leader>gs", ':Git<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>gg", ':Git<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>gp', ':Git push<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>gP', ':Git pull<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>gd', ':Gdiff %<CR>', { noremap = true, silent = true })
 
 -- Neotree keybindings
