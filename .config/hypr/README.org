@@ -55,9 +55,26 @@ Install all the packages I need to get started with this config
 #+begin_src sh
 
 # I'm using paru but feel free to use any aur helper if you are on arch
- paru -S --needed --noconfirm waybar-hyprland-git hyprland-bin swaylock swaybg grim wofi kitty lxappearance qt5ct qt6ct kvantum awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono
+ paru -S --needed --noconfirm waybar-hyprland-git hyprland swaylock swaybg grim wofi kitty lxappearance qt5ct qt6ct kvantum awesome-terminal-fonts adobe-source-code-pro-fonts ttf-jetbrains-mono \
+ ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-iosevka-nerd
+
+# Clones my repository
+git clone https://github.com/phoenix988/hyprland.git $HOME/.config/hypr
 
 #+end_src
+
+***** OPTIONAL
+If you want to install a bunch of fonts that can come in handy
+you can clone my repo where I store a collection of fonts I use for my configs
+#+begin_src sh
+# Here you clone them to your user folder
+git clone https://github.com/phoenix988/fonts.git $HOME/.local/share/fonts
+
+# But you can also choose to move them to /usr/share/fonts to make it systemwide
+sudo cp -r $HOME/fonts/* /usr/share/fonts
+#+end_src
+
+
 
 
 
