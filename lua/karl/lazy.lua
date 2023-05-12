@@ -24,6 +24,13 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+  -- Wilder vim
+{
+  'gelguy/wilder.nvim',
+  config = function()
+    -- config goes here
+  end,
+},
   -- Startscreen
   {"mhinz/vim-startify"},
 
@@ -150,7 +157,7 @@ require('lazy').setup({
                                                     "MunifTanjim/nui.nvim", } },
 
   { 'nvim-tree/nvim-tree.lua' },
- 
+
  -- Which key gives hint about keybindings
   { 'folke/which-key.nvim' },
 
