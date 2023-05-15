@@ -284,6 +284,8 @@ require('lazy').setup({
 
   { 'nvim-tree/nvim-tree.lua' },
 
+
+
  -- Which key gives hint about keybindings
   { 'folke/which-key.nvim' },
 
@@ -383,7 +385,7 @@ vim.api.nvim_set_keymap('n', '<Leader>n.', ':Neotree .<CR>', { noremap = true, s
 vim.api.nvim_set_keymap('n', '<Leader>hr', ':Lazy<CR>', { noremap = true, silent = true })
 
 -- Terminal
-vim.api.nvim_set_keymap('n', '<Leader>ot', ':terminal<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>tt', ':terminal<CR>', { noremap = true, silent = true })
 
 -- Keybindings for Harpoon
 local mark = require("harpoon.mark")
@@ -428,6 +430,9 @@ vim.api.nvim_set_keymap("n", "<Leader>fr",
   {noremap = true, silent = true})
 
 require("telescope").load_extension "file_browser"
+
+-- ORGMODE Tangle
+vim.api.nvim_set_keymap('n', '<Leader>oT', ':OrgTangle<CR>', { noremap = true, silent = true })
 
 
 #+END_SRC
@@ -620,12 +625,23 @@ require('nvim-treesitter.configs').setup {
   ensure_installed = {'org'}, -- Or run :TSUpdate org
 }
 
+
 require('orgmode').setup({
   org_agenda_files = {'~/Dropbox/org/*', '~/my-orgs/**/*'},
   org_default_notes_file = '~/Dropbox/org/refile.org',
 })
 
+function tangle_files()
+  -- Get the current buffer's path
+  local current_file = vim.api.nvim_buf_get_name(0)
 
+  -- Execute the org-babel-tangle command in Emacs
+  local command = "silent !emacsclient -e '(org-babel-tangle-file \"" .. current_file .. "\")'"
+  vim.api.nvim_command(command)
+end
+
+-- Register the command
+vim.cmd("command! OrgTangle lua tangle_files()")
 
 #+end_src
 

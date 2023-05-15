@@ -158,6 +158,8 @@ require('lazy').setup({
 
   { 'nvim-tree/nvim-tree.lua' },
 
+
+
  -- Which key gives hint about keybindings
   { 'folke/which-key.nvim' },
 
