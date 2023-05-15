@@ -20,12 +20,12 @@ def init_widgets_list():
     widgets_list = [
              widget.Sep(
                        linewidth = 0,
-                       padding = 0,
+                       padding = 6,
                        foreground = colors[2],
                        background = colors[0]
                        ),
              widget.Image(
-                        filename = "~/.config/qtile/icons/pop-os-rose-pine.png",
+                        filename = "~/.config/qtile/icon.png",
                         scale = "False",
                         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(MYTERM_NORMAL)},
                         padding = 10
@@ -246,6 +246,7 @@ def init_widgets_list():
                        text = '' ,
                        background = colors[0],
                        foreground = colors[10],
+                       fontsize = 14,
                        padding = -1,
                        decorations = [
                             BorderDecoration (
@@ -420,7 +421,7 @@ def init_widgets_list():
                        ),
              widget.Sep(
                        linewidth = 0,
-                       padding = 6,
+                       padding = 12,
                        foreground = colors[2],
                        background = colors[0]
                        ),
