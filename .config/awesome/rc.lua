@@ -60,7 +60,7 @@ run_once({ "unclutter -root" }) -- entries must be comma-separated
 -- }}}
 
 -- {{{ Variable definitions
-local chosen_theme = "rose-pine"
+local chosen_theme = "iceberg"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "kitty"
@@ -228,6 +228,9 @@ globalkeys = awful.util.table.join(
         {description="run pavucontrol", group="Applications"}),
 	awful.key({ modkey, "Shift" }, "s", function () awful.util.spawn( "flameshot gui" ) end,
         {description="Take screenshot", group="Applications"}),
+	awful.key({ modkey, "Shift" }, "y", function () awful.util.spawn( editor ) end,
+        {description="Take screenshot", group="Applications"}),
+
 
 
     -- Hotkeys
@@ -235,6 +238,11 @@ globalkeys = awful.util.table.join(
               {description="show help", group="awesome"}),
     awful.key({ modkey, }, "F2", function () awful.util.spawn("/home/karl/.config/kitty/kitty-keys.sh") end,
               {description="show help for kitty", group="awesome"}),
+    awful.key({ modkey, }, "F11", function () awful.util.spawn(home .. "/.scripts/restart/picom-control") end,
+              {description="kill picom/start picom", group="awesome"}),
+    awful.key({ modkey, }, "F12", function () awful.util.spawn(home .. "/.scripts/activated/set-random-bg") end,
+              {description="set random wallpaper", group="awesome"}),
+   
     -- Tag browsing
     awful.key({ modkey, }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
@@ -301,7 +309,7 @@ globalkeys = awful.util.table.join(
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
-    awful.key({ modkey,           }, "Tab",
+    awful.key({ modkey,  "Control"  }, "Tab",
         function ()
             awful.client.focus.history.previous()
             if client.focus then
@@ -331,9 +339,9 @@ globalkeys = awful.util.table.join(
               {description = "lock the screen", group = "awesome"}),
 --	awful.key({ modkey, "Shift"   }, "q", function () awful.util.spawn_with_shell("oblogout") end),
 
-    awful.key({ altkey, "Shift"   }, "l",     function () awful.tag.incmwfact( 0.05)          end,
+    awful.key({ modkey, "Control"   }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
-    awful.key({ altkey, "Shift"   }, "h",     function () awful.tag.incmwfact(-0.05)          end,
+    awful.key({ modkey, "Control"   }, "h",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "decrease master width factor", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
@@ -343,9 +351,9 @@ globalkeys = awful.util.table.join(
               {description = "increase the number of columns", group = "layout"}),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
+    awful.key({ modkey,           }, "Tab", function () awful.layout.inc( 1)                end,
               {description = "select next", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
+    awful.key({ modkey, "Shift"   }, "Tab", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
 
 -- tmux bindings
@@ -358,6 +366,7 @@ globalkeys = awful.util.table.join(
     awful.key({ altkey, }, "7", function () awful.spawn( home .. "/.scripts/tmux/window-7" ) end),
     awful.key({ altkey, }, "8", function () awful.spawn( home .. "/.scripts/tmux/window-8" ) end),
     awful.key({ altkey, }, "9", function () awful.spawn( home .. "/.scripts/tmux/window-9" ) end),
+    
 
     
     awful.key({ altkey }, "e", function () awful.util.spawn(home .. "/.dmenu/dm-editconfig") end,
@@ -386,6 +395,9 @@ globalkeys = awful.util.table.join(
               {description = "run dm-play-pause", group = "dmenu"}),
     awful.key({ altkey }, "g", function () awful.util.spawn(home .. "/.dmenu/dm-theme") end,
               {description = "run dm-theme", group = "dmenu"}),
+              
+    -- switch layout
+    awful.key({ modkey, }, "space", function () awful.spawn( home .. "/.scripts/activated/layout-switcher" ) end),
 
     awful.key({ modkey, "Control" }, "n",
               function ()
@@ -486,7 +498,7 @@ globalkeys = awful.util.table.join(
 
     -- User programs
 --    awful.key({ modkey }, "q", function () awful.spawn(browser) end),
-    awful.key({ modkey }, "a", function () awful.spawn(guieditor) end),
+    awful.key({ modkey, "Shift" }, "a", function () awful.spawn(guieditor) end),
 
     -- Default
     -- Menubar
@@ -500,7 +512,7 @@ globalkeys = awful.util.table.join(
 --		end)
     
     -- Prompt
-    awful.key({ modkey }, "r", function () awful.util.spawn("rofi -show drun") end,
+    awful.key({ modkey }, "r", function () awful.util.spawn("rofi -show drun -show-icons") end,
               {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "x",
@@ -741,7 +753,9 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- Autostart applications
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
+awful.spawn.with_shell("~/.config/awesome/autostart_custom.sh")
 --awful.spawn.with_shell("~/.fehbg")
 
 
 beautiful.useless_gap = 7
+
