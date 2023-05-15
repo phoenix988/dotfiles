@@ -55,6 +55,14 @@ tooltip {
     border-radius: 15px 15px 15px 15px;
 }
 
+#workspaces button:hover {
+    background: #161821;
+    color: #8FC1C3;
+    border-radius: 15px;
+}
+
+
+
 #language,
 #custom-updates,
 #custom-caffeine,

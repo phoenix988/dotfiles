@@ -1,115 +1,264 @@
-/**
+/*******************************************************************************
  * ROFI Color theme
- * User: Qball
- * Copyright: Dave Davenport
- */
-
+ * Theme designed to show off moving, packing of widgets, icons and more.
+ * User: DaveDavenport
+ * Copyright: DaveDavenport
+ ********************************************************************************/
 * {
-    text-color:  #D8Dee9;
-    background-color:  rgba(0,0,0,0);
-    dark: #000000;
-    // Black
-    black:       #FFFACD;
-    lightblack:  #2E3440;
-    //
-    // Red
-    red:         #cd5c5c;
-    lightred:    #cc5533;
-    //
-    // Green
-    green:       #86af80;
-    lightgreen:  #EBCB8B;
-    //
-    // Yellow
-    yellow:      #e8ae5b;
-    lightyellow:     #ffa75d;
-    //
-    // Blue
-    blue:      #81A1C1;
-    lightblue:     #87ceeb;
-    //
-    // Magenta
-    magenta:      #deb887;
-    lightmagenta:     #996600;
-    //
-    // Cyan
-    cyan:      #b0c4de;
-    lightcyan:     #b0c4de;
-    //
-    // White
-    white:      #bbaa99;
-    lightwhite:     #ddccbb;
-    //
-    // Bold, Italic, Underline
-    highlight:     bold #ffffff;
+    selected-normal-foreground:  #8fc1c3;
+    foreground:                  #D8DEE9;
+    normal-foreground:           @foreground;
+    alternate-normal-background: #161821;
+    selected-urgent-foreground:  #84A0C6;
+    urgent-foreground:           #B48EAD;
+    alternate-urgent-background: #161821;
+    active-foreground:           #89b8c2;
+    lightbg:                     #D8DEE9;
+    selected-active-foreground:  rgba ( 166, 226, 42, 100 % );
+    alternate-active-background: rgba ( 39, 40, 34, 0 % );
+    background:                  #161821;
+    bordercolor:                 #E2A478;
+    alternate-normal-foreground: @foreground;
+    normal-background:           #161821;
+    selected-normal-background:  #5C6370;
+    separatorcolor:              #E27878;
+    urgent-background:           rgba ( 39, 40, 34, 0 % );
+    selected-urgent-background:  rgba ( 249, 38, 114, 100 % );
+    alternate-urgent-foreground: @urgent-foreground;
+    background-color:            transparent;
+    alternate-active-foreground: @active-foreground;
+    active-background:           rgba ( 39, 40, 34, 0 % );
+    selected-active-background:  rgba ( 20, 20, 17, 100 % );
 }
 window {
-    height:   100%;
-    width: 30em;
-    location: west;
-    anchor:   west;
-    border:  0px 2px 0px 0px;
-    text-color: @lightwhite;
+    border-color:     #E9B189;
+    background-color: #161821;
+    border:           2px;
+    padding:          0px;
+    border-radius:    10px;
+    padding:          0.5em;
+    spacing:          0px;
+
+    anchor:         north;
+    location:       center;
+    y-offset:       -15.5em;
+
+
+    children: [ inputbar, message, wrapper-mode-switcher, listview , pagerbox ];
 }
+
+
+pagerbox {
+    expand: false;
+    orientation: horizontal;
+    children: [ icon-left, pad, icon-right ];
+}
+
+pad {
+  expand: true;
+}
+icon-left {
+    expand: false;
+    filename: "go-previous";
+    size: 24;
+    vertical-align: 0.5;
+    action: "kb-page-prev";
+}
+
+icon-right {
+    expand: false;
+    filename: "go-next";
+    size: 24;
+    vertical-align: 0.5;
+    action: "kb-page-next";
+}
+
+
+
+wrapper-mode-switcher {
+    orientation: horizontal;
+
+    expand:     false;
+    spacing:    0;
+    children: [ icon-ms-ic1, mode-switcher, icon-ms-ic2 ];
+}
+icon-ms-ic1 {
+    filename: "go-previous";
+}
+icon-ms-ic2 {
+    filename: "go-next";
+}
+icon-ms-ic1,icon-ms-ic2 {
+    size: 16;
+    vertical-align: 0.8;
+    expand:        false;
+    border:       0px 0px 2px ;
+    border-color: @separatorcolor;
+}
+
 mode-switcher {
-    border: 2px 0px 0px 0px;
-    background-color: @lightblack;
-    padding: 4px;
-}
-button selected {
-    border-color: @lightgreen;
-    text-color: @lightgreen;
-}
-inputbar {
-    background-color: @lightblack;
-    text-color: @lightgreen;
-    padding: 4px;
-    border: 0px 0px 2px 0px;
-}
-mainbox {
+    border:  0px;
+    spacing: 0px;
     expand: true;
-    background-color: #1c1c1cee;
-    spacing: 1em;
 }
+
+button {
+    padding:      2px;
+    border:       0px 0px 2px ;
+    border-color: @separatorcolor;
+    text-color: #D8DEE9;
+}
+button selected.normal {
+    text-color: #282A36;
+    background-color: #8FC1C3;
+
+    border:       2px 2px 0px ;
+    border-color: @separatorcolor;
+    border-radius:    10px 10px 0 0;
+}
+
+
+sidebar {
+    expand: false;
+}
+
+message {
+    text-color:       #161821;
+    background-color: #D8DEE9;
+    border-color:     #8FC1C3;
+    border:           2px;
+    border-radius:    5px;
+    padding:          4px;
+    margin:           0px 0px 0.5em;
+    expand:           false;
+}
+
 listview {
-    padding: 0em 0.4em 0em 1em;
-    dynamic: false;
-    lines: 0;
+    spacing:      2px ;
+    scrollbar:    false;
+    padding:      0.5em;
+    background-color: #282A36;
+
+    expand:       true;
+    border:       0px 2px 2px ;
+    border-color: @separatorcolor;
+    border-radius: 0px 0px 10px 10px;
+}
+element {
+    border:  1;
+    border-color: transparent;
+    padding: 4px ;
 }
 element-text {
     background-color: inherit;
     text-color:       inherit;
 }
-element selected  normal {
-    background-color: @blue;
-    text-color: @black;
+element.normal.normal {
+    background-color: @normal-background;
+    text-color:       @normal-foreground;
 }
-element normal active {
-    text-color: @lightblue;
+element.normal.urgent {
+    background-color: @urgent-background;
+    text-color:       @urgent-foreground;
 }
-element normal urgent {
-    text-color: @lightred;
+element.normal.active {
+    background-color: @active-background;
+    text-color:       @active-foreground;
 }
-element alternate normal {
+element.selected.normal {
+    border:  1;
+    border-color: grey/80%;
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
 }
-element alternate active {
-    text-color: @lightblue;
+element.selected.urgent {
+    border:  1;
+    border-color: grey/80%;
+    background-color: @selected-urgent-background;
+    text-color:       @selected-urgent-foreground;
 }
-element alternate urgent {
-    text-color: @lightred;
+element.selected.active {
+    border:  1;
+    border-color: grey/80%;
+    background-color: @selected-active-background;
+    text-color:       @selected-active-foreground;
 }
-element selected active {
-    background-color: @lightblue;
-    text-color: @dark;
+element.alternate.normal {
+    background-color: @alternate-normal-background;
+    text-color:       @alternate-normal-foreground;
 }
-element selected urgent {
-    background-color: @lightred;
-    text-color: @dark;
+element.alternate.urgent {
+    background-color: @alternate-urgent-background;
+    text-color:       @alternate-urgent-foreground;
 }
-error-message {
-    expand: true;
-    background-color: red;
-    border-color: darkred;
+element.alternate.active {
+    background-color: @alternate-active-background;
+    text-color:       @alternate-active-foreground;
+}
+scrollbar {
+    width:        4px ;
+    border:       0;
+    handle-width: 8px ;
+    padding:      0;
+}
+sidebar {
+    border:       2px 0px 0px ;
+    border-color: @separatorcolor;
+}
+inputbar {
+    text-color: @normal-foreground;
+    padding: 0px 0px 0.5em;
+}
+case-indicator {
+    text-color: @normal-foreground;
+}
+
+wrapper {
+    orientation: horizontal;
+    text-color:       #161821;
+    background-color: #D8DEE9;
+    border-color:     #8FC1C3;
+
     border: 2px;
-    padding: 1em;
+    border-radius: 5px;
+    padding: 4px;
+    children:   [ icon-k, entry, icon-paste];
+    spacing:  0.5em;
 }
+button-paste {
+    expand: false;
+    str: "gtk-paste";
+    size: 24;
+    vertical-align: 0.5;
+    action: "kb-cancel";
+}
+icon-paste {
+    expand: false;
+    filename: "gtk-paste";
+    size: 24;
+    vertical-align: 0.5;
+    action: "kb-primary-paste";
+}
+icon-k {
+    expand: false;
+    filename: "input-keyboard";
+    size: 24;
+    vertical-align: 0.5;
+
+}
+entry {
+    vertical-align: 0.5;
+}
+inputbar {
+    children:   [ wrapper ];
+}
+
+error-message {
+    background-color: darkred/10%;
+    border-color: darkred;
+    border-radius: 10px;
+    border: 2px;
+    padding: 0.5em;
+
+}
+
