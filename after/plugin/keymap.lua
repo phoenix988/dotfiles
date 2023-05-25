@@ -35,7 +35,7 @@ vim.api.nvim_set_keymap('n', '<Leader>n.', ':Neotree .<CR>', { noremap = true, s
 vim.api.nvim_set_keymap('n', '<Leader>hr', ':Lazy<CR>', { noremap = true, silent = true })
 
 -- Terminal
-vim.api.nvim_set_keymap('n', '<Leader>ot', ':terminal<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>tt', ':terminal<CR>', { noremap = true, silent = true })
 
 -- Keybindings for Harpoon
 local mark = require("harpoon.mark")
@@ -80,3 +80,6 @@ vim.api.nvim_set_keymap("n", "<Leader>fr",
   {noremap = true, silent = true})
 
 require("telescope").load_extension "file_browser"
+
+-- ORGMODE Tangle
+vim.api.nvim_set_keymap('n', '<Leader>oT', ':OrgTangle<CR>', { noremap = true, silent = true })
