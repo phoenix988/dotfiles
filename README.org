@@ -880,7 +880,7 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 Here you configure all your widgets that you have in your Qtile bar!
 So if you want to make qtile look fancy this is what you want to configure
 *** DESKTOP
-#+BEGIN_SRC python :tangle examples/config-desktop.py
+#+BEGIN_SRC python :tangle examples/config_desktop.py
 import os
 import re
 import socket
@@ -1319,7 +1319,7 @@ Widgets to use if you are on a desktop computer
 Settings to use if y
 ou are on a laptop. The main diffrence is that this config
 have the battery widget active
-#+BEGIN_SRC python :tangle examples/config-laptop.py
+#+BEGIN_SRC python :tangle examples/config_laptop.py
 import os
 import re
 import socket
