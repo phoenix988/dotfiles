@@ -274,7 +274,7 @@ General bindings like how to exit hyprland and kill active windows
 $mainMod = SUPER
 $browser1 = qutebrowser
 $browser2 = librewolf
-$term = kitty
+$term = kitty -e tmux attach
 $script_path = $HOME/.scripts
 
 
@@ -286,10 +286,11 @@ bind = $mainMod SHIFT, Q, exit,                                                 
 
 
 # Utilities
-bind = $mainMod, M, exec, wlogout                                                          #Logout screen
-bind = $mainMod, R, exec, wofi --show drun                                                 #Run menu
+bind = $mainMod, M, exec, wlogout                                                                   #Logout screen
+bind = $mainMod, R, exec, wofi --show drun                                                          #Run menu
 bind = $mainMod, F2, exec, $HOME/.config/hypr/hyprland-keys                                         #Shows this help menu
 bind = $mainMod, F1, exec, $HOME/.config/kitty/kitty-keys.sh                                        #Show keybinding for kitty terminal
+bind = $mainMod, F9, exec, azla                                                                     #Show keybinding for kitty terminal
 
 
 # Lock Screen
