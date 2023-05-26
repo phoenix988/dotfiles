@@ -584,9 +584,9 @@ def init_widgets_screen1():
     return widgets_screen1                 # Monitor 1 will display all widgets in widgets_list
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=23, margin=8 )),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=23, margin=8)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=26, margin=8))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=27, margin=8 )),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=27, margin=8)),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=28, margin=8))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()

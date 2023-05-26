@@ -37,6 +37,7 @@
   - [[ICEBERG]]
   - [[NORD]]
   - [[ROSE-PINE]]
+  - [[TOKYO-NIGHT]]
 
 ** ABOUT
 This is my qtile configuration. Qtile is a Window Manager written in python.
@@ -771,14 +772,14 @@ make sure this is set to config.py after :tangle
 from libqtile import layout, bar, widget, hook
 from libqtile.config import Click, Drag, Group, ScratchPad, DropDown, KeyChord, Key, Match, Screen
 
-group_names = [(" ", {'layout': 'bsp' ,'matches':[Match(wm_class=["Brave-browser-nightly", "Chromium" , "librewolf"])]}),
-               (" ", {'layout': 'bsp','matches':[Match(wm_class=["neo"])]}),
-               (" ", {'layout': 'bsp', 'matches':[Match(wm_class=["TeamViewer"])]}),
-               (" ", {'layout': 'max', 'matches':[Match(wm_class=["lutris" , "Steam" , "upc.exe" , "steam_proton" , "heroic"])]}),
+group_names = [(" ", {'layout': 'bsp' ,'matches':[Match(wm_class=["Brave-browser-nightly", "Chromium" , "librewolf"])]}),
+               (" ", {'layout': 'bsp','matches':[Match(wm_class=["neo"])]}),
+               (" ", {'layout': 'bsp', 'matches':[Match(wm_class=["TeamViewer"])]}),
+               (" ", {'layout': 'max', 'matches':[Match(wm_class=["lutris" , "Steam" , "upc.exe" , "steam_proton" , "heroic"])]}),
                (" ", {'layout': 'bsp', 'matches':[Match(wm_class=["re.sonny.Tangram", "crx_cifhbcnohmdccbgoicgdjpfamggdegmo", "disk.yandex.com__client_disk"])]}),
-               (" ", {'layout': 'max', 'matches':[Match(wm_class=["discord" , "Franz" , "whatsapp-nativefier-d40211" , "altus" , "whatsdesk" , "whatsapp-for-linux", "web.whatsapp.com"])]}),
-               (" ", {'layout': 'bsp', 'matches':[Match(wm_class=["Spotify"])]}),
-               (" ", {'layout': 'treetab', 'matches':[Match(wm_class=["io.github.celluloid_player.Celluloid" , "urxvt" , "obs", "youtube.com", "netflix.com"])]}),
+               ("  ", {'layout': 'bsp', 'matches':[Match(wm_class=["Spotify"])]}),
+               ("  ", {'layout': 'max', 'matches':[Match(wm_class=["discord" , "Franz" , "whatsapp-nativefier-d40211" , "altus" , "whatsdesk" , "whatsapp-for-linux", "web.whatsapp.com"])]}),
+               (" ", {'layout': 'treetab', 'matches':[Match(wm_class=["io.github.celluloid_player.Celluloid" , "urxvt" , "obs", "youtube.com", "netflix.com"])]}),
                (" ", {'layout': 'bsp', 'matches':[Match(wm_class=["gimp-2.10","Gimp" ,"Cinelerra","Olive", "kdenlive" , "resolve" ])]})]
 
 #+END_SRC
@@ -902,12 +903,12 @@ def init_widgets_list():
     widgets_list = [
              widget.Sep(
                        linewidth = 0,
-                       padding = 0,
+                       padding = 6,
                        foreground = colors[2],
                        background = colors[0]
                        ),
              widget.Image(
-                        filename = "~/.config/qtile/icons/pop-os-rose-pine.png",
+                        filename = "~/.config/qtile/icon.png",
                         scale = "False",
                         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(MYTERM_NORMAL)},
                         padding = 10
@@ -1128,6 +1129,7 @@ def init_widgets_list():
                        text = '' ,
                        background = colors[0],
                        foreground = colors[10],
+                       fontsize = 14,
                        padding = -1,
                        decorations = [
                             BorderDecoration (
@@ -1302,7 +1304,7 @@ def init_widgets_list():
                        ),
              widget.Sep(
                        linewidth = 0,
-                       padding = 6,
+                       padding = 12,
                        foreground = colors[2],
                        background = colors[0]
                        ),
@@ -1345,7 +1347,7 @@ def init_widgets_list():
                        background = colors[0]
                        ),
              widget.Image(
-                        filename = "~/.config/qtile/icons/pop-os-iceberg.png",
+                        filename = "~/.config/qtile/icon.png",
                         scale = "False",
                         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(MYTERM_NORMAL)},
                         padding = 10
@@ -1764,9 +1766,9 @@ def init_widgets_screen1():
     return widgets_screen1                 # Monitor 1 will display all widgets in widgets_list
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=23, margin=8 )),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=23, margin=8)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=26, margin=8))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=27, margin=8 )),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=27, margin=8)),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=28, margin=8))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
@@ -2008,5 +2010,38 @@ colors = [["#191724", "#191724"], # 0 -- BG color
           ["#9CCFD8", "#9CCFD8"], # 14 -- volume widget
           ["#F6C177", "#F6C177"]] # 15 -- linux icon
 
+
+#+END_SRC
+
+*** TOKYO-NIGHT
+#+BEGIN_SRC python :tangle themes/tokyo-night.py
+# TorkyoNight theme for qtile
+# Author: Karl Fredin
+
+# colors for borders and layouts
+layout_colors = [["#7DCFFF", "#7DCFFF"], # 0 -- Border color
+                 ["#1A1B26", "#1A1B26"], # 1
+                 ["#1A1B26", "#1A1B26"], # 2
+                 ["#000000", "#000000"], # 3
+                 ["#6B7089", "#6B7089"]] # 4
+
+
+# Color for the qtile bar
+colors = [["#1A1B26", "#1A1B26"], # 0 -- BG color
+          ["#6B7089", "#6B7089"], # 1 -- Task tray bg
+          ["#BB9AF7", "#BB9AF7"], # 2
+          ["#9ECE6A", "#9ECE6A"], # 3
+          ["#7AA2F7", "#7AA2F7"], # 4
+          ["#4C3466", "#8264B3"], # 5
+          ["#BB9AF7", "#BB9AF7"], # 6
+          ["#BB9AF7", "#BB9AF7"], # 7
+          ["#F6C177", "#F6C177"], # 8  -- weather widget
+          ["#E0DEF4", "#E0DEF4"], # 9  -- df widget
+          ["#9ECE6A", "#9ECE6A"], # 10 -- cpu widget
+          ["#F7768E", "#F7768E"], # 11 -- temp widget
+          ["#7DCFFF", "#7DCFFF"], # 12 -- memory widget
+          ["#BB9AF7", "#BB9AF7"], # 13 -- update widget
+          ["#E0AF68", "#E0AF68"], # 14 -- volume widget
+          ["#7AA2F7", "#7AA2F7"]] # 15 -- linux icon
 
 #+END_SRC
