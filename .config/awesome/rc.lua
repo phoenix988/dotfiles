@@ -21,6 +21,7 @@ local menubar       = require("menubar")
 local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 local gpmdp	    = require("widgets.gpmdp")
+
 -- }}}
 
 -- {{{ Error handling
@@ -60,10 +61,10 @@ run_once({ "unclutter -root" }) -- entries must be comma-separated
 -- }}}
 
 -- {{{ Variable definitions
-local chosen_theme = "iceberg"
+local chosen_theme = "default"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
-local terminal     = "kitty"
+local terminal     = "kitty -e tmux attach"
 local editor       = os.getenv("EDITOR") or "nvim"
 local home         = os.getenv("HOME")
 local gui_editor   = "emacsclient -c -a emacs"
@@ -74,9 +75,8 @@ awful.util.terminal = terminal
 
 awful.layout.layouts = {
     awful.layout.suit.spiral.dwindle,	--9
-    awful.layout.suit.max,				--11
-    awful.layout.suit.floating,			--1
-    awful.layout.suit.tile,				--2
+    awful.layout.suit.max,		--11
+    awful.layout.suit.floating,		--1
 --    lain.layout.cascade,
 --    lain.layout.cascade.tile,
 --    awful.layout.suit.max.fullscreen,
@@ -218,8 +218,6 @@ globalkeys = awful.util.table.join(
         {description="run browser", group="Applications"}),
 	awful.key({ modkey }, "b", function () awful.util.spawn( "qutebrowser --backend webengine" ) end,
         {description="run qutebrowser", group="Applications"}),
-	awful.key({ modkey, "Shift" }, "b", function () awful.util.spawn( "firefox-bin" ) end,
-        {description="run firefox", group="Applications"}),
 	awful.key({ modkey, "Shift" }, "v", function () awful.util.spawn( "virt-manager" ) end,
         {description="run virt-manager", group="Applications"}),
 	awful.key({ modkey,}, "i", function () awful.util.spawn( "lxappearance" ) end,
@@ -230,13 +228,19 @@ globalkeys = awful.util.table.join(
         {description="Take screenshot", group="Applications"}),
 	awful.key({ modkey, "Shift" }, "y", function () awful.util.spawn( editor ) end,
         {description="Take screenshot", group="Applications"}),
+	awful.key({ modkey, "Shift" }, "t", function () awful.util.spawn( "kitty -e btop" ) end,
+        {description="Run btop", group="Applications"}),
+	awful.key({ modkey, "Shift" }, "y", function () awful.util.spawn( "kitty -e neomutt" ) end,
+        {description="Run Neomutt", group="Applications"}),
+	awful.key({ modkey,}, "F9", function () awful.util.spawn("azla" ) end,
+        {description="Run Azla", group="Applications"}),
 
 
 
     -- Hotkeys
     awful.key({ modkey, }, "F1",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
-    awful.key({ modkey, }, "F2", function () awful.util.spawn("/home/karl/.config/kitty/kitty-keys.sh") end,
+    awful.key({ modkey, }, "F2", function () awful.util.spawn(home .. "/.config/kitty/kitty-keys.sh") end,
               {description="show help for kitty", group="awesome"}),
     awful.key({ modkey, }, "F11", function () awful.util.spawn(home .. "/.scripts/restart/picom-control") end,
               {description="kill picom/start picom", group="awesome"}),
@@ -631,6 +635,7 @@ awful.rules.rules = {
                      border_color = beautiful.border_normal,
                      focus = awful.client.focus.filter,
                      raise = true,
+                     ontop = true,
                      keys = clientkeys,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
@@ -646,23 +651,23 @@ awful.rules.rules = {
 --      properties = { titlebars_enabled = true } },
 
     { rule = { class = "LibreWolf" },
-     properties = {tag = " " } },
+     properties = {tag = "  " } },
 
     { rule = { class = "Steam" },
-     properties = {tag = " " } },
+     properties = {tag = "  " } },
 
     { rule = { class = "Gimp" },
-          properties = { tag = " " } },
+          properties = { tag = "  " } },
 
 
     { rule = { class = "youtube.com" },
-        properties = { screen = 1, tag = " " } },
+        properties = { screen = 1, tag = "  " } },
 
     { rule = { class = "whatsapp-nativefier-d40211" },
-        properties = { tag = " " } },
+        properties = { tag = "  " } },
     
     { rule = { class = "discord" },
-        properties = { tag = " " } },
+        properties = { tag = "  " } },
        
 
          { rule = { class = "Yad" },
@@ -766,5 +771,4 @@ awful.spawn.with_shell("~/.config/awesome/autostart_custom.sh")
 --awful.spawn.with_shell("~/.fehbg")
 
 
-beautiful.useless_gap = 7
 
