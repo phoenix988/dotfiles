@@ -770,5 +770,3 @@ awful.spawn.with_shell("~/.config/awesome/autostart.sh")
 awful.spawn.with_shell("~/.config/awesome/autostart_custom.sh")
 --awful.spawn.with_shell("~/.fehbg")
 
-
-

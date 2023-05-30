@@ -80,28 +80,6 @@ mylauncher:connect_signal("button::press", function() awful.util.mymainmenu:togg
 
 local mylauncher = wibox.container.background(mylauncher, theme.bg_alt, gears.shape.rectangle)
 
-
---[[ Mail IMAP check
--- commented because it needs to be set before use
-local mail = lain.widget.imap({
-    timeout  = 180,
-    server   = "server",
-    mail     = "mail",
-    password = "keyring get mail",
-    settings = function()
-        mail  = ""
-        count = ""
-
-        if mailcount > 0 then
-            mail = "<span font='Droid Sans 5'> </span>Mail "
-            count = mailcount .. " "
-        end
-
-        widget:set_markup(markup(blue, mail) .. count)
-    end
-})
---]]
-
 -- MPD
    local mpdicon = wibox.widget.imagebox()
    theme.mpd = lain.widget.mpd({
@@ -178,53 +156,52 @@ local mail = lain.widget.imap({
 -- bat widget end
 
 ---- / fs
-  --local fsicon = wibox.widget.imagebox(theme.disk)
-  local fsbar = wibox.widget {
-      forced_height    = 1,
-      forced_width     = 100,
-      color            = theme.fg_focus,
-      background_color = theme.bg_normal,
-      margins          = 1,
-      paddings         = 1,
-      ticks            = true,
-      ticks_size       = 13,
-      widget           = wibox.widget.progressbar,
-  }
-  
-  theme.fs = lain.widget.fs({
-      partition = "/",
-  --    partition = "/",
-      options = "--exclude-type=tmpfs",
-      notification_preset = { fg = theme.fg_focus, bg = theme.bg_normal, font = "Droid Sans 10.5" },
-      settings  = function()
-          if tonumber(fs_now.used) < 90 then
-              fsbar:set_color(theme.fg_focus)
-          else
-              fsbar:set_color("#EB8F8F")
-          end
-          fsbar:set_value(fs_now.used / 100)
-      end
-  })
-  local fsbg = wibox.container.background(fsbar, "#474747", gears.shape.rectangle)
-  local fswidget = wibox.container.margin(fsbg, 2, 7, 6, 6)
-  
-  local fswidget = wibox.container.background(fswidget, theme.bg_normal, gears.shape.rectangle)
-  
-  local fsfont = "Droid Sans 12"
-  
-  local fsicon =  wibox.widget {
-       markup = "<span foreground='" .. theme.fg_focus .. "' font='" .. fsfont .. "'>⛁</span>",
-       widget = wibox.widget.textbox
-  }
-  
-  local fsicon = wibox.container.margin(fsicon, 10, 7, 6, 4)
-  local fsicon = wibox.container.background(fsicon, theme.bg_normal, gears.shape.rectangle)
-  
-  -- Launch disk usage analyzer when you click the fs widget
-  fswidget.widget:connect_signal("button::press", function()
-      -- Perform some action when the widget is clicked
-      awful.spawn("baobab")
-  end)
+   --local fsicon = wibox.widget.imagebox(theme.disk)
+   local fsbar = wibox.widget {
+       forced_height    = 1,
+       forced_width     = 100,
+       color            = theme.fg_focus,
+       background_color = theme.bg_normal,
+       margins          = 1,
+       paddings         = 1,
+       ticks            = true,
+       ticks_size       = 13,
+       widget           = wibox.widget.progressbar,
+   }
+   
+   theme.fs = lain.widget.fs({
+       partition = "/",
+       options = "--exclude-type=tmpfs",
+       notification_preset = { fg = theme.fg_focus, bg = theme.bg_normal, font = "Droid Sans 10.5" },
+       settings  = function()
+           if tonumber(fs_now.used) < 90 then
+               fsbar:set_color(theme.fg_focus)
+           else
+               fsbar:set_color("#EB8F8F")
+           end
+           fsbar:set_value(fs_now.used / 100)
+       end
+   })
+   local fsbg = wibox.container.background(fsbar, "#474747", gears.shape.rectangle)
+   local fswidget = wibox.container.margin(fsbg, 2, 7, 6, 6)
+   
+   local fswidget = wibox.container.background(fswidget, theme.bg_normal, gears.shape.rectangle)
+   
+   local fsfont = "Droid Sans 12"
+   
+   local fsicon =  wibox.widget {
+        markup = "<span foreground='" .. theme.fg_focus .. "' font='" .. fsfont .. "'>⛁</span>",
+        widget = wibox.widget.textbox
+   }
+   
+   local fsicon = wibox.container.margin(fsicon, 10, 7, 6, 4)
+   local fsicon = wibox.container.background(fsicon, theme.bg_normal, gears.shape.rectangle)
+   
+   -- Launch disk usage analyzer when you click the fs widget
+   fswidget.widget:connect_signal("button::press", function()
+       -- Perform some action when the widget is clicked
+       awful.spawn("baobab")
+   end)
 -- fs widget end
 
 -- ALSA volume bar
@@ -278,12 +255,6 @@ local mail = lain.widget.imap({
    
    local volumewidget = wibox.container.background(volumewidget, theme.seperator_2 , gears.shape.rectangle)
    local volicon = wibox.container.background(volicon, theme.seperator_2 , gears.shape.rectangle)
-   
-   -- volume icons
-   --"🕪"
-   --"🕩"
-   --"🕨"
-
 -- volume widget end
 
 -- Creates cpu widget
@@ -490,6 +461,11 @@ local mail = lain.widget.imap({
         widget = wibox.widget.textbox
    }
    
+   local first_sec =  wibox.widget {
+        markup = "<span background='" .. theme.bg_normal .. "' foreground='" .. theme.bg_normal .. "'  font='" .. seperator_font_alt .. "'>|</span>",
+        widget = wibox.widget.textbox
+   }
+
    local first_main = wibox.container.background(first_main, theme.bg_alt, gears.shape.rectangle)
    
    local col_bg =  wibox.widget {
@@ -499,7 +475,7 @@ local mail = lain.widget.imap({
    
    -- powerline seperators
    local seperator = wibox.widget {
-        markup = "<span foreground='" .. theme.seperator_1 .. "' font='" .. seperator_font .. "'></span>",
+        markup = "<span foreground='" .. theme.seperator_1 .. "' background='" .. theme.bg_normal .. "'  font='" .. seperator_font .. "'></span>",
         widget = wibox.widget.textbox,
    }
    
@@ -538,6 +514,12 @@ local mail = lain.widget.imap({
         markup = "<span foreground='" .. theme.bg_alt .. "' background='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
         widget = wibox.widget.textbox,
    }
+
+   local right_powerline_alt = wibox.widget {
+        markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.bg_alt .. "' font='" .. seperator_font .. "'></span>",
+        widget = wibox.widget.textbox,
+   }
+ 
    
    local clock_sep = wibox.widget {
         markup = "<span foreground='" .. theme.seperator_1 .. "' background='" .. theme.seperator_1 .. "' font='" .. seperator_font .. "'> </span>",
@@ -581,10 +563,10 @@ function theme.at_screen_connect(s)
     
     -- Example of icons you can use
     -- local names = ["", "", "", "", "", "", "", "", "ﭮ", "", "", "﨣", "F1", "F2", "F3", "F4", "F5"]
-    -- local names = { " ", " ", " ", " ", " ", " ", " ", " ", " " }
+    -- local names = { " ", " ", " ", " ", " ", " ", " ", " ", " "  }
     
     -- Set workspace names
-    local names = { "  ", " ", "  ", "  ", "  ", "  ", "  ", " ", "  " }
+    local names = { "  ", " ", "  ", "  ", "  ", "  ", "  ", " ", "  " }
     local l = awful.layout.suit
     local layouts = { l.max, l.tile.right, l.tile.right, l.max, l.tile.right, l.tile.right, l.tile.right, l.floating, l.floating, }
     awful.tag(names, s, layouts)
@@ -600,22 +582,89 @@ function theme.at_screen_connect(s)
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
 
+    local taglist_font = "Droid Sans 17"
+
     -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
+    -- s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
+    s.mytaglist = awful.widget.taglist {
+       screen    = s,
+       filter    = awful.widget.taglist.filter.all,
+       buttons   = awful.util.taglist_buttons,
+       style     = {
+          font     = taglist_font,      
+          spacing  = 4,
+       },
+    }
 
     -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
+    -- s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
+    s.mytasklist = awful.widget.tasklist {
+       screen   = s,
+       filter   = awful.widget.tasklist.filter.currenttags,
+       buttons  = awful.util.tasklist_buttons,
+       style    = {
+          shape_border_width = 1,
+          shape_border_color = theme.bg_normal,
+          shape  = gears.shape.rounded_bar,
+          bg_focus = theme.fg_alt,
+          spacing  = 10,
+       },
+       layout   = {
+           spacing_widget = {
+               {
+                   forced_width  = 5,
+                   forced_height = 18,
+                   thickness     = 1,
+                   color         = theme.bg_alt,
+                   widget        = wibox.widget.separator
+               },
+               valign = 'center',
+               halign = 'center',
+               widget = wibox.container.place,
+           },
+           spacing = 1,
+           layout  = wibox.layout.fixed.horizontal
+       },
+       -- Notice that there is *NO* wibox.wibox prefix, it is a template,
+       -- not a widget instance.
+       widget_template = {
+           {
+               wibox.widget.base.make_widget(),
+               forced_height = 5,
+               id            = 'background_role',
+               widget        = wibox.container.background,
+           },
+           {
+               {
+                   id     = 'clienticon',
+                   widget = awful.widget.clienticon,
+               },
+               margins = 2,
+               widget  = wibox.container.margin
+           },
+           nil,
+           create_callback = function(self, c, index, objects) --luacheck: no unused args
+               self:get_children_by_id('clienticon')[1].client = c
+           end,
+           layout = wibox.layout.align.vertical,
+       },
+    }
 
     s.mytasklist = wibox.container.background(s.mytasklist, "#00000000")
+
+    local systray_widget = wibox.widget.systray()
+    systray_widget:set_base_size(30)
+
 
     -- Create the horizontal wibox
     s.mywibox = awful.wibar({ 
     position = "top", 
     screen = s, 
-    height = 28, 
-    border_width = 8,
+    height = 32, 
+    border_width = 10,
     bg = theme.bg_normal, 
-    fg = theme.fg_normal })
+    fg = theme.fg_normal, 
+    })
 
 
     -- Add widgets to the wibox
@@ -631,16 +680,20 @@ function theme.at_screen_connect(s)
             s.mylayoutbox,
             bar_spr,
             first,
-            s.mytaglist,
+            s.mytasklist,
+            bar_spr,
             first,
+            s.mytaglist,
             s.mypromptbox,
-            spr_big,
+            first_sec,
+            first_sec,
+            first_sec,
+            first_sec,
         },
-        s.mytasklist, -- Middle widget
+         -- Middle widget
+        first_sec,
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            spr_big,
-            small_spr,
             seperator,
             mytextclock,
             clock_sep,
@@ -655,11 +708,7 @@ function theme.at_screen_connect(s)
             cpuwidget,
             tempicon,
             tempwidget,
-           -- temp_text,
             seperator_col,
-           -- baticon,
-           -- batwidget,
-           -- bar_spr,
             fsicon,
             fswidget,
             seperator_col_dif,
