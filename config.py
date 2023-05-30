@@ -67,11 +67,11 @@ keys = [
               lazy.shutdown(),
               desc='Shutdown Qtile'
               ),
-         Key([mod, ], "F2", #Show all the keybindings
+         Key([mod, ], "F1", #Show all the keybindings
               lazy.spawn("/home/karl/.config/qtile/qtile-keys.sh"),
               desc='Run Help Menu'
               ),
-         Key([mod, ], "F1", #show kitty bindings
+         Key([mod, ], "F2", #show kitty bindings
               lazy.spawn("/home/karl/.config/kitty/kitty-keys.sh"),
               desc='Run Help Menu for kitty'
               ),
