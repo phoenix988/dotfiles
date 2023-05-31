@@ -546,7 +546,7 @@ layouts = [
          font = "Ubuntu Mono",
          fontsize = 10,
          sections = [""],
-         section_fontsize = 10,
+         section_fontsize = 16,
          border_width = 2,
          bg_color = layout_colors[2],
          active_bg = layout_colors[0],
@@ -571,8 +571,6 @@ layouts = [
                       max_border_width = 1),
 ]
 
-prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
-
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
     del widgets_screen2[18:23]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
@@ -584,9 +582,9 @@ def init_widgets_screen1():
     return widgets_screen1                 # Monitor 1 will display all widgets in widgets_list
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=27, margin=8 )),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=27, margin=8)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=28, margin=8))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=32, margin=8 )),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=32, margin=8)),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=32, margin=8))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
