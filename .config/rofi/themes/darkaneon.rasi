@@ -42,10 +42,12 @@
     //
     // Bold, Italic, Underline
     highlight:     bold #ffffff;
+	
+    font: "Cartograph CF 20";
 }
 window {
     height:   100%;
-    width: 30em;
+    width: 600;
     location: west;
     anchor:   west;
     border:  0px 2px 0px 0px;
@@ -116,3 +118,14 @@ error-message {
     border: 2px;
     padding: 1em;
 }
+
+#textbox-prompt-colon {
+	expand:     false;
+	str:        "";
+	margin:     0px 0.3em 0em 0em;
+    padding:    5px 0px 0px 6px;
+	font:	    "feather 14";
+	text-color: @blue;
+}
+
+
