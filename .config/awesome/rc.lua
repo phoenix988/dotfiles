@@ -64,7 +64,8 @@ run_once({ "unclutter -root" }) -- entries must be comma-separated
 local chosen_theme = "default"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
-local terminal     = "kitty -e tmux attach"
+local terminal     = "kitty"
+local terminal_alt = "kitty -e tmux attach"
 local editor       = os.getenv("EDITOR") or "nvim"
 local home         = os.getenv("HOME")
 local gui_editor   = "emacsclient -c -a emacs"
@@ -77,6 +78,7 @@ awful.layout.layouts = {
     awful.layout.suit.spiral.dwindle,	--9
     awful.layout.suit.max,		--11
     awful.layout.suit.floating,		--1
+    awful.layout.suit.tile,
 --    lain.layout.cascade,
 --    lain.layout.cascade.tile,
 --    awful.layout.suit.max.fullscreen,
@@ -239,7 +241,7 @@ globalkeys = awful.util.table.join(
 
     -- Hotkeys
     awful.key({ modkey, }, "F1",      hotkeys_popup.show_help,
-              {description="show help", group="awesome"}),
+              {description="show awesome keybindings", group="awesome"}),
     awful.key({ modkey, }, "F2", function () awful.util.spawn(home .. "/.config/kitty/kitty-keys.sh") end,
               {description="show help for kitty", group="awesome"}),
     awful.key({ modkey, }, "F11", function () awful.util.spawn(home .. "/.scripts/restart/picom-control") end,
@@ -333,7 +335,7 @@ globalkeys = awful.util.table.join(
     end),
 
     -- Standard program
-    awful.key({ modkey, }, "Return", function () awful.spawn(terminal) end,
+    awful.key({ modkey, }, "Return", function () awful.spawn(terminal_alt) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Shift" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
@@ -516,7 +518,8 @@ globalkeys = awful.util.table.join(
 --		end)
     
     -- Prompt
-    awful.key({ modkey }, "r", function () awful.util.spawn("rofi -show drun -show-icons") end,
+    awful.key({ modkey }, "r", function () awful.util.spawn("rofi -show drun -show-icons -display-drun '' -drun-display-format \'{name}\'") end,
+
               {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "x",
@@ -659,6 +662,8 @@ awful.rules.rules = {
     { rule = { class = "Gimp" },
           properties = { tag = "  " } },
 
+    { rule = { class = "kdenlive" },
+          properties = { tag = "  " } },
 
     { rule = { class = "youtube.com" },
         properties = { screen = 1, tag = "  " } },

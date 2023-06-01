@@ -29,6 +29,7 @@ theme.seperator_3                               = theme.bg_normal
 theme.menu_height                               = 25
 theme.menu_width                                = 250
 theme.tasklist_disable_icon                     = true
+theme.systray_icon_spacing                      = 2
 theme.awesome_icon                              = theme.dir .."/icons/awesome.png"
 theme.menu_submenu_icon                         = theme.dir .. "/icons/submenu.png"
 theme.taglist_squares_sel                       = theme.dir .. "/icons/square_unsel.png"

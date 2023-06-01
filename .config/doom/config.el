@@ -192,12 +192,12 @@
 
   (doom-themes-neotree-config)
 
-  (setq doom-themes-treemacs-theme "doom-iceberg")
+  (setq doom-themes-treemacs-theme "doom-rose-pine")
 
   (doom-themes-treemacs-config)
 
   (doom-themes-org-config))
 
-  (load-theme 'doom-iceberg t)
+  (load-theme 'doom-rose-pine t)
 
 (use-package autothemer :ensure t)
