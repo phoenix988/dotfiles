@@ -498,6 +498,7 @@ binde=ALT,Q, exec, $HOME/.dmenu/dm-virt-manager                             #Dme
 binde=ALT,P, exec, $HOME/.dmenu/dm-play-pause                               #Dmenu script to control media
 binde=ALT,N, exec, $HOME/.dmenu/dm-ssh                                      #Dmenu script to connect via ssh
 binde=$mainMod,Y, exec, $HOME/.dmenu/dm-tmux                                #Dmenu script to control tmux sessions
+binde=ALT,G, exec, $HOME/.dmenu/dm-theme                               #Dmenu script to change theme
 #+END_SRC
 
 
