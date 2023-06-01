@@ -12,6 +12,7 @@
     - [[.config/awesome][AWESOME]]
     - [[.xmonad][XMONAD]]
     - [[.config/spectrwm][SPECTRWM]]
+    - [[.config/leftwm][LeftWM]]
   - [[TEXT EDITORS]]
     - [[.config/doom][DOOM EMACS]]
     - [[.config/nvim][NEOVIM]]
@@ -42,7 +43,7 @@ since I have used them. So if you pull down my xmonad,awesome and specrteWM
 config they might be broken so keep that in mind.
 |----------+---------+----------|
 | [[.config/qtile][Qtile]]    | [[.xmonad][Xmonad]]  | [[.config/hypr][Hyprland]] |
-| [[.config/spectrwm][SpectrWM]] | [[.config/awesome][Awesome]] |          |
+| [[.config/spectrwm][SpectrWM]] | [[.config/awesome][Awesome]] | [[.config/leftwm][LeftWM]]   |
 
 *** TEXT EDITORS
 Well the only text editor I use is Doom emacs and Neovim
