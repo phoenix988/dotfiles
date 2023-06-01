@@ -27,8 +27,8 @@ tooltip {
 }
 
 #workspaces button.active {
-    color: #2E3440;
-    background: #81A1C1;
+    color: #81A1C1;
+    background: #2E3440;
     border-radius: 15px 15px 15px 15px;
 }
 
@@ -39,14 +39,14 @@ tooltip {
 }
 
 #workspaces button.urgent {
-    color: #11111b;
-    background: #a6e3a1;
+    color: #0087BD;
+    background: #2E3440;
     border-radius: 10px;
 }
 
 #workspaces button:hover {
-    background: #0087BD;
-    color: #D8DEE9;
+    background: #2E3440;
+    color: #81A1C1;
     border-radius: 15px;
 }
 
@@ -68,6 +68,7 @@ tooltip {
     margin: 3px 0px;
     margin-top: 10px;
     border: 1px solid #2E3440;
+    border-color: #0087BD;
 }
 
 #tray {
@@ -114,8 +115,9 @@ tooltip {
 #memory {
     color: #f38ba8;
     border-radius: 0px 10px 10px 0px;
-    margin-left: 0px;
+    margin-left:  0px;
     border-right: 0px;
+    border-left:  0px;
     background: #2E3440;
     }
 
