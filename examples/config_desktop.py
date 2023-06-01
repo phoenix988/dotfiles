@@ -85,7 +85,7 @@ def init_widgets_list():
                        foreground = colors[0],
                        background = colors[4],
                        padding = 8,
-                       fontsize = 15
+                       fontsize = 18
                        ),
              widget.CurrentLayoutIcon(
                        background = colors[4],
@@ -179,6 +179,12 @@ def init_widgets_list():
                       background = colors[1],
                       padding = 1,
                       ),
+             widget.Sep(
+                       linewidth = 0,
+                       padding = 12,
+                       foreground = colors[1],
+                       background = colors[1]
+                       ),
              widget.TextBox(
                        text = '',
                        background = colors[1],
