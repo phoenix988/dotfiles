@@ -97,20 +97,14 @@ require('lazy').setup({
     },
   },
 
-  { -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'iceberg'
-    end,
-  },
-
   { -- Some more themes
-  'cocopon/iceberg.vim',
+  'navarasu/onedark.nvim',
+  'phoenix988/iceberg.nvim',
   'rose-pine/neovim',
   'Mofiqul/dracula.nvim',
   'folke/tokyonight.nvim',
   'shaunsingh/nord.nvim',
+  'ribru17/bamboo.nvim',
   },
 
   { -- Set lualine as statusline

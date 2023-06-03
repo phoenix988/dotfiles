@@ -20,6 +20,7 @@
   - [[STANDARD SETS]]
   - [[PLUGINS]]
     - [[COLORS]]
+    - [[ICEBERG]]
     - [[LASTPLACE]]
     - [[LSP-ZERO]]
     - [[LUALINE]]
@@ -223,20 +224,14 @@ require('lazy').setup({
     },
   },
 
-  { -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'iceberg'
-    end,
-  },
-
   { -- Some more themes
-  'cocopon/iceberg.vim',
+  'navarasu/onedark.nvim',
+  'phoenix988/iceberg.nvim',
   'rose-pine/neovim',
   'Mofiqul/dracula.nvim',
   'folke/tokyonight.nvim',
   'shaunsingh/nord.nvim',
+  'ribru17/bamboo.nvim',
   },
 
   { -- Set lualine as statusline
@@ -359,6 +354,11 @@ vim.api.nvim_set_keymap("n", "<Leader>td", ':tabclose<CR>', { noremap = true, si
 vim.api.nvim_set_keymap("n", "<Leader>ch", ':HighlightColorsToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gt", ':BufferNext<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gT", ':BufferPrevious<CR>', { noremap = true, silent = true })
+
+-- Tab between splits
+vim.api.nvim_set_keymap("n", "<Tab>", '<C-W>w', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<S-Tab>", '<C-W>W', { noremap = true, silent = true })
+
 
 -- Git commands
 vim.api.nvim_set_keymap("n", "<leader>gs", ':Git<CR>', { noremap = true, silent = true })
@@ -502,7 +502,44 @@ require("nvim-highlight-colors").toggle()
 ColorMyPencils()
 #+end_src
 
+*** ICEBERG
+#+begin_src lua :tangle after/plugin/iceberg.lua
+-- Lua
+require('iceberg').setup  {
+    -- Main options --
+    transparent = false,  -- Show/hide background
+    term_colors = true, -- Change terminal color as per the selected theme style
+    ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
+    cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
 
+    -- Change code style ---
+    -- Options are italic, bold, underline, none
+    -- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
+    code_style = {
+        comments = 'italic',
+        keywords = 'none',
+        functions = 'none',
+        strings = 'none',
+        variables = 'italic'
+    },
+
+    -- Lualine options --
+    lualine = {
+        transparent = false, -- lualine center bar transparency
+    },
+
+    -- Custom Highlights --
+    colors = {}, -- Override default colors
+    highlights = {}, -- Override highlight groups
+
+    -- Plugins Config --
+    diagnostics = {
+        darker = false, -- darker colors for diagnostic
+        undercurl = true,   -- use undercurl instead of underline for diagnostics
+        background = true,    -- use background color for virtual text
+    },
+}
+#+end_src
 *** LASTPLACE
 Lastplace never starts at the top of your files again.
 If you exit a file and come back this plugin will remeber your last location

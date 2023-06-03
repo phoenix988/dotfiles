@@ -10,6 +10,11 @@ vim.api.nvim_set_keymap("n", "<Leader>ch", ':HighlightColorsToggle<CR>', { norem
 vim.api.nvim_set_keymap("n", "gt", ':BufferNext<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gT", ':BufferPrevious<CR>', { noremap = true, silent = true })
 
+-- Tab between splits
+vim.api.nvim_set_keymap("n", "<Tab>", '<C-W>w', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<S-Tab>", '<C-W>W', { noremap = true, silent = true })
+
+
 -- Git commands
 vim.api.nvim_set_keymap("n", "<leader>gs", ':Git<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>gg", ':Git<CR>', { noremap = true, silent = true })
