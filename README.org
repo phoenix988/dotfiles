@@ -20,6 +20,7 @@
   - [[STANDARD SETS]]
   - [[PLUGINS]]
     - [[COLORS]]
+    - [[ICEBERG]]
     - [[LASTPLACE]]
     - [[LSP-ZERO]]
     - [[LUALINE]]
