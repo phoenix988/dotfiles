@@ -106,11 +106,13 @@ require('lazy').setup({
   },
 
   { -- Some more themes
-  'cocopon/iceberg.vim',
+ -- 'cocopon/iceberg.vim',
+  'phoenix988/iceberg.nvim',
   'rose-pine/neovim',
   'Mofiqul/dracula.nvim',
   'folke/tokyonight.nvim',
   'shaunsingh/nord.nvim',
+  'ribru17/bamboo.nvim',
   },
 
   { -- Set lualine as statusline
