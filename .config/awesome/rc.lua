@@ -236,6 +236,8 @@ globalkeys = awful.util.table.join(
         {description="Run Neomutt", group="Applications"}),
 	awful.key({ modkey,}, "F9", function () awful.util.spawn("azla" ) end,
         {description="Run Azla", group="Applications"}),
+	awful.key({ modkey, "Control" }, "k", function () awful.util.spawn( "rofi -show window" ) end,
+        {description="Jump between windows using rofi", group="Client"}),
 
 
 

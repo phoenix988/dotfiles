@@ -16,11 +16,14 @@ local mytasklist = require("widgets.mytasklist")
 local awesome, client = awesome, client
 
 -- Imports the colors to use
-local chosen_theme  = "rose-pine"
+local chosen_theme  = "iceberg"
 local theme         = require("themes/" .. chosen_theme .. "/color")
 
 -- Command to run to check for updates
 local update_command = "bash -c 'paru -Syy &> /dev/null && paru -Qu 2> /dev/null | wc -l'"
+
+-- Command to check for kernel version
+local kernel_command = "uname -r"
 
 -- Sets some variables
 local threshold    = 80
@@ -32,51 +35,33 @@ local green        = "#9ECE6A"
 local white        = theme.fg_normal
 local icon         = {}
 
+-- Sets the size of the progressbar here by modifying the numbers
+local bar_size     = {2, 7, 7, 7}
+
 -- Defines fonts used in the widgets
 local font         = {}
 font.first         = "Droid Sans 7"
 font.seperator     = "FiraCode Nerd Font Mono 38"
 font.seperator_alt = "Droid Sans 25"
-font.linux_icon    = "Droid Sans 16"
+font.linux_icon    = "Droid Sans 17"
 font.fs            = "Droid Sans 14"
 font.cpu           = "Droid Sans 12"
 font.temp          = "Droid Sans 11"
+font.bar           = "Droid Sans 9"
 font.mem           = "Droid Sans 12"
-font.update        = "JetBrains Mono Nerd 12"
-font.taglist       = "Droid Sans 17"
+font.update        = "JetBrains Mono Nerd 14"
+font.taglist       = "Droid Sans 19"
 
-
+theme.tasklist_font             = "JetBrains Mono Nerd 16"
+theme.tasklist_plain_task_name  = true
 
 -- Make the clock widget
 local mytextclock = wibox.widget.textclock(markup(theme.bg_normal, "  %a") .. markup(theme.bg_alt, " %d ") .. markup(theme.bg_normal, "%b ") .. markup(theme.bg_alt, " %I:%M "))
-mytextclock.font = "JetBrains Mono Nerd 12"
+mytextclock.font = "JetBrains Mono Nerd 14"
 local mytextclock = wibox.container.margin(mytextclock, 1, 1, 3, 1)
 
 -- Set the bg color of the clock widget
 local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, gears.shape.rectangle)
-
--- Makes update widget
-   updatewidget = awful.widget.watch(
-       update_command,
-       600,
-       function(widget, stdout)
-           updatewidget.markup = '<span foreground="' .. theme.bg_normal .. '" background="' .. theme.seperator_1 .. '" font="' .. font.update .. '">' .. stdout .. '</span>'
-       end
-   )
-
-      -- Update icon
-      updateicon =  wibox.widget {
-          markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. font.update .. "'>⟳</span>",
-          widget = wibox.widget.textbox
-          }
-   
-   -- Setting some settings of the update widget
-   local updatewidget = wibox.container.margin(updatewidget, 0, 0, 4, 1)
-   local updateicon = wibox.container.margin(updateicon, 0, 0, 4, 1)
-   local updateicon = wibox.container.background(updateicon, theme.seperator_1, gears.shape.rectangle)
-   local updatewidget = wibox.container.background(updatewidget, theme.seperator_1, gears.shape.rectangle)
--- Update widget end
-
 
 -- Calendar
    lain.widget.calendar({
@@ -87,6 +72,45 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
            bg   = theme.bg_normal
    }})
 -- Calendar end
+
+-- Makes update widget
+   updatewidget = awful.widget.watch(
+       update_command,
+       600,
+       function(widget, stdout)
+           updatewidget.markup = '<span foreground="' .. theme.bg_normal .. '" background="' .. theme.seperator_1 .. '" font="' .. font.update .. '">' .. stdout .. '</span>'
+       end
+   )
+
+   -- Update icon
+   updateicon =  wibox.widget {
+       markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. font.update .. "'>⟳</span>",
+       widget = wibox.widget.textbox
+   }
+   
+   -- Setting some settings for the update widget
+   local updatewidget = wibox.container.margin(updatewidget, 0, 0, 4, 1)
+   local updatewidget = wibox.container.background(updatewidget, theme.seperator_1, gears.shape.rectangle)
+   
+   -- Setting some settings for the update icon widget
+   local updateicon = wibox.container.margin(updateicon, 0, 0, 4, 1)
+   local updateicon = wibox.container.background(updateicon, theme.seperator_1, gears.shape.rectangle)
+-- Update widget end
+
+-- Makes kernel version widget
+   kernelwidget = awful.widget.watch(
+       kernel_command,
+       1,
+       function(widget, stdout)
+           kernelwidget.markup = '<span foreground="' .. theme.fg_icon .. '" background="' .. theme.bg_normal .. '" font="' .. font.update .. '">' .. stdout .. '</span>'
+       end
+   )
+   
+   -- Setting some settings for the update icon widget
+   local kernelwidget = wibox.container.margin(kernelwidget, 0, 0, 4, 1)
+   local kernelwidget = wibox.container.background(kernelwidget, theme.bg_normal, gears.shape.rectangle)
+-- Kernel widget end
+
 
 -- Menu system where you can launch applications using a menu
    local mylauncher = awful.widget.button({image = theme.awesome_icon})
@@ -172,7 +196,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
    })
  
    local fsbg = wibox.container.background(fsbar, "#474747", gears.shape.rectangle)
-   local fswidget = wibox.container.margin(fsbg, 2, 7, 6, 6)
+   local fswidget = wibox.container.margin(fsbg, table.unpack(bar_size))
    
    local fswidget = wibox.container.background(fswidget, theme.bg_normal, gears.shape.rectangle)
    
@@ -189,6 +213,14 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
        -- Perform some action when the widget is clicked
        awful.spawn("baobab")
    end)
+
+    awful.tooltip {
+           objects = { fswidget },
+           timer_function = function()
+               return fs_now.used  
+           end
+    }
+
 -- fs widget end
 
 -- ALSA volume bar
@@ -238,7 +270,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
    ))
    
    local volumebg = wibox.container.background(theme.volume.bar, "#474747", gears.shape.rectangle)
-   local volumewidget = wibox.container.margin(volumebg, 2, 7, 6, 6)
+   local volumewidget = wibox.container.margin(volumebg, table.unpack(bar_size))
    
    local volumewidget = wibox.container.background(volumewidget, theme.seperator_2 , gears.shape.rectangle)
    local volicon = wibox.container.margin(volicon, 2, 7, 2, 2)
@@ -273,7 +305,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
    })
 
    local  cpubg = wibox.container.background(cpubar, "#474747", gears.shape.rectangle)
-   local cpuwidget = wibox.container.margin(cpubg, 2, 7, 6, 6)
+   local cpuwidget = wibox.container.margin(cpubg, table.unpack(bar_size))
    
    -- makes the colour of the cpu widget
    local cpuwidget = wibox.container.background(cpuwidget, theme.seperator_2 , gears.shape.rectangle)
@@ -350,7 +382,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
    })
    
    local tempbg     = wibox.container.background(tempbar,"#474747" , gears.shape.rectangle)
-   local tempwidget = wibox.container.margin(tempbg, 2, 7, 6, 6)
+   local tempwidget = wibox.container.margin(tempbg, table.unpack(bar_size))
    local tempwidget = wibox.container.background(tempwidget, theme.seperator_2 , gears.shape.rectangle)
    
    local temptextbg = wibox.container.background(temp_text_setting, theme.seperator_2 , gears.shape.rectangle)
@@ -381,16 +413,31 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
        ticks_size       = 13,
        widget           = wibox.widget.progressbar,
    }
+
+    local memorytext = wibox.widget.textbox()
+
+    local memorymargin = wibox.widget {
+         widget = wibox.container.margin,
+         bottom = 10,
+         top = 1000,
+         left = 1000,
+    }
+
+    local memorystack = wibox.widget {
+        memorybar,
+        memorytext,
+        layout = wibox.layout.stack
+    }
    
    theme.mem = lain.widget.mem({
      settings = function()
-           --widget:set_markup( "MEM: " .. mem_now.used .. "MB ")
            memorybar:set_value(mem_now.used / mem_now.total )
+           --memorytext:set_markup("<span foreground='" .. theme.fg_alt .. "' font='" .. font.bar .. "'> Free: " .. mem_now.used .. " MB</span>")
        end
    })
    
-   local memorybg = wibox.container.background(memorybar, "#474747", gears.shape.rectangle)
-   local memorywidget = wibox.container.margin(memorybg, 2, 7, 6, 6)
+   local memorybg = wibox.container.background(memorystack, "#474747", gears.shape.rectangle)
+   local memorywidget = wibox.container.margin(memorybg, table.unpack(bar_size))
 
    local memorywidget = wibox.container.background(memorywidget, theme.bg_normal, gears.shape.rectangle)
    
@@ -557,7 +604,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
     -- Create a tasklist widget
     --s.mytasklist = mytasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
-    s.mytasklist = awful.widget.tasklist {
+    s.mytasklist = mytasklist {
         screen   = s,
         filter   = function(c, scr)
             return awful.widget.tasklist.filter.currenttags(c, scr) and c == client.focus
@@ -628,13 +675,13 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
     
     -- Makes systray widget
     local systraywidget = wibox.widget.systray()
-    systraywidget:set_base_size(24)
+    systraywidget:set_base_size(28)
 
     -- Create the horizontal wibox
     s.mywibox = awful.wibar({ 
     position = "top", 
     screen = s, 
-    height = 32, 
+    height = 35, 
     border_width = 10,
     bg = theme.bg_normal, 
     fg = theme.fg_normal, 
@@ -672,6 +719,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             seperator.first_sec,
+            seperator.first_sec,
             powerline.sep_1,
             mytextclock,
             seperator.clock_sep,
@@ -679,6 +727,38 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
             updatewidget,
             seperator.clock_sep,
             powerline.sep_2,
+            seperator.first_sec,
+            {
+            {linuxicon,
+             bottom = 2,
+             color  = theme.fg_icon,
+             widget = wibox.container.margin,
+            },
+             left  = 0,
+             right = 0,
+             layout = wibox.container.margin,
+            },
+            {
+            {seperator.small_spr,
+             bottom = 2,
+             color  = theme.fg_icon,
+             widget = wibox.container.margin,
+            },
+             left  = 0,
+             right = 0,
+             layout = wibox.container.margin,
+            },
+            {
+            {kernelwidget,
+             bottom = 2,
+             color  = theme.fg_icon,
+             widget = wibox.container.margin,
+            },
+             left  = 0,
+             right = 0,
+             layout = wibox.container.margin,
+            },
+            seperator.first_sec,
             {
             {memicon,
              bottom = 2,
@@ -715,97 +795,87 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
              bottom = 2,
              color  = theme.fg_cpu,
              widget = wibox.container.margin,
-             },
+            },
              left  = 0,
              right = 0,
              layout = wibox.container.margin,
-             },
+            },
             {
             {tempicon,
              bottom = 2,
              color  = theme.fg_cpu,
              widget = wibox.container.margin,
-             },
+            },
              left  = 0,
              right = 0,
              layout = wibox.container.margin,
-             },
+            },
             {
             {tempwidget,
              bottom = 2,
              color  = theme.fg_cpu,
              widget = wibox.container.margin,
-             },
+            },
              left  = 0,
              right = 0,
              layout = wibox.container.margin,
-             },
+            },
             powerline.sep_3,
             {
             {fsicon,
              bottom = 2,
              color  = theme.fg_focus,
              widget = wibox.container.margin,
-             },
+            },
              left  = 0,
              right = 0,
              layout = wibox.container.margin,
-             },
+            },
             {
             {fswidget,
              bottom = 2,
              color  = theme.fg_focus,
              widget = wibox.container.margin,
-             },
+            },
              left  = 0,
              right = 0,
              layout = wibox.container.margin,
-             },
+            },
             powerline.sep_4,
             {
             {volicon,
              bottom = 2,
              color  = theme.fg_alt,
              widget = wibox.container.margin,
-             },
+            },
              left  = 0,
              right = 0,
              layout = wibox.container.margin,
-             },
+            },
             {
             {volumewidget,
              bottom = 2,
              color  = theme.fg_alt,
              widget = wibox.container.margin,
-             },
+            },
              left  = 0,
              right = 0,
              layout = wibox.container.margin,
-             },
+            },
             powerline.sep_3,
             seperator.col_bg,
+            seperator.first_sec,
             {
             {wibox.widget.systray(),
-             bottom = 2,
-             color  = theme.fg_normal,
+             bottom = 4,
+             top    = 4,
+             color  = theme.bg_normal,
              widget = wibox.container.margin,
             },
              left  = 0,
              right = 0,
              layout = wibox.container.margin,
             },
-            seperator.first_sec,
-            seperator.first_sec,
-            {
-            {linuxicon,
-             bottom = 2,
-             color  = theme.fg_icon,
-             widget = wibox.container.margin,
-             },
-             left  = 0,
-             right = 0,
-             layout = wibox.container.margin,
-             },
             seperator.first_sec,
         },
     }
