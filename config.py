@@ -31,7 +31,7 @@ from qtile_extras.widget.decorations import RectDecoration, PowerLineDecoration,
 mod = "mod4"
 
 # Terminals
-MYTERM = "kitty -e zsh"
+MYTERM = "kitty -e tmux attach"
 MYTERM_NORMAL = "kitty -e zsh"
 SYSMON = "kitty --class=btop -e btop"
 
