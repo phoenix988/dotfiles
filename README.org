@@ -54,6 +54,8 @@ rm -rf $HOME/.cache/nvim
 git clone -b neovim https://github.com/phoenix988/dotfiles.git ~/.config/nvim
 #+END_SRC
 
+#+RESULTS:
+
 ** KEYBINDINGS
 This is some of the most important keybindings to know. Of course you also
 Need to know the most basic vim commands too which I dont list here but I assume you
@@ -150,6 +152,14 @@ require('lazy').setup({
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
+
+   {
+    "kdheepak/lazygit.nvim",
+    -- optional for floating window border decoration
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
+    },
 
   -- Wilder vim
 {
@@ -366,6 +376,7 @@ vim.api.nvim_set_keymap("n", "<leader>gg", ':Git<CR>', { noremap = true, silent 
 vim.api.nvim_set_keymap('n', '<Leader>gp', ':Git push<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>gP', ':Git pull<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>gd', ':Gdiff %<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>gl", ':LazyGit<CR>', { noremap = true, silent = true })
 
 -- Neotree keybindings
 vim.api.nvim_set_keymap("n", "<F4>", ':NvimTreeFocus<CR>', { noremap = true, silent = true })
@@ -436,6 +447,8 @@ vim.api.nvim_set_keymap('n', '<Leader>oT', ':OrgTangle<CR>', { noremap = true, s
 
 
 #+END_SRC
+
+#+RESULTS:
 
 ** STANDARD SETS
 Some standard neovim settings based on your prefrence

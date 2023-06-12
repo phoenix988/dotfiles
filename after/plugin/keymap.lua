@@ -21,6 +21,7 @@ vim.api.nvim_set_keymap("n", "<leader>gg", ':Git<CR>', { noremap = true, silent 
 vim.api.nvim_set_keymap('n', '<Leader>gp', ':Git push<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>gP', ':Git pull<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>gd', ':Gdiff %<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>gl", ':LazyGit<CR>', { noremap = true, silent = true })
 
 -- Neotree keybindings
 vim.api.nvim_set_keymap("n", "<F4>", ':NvimTreeFocus<CR>', { noremap = true, silent = true })
