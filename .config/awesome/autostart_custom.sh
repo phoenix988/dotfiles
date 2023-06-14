@@ -8,7 +8,4 @@ function run {
   fi
 }
 
-run "lxsession"
 run "picom -b --config $HOME/.config/picom/picom-jona.conf"
-
-

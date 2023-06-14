@@ -22,6 +22,8 @@ local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 local gpmdp	    = require("widgets.gpmdp")
 
+local theme         = require("activate_theme")
+
 -- }}}
 
 -- {{{ Error handling
@@ -61,7 +63,8 @@ run_once({ "unclutter -root" }) -- entries must be comma-separated
 -- }}}
 
 -- {{{ Variable definitions
-local chosen_theme = "default"
+-- Choose your theme of widgets here
+local chosen_theme = theme.chosen_widget
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "kitty"
@@ -257,14 +260,28 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, }, "Right",  awful.tag.viewnext,
               {description = "view next", group = "tag"}),
     awful.key({ modkey, }, "Escape", awful.tag.history.restore,
-              {description = "go back", group = "tag"}),
-	
-	-- Tag browsing keyboard
-	awful.key({ modkey, altkey, "Control" }, "h",   awful.tag.viewprev,
-              {description = "view previous", group = "tag"}),
-        awful.key({ modkey, altkey, "Control" }, "l",  awful.tag.viewnext,
-              {description = "view next", group = "tag"}),
+             {description = "go back", group = "tag"}),
+       
+    -- Tag browsing keyboard
+    awful.key({ modkey, altkey, "Control" }, "h",   awful.tag.viewprev,
+          {description = "view previous", group = "tag"}),
+    awful.key({ modkey, altkey, "Control" }, "l",  awful.tag.viewnext,
+          {description = "view next", group = "tag"}),
 
+    -- Switch between workspaces on all monitors
+    awful.key({ modkey, "Control"   }, ",", 
+      function()
+        for i = 1, screen.count() do
+          awful.tag.viewprev(screen[i])
+        end
+      end ),
+    
+    awful.key({ modkey, "Control"   }, ".", 
+      function()
+        for i = 1, screen.count() do
+          awful.tag.viewnext(screen[i])
+        end
+      end ),
 
     -- Default client focus
     awful.key({ modkey, }, "j",
@@ -338,6 +355,8 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey, }, "Return", function () awful.spawn(terminal_alt) end,
+              {description = "open a terminal with tmux", group = "launcher"}),
+    awful.key({ modkey, }, "t", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Shift" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
@@ -345,7 +364,7 @@ globalkeys = awful.util.table.join(
               {description = "quit awesome", group = "awesome"}),
     awful.key({ altkey, "Control"}, "l", function() awful.spawn("slock") end,
               {description = "lock the screen", group = "awesome"}),
---	awful.key({ modkey, "Shift"   }, "q", function () awful.util.spawn_with_shell("oblogout") end),
+-- awful.key({ modkey, "Shift"   }, "q", function () awful.util.spawn_with_shell("oblogout") end),
 
     awful.key({ modkey, "Control"   }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
@@ -656,25 +675,25 @@ awful.rules.rules = {
 --      properties = { titlebars_enabled = true } },
 
     { rule = { class = "LibreWolf" },
-     properties = {tag = "  " } },
+     properties = {tag = "" } },
 
     { rule = { class = "Steam" },
-     properties = {tag = "  " } },
+     properties = {tag = "󰓓 " } },
 
     { rule = { class = "Gimp" },
-          properties = { tag = "  " } },
+          properties = { tag = " " } },
 
     { rule = { class = "kdenlive" },
-          properties = { tag = "  " } },
+          properties = { tag = " " } },
 
     { rule = { class = "youtube.com" },
-        properties = { screen = 1, tag = "  " } },
+        properties = { screen = 1, tag = "󰝚 " } },
 
     { rule = { class = "whatsapp-nativefier-d40211" },
-        properties = { tag = "  " } },
+        properties = { tag = "󰙯 " } },
     
     { rule = { class = "discord" },
-        properties = { tag = "  " } },
+        properties = { tag = "󰙯 " } },
        
 
          { rule = { class = "Yad" },

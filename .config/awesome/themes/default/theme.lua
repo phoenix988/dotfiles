@@ -10,538 +10,61 @@ local gears   = require("gears")
 local lain    = require("lain")
 local awful   = require("awful")
 local wibox   = require("wibox")
+local dpi     = require('beautiful').xresources.apply_dpi
 local os      = { getenv = os.getenv, setlocale = os.setlocale }
 local gpmdp   = require("widgets.gpmdp")
-local mytasklist = require("widgets.mytasklist")
 local awesome, client = awesome, client
 
 -- Imports the colors to use
-local chosen_theme  = "iceberg"
-local theme         = require("themes/" .. chosen_theme .. "/color")
+local theme         = require("activate_theme")
+local theme         = require("themes/" .. theme.chosen_theme .. "/color")
 
--- Command to run to check for updates
-local update_command = "bash -c 'paru -Syy &> /dev/null && paru -Qu 2> /dev/null | wc -l'"
+-- Imports some widgets from init.lua
+local init        = require("widgets.init")
 
--- Command to check for kernel version
-local kernel_command = "uname -r"
+-- Imports my fonts
+local font        = require("themes.default.font")
 
--- Sets some variables
-local threshold    = 80
-local tempfile_set = "/sys/class/thermal/thermal_zone0/hwmon4/temp1_input"
-local markup       = lain.util.markup
-local blue         = theme.fg_focus
-local red          = "#F7768E"
-local green        = "#9ECE6A"
-local white        = theme.fg_normal
-local icon         = {}
+-- Custom tasklist with class names as titles
+local mytasklist  = require("widgets.mytasklist")
 
--- Sets the size of the progressbar here by modifying the numbers
-local bar_size     = {2, 7, 7, 7}
+local mytextclock = init.clock
 
--- Defines fonts used in the widgets
-local font         = {}
-font.first         = "Droid Sans 7"
-font.seperator     = "FiraCode Nerd Font Mono 38"
-font.seperator_alt = "Droid Sans 25"
-font.linux_icon    = "Droid Sans 17"
-font.fs            = "Droid Sans 14"
-font.cpu           = "Droid Sans 12"
-font.temp          = "Droid Sans 11"
-font.bar           = "Droid Sans 9"
-font.mem           = "Droid Sans 12"
-font.update        = "JetBrains Mono Nerd 14"
-font.taglist       = "Droid Sans 19"
+-- Imports fs widget
+local fs          = init.fs
 
-theme.tasklist_font             = "JetBrains Mono Nerd 16"
-theme.tasklist_plain_task_name  = true
+-- Imports cpu widget
+local cpu         = init.cpu
 
--- Make the clock widget
-local mytextclock = wibox.widget.textclock(markup(theme.bg_normal, "  %a") .. markup(theme.bg_alt, " %d ") .. markup(theme.bg_normal, "%b ") .. markup(theme.bg_alt, " %I:%M "))
-mytextclock.font = "JetBrains Mono Nerd 14"
-local mytextclock = wibox.container.margin(mytextclock, 1, 1, 3, 1)
+-- Imports volume widget
+local vol         = init.vol
 
--- Set the bg color of the clock widget
-local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, gears.shape.rectangle)
+-- Imports Memory widget
+local mem         = init.mem
 
--- Calendar
-   lain.widget.calendar({
-       attach_to = { mytextclock },
-       notification_preset = {
-           font = "Droid Sans Mono 13",
-           fg   = white,
-           bg   = theme.bg_normal
-   }})
--- Calendar end
+-- Imports seperators
+local powerline   = init.pow
+local seperator   = init.sep
 
--- Makes update widget
-   updatewidget = awful.widget.watch(
-       update_command,
-       600,
-       function(widget, stdout)
-           updatewidget.markup = '<span foreground="' .. theme.bg_normal .. '" background="' .. theme.seperator_1 .. '" font="' .. font.update .. '">' .. stdout .. '</span>'
-       end
-   )
+-- Import batwidget
+local bat         = init.bat
 
-   -- Update icon
-   updateicon =  wibox.widget {
-       markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. font.update .. "'>⟳</span>",
-       widget = wibox.widget.textbox
-   }
-   
-   -- Setting some settings for the update widget
-   local updatewidget = wibox.container.margin(updatewidget, 0, 0, 4, 1)
-   local updatewidget = wibox.container.background(updatewidget, theme.seperator_1, gears.shape.rectangle)
-   
-   -- Setting some settings for the update icon widget
-   local updateicon = wibox.container.margin(updateicon, 0, 0, 4, 1)
-   local updateicon = wibox.container.background(updateicon, theme.seperator_1, gears.shape.rectangle)
--- Update widget end
-
--- Makes kernel version widget
-   kernelwidget = awful.widget.watch(
-       kernel_command,
-       1,
-       function(widget, stdout)
-           kernelwidget.markup = '<span foreground="' .. theme.fg_icon .. '" background="' .. theme.bg_normal .. '" font="' .. font.update .. '">' .. stdout .. '</span>'
-       end
-   )
-   
-   -- Setting some settings for the update icon widget
-   local kernelwidget = wibox.container.margin(kernelwidget, 0, 0, 4, 1)
-   local kernelwidget = wibox.container.background(kernelwidget, theme.bg_normal, gears.shape.rectangle)
--- Kernel widget end
+-- App launcher
+local mylauncher  = init.launcher
 
 
--- Menu system where you can launch applications using a menu
-   local mylauncher = awful.widget.button({image = theme.awesome_icon})
-   mylauncher:connect_signal("button::press", function() awful.util.mymainmenu:toggle() end)
-   
-   local mylauncher = wibox.container.background(mylauncher, theme.bg_alt, gears.shape.rectangle)
+-- Imports update widget
+local updatewidget = init.updatewidget
+local updateicon   = init.updateicon
 
--- Battery
-   local baticon = wibox.widget.imagebox(theme.bat)
-   local batbar = wibox.widget {
-       forced_height    = 1,
-       forced_width     = 143,
-       color            = theme.fg_normal,
-       background_color = theme.bg_normal,
-       margins          = 1,
-       paddings         = 1,
-       ticks            = true,
-       ticks_size       = 13,
-       widget           = wibox.widget.progressbar,
-   }
-   local batupd = lain.widget.bat({
-       settings = function()
-           if bat_now.status == "N/A" or type(bat_now.perc) ~= "number" then return end
-   
-           if bat_now.status == "Charging" then
-               baticon:set_image(theme.ac)
-               if bat_now.perc >= 98 then
-                   batbar:set_color(green)
-               elseif bat_now.perc > 50 then
-                   batbar:set_color(theme.fg_normal)
-               elseif bat_now.perc > 15 then
-                   batbar:set_color(theme.fg_normal)
-               else
-                   batbar:set_color(red)
-               end
-           else
-               if bat_now.perc >= 98 then
-                   batbar:set_color(green)
-               elseif bat_now.perc > 50 then
-                   batbar:set_color(theme.fg_normal)
-                   baticon:set_image(theme.bat)
-               elseif bat_now.perc > 15 then
-                   batbar:set_color(theme.fg_normal)
-                   baticon:set_image(theme.bat_low)
-               else
-                   batbar:set_color(red)
-                   baticon:set_image(theme.bat_no)
-               end
-           end
-           batbar:set_value(bat_now.perc / 100)
-       end
-   })
-   local batbg = wibox.container.background(batbar, "#474747", gears.shape.rectangle)
-   local batwidget = wibox.container.margin(batbg, 2, 7, 4, 4)
--- bat widget end
+-- imports variables
+local var     = require("themes.default.variables")
+local markup  = var.markup
 
----- / fs
-   --local fsicon = wibox.widget.imagebox(theme.disk)
-   local fsbar = wibox.widget {
-       forced_height    = 1,
-       forced_width     = 100,
-       color            = theme.fg_focus,
-       background_color = theme.bg_normal,
-       margins          = 1,
-       paddings         = 1,
-       ticks            = true,
-       ticks_size       = 13,
-       widget           = wibox.widget.progressbar,
-   }
-   
-   theme.fs = lain.widget.fs({
-       partition = "/",
-       options = "--exclude-type=tmpfs",
-       notification_preset = { fg = theme.fg_focus, bg = theme.bg_normal, font = "Droid Sans 10.5" },
-       settings  = function()
-           if tonumber(fs_now.used) < 90 then
-               fsbar:set_color(theme.fg_focus)
-           else
-               fsbar:set_color(red)
-           end
-           fsbar:set_value(fs_now.used / 100)
-       end
-   })
- 
-   local fsbg = wibox.container.background(fsbar, "#474747", gears.shape.rectangle)
-   local fswidget = wibox.container.margin(fsbg, table.unpack(bar_size))
-   
-   local fswidget = wibox.container.background(fswidget, theme.bg_normal, gears.shape.rectangle)
-   
-   local fsicon =  wibox.widget {
-        markup = "<span foreground='" .. theme.fg_focus .. "' font='" .. font.fs .. "'>⛁</span>",
-        widget = wibox.widget.textbox
-   }
-   
-   local fsicon = wibox.container.margin(fsicon, 10, 7, 6, 4)
-   local fsicon = wibox.container.background(fsicon, theme.bg_normal, gears.shape.rectangle)
-   
-   -- Launch disk usage analyzer when you click the fs widget
-   fswidget.widget:connect_signal("button::press", function()
-       -- Perform some action when the widget is clicked
-       awful.spawn("baobab")
-   end)
-
-    awful.tooltip {
-           objects = { fswidget },
-           timer_function = function()
-               return fs_now.used  
-           end
-    }
-
--- fs widget end
-
--- ALSA volume bar
-   local volicon = wibox.widget.imagebox(theme.vol)
-   theme.volume = lain.widget.alsabar({
-       width = 120, border_width = 0, ticks = true, ticks_size = 13,
-       notification_preset = { font = theme.font },
-       --togglechannel = "IEC958,3",
-       settings = function()
-           if volume_now.status == "off" then
-               volicon:set_image(theme.vol_mute)
-           elseif volume_now.level == 0 then
-               volicon:set_image(theme.vol_no)
-           elseif volume_now.level <= 50 then
-               volicon:set_image(theme.vol_low)
-           else
-               volicon:set_image(theme.vol)
-           end
-       end,
-       colors = {
-           background   = theme.bg_normal,
-           mute         = red,
-           unmute       = theme.fg_alt
-       }
-   })
-   theme.volume.tooltip.wibox.fg = theme.bg_normal
-   theme.volume.bar:buttons(awful.util.table.join (
-             awful.button({}, 1, function()
-               awful.spawn.with_shell(string.format("%s -e alsamixer", awful.util.terminal))
-             end),
-             awful.button({}, 2, function()
-               awful.spawn(string.format("%s set %s 100%%", theme.volume.cmd, theme.volume.channel))
-               theme.volume.update()
-             end),
-             awful.button({}, 3, function()
-               awful.spawn(string.format("%s set %s toggle", theme.volume.cmd, theme.volume.togglechannel or theme.volume.channel))
-               theme.volume.update()
-             end),
-             awful.button({}, 4, function()
-               awful.spawn(string.format("%s set %s 2%%+", theme.volume.cmd, theme.volume.channel))
-               theme.volume.update()
-             end),
-             awful.button({}, 5, function()
-               awful.spawn(string.format("%s set %s 2%%-", theme.volume.cmd, theme.volume.channel))
-               theme.volume.update()
-             end)
-   ))
-   
-   local volumebg = wibox.container.background(theme.volume.bar, "#474747", gears.shape.rectangle)
-   local volumewidget = wibox.container.margin(volumebg, table.unpack(bar_size))
-   
-   local volumewidget = wibox.container.background(volumewidget, theme.seperator_2 , gears.shape.rectangle)
-   local volicon = wibox.container.margin(volicon, 2, 7, 2, 2)
-   local volicon = wibox.container.background(volicon, theme.seperator_2 , gears.shape.rectangle)
--- volume widget end
-
--- Creates cpu widget
-   --local cpuicon = wibox.widget.imagebox(theme.cpu)
-   local cpuicon =  wibox.widget {
-        markup = "<span foreground='" .. theme.fg_cpu .. "' font='" .. font.cpu .. "'></span>",
-        widget = wibox.widget.textbox
-        }
-   
-   local cpubar = wibox.widget {
-       forced_height    = 1,
-       forced_width     = 100,
-       color            = theme.fg_cpu,
-       background_color = theme.bg_normal,
-       margins          = 1,
-       paddings         = 1,
-       ticks            = true,
-       ticks_size       = 13,
-       widget           = wibox.widget.progressbar,
-   }
-   
-   
-   theme.cpu = lain.widget.cpu({
-       settings = function()
-           --widget:set_markup(" CPU: " .. cpu_now.usage .. "% ")
-           cpubar:set_value(cpu_now.usage / 100 )
-       end
-   })
-
-   local  cpubg = wibox.container.background(cpubar, "#474747", gears.shape.rectangle)
-   local cpuwidget = wibox.container.margin(cpubg, table.unpack(bar_size))
-   
-   -- makes the colour of the cpu widget
-   local cpuwidget = wibox.container.background(cpuwidget, theme.seperator_2 , gears.shape.rectangle)
-   
-   local cpuicon = wibox.container.margin(cpuicon, 10, 7, 4, 4)
-   local cpuicon = wibox.container.background(cpuicon, theme.seperator_2 , gears.shape.rectangle)
-
-   -- Launch btop when you click the cpu widget
-   cpuwidget.widget:connect_signal("button::press", function()
-       -- Perform some action when the widget is clicked
-       awful.spawn("kitty -e btop")
-   end)
-
-   awful.tooltip {
-       objects = { cpuwidget },
-       timer_function = function()
-           return "Cpu: " .. cpu_now.usage .. "%" 
-       end
-   }
-
--- cpu widget end
-   
--- Make temp widget  
-   local tempbar = wibox.widget {
-       forced_height    = 5,
-       forced_width     = 60,
-       color            = theme.fg_cpu,
-       background_color = theme.bg_normal,
-       margins          = 1,
-       paddings         = 1,
-       ticks            = true,
-       ticks_size       = 13,
-       widget           = wibox.widget.progressbar,
-   }
-   
-   -- make the temp widget
-   theme.temp = lain.widget.temp({
-       tempfile = "/sys/class/thermal/thermal_zone0/hwmon4/temp1_input",
-       settings = function()
-           if coretemp_now >= threshold then
-               tempbar:set_color(red)
-               tempicon =  wibox.widget {
-               markup = "<span foreground='" .. red .. "' font='" .. font.temp .. "'>🌡</span>",
-               widget = wibox.widget.textbox}
-           else
-               tempbar:set_color(theme.fg_cpu)
-                  tempicon =  wibox.widget {
-                  markup = "<span foreground='" .. theme.fg_cpu .. "' font='" .. font.temp .. "'>🌡</span>",
-                  widget = wibox.widget.textbox}
-           end
-           tempbar:set_value(coretemp_now / 100 )
-       end
-   })
-   
-   local temp_text_setting = wibox.widget {
-       color            = theme.fg_cpu,
-       background_color = theme.seperator_2 ,
-       margins          = 1,
-       paddings         = 1,
-       ticks            = false,
-       ticks_size       = 13,
-       widget           = wibox.widget.textbox,
-   }
-   
-   theme.temp_text = lain.widget.temp({
-       tempfile = "/sys/class/thermal/thermal_zone0/hwmon4/temp1_input",
-       settings = function()
-           if coretemp_now >= threshold then
-               temp_text_setting:set_markup("<b><span foreground='" .. red .. "'>" .. coretemp_now .. "°C</span></b>")
-           else
-               temp_text_setting:set_markup("<b><span foreground='" .. theme.fg_cpu .. "'>" .. coretemp_now .. "°C</span></b>")
-           end
-       end
-   })
-   
-   local tempbg     = wibox.container.background(tempbar,"#474747" , gears.shape.rectangle)
-   local tempwidget = wibox.container.margin(tempbg, table.unpack(bar_size))
-   local tempwidget = wibox.container.background(tempwidget, theme.seperator_2 , gears.shape.rectangle)
-   
-   local temptextbg = wibox.container.background(temp_text_setting, theme.seperator_2 , gears.shape.rectangle)
-   local temptext  = wibox.container.margin(temptextbg, 2, 7, 4, 4)
-   local temptext  = wibox.container.background(temptext, theme.seperator_2 , gears.shape.rectangle)
-   
-   awful.tooltip {
-       objects = { tempwidget },
-       timer_function = function()
-           return "Temperature: " .. coretemp_now .. "°C"
-       end
-   }
-   
-   -- makes the colour of the temp widget
-   local tempicon = wibox.container.margin(tempicon, 8, 7, 6, 0)
-   local tempicon = wibox.container.background(tempicon, theme.seperator_2 , gears.shape.rectangle)
--- Temp  widget End
-   
-  -- Makes the memory widget
-   local memorybar = wibox.widget {
-       forced_height    = 1,
-       forced_width     = 100,
-       color            = theme.fg_mem,
-       background_color = theme.bg_normal,
-       margins          = 1,
-       paddings         = 1,
-       ticks            = true,
-       ticks_size       = 13,
-       widget           = wibox.widget.progressbar,
-   }
-
-    local memorytext = wibox.widget.textbox()
-
-    local memorymargin = wibox.widget {
-         widget = wibox.container.margin,
-         bottom = 10,
-         top = 1000,
-         left = 1000,
-    }
-
-    local memorystack = wibox.widget {
-        memorybar,
-        memorytext,
-        layout = wibox.layout.stack
-    }
-   
-   theme.mem = lain.widget.mem({
-     settings = function()
-           memorybar:set_value(mem_now.used / mem_now.total )
-           --memorytext:set_markup("<span foreground='" .. theme.fg_alt .. "' font='" .. font.bar .. "'> Free: " .. mem_now.used .. " MB</span>")
-       end
-   })
-   
-   local memorybg = wibox.container.background(memorystack, "#474747", gears.shape.rectangle)
-   local memorywidget = wibox.container.margin(memorybg, table.unpack(bar_size))
-
-   local memorywidget = wibox.container.background(memorywidget, theme.bg_normal, gears.shape.rectangle)
-   
-   -- Makes memory icon
-   local memicon =  wibox.widget {
-        markup = "<span foreground='" .. theme.fg_mem .. "' font='" .. font.mem .. "'>🖬</span>",
-        widget = wibox.widget.textbox
-   }
-   
-   local memicon = wibox.container.margin(memicon, 10, 7, 7, 4)
-   local memicon = wibox.container.background(memicon, theme.bg_normal, gears.shape.rectangle)
-
-   awful.tooltip {
-       objects = { memorywidget },
-       timer_function = function()
-           return mem_now.used .. " / " .. mem_now.total .. " MB" 
-       end
-   }
--- Memory widget end
-
--- Weather widget
-   local weather_widget = lain.widget.weather({
-       city_id = 598316,
-       units = "metric",  -- Use "imperial" for Fahrenheit
-       settings = function()
-           -- Format the weather widget text
-           widget:set_text("Temp: " .. weather_now["main"]["temp"] .. "°C | " .. weather_now["weather"][1]["description"])
-       end
-   })
--- Weather widget end
-
--- Linux icon
-   local linuxicon =  wibox.widget {
-            markup = "<span foreground='" .. theme.fg_icon .. "' font='" .. font.linux_icon .. "'></span>",
-            widget = wibox.widget.textbox
-   }
-
-   local linuxicon = wibox.container.background(linuxicon, theme.bg_normal, gears.shape.rectangle)
-
--- Separators
-
-   local seperator = {}
-   seperator.first     = wibox.widget.textbox(markup.font("Droid Sans 3", " "))
-   seperator.spr       = wibox.widget.textbox(' ')
-   seperator.spr_big   = wibox.widget.textbox(markup.font("Droid Sans 20", "         "))
-   seperator.small_spr = wibox.widget.textbox(markup.font("Droid Sans 4", "  "))
-   seperator.bar_spr   = wibox.widget.textbox(markup.font("Droid Sans 3", " ") .. markup.fontfg(theme.font, "#333333", "  |  ") .. markup.font("Droid Sans 5", " "))
-
-   seperator.first_main =  wibox.widget {
-                 markup = "<span background='" .. theme.bg_alt .. "' foreground='" .. theme.bg_alt .. "'  font='" .. font.first .. "'>|</span>",
-                 widget = wibox.widget.textbox
-   }
-   
-   seperator.first_main = wibox.container.background(seperator.first_main, theme.bg_alt, gears.shape.rectangle)
-   
-   seperator.first_sec =  wibox.widget {
-                markup = "<span background='" .. theme.bg_normal .. "' foreground='" .. theme.bg_normal .. "'  font='" .. font.seperator_alt .. "'>|</span>",
-                widget = wibox.widget.textbox
-   }
-   
-   seperator.clock_sep = wibox.widget {
-                markup = "<span foreground='" .. theme.seperator_1 .. "' background='" .. theme.seperator_1 .. "' font='" .. font.seperator .. "'> </span>",
-                widget = wibox.widget.textbox,
-   }
-
-   seperator.col_bg =  wibox.widget {
-             markup = "<span background='" .. theme.bg_normal .. "' font='" .. font.seperator_alt .. "'> </span>",
-             widget = wibox.widget.textbox
-   }
-   
-   -- powerline seperators
-   local powerline = {}
-   powerline.sep_1 = wibox.widget {
-            markup = "<span foreground='" .. theme.seperator_1 .. "' background='" .. theme.bg_normal .. "'  font='" .. font.seperator .. "'></span>",
-            widget = wibox.widget.textbox,
-   }
-   
-   powerline.sep_2 = wibox.widget {
-            markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_1 .. "' font='" .. font.seperator .. "'></span>",
-            widget = wibox.widget.textbox,
-   }
-   
-   
-   powerline.sep_3 = wibox.widget {
-            markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_2 .. "' font='" .. font.seperator .. "'></span>",
-            widget = wibox.widget.textbox,
-   }
-   
-   powerline.sep_4 = wibox.widget {
-            markup = "<span foreground='" .. theme.seperator_2 .. "' background='" .. theme.bg_normal .. "' font='" .. font.seperator .. "'></span>",
-            widget = wibox.widget.textbox,
-   }
-   
-   powerline.sep_right = wibox.widget {
-                markup = "<span foreground='" .. theme.bg_alt .. "' background='" .. theme.bg_normal .. "' font='" .. font.seperator .. "'></span>",
-                widget = wibox.widget.textbox,
-   }
-
-   powerline.sep_right_alt = wibox.widget {
-                    markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.bg_alt .. "' font='" .. font.seperator .. "'></span>",
-                    widget = wibox.widget.textbox,
-   }
--- Seperator end
-
+-- Sets some global variables
+theme.tasklist_font             = var.tasklist_font
+theme.tasklist_plain_task_name  = var.tasklist_plain_task_name
+  
    -- Eminent-like task filtering
    local orig_filter = awful.widget.taglist.filter.all
    
@@ -563,17 +86,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
     end
     gears.wallpaper.maximized(wallpaper, s, true)
 
-    -- Tag names and layouts
-    -- awful.tag(awful.util.tagnames, s, awful.layout.layouts)
-    
-    -- Example of icons you can use
-    -- local names = ["", "", "", "", "", "", "", "", "ﭮ", "", "", "﨣", "F1", "F2", "F3", "F4", "F5"]
-    -- local names = { " ", " ", " ", " ", " ", " ", " ", " ", " "  }
-    -- Set workspace names
-    local names = { "  ", " ", "  ", "  ", "  ", "  ", "  ", " ", "  " }
-    local l = awful.layout.suit
-    local layouts = { l.max, l.tile.right, l.tile.right, l.max, l.tile.right, l.tile.right, l.tile.right, l.floating, l.floating, }
-    awful.tag(names, s, layouts)
+    awful.tag(var.names, s, var.layouts)
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -597,7 +110,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
        buttons   = awful.util.taglist_buttons,
        style     = {
           font     = font.taglist,      
-          spacing  = 0,
+          spacing  = 2,
        },
     }
 
@@ -614,68 +127,10 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
             -- Your template configuration here
         },
     }
-
-    -- Create tasklist with icons
-    --s.mytasklist = awful.widget.tasklist {
-    --   screen   = s,
-    --   filter   = awful.widget.tasklist.filter.currenttags,
-    --   buttons  = awful.util.tasklist_buttons,
-    --   style    = {
-    --      shape_border_width = 1,
-    --      shape_border_color = theme.bg_normal,
-    --      shape              = gears.shape.rounded_bar,
-    --      bg_focus           = theme.taglist_fg_focus,
-    --      bg_normal          = theme.bg_alt,
-    --      spacing            = 10,
-    --   },
-    --   layout   = {
-    --       spacing_widget = {
-    --           {
-    --               forced_width  = 5,
-    --               forced_height = 30,
-    --               thickness     = 1,
-    --               shape         = gears.shape.circle,
-    --               color         = theme.bg_normal,
-    --               margin        = 20,
-    --               widget        = wibox.widget.separator,
-    --           },
-    --           valign = 'center',
-    --           halign = 'center',
-    --           widget = wibox.container.place,
-    --       },
-    --       spacing = 20,
-    --       layout  = wibox.layout.fixed.horizontal
-    --   },
-    --   -- Notice that there is *NO* wibox.wibox prefix, it is a template,
-    --   -- not a widget instance.
-    --   widget_template = {
-    --       {
-    --           wibox.widget.base.make_widget(),
-    --           forced_height = 5,
-    --           id            = 'background_role',
-    --           widget        = wibox.container.background,
-    --       },
-    --       {
-    --           {
-    --               id            = 'clienticon',
-    --               widget        = awful.widget.clienticon,
-    --               forced_width  = 25,
-    --           },
-    --           margins = 2,
-    --           widget  = wibox.container.margin
-    --       },
-    --       nil,
-    --       create_callback = function(self, c, index, objects) --luacheck: no unused args
-    --           self:get_children_by_id('clienticon')[1].client = c
-    --       end,
-    --       layout = wibox.layout.align.vertical,
-    --   },
-    --}
-
-    
+        
     -- Makes systray widget
-    local systraywidget = wibox.widget.systray()
-    systraywidget:set_base_size(28)
+    s.systray = wibox.widget.systray()
+    s.systray:set_base_size(29)
 
     -- Create the horizontal wibox
     s.mywibox = awful.wibar({ 
@@ -686,7 +141,6 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
     bg = theme.bg_normal, 
     fg = theme.fg_normal, 
     })
-
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -729,7 +183,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
             powerline.sep_2,
             seperator.first_sec,
             {
-            {linuxicon,
+            {seperator.linuxicon,
              bottom = 2,
              color  = theme.fg_icon,
              widget = wibox.container.margin,
@@ -760,7 +214,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
             },
             seperator.first_sec,
             {
-            {memicon,
+            {mem.memicon,
              bottom = 2,
              color  = theme.fg_mem,
              widget = wibox.container.margin,
@@ -770,7 +224,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
              layout = wibox.container.margin,
             },
             {
-            {memorywidget,
+            {mem.memorywidget,
              bottom = 2,
              color  = theme.fg_mem,
              widget = wibox.container.margin,
@@ -781,7 +235,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
             },
             powerline.sep_4,
             {
-            {cpuicon,
+            {cpu.cpuicon,
              bottom = 2,
              color  = theme.fg_cpu,
              widget = wibox.container.margin,
@@ -791,7 +245,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
              layout = wibox.container.margin,
             },
             {
-            {cpuwidget,
+            {cpu.cpuwidget,
              bottom = 2,
              color  = theme.fg_cpu,
              widget = wibox.container.margin,
@@ -801,7 +255,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
              layout = wibox.container.margin,
             },
             {
-            {tempicon,
+            {cpu.tempicon,
              bottom = 2,
              color  = theme.fg_cpu,
              widget = wibox.container.margin,
@@ -811,7 +265,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
              layout = wibox.container.margin,
             },
             {
-            {tempwidget,
+            {cpu.tempwidget,
              bottom = 2,
              color  = theme.fg_cpu,
              widget = wibox.container.margin,
@@ -822,7 +276,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
             },
             powerline.sep_3,
             {
-            {fsicon,
+            {fs.fsicon,
              bottom = 2,
              color  = theme.fg_focus,
              widget = wibox.container.margin,
@@ -832,7 +286,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
              layout = wibox.container.margin,
             },
             {
-            {fswidget,
+            {fs.fswidget,
              bottom = 2,
              color  = theme.fg_focus,
              widget = wibox.container.margin,
@@ -843,7 +297,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
             },
             powerline.sep_4,
             {
-            {volicon,
+            {vol.volicon,
              bottom = 2,
              color  = theme.fg_alt,
              widget = wibox.container.margin,
@@ -853,7 +307,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
              layout = wibox.container.margin,
             },
             {
-            {volumewidget,
+            {vol.volumewidget,
              bottom = 2,
              color  = theme.fg_alt,
              widget = wibox.container.margin,
@@ -863,20 +317,18 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
              layout = wibox.container.margin,
             },
             powerline.sep_3,
-            seperator.col_bg,
             seperator.first_sec,
             {
             {wibox.widget.systray(),
              bottom = 4,
-             top    = 4,
+             top    = 6,
              color  = theme.bg_normal,
              widget = wibox.container.margin,
             },
-             left  = 0,
-             right = 0,
+             left  = 3,
+             right = -2,
              layout = wibox.container.margin,
             },
-            seperator.first_sec,
         },
     }
 
