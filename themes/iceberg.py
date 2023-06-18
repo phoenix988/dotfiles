@@ -26,4 +26,4 @@ colors = [["#161821", "#161821"], # 0 -- BG color
           ["#8FBCBB", "#8FBCBB"], # 12 -- memory widget
           ["#b48ead", "#b48ead"], # 13 -- update widget
           ["#91acd1", "#91acd1"], # 14 -- volume widget
-          ["#eceff4", "#eceff4"]] # 15 -- linux icon
+          ["#d8dee9", "#d8dee9"]] # 15 -- linux icon

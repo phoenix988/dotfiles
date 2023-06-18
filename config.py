@@ -27,8 +27,11 @@ from config_icon import group_names
 from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration, PowerLineDecoration, BorderDecoration
 
+# import some variables
+from var import variables
+
 # Define super key as variable
-mod = "mod4"
+mod = variables['mod']
 
 # Terminals
 MYTERM = "kitty -e tmux attach"
@@ -120,11 +123,16 @@ keys = [
 
          #KEYS_GROUP Launch applications with super + shift + key
          Key([mod, "shift"], "y", #Run Graphical Text editor
-             lazy.spawn( EDITOR ),
+             lazy.spawn( variables['term'] + ' neomutt' ),
              desc='Launch My Graphical Editor'
              ),
          Key([mod, "shift"], "w", #Browser 1
              lazy.spawn(BROWSER1),
+             desc='Launch browser1'
+             ),
+
+         Key([mod, "shift"], "t", #Browser 1
+             lazy.spawn(variables['sysmon']),
              desc='Launch browser1'
              ),
          Key([mod, "shift"], "v", #Launch Virt-Manager
@@ -517,7 +525,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 #My default layout theme
 #and if you want to activate a layout just uncomment them
-layout_theme = {"border_width": 2,
+layout_theme = {"border_width": 3,
                 "margin": 5,
                 "border_focus": layout_colors[0],
                 "border_normal": layout_colors[1]
@@ -573,7 +581,7 @@ layouts = [
 
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
-    del widgets_screen2[18:24]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
+    del widgets_screen2[17:25]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
     return widgets_screen2
 
 def init_widgets_screen1():

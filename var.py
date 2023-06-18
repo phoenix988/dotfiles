@@ -1,5 +1,3 @@
-
-
 variables = {
     'term': 'kitty',
     'browser': 'librewolf',
@@ -18,5 +16,5 @@ variables['lockscreen'] =  "slock"
 variables['dmenu_path'] = "/home/karl/.dmenu"
 variables['script_path'] = "/home/karl/.scripts/activated"
 variables['tmux_path'] = "/home/karl/.scripts/tmux"
-
-
+variables['FILE_MANAGER'] = "emacsclient -c -a '' --eval '(dired nil)'"
+variables['GUI_FILE_MANAGER'] = "pcmanfm"

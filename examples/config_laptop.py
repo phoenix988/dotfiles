@@ -409,6 +409,7 @@ def init_widgets_list():
                         foreground = colors[15],
                         padding = 4,
                         fontsize = 15,
+                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myterm)},
                         decorations = [
                             BorderDecoration (
                             colour = colors[15],
