@@ -55,6 +55,7 @@
 (package! harpoon)
 (package! autothemer)
 (package! ssh)
+(package! lsp-treemacs)
 (package! rainbow-mode)
 
 (require 'package)

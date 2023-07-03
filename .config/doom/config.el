@@ -79,7 +79,7 @@
   (kbd "O") 'dired-do-chown
   (kbd "P") 'dired-do-print
   (kbd "R") 'dired-do-rename
-  (kbd "T") 'dired-create-empty-file
+  (kbd "a") 'dired-create-empty-file
   (kbd "Y") 'dired-copy-filenamecopy-filename-as-kill ; copies filename to kill ring.
   (kbd "Z") 'dired-do-compress
   (kbd "+") 'dired-create-directory
@@ -134,7 +134,12 @@
        :desc "Vterm" "V" #'vterm))
 
 (setq display-line-numbers-type 'relative)
+
 (global-display-line-numbers-mode)
+
+(rainbow-mode 1)
+
+(setq scroll-margin 8)
 
 (map! :leader
       :desc "Org babel tangle" "m B" #'org-babel-tangle)
@@ -168,6 +173,8 @@
 
 (add-hook 'prog-mode-hook 'rainbow-mode)
 
+(rainbow-mode 1)
+
 (setq shell-file-name "/bin/zsh"
       vterm-max-scrollback 5000)
 
@@ -192,12 +199,12 @@
 
   (doom-themes-neotree-config)
 
-  (setq doom-themes-treemacs-theme "doom-rose-pine")
+  (setq doom-themes-treemacs-theme "doom-iceberg")
 
   (doom-themes-treemacs-config)
 
   (doom-themes-org-config))
 
-  (load-theme 'doom-rose-pine t)
+  (load-theme 'doom-iceberg t)
 
 (use-package autothemer :ensure t)

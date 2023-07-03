@@ -47,6 +47,7 @@
     (base7      '("#E2A478" "#E2A478" "brightblack"  ))
     (base8      '("#282A36" "#282A36" "white"        ))
     (fg-alt     '("#818596" "#818596" "brightwhite"  ))
+    (fg-high    '("#5A5B5E" "#5A4B5E" "grey"         ))
     (fg         '("#D8DEE9" "#D8DEE9" "white"        ))
 
     (grey       base4)
@@ -64,7 +65,7 @@
     (lightred   '("#E98989" "#E98989" "lightred"   ))
 
     ;; additional highlighting colours for iceberg
-    (hor-highlight  (doom-lighten base3 0.05))
+    (hor-highlight  (doom-darken fg-high 0.05))
     (hor-highlight-selected (doom-lighten base3 0.1))
     (hor-highlight-bright (doom-lighten base3 0.2))
 
