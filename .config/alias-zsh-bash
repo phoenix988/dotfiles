@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# my zsh and bash aliases
 command_exist() {
         type "$1" &> /dev/null;
 }
@@ -14,35 +15,35 @@ alias hg="history | grep"
 # ls aliases use lsd if its available
 if command_exist exa ; then
 
-alias ls='exa --color=auto'
-alias la='exa -a'
-alias lA='exa -A'
-alias ll='exa -l'
-alias lla='exa -la'
-alias ld='exa -l | grep ^d'
-alias l='exa'
-alias l.="exa -A | egrep '^\.'"
-alias hidden="exa -A | grep -v ^[A-Z] | grep -v ^[a-z]"
+     alias ls='exa --color=auto'
+     alias la='exa -a'
+     alias lA='exa -A'
+     alias ll='exa -l'
+     alias lla='exa -la'
+     alias ld='exa -l | grep ^d'
+     alias l='exa'
+     alias l.="exa -A | egrep '^\.'"
+     alias hidden="exa -A | grep -v ^[A-Z] | grep -v ^[a-z]"
 
 
 else
 
-alias ls='ls --color=auto'
-alias la='ls -a'
-alias lA='ls -A'
-alias ll='ls -l'
-alias lla='ls -la'
-alias ld='ls -l | grep ^d'
-alias l='ls'
-alias l.="ls -A | egrep '^\.'"
-alias hidden="ls -A | grep -v ^[A-Z] | grep -v ^[a-z]"
+     alias ls='ls --color=auto'
+     alias la='ls -a'
+     alias lA='ls -A'
+     alias ll='ls -l'
+     alias lla='ls -la'
+     alias ld='ls -l | grep ^d'
+     alias l='ls'
+     alias l.="ls -A | egrep '^\.'"
+     alias hidden="ls -A | grep -v ^[A-Z] | grep -v ^[a-z]"
 
 fi
 
 # btop alias if it's installed
 if command_exist btop ; then
 
-alias htop='btop'
+    alias htop='btop'
 
 
 fi
@@ -80,57 +81,58 @@ if command_exist apt ; then
 
   if command_exist nala ; then
 
-   alias apt='sudo apt'
-   alias update='sudo apt update && sudo apt upgrade'
-   alias remove="sudo apt remove"
-   alias nala="sudo apt"
-   alias search="sudo apt search"
-   alias install="sudo apt install"
+      alias apt='sudo nala'
+      alias update='sudo nala update && sudo nala upgrade'
+      alias remove="sudo nala remove"
+      alias nala="sudo nala"
+      alias search="sudo nala search"
+      alias install="sudo nala install"
 
   else
 
-   alias apt='sudo nala'
-   alias update='sudo nala update && sudo nala upgrade'
-   alias remove="sudo nala remove"
-   alias nala="sudo nala"
-   alias search="sudo nala search"
-   alias install="sudo nala install"
-fi
+      alias apt='sudo apt'
+      alias update='sudo apt update && sudo apt upgrade'
+      alias remove="sudo apt remove"
+      alias nala="sudo apt"
+      alias search="sudo apt search"
+      alias install="sudo apt install"
+  fi
 
-if command_exist batcat ; then
-
-   alias bat='batcat'
-   alias cat='batcat'
-
-fi
+  if command_exist batcat ; then
+  
+      alias bat='batcat'
+      alias cat='batcat'
+  
+  fi
 
 
 elif command_exist pacman ; then
 
-    alias pacman="sudo pacman"
-    alias update='sudo pacman -Syyu'
-    alias remove="sudo pacman -Rns"
+      alias pacman="sudo pacman"
+      alias update='sudo pacman -Syyu'
+      alias remove="sudo pacman -Rns"
 
-    # fix obvious typo's
-    alias cd..='cd ..'
-    alias pdw="pwd"
-    alias udpate='sudo pacman -Syyu'
-    alias upate='sudo pacman -Syyu'
-    alias updte='sudo pacman -Syyu'
-    alias updqte='sudo pacman -Syyu'
-    alias upqll="paru -Syu --noconfirm"
+      # fix obvious typo's
+      alias cd..='cd ..'
+      alias pdw="pwd"
+      alias udpate='sudo pacman -Syyu'
+      alias upate='sudo pacman -Syyu'
+      alias updte='sudo pacman -Syyu'
+      alias updqte='sudo pacman -Syyu'
+      alias upqll="paru -Syu --noconfirm"
 
-    # pacman unlock
-    alias unlock="sudo rm /var/lib/pacman/db.lck"
-    alias rmpacmanlock="sudo rm /var/lib/pacman/db.lck"
+      # pacman unlock
+      alias unlock="sudo rm /var/lib/pacman/db.lck"
+      alias rmpacmanlock="sudo rm /var/lib/pacman/db.lck"
 
 
-if command_exist bat ; then
+   if command_exist bat ; then
+   
+       # Change cat to bat
+       alias cat='bat'
+       alias norcat='/usr/bin/cat'
+   fi
 
-    # Change cat to bat
-    alias cat='bat'
-    alias norcat='/usr/bin/cat'
-fi
     # paru as aur helper - updates everything
     alias pksyua="paru -Syu --noconfirm"
     alias upall="paru -Syu --noconfirm"
@@ -212,7 +214,6 @@ alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 alias dec="gpg --decrypt"
 alias enc="gpg --encrypt -r karlfredin@gmail.com"
 alias gpgk="gpg --list-secret-keys --keyid-format LONG"
-
 
 # maintenance
 alias big="expac -H M '%m\t%n' | sort -h | nl"
@@ -367,7 +368,6 @@ export date_for_backup=$(date +%d-%h-%Y-%H-%M )
 
 # Docker host config
 export DOCKER_HOST=ssh://karl@192.168.1.31
-
 
 # quickly connect to tmux sessions
 t() {
