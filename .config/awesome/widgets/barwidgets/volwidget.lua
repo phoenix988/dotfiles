@@ -62,7 +62,7 @@ local widget       = {}
    local volumewidget = wibox.container.margin(volumebg, table.unpack(var.bar_size))
    
    widget.volumewidget = wibox.container.background(volumewidget, theme.seperator_2 , gears.shape.rectangle)
-   local volicon = wibox.container.margin(volicon, 2, 7, 2, 2)
+   local volicon = wibox.container.margin(volicon, 2, 2, 2, 2)
    widget.volicon = wibox.container.background(volicon, theme.seperator_2 , gears.shape.rectangle)
 -- volume widget end
 

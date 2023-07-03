@@ -9,11 +9,11 @@ font.linux_icon    = "Droid Sans 17"
 font.fs            = "Droid Sans 14"
 font.cpu           = "Droid Sans 12"
 font.temp          = "Droid Sans 11"
-font.mem           = "Droid Sans 12"
-font.update        = "JetBrains Mono Nerd 14"
-font.vol           = "JetBrains Mono Nerd 16"
+font.mem           = "JetBrainsMono Nerd Font 12"
+font.update        = "JetBrainsMono Nerd Font 13"
+font.vol           = "JetBrainsMono Nerd Font 16"
 font.taglist       = "Droid Sans 21"
-font.clock         = "JetBrains Mono Nerd 14"
+font.clock         = "JetBrainsMono Nerd Font 13"
 
 
 return font

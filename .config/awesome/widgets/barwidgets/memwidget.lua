@@ -59,7 +59,7 @@ local widget       = {}
         widget = wibox.widget.textbox
    }
    
-   local memicon = wibox.container.margin(memicon, 10, 7, 7, 4)
+   local memicon = wibox.container.margin(memicon, 10, 7, 9, 4)
    widget.memicon = wibox.container.background(memicon, theme.bg_normal, gears.shape.rectangle)
 
    awful.tooltip {

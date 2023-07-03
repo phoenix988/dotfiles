@@ -3,7 +3,7 @@ local awful = require("awful")
 local lain  = require("lain")
 local gears = require("gears")
 local font  = require("themes.default.font")
-local var     = require("themes.default.variables")
+local var   = require("themes.default.variables")
 
 local chosen_theme  = require("activate_theme")
 local theme         = require("themes/" .. chosen_theme.chosen_theme .. "/color")
@@ -24,7 +24,7 @@ local update_command = var.update_command
 
    -- Update icon
    updateicon =  wibox.widget {
-       markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. font.update .. "'>⟳</span>",
+       markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. font.update .. "'> </span>",
        widget = wibox.widget.textbox
    }
    

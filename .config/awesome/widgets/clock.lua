@@ -9,7 +9,7 @@ local markup       = lain.util.markup
 local font         = require("themes.default.font")
 
 -- Make the clock widget
-local mytextclock = wibox.widget.textclock(markup(theme.bg_normal, "  %a") .. markup(theme.bg_alt, " %d ") .. markup(theme.bg_normal, "%b   ") .. markup(theme.bg_alt, "󰦖   %I:%M "))
+local mytextclock = wibox.widget.textclock(markup(theme.bg_normal, " %a") .. markup(theme.bg_alt, " %d ") .. markup(theme.bg_normal, "%b ") .. markup(theme.bg_alt, " %I:%M "))
 mytextclock.font = font.clock
 local mytextclock = wibox.container.margin(mytextclock, 1, 1, 3, 1)
 --

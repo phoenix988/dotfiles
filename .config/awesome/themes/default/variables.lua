@@ -5,6 +5,7 @@ local lain  = require("lain")
 local awful = require("awful")
 local theme = require("activate_theme")
 
+
 local var = {}
 
 if theme.chosen_widget == "laptop" then
