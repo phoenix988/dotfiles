@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Example for $XDG_CONFIG_HOME/sxiv/exec/key-handler
-# Called by sxiv(1) after the external prefix key (C-x by default) is pressed.
+#right Called by sxiv(1) after the external prefix key (C-x by default) is pressed.
 # The next key combo is passed as its first argument. Passed via stdin are the
 # images to act upon, one path per line: all marked images, if in thumbnail
 # mode and at least one image has been marked, otherwise the current image.
@@ -22,7 +22,7 @@ if [ $XDG_SESSION_TYPE = "wayland" ] ; then
         		"C-c")
         			   echo -n "$file" | wl-copy  ;;
         		"C-w") 
-                      killall swaybg
+                                  killall swaybg
         			  swaybg -i "$file" & 
                       image=$(cat ~/.fehbg | awk '{print $NF}' | tail -n1) && sed -i "s|$image|$file|g" ~/.fehbg ;;
                  esac

@@ -19,7 +19,7 @@
     - [[NEOTREE][NEOTREE]]
     - [[TERMINAL][TERM]]
   - [[HARPOON]]
-- [[LINE NUMBERS]]
+- [[LINE NUMBERS][LINE SETTINGS]]
 - [[ORG MODE]]
 - [[RAINBOW MODE]]
 - [[SHELL][SHELL]]
@@ -201,7 +201,7 @@ This configuration allows me to use the vim keys inside of dired
   (kbd "O") 'dired-do-chown
   (kbd "P") 'dired-do-print
   (kbd "R") 'dired-do-rename
-  (kbd "T") 'dired-create-empty-file
+  (kbd "a") 'dired-create-empty-file
   (kbd "Y") 'dired-copy-filenamecopy-filename-as-kill ; copies filename to kill ring.
   (kbd "Z") 'dired-do-compress
   (kbd "+") 'dired-create-directory
@@ -318,7 +318,12 @@ Settings for line numbers change relative to example absolute if you want
 to see the exact line number of the file. But I always prefer relative
 #+begin_src emacs-lisp :tangle config.el
 (setq display-line-numbers-type 'relative)
+
 (global-display-line-numbers-mode)
+
+(rainbow-mode 1)
+
+(setq scroll-margin 8)
 #+end_src
 
 ** ORG MODE
@@ -359,7 +364,13 @@ Various settings for org mode in emacs
 Enable rainbow mode in emacs to highlight colors
 #+begin_src emacs-lisp :tangle config.el
 (add-hook 'prog-mode-hook 'rainbow-mode)
+
+(rainbow-mode 1)
 #+end_src
+
+
+
+
 ** SHELL
 Settings for the various shells inside of emacs. For example I set the alias file for eshell
 #+begin_src emacs-lisp :tangle config.el

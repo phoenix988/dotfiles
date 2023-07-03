@@ -199,7 +199,7 @@ master {
 Configure your monitors here like resolution and framerate for example
 #+BEGIN_SRC conf :tangle hyprland.conf
 monitor=DP-2,2560x1440@144,0x0,1
-monitor=DP-3,1920x1080@60,2560x0,1
+monitor=DP-3,2560x1440@144,2560x0,1
 #+END_SRC
 
 *** STYLING
@@ -577,15 +577,15 @@ One thing I miss from qtile is that the monitors share workspaces. You can kinda
 get the same effect in hyprland but it works a bit diffrent. The workflow took
 some getting used to but I really enjoy it.
 #+begin_src conf :tangle hyprland.conf
-wsbind=1,DP-2
-wsbind=2,DP-2
-wsbind=3,DP-2
-wsbind=4,DP-2
-wsbind=5,DP-2
-
-wsbind=6,DP-3
-wsbind=7,DP-3
-wsbind=8,DP-3
-wsbind=9,DP-3
-wsbind=10,DP-3
+workspace=1,monitor:DP-2
+workspace=2,monitor:DP-2
+workspace=3,monitor:DP-2
+workspace=4,monitor:DP-2
+workspace=5,monitor:DP-2
+#
+workspace=6,monitor:DP-3
+workspace=7,monitor:DP-3
+workspace=8,monitor:DP-3
+workspace=9,monitor:DP-3
+workspace=10,monitor:DP-3
 #+end_src
