@@ -1,4 +1,5 @@
-vim.keymap.set("n", "<leader>.", vim.cmd.Vifm)
+-- Vifm
+vim.api.nvim_set_keymap("n", "<leader>.", ':Vifm<CR>' ,{ noremap = true, silent = true })
 
 -- Quickly move between windows
 vim.api.nvim_set_keymap("n", "<leader>bn", ':BufferNext' ,{ noremap = true, silent = true })
@@ -50,15 +51,15 @@ local ui   = require("harpoon.ui")
 
 vim.keymap.set("n", "<leader>a", mark.add_file)
 vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
-vim.keymap.set("n", "<leader>h1", function() ui.nav_file(1) end)
-vim.keymap.set("n", "<leader>h2", function() ui.nav_file(2) end)
-vim.keymap.set("n", "<leader>h3", function() ui.nav_file(3) end)
-vim.keymap.set("n", "<leader>h4", function() ui.nav_file(4) end)
-vim.keymap.set("n", "<leader>h5", function() ui.nav_file(5) end)
-vim.keymap.set("n", "<leader>h6", function() ui.nav_file(6) end)
-vim.keymap.set("n", "<leader>h7", function() ui.nav_file(7) end)
-vim.keymap.set("n", "<leader>h8", function() ui.nav_file(8) end)
-vim.keymap.set("n", "<leader>h9", function() ui.nav_file(9) end)
+vim.api.nvim_set_keymap('n', '<Leader>h1', ':ToHarpoon 1<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>h2', ':ToHarpoon 2<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>h3', ':ToHarpoon 3<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>h4', ':ToHarpoon 4<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>h5', ':ToHarpoon 5<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>h6', ':ToHarpoon 6<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>h7', ':ToHarpoon 7<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>h8', ':ToHarpoon 8<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>h9', ':ToHarpoon 9<CR>', { noremap = true, silent = true })
 
 -- Keybinding to save as sudo
 vim.api.nvim_set_keymap('n', '<Leader>fs', ':SudaWrite<CR>', { noremap = true, silent = true })

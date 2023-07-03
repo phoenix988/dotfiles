@@ -83,11 +83,13 @@ require('lazy').setup({
   -- Highlight colors inside of vim
    {'brenoprata10/nvim-highlight-colors'},
 
- -- Orgmode
+  -- Orgmode
    { 'nvim-orgmode/orgmode' },
 
   -- Save as sudo
    {'lambdalisue/suda.vim'},
+ 
+  {'akinsho/toggleterm.nvim'},
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',
