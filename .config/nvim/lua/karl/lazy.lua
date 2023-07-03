@@ -24,6 +24,14 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+   {
+    "kdheepak/lazygit.nvim",
+    -- optional for floating window border decoration
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
+    },
+
   -- Wilder vim
 {
   'gelguy/wilder.nvim',
@@ -75,14 +83,18 @@ require('lazy').setup({
   -- Highlight colors inside of vim
    {'brenoprata10/nvim-highlight-colors'},
 
- -- Orgmode
+  -- Orgmode
    { 'nvim-orgmode/orgmode' },
 
   -- Save as sudo
    {'lambdalisue/suda.vim'},
+ 
+  {'akinsho/toggleterm.nvim'},
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',
+
+    opts = {} },
   { -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -193,6 +205,9 @@ require('lazy').setup({
           })
       end
   },
+
+    -- Vimwiki
+    { "chipsenkbeil/vimwiki.nvim" },
 
 
 }, {})

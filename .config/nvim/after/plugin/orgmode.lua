@@ -28,7 +28,15 @@ function tangle_files()
 
   -- Execute the org-babel-tangle command in Emacs
   local command = "silent !emacsclient -e '(org-babel-tangle-file \"" .. current_file .. "\")'"
-  vim.api.nvim_command(command)
+  local match = string.match(current_file, "org")
+
+  if match == "org" then
+     print(current_file .. " tangled")
+     vim.api.nvim_command(command)
+  else
+     print(current_file .. " is not an org document")
+  end
+
 end
 
 -- Register the command
