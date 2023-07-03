@@ -13,7 +13,7 @@ colors = [["#1e1f28", "#1e1f28"], # 0 -- BG color
           ["#50fa7b", "#50fa7b"], # 3
           ["#A372D8", "#A372D8"], # 4 -- Workspace highlight
           ["#A4FFFF", "#A4FFFF"], # 5 -- Workspace FG
-          ["#F8F8F2", "#F8F8F2"], # 6
+          ["#ff78c5", "#ff78c5"], # 6
           ["#ecbbfb", "#ecbbfb"], # 7
           ["#FF92DF", "#FF92DF"], # 8  -- weather widget
           ["#D6ACFF", "#D6ACFF"], # 9  -- df widget
@@ -22,4 +22,4 @@ colors = [["#1e1f28", "#1e1f28"], # 0 -- BG color
           ["#FF79C6", "#FF79C6"], # 12 -- memory widget
           ["#FFFFA5", "#FFFFA5"], # 13 -- update widget
           ["#A4FFFF", "#A4FFFF"], # 14 -- volume widget
-          ["#bd92f8", "#bd92f8"]] # 15 -- linux icon
+          ["#f8f8f2", "#f8f8f2"]] # 15 -- linux icon
