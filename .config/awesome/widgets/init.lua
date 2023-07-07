@@ -25,6 +25,9 @@ init.updatemodule = require("widgets.updatewidget")
 init.updatewidget = init.updatemodule.updatewidget
 init.updateicon   = init.updatemodule.updateicon
 
+init.layoutwidget = require("widgets.layout").layoutwidget
+init.layouticon = require("widgets.layout").layouticon
+
 init.launcher     = require("widgets.launcher")
 
 return init

@@ -18,8 +18,7 @@ theme.chosen_theme  = "iceberg"
 
 -- Widget layout
 --{{ default
--- short}}
-
+-- laptop}}
 
 theme.chosen_widget = "default"
 

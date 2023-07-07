@@ -1,43 +1,52 @@
+-- Create your own update widget
+-- package manager supported
+-- paru, pacman, apt
 local awful   = require("awful")
 local gears   = require("gears")
 local wibox   = require("wibox")
+local var     = require("themes.default.variables")
 
 local update = {}
 
 -- Define the constructor method
-function update.widget_create(dist,theme,font)
+function update:create(dist,theme,font)
+      local M = {}
+      
+      -- Command to run to check for updates
+      if dist == "arch" then 
+           M.command = "bash -c 'pacman -Qu | wc -l'"
+      elseif dist == "paru" then     
+           M.command = "bash -c 'paru -Syy &> /dev/null && paru -Qu 2> /dev/null | wc -l'"
+      elseif dist == "ubuntu" then
+           M.command = "dpkg -l 2> /dev/null | wc -l"
+      else      
+           M.command = "bash -c 'pacman -Syy &> /dev/null && pacman -Qu 2> /dev/null | wc -l'"
+      end
+      
+      -- Makes update widget
+      M.widget = awful.widget.watch(
+          M.command,
+          0,
+          function(widget, stdout)
+              widget.markup = '<span foreground="' .. theme.bg_normal .. '" background="' .. theme.seperator_1 .. '" font="' .. font.update .. '">'  .. stdout .. '</span>'
+          end
+      )
 
-    -- Command to run to check for updates
-    if dist == "arch" then 
-         update.command = "bash -c 'paru -Syy &> /dev/null && paru -Qu 2> /dev/null | wc -l'"
-    elseif dist == "ubuntu" then
-         update.command = "dpkg -l 2> /dev/null | wc -l"
-    end
-    
-    -- Makes update widget
-    update.widget = awful.widget.watch(
-        update.command,
-        600,
-        function(widget, stdout)
-            update.widget.markup = '<span foreground="' .. theme.bg_normal .. '" background="' .. theme.seperator_1 .. '" font="' .. font.update .. '">'  .. stdout .. '</span>'
-        end
-    )
+      -- Update icon
+      local icon =  wibox.widget {
+          markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. font.update .. "'> </span>",
+          widget = wibox.widget.textbox
+      }
 
-   -- Update icon
-   update.icon =  wibox.widget {
-       markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. font.update .. "'>⟳</span>",
-       widget = wibox.widget.textbox
-   }
+      -- Setting some settings for the update widget
+      M.widget = wibox.container.margin(M.widget, 0, 0, 4, 1)
+      M.widget = wibox.container.background(M.widget, theme.seperator_1, gears.shape.rectangle)
+      
+      -- Setting some settings for the update icon widget
+      local icon = wibox.container.margin(icon, 0, 0, 4, 1)
+      M.icon = wibox.container.background(icon, theme.seperator_1, gears.shape.rectangle)
 
-   -- Setting some settings for the update widget
-   update.widget = wibox.container.margin(update.widget, 0, 0, 4, 1)
-   update.widget = wibox.container.background(update.widget, theme.seperator_1, gears.shape.rectangle)
-   
-   -- Setting some settings for the update icon widget
-   update.icon = wibox.container.margin(update.icon, 0, 0, 4, 1)
-   update.icon = wibox.container.background(update.icon, theme.seperator_1, gears.shape.rectangle)
-
-   return update
+      return M
 
 end
 

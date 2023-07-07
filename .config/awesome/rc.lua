@@ -23,6 +23,7 @@ local gpmdp	    = require("widgets.gpmdp")
 
 local theme         = require("activate_theme")
 local var           = require("themes.default.variables")
+local layout_switch = require("widgets.layout").layout_switcher
 
 -- }}}
 
@@ -74,6 +75,18 @@ local home         = os.getenv("HOME")
 local gui_editor   = "emacsclient -c -a emacs"
 local browser      = "librewolf"
 local guieditor    = "emacsclient -c -a emacs"
+local se,us,az     = "se","us","az"
+
+-- Function to switch layout
+local function layout_switch_run() 
+    -- Gets the layout to switch
+    local switch = layout_switch(se, us, az)
+    -- the command to run
+    local command = "bash -c '" .. switch .. "'"
+    
+    -- runs the command
+    awful.util.spawn(command)
+end
 
 awful.util.terminal = terminal
 
@@ -425,7 +438,7 @@ globalkeys = awful.util.table.join(
               {description = "run dm-theme", group = "dmenu"}),
               
     -- switch keyboard layout
-    awful.key({ modkey, }, "space", function () awful.spawn( home .. "/.scripts/activated/layout-switcher" ) end),
+    awful.key({ modkey, }, "space", function () awful.spawn(layout_switch_run()) end),
     
     -- Restore minimized window
     awful.key({ modkey, "Control" }, "n",

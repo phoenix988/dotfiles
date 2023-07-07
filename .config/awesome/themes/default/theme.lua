@@ -23,6 +23,9 @@ local chosen_widget = require("activate_theme")
 
 -- Imports some widgets from init.lua
 local init        = require("widgets.init")
+local update      = require("widgets.functions.update")
+
+-- adds the kernelwidget to the init table
 init.kernelwidget = kernelwidget
 
 -- Imports my fonts
@@ -32,8 +35,11 @@ local font        = require("themes.default.font")
 local mytasklist  = require("widgets.mytasklist")
 
 -- imports variables
-local var     = require("themes.default.variables")
-local markup  = var.markup
+local var         = require("themes.default.variables")
+local markup      = var.markup
+
+-- Create update widget with icon
+init.update = update:create("paru",theme,font)
 
 -- Sets some global variables
 theme.tasklist_font             = var.tasklist_font
@@ -191,7 +197,7 @@ theme.tasklist_plain_task_name  = var.tasklist_plain_task_name
         -- Create wibar thats made for laptops in mind
         local mywibar = require("widgets.wibar.wibox_laptop")
 
-        -- Create the wibar 
+        -- Create the wibar made for laptops or smaller res screens 
         mywibar.create(s,wibox,seperator,powerline,mylauncher,
                    mytextclock,updateicon,updatewidget,mem,cpu,
                    bat,vol,kernelwidget,theme)

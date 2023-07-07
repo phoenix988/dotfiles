@@ -37,6 +37,9 @@ var.kernel_command = "uname -r"
 -- Command to check for updates
 var.update_command = "bash -c 'paru -Syy &> /dev/null && paru -Qu 2> /dev/null | wc -l'"
 
+-- Command for getting current layout
+var.layout_command = "bash -c 'setxkbmap -query | grep layout | cut -d : -f 2'"
+
 -- Set Tagicons
 -- Example of icons you can use
 -- local names = ["", "", "", "", "", "", "", "", "ﭮ", "", "", "﨣", "F1", "F2", "F3", "F4", "F5"]
