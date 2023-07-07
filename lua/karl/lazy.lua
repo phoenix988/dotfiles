@@ -48,8 +48,14 @@ require('lazy').setup({
      opts = function()
       local dashboard = require("alpha.themes.dashboard")
       local myConfig = "/home/karl/.config/nvim/README.org"
-      local setLogo = require("lua.karl.dash")
-      local logo = setLogo()
+      local logo = [[
+            ███████╗██████╗ ██╗██████╗  █████╗ ██╗   ██╗
+            ██╔════╝██╔══██╗██║██╔══██╗██╔══██╗╚██╗ ██╔╝
+            █████╗  ██████╔╝██║██║  ██║███████║ ╚████╔╝
+            ██╔══╝  ██╔══██╗██║██║  ██║██╔══██║  ╚██╔╝
+            ██║     ██║  ██║██║██████╔╝██║  ██║   ██║
+            ╚═╝     ╚═╝  ╚═╝╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝
+            ]]
       dashboard.section.header.val = vim.split(logo, "\n")
       dashboard.section.buttons.val = {
         dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
