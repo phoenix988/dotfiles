@@ -128,6 +128,28 @@ require("karl.remap")
 require("karl.set")
 #+end_src
 
+
+
+** SESSION
+#+begin_src lua :tangle after/plugin/session.lua
+function saveSession()
+  local sessionFile = "last_session"
+  local sessionPath = vim.fn.expand('~/.local/share/nvim/' .. sessionFile)
+  vim.cmd('mksession! ' .. sessionPath)
+  print('Session saved to: ' .. sessionPath)
+end
+
+function loadSession()
+  local sessionFile = "last_session"
+  local sessionPath = vim.fn.expand('~/.local/share/nvim/' .. sessionFile)
+  vim.cmd('source ' .. sessionPath)
+  print('Session loaded from: ' .. sessionPath)
+end
+
+vim.cmd("command! SaveSession lua saveSession()")
+vim.cmd("command! LoadSession lua loadSession()")
+
+#+end_src
 ** DASH
 Sets the logo of neovim based on the day of the week
 #+begin_src lua :tangle lua/karl/dash.lua
@@ -180,6 +202,7 @@ return setLogo
 ** LAZY
 #+begin_src lua :tangle lua/karl/lazy.lua
 -- Install package manager
+
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -244,7 +267,7 @@ require('lazy').setup({
         dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
         dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
         dashboard.button("c", " " .. " Config", ":e" .. myConfig .. "<CR>"),
-        dashboard.button("s", " " .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
+        dashboard.button("s", " " .. " Restore Session", [[:LoadSession <cr>]]),
         dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
         dashboard.button("q", " " .. " Quit", ":qa<CR>"),
       }
