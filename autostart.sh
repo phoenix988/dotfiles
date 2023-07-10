@@ -6,7 +6,8 @@ lxsession &
 #/usr/lib/polkit-kde-authentication-agent-1 &
 
 #Compositor
-picom -b --config  $HOME/.config/picom/picom.conf
+#picom -b --config  $HOME/.config/picom/picom.conf
+picom -b --config  $HOME/.config/picom/picom-jona.conf
 
 #Set Display layout
 #$HOME/.screenlayout/layout.sh &

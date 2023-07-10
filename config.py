@@ -35,11 +35,11 @@ mod = variables['mod']
 
 # Terminals
 MYTERM = "kitty -e tmux attach"
-MYTERM_NORMAL = "kitty -e zsh"
-SYSMON = "kitty --class=btop -e btop"
+MYTERM_NORMAL = variables['term']
+SYSMON = variables['sysmon']
 
 # Filemanagers
-FILE_MANAGER = "emacsclient -c -a '' --eval '(dired nil)'"
+FILE_MANAGER = variables['FILE_MANAGER']
 GUI_FILE_MANAGER = "pcmanfm"
 
 # Browsers
@@ -71,7 +71,7 @@ keys = [
               desc='Shutdown Qtile'
               ),
          Key([mod, ], "F1", #Show all the keybindings
-              lazy.spawn("/home/karl/.config/qtile/qtile-keys.sh"),
+              lazy.spawn("/home/karl/.config/qtile/qtile_keys.sh"),
               desc='Run Help Menu'
               ),
          Key([mod, ], "F2", #show kitty bindings
@@ -83,7 +83,7 @@ keys = [
               desc='Lock computer'
               ),
          Key([mod, ], "space", #Toggle between keyboard layouts
-              lazy.spawn(SCRIPT_PATH + "/layout-switcher"),
+              lazy.spawn(SCRIPT_PATH + "/layout_switcher.lua"),
               desc='switch between Keyboard layouts'
              ),
          Key([mod, ], "r", #Run Rofi
@@ -120,6 +120,10 @@ keys = [
              lazy.spawn( MYTERM ),
              desc='Launches My Terminal'
               ),
+         Key([mod, ], "F9", #Launch Gimp
+             lazy.spawn( "azla" ),
+             desc='run azla'
+             ),
 
          #KEYS_GROUP Launch applications with super + shift + key
          Key([mod, "shift"], "y", #Run Graphical Text editor
@@ -188,7 +192,7 @@ keys = [
              desc='Set a random wallpaper'
              ),
          Key([mod, ],"F11", #Kills and starts picom compositor
-             lazy.spawn(SCRIPT_PATH + "/picom-control"),
+             lazy.spawn("/home/karl/.scripts/restart/picom-control"),
              desc='kills and start picom'
              ),
          Key([mod, ],"F10", #Change display layout,for my laptop when I connect external Screens
@@ -574,6 +578,7 @@ layouts = [
          margin_y = 20,
          panel_width = 150
          ),
+
     layout.Floating(**layout_theme,
                       fullscreen_border_width = 1,
                       max_border_width = 1),
@@ -590,9 +595,9 @@ def init_widgets_screen1():
     return widgets_screen1                 # Monitor 1 will display all widgets in widgets_list
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=32, margin=8 )),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=32, margin=8)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=32, margin=8))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=38, margin=8 )),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=38, margin=8)),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=38, margin=8))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
@@ -674,6 +679,7 @@ focus_on_window_activation = "smart"
 def start_once():
     home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/autostart.sh'])
+    subprocess.call([home + '/.config/qtile/autostart_custom.sh'])
 
 
 
