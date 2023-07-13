@@ -21,6 +21,7 @@ require('lazy').setup({
 
   -- Git related plugins
   'tpope/vim-fugitive',
+  'NeogitOrg/neogit',
   'tpope/vim-rhubarb',
   "jreybert/vimagit",
 

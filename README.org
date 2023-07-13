@@ -15,6 +15,7 @@
 - [[CONFIG]]
   - [[INIT]]
   - [[LAZY]]
+  - [[SESSION]]
   - [[STANDARD REMAPS]]
   - [[PLUGIN REMAPS]]
   - [[STANDARD SETS]]
@@ -123,6 +124,7 @@ Source all my lua files and set my leaderkey. I keep this config very light
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+require("lugitive.status")
 require("karl.lazy")
 require("karl.remap")
 require("karl.set")
@@ -130,26 +132,6 @@ require("karl.set")
 
 
 
-** SESSION
-#+begin_src lua :tangle after/plugin/session.lua
-function saveSession()
-  local sessionFile = "last_session"
-  local sessionPath = vim.fn.expand('~/.local/share/nvim/' .. sessionFile)
-  vim.cmd('mksession! ' .. sessionPath)
-  print('Session saved to: ' .. sessionPath)
-end
-
-function loadSession()
-  local sessionFile = "last_session"
-  local sessionPath = vim.fn.expand('~/.local/share/nvim/' .. sessionFile)
-  vim.cmd('source ' .. sessionPath)
-  print('Session loaded from: ' .. sessionPath)
-end
-
-vim.cmd("command! SaveSession lua saveSession()")
-vim.cmd("command! LoadSession lua loadSession()")
-
-#+end_src
 ** DASH
 Sets the logo of neovim based on the day of the week
 #+begin_src lua :tangle lua/karl/dash.lua
@@ -224,6 +206,7 @@ require('lazy').setup({
 
   -- Git related plugins
   'tpope/vim-fugitive',
+  'NeogitOrg/neogit',
   'tpope/vim-rhubarb',
   "jreybert/vimagit",
 
@@ -472,6 +455,26 @@ require('lazy').setup({
 }, {})
 
 #+end_src
+** SESSION
+#+begin_src lua :tangle after/plugin/session.lua
+function saveSession()
+  local sessionFile = "last_session"
+  local sessionPath = vim.fn.expand('~/.local/share/nvim/' .. sessionFile)
+  vim.cmd('mksession! ' .. sessionPath)
+  print('Session saved to: ' .. sessionPath)
+end
+
+function loadSession()
+  local sessionFile = "last_session"
+  local sessionPath = vim.fn.expand('~/.local/share/nvim/' .. sessionFile)
+  vim.cmd('source ' .. sessionPath)
+  print('Session loaded from: ' .. sessionPath)
+end
+
+vim.cmd("command! SaveSession lua saveSession()")
+vim.cmd("command! LoadSession lua loadSession()")
+
+#+end_src
 
 ** STANDARD REMAPS
 Sets some standard keybindings here. These keybindings are builtin
@@ -536,6 +539,10 @@ vim.api.nvim_set_keymap('n', '<Leader>hr', ':Lazy<CR>', { noremap = true, silent
 -- Terminal
 vim.api.nvim_set_keymap('n', '<Leader>tt', ':terminal<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>ok', ':terminal<CR>', { noremap = true, silent = true })
+
+-- Save/load Session
+vim.api.nvim_set_keymap('n', '<Leader>ss', ':SaveSession<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>sl', ':LoadSession<CR>', { noremap = true, silent = true })
 
 -- Keybindings for Harpoon
 local mark = require("harpoon.mark")
@@ -1021,6 +1028,10 @@ wk.register({
   t = {
     name = "Tab"
   },
+  s = {
+    name = "Session"
+  },
+
 
 }, { prefix = "<leader>" })
 

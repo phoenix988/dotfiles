@@ -31,5 +31,9 @@ wk.register({
   t = {
     name = "Tab"
   },
+  s = {
+    name = "Session"
+  },
+
 
 }, { prefix = "<leader>" })
