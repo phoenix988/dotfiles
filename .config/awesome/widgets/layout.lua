@@ -3,6 +3,18 @@ local wibox = require("wibox")
 local awful = require("awful")
 local lain  = require("lain")
 local gears = require("gears")
+local font  = require("themes.default.font")
+local var   = require("themes.default.variables")
+
+local chosen_theme  = require("activate_theme")
+local theme         = require("themes/" .. chosen_theme.chosen_theme .. "/color")
+
+local markup       = lain.util.markup
+
+-- Command to check for kernel version
+local layout_command = var.layout_command
+
+local se,us,az = "se","us","az"
 
 -- function to switch to switch the layout
 local function layout_switcher(...)
@@ -14,7 +26,7 @@ local function layout_switcher(...)
          last = i
      end
      
-	 local bash_command = "setxkbmap -query | grep layout | awk '{print $NF}'"
+     local bash_command = "setxkbmap -query | grep layout | awk '{print $NF}'"
      local file = io.popen(bash_command)
      local output = file:read("*a")
 	 local output = string.gsub(output, "%s", "")
@@ -36,9 +48,45 @@ local function layout_switcher(...)
         
      local command = "setxkbmap " .. layouts[choice]
 
-     return command
+     return command, layouts[choice]
 end
 
+
+-- Makes keyboard layout widget
+--local layoutwidget = awful.widget.watch(
+--    "bash -c 'setxkbmap -query | grep layout | cut -d : -f 2'",
+--    0,
+--    function(widget, stdout)
+--        local stdout = string.gsub(stdout, "%s", "")
+--        widget.markup = '<span foreground="' .. theme.bg_normal .. '" background="' .. theme.seperator_1 .. '" font="' .. font.update .. '">'  .. stdout .. '</span>'
+--    end
+--)
+--
+--local layouticon =  wibox.widget {
+--    markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. font.update .. "'>  </span>",
+--    widget = wibox.widget.textbox
+--}
+--
+---- Setting some settings for the update icon widget
+--local layoutwidget = wibox.container.margin(layoutwidget, 0, 0, 4, 1)
+--local layoutwidget = wibox.container.background(layoutwidget, theme.seperator_1, gears.shape.rectangle)
+--
+--local layouticon = wibox.container.margin(layouticon, 0, 0, 4, 1)
+--local layouticon = wibox.container.background(layouticon, theme.seperator_1, gears.shape.rectangle)
+----
+---- Sets click action when you click the widget   
+--layoutwidget:connect_signal("button::press", function(_, _, _, button)
+--    -- Perform some action when the widget is clicked
+--    if button == 1 then
+--       -- sets the available layouts to switch between when you click the widget
+--       local switch = layout_switcher(se, us, az)
+--       awful.spawn("bash -c '" .. switch .. "'")
+--    end
+--end)
+
 -- Returns the widgets and function
-return {layout_switcher = layout_switcher}
+
+return {layoutwidget = layoutwidget, 
+        layout_switcher = layout_switcher, 
+        layouticon = layouticon}
 

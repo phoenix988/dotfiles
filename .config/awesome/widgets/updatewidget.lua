@@ -10,32 +10,43 @@ local theme         = require("themes/" .. chosen_theme.chosen_theme .. "/color"
 
 local markup       = lain.util.markup
 
+
+local M = {}
+
 -- Command to run to check for updates
-local update_command = var.update_command
+M.update_command = var.update_command
 
 -- Makes update widget
-   updatewidget = awful.widget.watch(
-       update_command,
-       600,
-       function(widget, stdout)
-           updatewidget.markup = '<span foreground="' .. theme.bg_normal .. '" background="' .. theme.seperator_1 .. '" font="' .. font.update .. '">'  .. stdout .. '</span>'
-       end
-   )
+M.updatewidget = awful.widget.watch(
+    M.update_command,
+    600,
+    function(widget, stdout)
+        widget.markup = '<span foreground="' .. theme.bg_normal .. '" background="' .. theme.seperator_1 .. '" font="' .. font.update .. '">'  .. stdout .. '</span>'
+    end
+)
 
-   -- Update icon
-   updateicon =  wibox.widget {
-       markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. font.update .. "'> </span>",
-       widget = wibox.widget.textbox
-   }
-   
-   -- Setting some settings for the update widget
-   local updatewidget = wibox.container.margin(updatewidget, 0, 0, 4, 1)
-   local updatewidget = wibox.container.background(updatewidget, theme.seperator_1, gears.shape.rectangle)
-   
-   -- Setting some settings for the update icon widget
-   local updateicon = wibox.container.margin(updateicon, 0, 0, 4, 1)
-   local updateicon = wibox.container.background(updateicon, theme.seperator_1, gears.shape.rectangle)
+-- Update icon
+M.updateicon =  wibox.widget {
+    markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. font.update .. "'> </span>",
+    widget = wibox.widget.textbox
+}
+
+-- Setting some settings for the update widget
+M.updatewidget = wibox.container.margin(M.updatewidget, 0, 0, 4, 1)
+M.widget = wibox.container.background(M.updatewidget, theme.seperator_1, gears.shape.rectangle)
+
+-- Setting some settings for the update icon widget
+M.updateicon = wibox.container.margin(M.updateicon, 0, 0, 4, 1)
+M.icon = wibox.container.background(M.updateicon, theme.seperator_1, gears.shape.rectangle)
+
+M.widget:connect_signal("button::press", function(_, _, _, button)
+    -- Perform some action when the widget is clicked
+    if button == 1 then
+       -- sets the available layouts to switch between when you click the widget
+       awful.spawn.with_shell(string.format("%s -e sudo pacman -Syyu", awful.util.terminal))
+    end
+end)
+
 -- Update widget end
 
-return {updatewidget = updatewidget,
-        updateicon   = updateicon }
+return M

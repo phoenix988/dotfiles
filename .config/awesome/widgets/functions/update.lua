@@ -10,6 +10,7 @@ local io      = require("io")
 local update = {}
 
 -- Define the constructor method
+-- Update widget main function
 function update:create(dist,theme,font,time)
       local M = {}
       
@@ -65,7 +66,6 @@ function update:create(dist,theme,font,time)
           end
       end)
 
-      local packages = command_run(M.packages)
       local N = {}
       table.insert(N,M.widget)
       table.insert(N,M.icon)
@@ -74,6 +74,7 @@ function update:create(dist,theme,font,time)
           awful.tooltip {
           objects = { N[key] },
           timer_function = function()
+              local packages = command_run(M.packages)
               return "Installed: " .. packages
           end
       }

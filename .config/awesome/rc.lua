@@ -80,12 +80,17 @@ local se,us,az     = "se","us","az"
 -- Function to switch layout
 local function layout_switch_run() 
     -- Gets the layout to switch
-    local switch = layout_switch(se, us, az)
+    local switch, choice = layout_switch(se, us, az)
     -- the command to run
     local command = "bash -c '" .. switch .. "'"
     
+    -- Format the output
+    local format = string.format("%s layout is selected", choice)
+
     -- runs the command
     awful.util.spawn(command)
+    
+    return format
 end
 
 awful.util.terminal = terminal
@@ -436,9 +441,12 @@ globalkeys = awful.util.table.join(
               {description = "run dm-play-pause", group = "dmenu"}),
     awful.key({ altkey }, "g", function () awful.util.spawn(home .. "/.dmenu/dm-theme") end,
               {description = "run dm-theme", group = "dmenu"}),
+    awful.key({ altkey }, "s", function () awful.util.spawn(home .. "/.dmenu/dm-ssh") end,
+              {description = "run dm-ssh", group = "dmenu"}),
+              
               
     -- switch keyboard layout
-    awful.key({ modkey, }, "space", function () awful.spawn(layout_switch_run()) end),
+    awful.key({ modkey, }, "space", function () naughty.notify({text = layout_switch_run()}) end),
     
     -- Restore minimized window
     awful.key({ modkey, "Control" }, "n",
@@ -574,7 +582,7 @@ clientkeys = awful.util.table.join(
         {description = "toggle fullscreen", group = "client"}),
     awful.key({ modkey, }, "q",      function (c) c:kill()                                   end,
               {description = "close", group = "client"}),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
+    awful.key({ modkey, "Shift" }, "f",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
@@ -686,7 +694,7 @@ awful.rules.rules = {
     { rule = { class = "LibreWolf" },
               properties = {tag = var.names[1] } },
 
-    { rule = { class = "Steam" },
+    { rule = { class = "steam" },
               properties = {tag = var.names[4] } },
 
     { rule = { class = "Gimp" },
