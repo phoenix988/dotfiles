@@ -1,7 +1,10 @@
 -- Install package manager
+
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+
+
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
     'git',
@@ -18,37 +21,91 @@ require('lazy').setup({
 
   -- Git related plugins
   'tpope/vim-fugitive',
+  'NeogitOrg/neogit',
   'tpope/vim-rhubarb',
   "jreybert/vimagit",
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-   {
+  {
     "kdheepak/lazygit.nvim",
     -- optional for floating window border decoration
     dependencies = {
-        "nvim-lua/plenary.nvim",
-    },
-    },
+       "nvim-lua/plenary.nvim",
+  },
+  },
 
   -- Wilder vim
-{
-  'gelguy/wilder.nvim',
-  config = function()
-    -- config goes here
-  end,
-},
-  -- Startscreen
-  {"mhinz/vim-startify"},
+  {
+    'gelguy/wilder.nvim',
+    config = function()
+      -- config goes here
+    end,
+  },
+  -- Dashboard settings
+  {
+    "goolord/alpha-nvim",
+     event = "VimEnter",
+     opts = function()
+      local dashboard = require("alpha.themes.dashboard")
+      local myConfig = "/home/karl/.config/nvim/README.org"
+      local logo = [[
+            ███████╗██████╗ ██╗██████╗  █████╗ ██╗   ██╗
+            ██╔════╝██╔══██╗██║██╔══██╗██╔══██╗╚██╗ ██╔╝
+            █████╗  ██████╔╝██║██║  ██║███████║ ╚████╔╝
+            ██╔══╝  ██╔══██╗██║██║  ██║██╔══██║  ╚██╔╝
+            ██║     ██║  ██║██║██████╔╝██║  ██║   ██║
+            ╚═╝     ╚═╝  ╚═╝╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝
+            ]]
+      dashboard.section.header.val = vim.split(logo, "\n")
+      dashboard.section.buttons.val = {
+        dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
+        dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert <CR>"),
+        dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
+        dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
+        dashboard.button("c", " " .. " Config", ":e" .. myConfig .. "<CR>"),
+        dashboard.button("s", " " .. " Restore Session", [[:LoadSession <cr>]]),
+        dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
+        dashboard.button("q", " " .. " Quit", ":qa<CR>"),
+      }
+      for _, button in ipairs(dashboard.section.buttons.val) do
+        button.opts.hl = "AlphaButtons"
+        button.opts.hl_shortcut = "AlphaShortcut"
+      end
+      dashboard.opts.layout[1].val = 8
+      return dashboard
+    end,
+    config = function(_, dashboard)
+      -- close Lazy and re-open when the dashboard is ready
+      if vim.o.filetype == "lazy" then
+        vim.cmd.close()
+        vim.api.nvim_create_autocmd("User", {
+          pattern = "AlphaReady",
+          callback = function()
+            require("lazy").show()
+          end,
+        })
+      end
 
- { "startup-nvim/startup.nvim",
-  dependencies = {"nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim"} },
+      require("alpha").setup(dashboard.opts)
+
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "LazyVimStarted",
+        callback = function()
+          local stats = require("lazy").stats()
+          local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+          dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
+          pcall(vim.cmd.AlphaRedraw)
+        end,
+      })
+    end,
+  },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
- { 'VonHeikemen/lsp-zero.nvim', dependencies = {'neovim/nvim-lspconfig'} },
- {'williamboman/mason-lspconfig.nvim'},
+  { 'VonHeikemen/lsp-zero.nvim', dependencies = {'neovim/nvim-lspconfig'} },
+  {'williamboman/mason-lspconfig.nvim'},
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -75,39 +132,39 @@ require('lazy').setup({
     {'saadparwaiz1/cmp_luasnip'}, -- Optional
     {'hrsh7th/cmp-nvim-lua'},     -- Optional
 
-  -- Snippets
+    -- Snippets
     {'L3MON4D3/LuaSnip'},             -- Required
     {'rafamadriz/friendly-snippets'}, -- Optional
 
 
-  -- Highlight colors inside of vim
-   {'brenoprata10/nvim-highlight-colors'},
+    -- Highlight colors inside of vim
+    {'brenoprata10/nvim-highlight-colors'},
 
-  -- Orgmode
-   { 'nvim-orgmode/orgmode' },
+    -- Orgmode
+    { 'nvim-orgmode/orgmode' },
 
-  -- Save as sudo
-   {'lambdalisue/suda.vim'},
- 
-  {'akinsho/toggleterm.nvim'},
+    -- Save as sudo
+    {'lambdalisue/suda.vim'},
 
-  -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',
+    {'akinsho/toggleterm.nvim'},
+
+    -- Useful plugin to show you pending keybinds.
+    { 'folke/which-key.nvim',
 
     opts = {} },
-  { -- Adds git releated signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
+    { -- Adds git releated signs to the gutter, as well as utilities for managing changes
+      'lewis6991/gitsigns.nvim',
+      opts = {
+        -- See `:help gitsigns.txt`
+        signs = {
+          add = { text = '+' },
+          change = { text = '~' },
+          delete = { text = '_' },
+          topdelete = { text = '‾' },
+          changedelete = { text = '~' },
+        },
       },
     },
-  },
 
   { -- Some more themes
   'navarasu/onedark.nvim',

@@ -45,6 +45,10 @@ vim.api.nvim_set_keymap('n', '<Leader>hr', ':Lazy<CR>', { noremap = true, silent
 vim.api.nvim_set_keymap('n', '<Leader>tt', ':terminal<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>ok', ':terminal<CR>', { noremap = true, silent = true })
 
+-- Save/load Session
+vim.api.nvim_set_keymap('n', '<Leader>ss', ':SaveSession<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>sl', ':LoadSession<CR>', { noremap = true, silent = true })
+
 -- Keybindings for Harpoon
 local mark = require("harpoon.mark")
 local ui   = require("harpoon.ui")
