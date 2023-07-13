@@ -143,11 +143,11 @@ mod = variables['mod']
 
 # Terminals
 MYTERM = "kitty -e tmux attach"
-MYTERM_NORMAL = "kitty -e zsh"
-SYSMON = "kitty --class=btop -e btop"
+MYTERM_NORMAL = variables['term']
+SYSMON = variables['sysmon']
 
 # Filemanagers
-FILE_MANAGER = "emacsclient -c -a '' --eval '(dired nil)'"
+FILE_MANAGER = variables['FILE_MANAGER']
 GUI_FILE_MANAGER = "pcmanfm"
 
 # Browsers
@@ -219,7 +219,7 @@ keys = [
               desc='Shutdown Qtile'
               ),
          Key([mod, ], "F1", #Show all the keybindings
-              lazy.spawn("/home/karl/.config/qtile/qtile-keys.sh"),
+              lazy.spawn("/home/karl/.config/qtile/qtile_keys.sh"),
               desc='Run Help Menu'
               ),
          Key([mod, ], "F2", #show kitty bindings
@@ -231,7 +231,7 @@ keys = [
               desc='Lock computer'
               ),
          Key([mod, ], "space", #Toggle between keyboard layouts
-              lazy.spawn(SCRIPT_PATH + "/layout-switcher"),
+              lazy.spawn(SCRIPT_PATH + "/layout_switcher.lua"),
               desc='switch between Keyboard layouts'
              ),
          Key([mod, ], "r", #Run Rofi
@@ -248,6 +248,7 @@ keys = [
 | SUPER + I     | Qtile Help      |
 | SUPER + O     | Kitty help      |
 | SUPER +  G    | Launch Gimp     |
+| SUPER +  G    | Launch Azla     |
 | SUPER + Enter | Launch Terminal |
 
 
@@ -302,6 +303,10 @@ keys = [
              lazy.spawn( MYTERM ),
              desc='Launches My Terminal'
               ),
+         Key([mod, ], "F9", #Launch Gimp
+             lazy.spawn( "azla" ),
+             desc='run azla'
+             ),
 
          #KEYS_GROUP Launch applications with super + shift + key
          Key([mod, "shift"], "y", #Run Graphical Text editor
@@ -378,7 +383,7 @@ keys = [
              desc='Set a random wallpaper'
              ),
          Key([mod, ],"F11", #Kills and starts picom compositor
-             lazy.spawn(SCRIPT_PATH + "/picom-control"),
+             lazy.spawn("/home/karl/.scripts/restart/picom-control"),
              desc='kills and start picom'
              ),
          Key([mod, ],"F10", #Change display layout,for my laptop when I connect external Screens
@@ -596,6 +601,9 @@ Pretty straight forward works the same way as in windows for example
              ),
 
 #+END_SRC
+
+#+RESULTS:
+
 *** TMUX
 | Keybinding        | DESCRIPTION           |
 |-------------------+-----------------------|
@@ -901,6 +909,7 @@ layouts = [
          margin_y = 20,
          panel_width = 150
          ),
+
     layout.Floating(**layout_theme,
                       fullscreen_border_width = 1,
                       max_border_width = 1),
@@ -933,7 +942,7 @@ from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration, PowerLineDecoration, BorderDecoration
 from var import variables
 
-widget_font = 14
+widget_font = 17
 widget_fam = "JetBrainsMono Nerd Font"
 
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
@@ -959,24 +968,25 @@ def init_widgets_list():
                        background = colors[0]
                        ),
              widget.GroupBox(
-                       font = "Ubuntu Bold",
-                       fontsize = 25,
-                       margin_y = 5,
+                       font = widget_fam,
+                       fontsize = 28,
+                       margin_y = 3,
                        margin_x = 0,
-                       padding_y = 0,
+                       padding_y = 6,
                        padding_x = 2,
                        hide_unused = "true",
                        borderwidth = 3,
-                       active = colors[5],
+                       active = colors[1],
                        inactive = colors[1],
                        rounded = "true",
                        disable_drag = "true",
+                       highlight_method = "text",
                        highlight_color = colors[4],
-                       highlight_method = "line",
-                       this_current_screen_border = colors[4],
+                       this_current_screen_border = colors[6],
                        this_screen_border = colors[2],
-                       other_current_screen_border = colors[4],
+                       other_current_screen_border = colors[6],
                        other_screen_border = colors[2],
+                       block_highlight_text_color = colors[6],
                        urgent_border = colors[5],
                        urgent_alert_method = "line",
                        foreground = colors[2],
@@ -998,21 +1008,21 @@ def init_widgets_list():
              widget.TextBox(
                        text = '',
                        background = colors[0],
-                       foreground = colors[2],
+                       foreground = colors[1],
                        padding = -1,
                        fontsize = 45
                        ),
              widget.TextBox(
                        text = ' ',
-                       background = colors[2],
-                       foreground = colors[0],
+                       background = colors[1],
+                       foreground = colors[2],
                        padding = 1,
                        font = widget_fam,
                        fontsize = 25,
                        ),
              widget.KeyboardLayout(
-                       foreground = colors[0],
-                       background = colors[2],
+                       foreground = colors[2],
+                       background = colors[1],
                        font = widget_fam,
                        fontsize = 20,
                        configured_keyboards = ['us', 'se', 'az'],
@@ -1020,7 +1030,7 @@ def init_widgets_list():
                        ),
              widget.TextBox(
                        text = '',
-                       background = colors[2],
+                       background = colors[1],
                        foreground = colors[0],
                        padding = -1,
                        fontsize = 45
@@ -1038,9 +1048,9 @@ def init_widgets_list():
                        background = colors[0],
                        borderwidth = 0,
                        border = colors[4],
-                       margin = 5,
+                       margin = 10,
                        margin_y = 4,
-                       padding = 0,
+                       padding = 3,
                        highlight_method = "block",
                        title_width_method = "uniform",
                        urgent_alert_method = "border",
@@ -1068,7 +1078,7 @@ def init_widgets_list():
                        foreground = colors[0],
                        background = colors[2],
                        fontsize   = widget_font,
-                       font = "JetBrainsMono Nerd Font",
+                       font = widget_fam,
                        format = " %A, %B %d/%Y -  %H:%M ",
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("yad --calendar")},
                        ),
@@ -1133,7 +1143,7 @@ def init_widgets_list():
                        fontsize   = widget_font,
                        font = widget_fam,
                        cityid = "598316",
-                       format = '󰖐 {main_temp} {units_temperature}° {weather_details}',
+                       format = '󰖐 {main_temp} {units_temperature}°',
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(variables['browser'] + " https://openweathermap.org/city/598316")},
                        decorations = [
                             BorderDecoration (
@@ -1293,44 +1303,6 @@ def init_widgets_list():
                        fontsize = 45
                        ),
              widget.TextBox(
-                       text = "",
-                       padding = 2,
-                       foreground = colors[13],
-                       background = colors[0],
-                       fontsize = widget_font,
-                       decorations = [
-                            BorderDecoration (
-                            colour = colors[13],
-                            border_width = [0, 0, 4, 0],
-                            padding_x = 0, )
-                            ],
-                       ),
-             widget.CheckUpdates(
-                       update_interval = 1800,
-                       distro = "Arch",
-                       fontsize = widget_font,
-                       font = widget_fam,
-                       display_format = " {updates} Updates",
-                       colour_have_updates = colors[13],
-                       colour_no_updates = colors[13],
-                       foreground = colors[13],
-                       background = colors[0],
-                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(variables['term'] + ' -e sudo pacman -Syu')},
-                       decorations = [
-                            BorderDecoration (
-                            colour = colors[13],
-                            border_width = [0, 0, 4, 0],
-                            padding_x = 0, )
-                            ],
-                       ),
-             widget.TextBox(
-                       text = '',
-                       background = colors[0],
-                       foreground = colors[0],
-                       padding = -1,
-                       fontsize = 45
-                       ),
-             widget.TextBox(
                        text = "♫ Vol:",
                        foreground = colors[14],
                        background = colors[0],
@@ -1354,6 +1326,45 @@ def init_widgets_list():
                        decorations = [
                             BorderDecoration (
                             colour = colors[14],
+                            border_width = [0, 0, 4, 0],
+                            padding_x = 0, )
+                            ],
+                       ),
+             widget.TextBox(
+                       text = '',
+                       background = colors[0],
+                       foreground = colors[0],
+                       padding = -1,
+                       fontsize = 45
+                       ),
+             widget.TextBox(
+                       text = "",
+                       padding = 2,
+                       foreground = colors[13],
+                       background = colors[0],
+                       fontsize = widget_font,
+                       decorations = [
+                            BorderDecoration (
+                            colour = colors[13],
+                            border_width = [0, 0, 4, 0],
+                            padding_x = 0, )
+                            ],
+                       ),
+             widget.CheckUpdates(
+                       update_interval = 1800,
+                       distro = "Arch",
+                       fontsize = widget_font,
+                       font = widget_fam,
+                       display_format = " {updates} Updates",
+                       no_update_string = ' 0',
+                       colour_have_updates = colors[13],
+                       colour_no_updates = colors[13],
+                       foreground = colors[13],
+                       background = colors[0],
+                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(variables['term'] + ' -e sudo pacman -Syu')},
+                       decorations = [
+                            BorderDecoration (
+                            colour = colors[13],
                             border_width = [0, 0, 4, 0],
                             padding_x = 0, )
                             ],
@@ -1849,9 +1860,9 @@ def init_widgets_screen1():
     return widgets_screen1                 # Monitor 1 will display all widgets in widgets_list
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=32, margin=8 )),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=32, margin=8)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=32, margin=8))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=38, margin=8 )),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=38, margin=8)),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=38, margin=8))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
@@ -1950,6 +1961,7 @@ So this is just a hook and you don't need to configure this. This is just so the
 def start_once():
     home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/autostart.sh'])
+    subprocess.call([home + '/.config/qtile/autostart_custom.sh'])
 
 
 
@@ -2010,11 +2022,11 @@ layout_colors = [["#A093C7", "#A093C7"],
 
 # Color for the qtile bar
 colors = [["#161821", "#161821"], # 0 -- BG color
-          ["#5C6370", "#5C6370"], # 1
+          ["#495469", "#495469"], # 1
           ["#91ACD1", "#91ACD1"], # 2
           ["#C0CA8E", "#C0CA8E"], # 3
           ["#425E86", "#425E86"], # 4
-          ["#C9A6CD", "#C9A6CD"], # 5
+          ["#C9A6CD", "#C9A6CD"], # 5 -- Workspace occupied
           ["#81A1C1", "#81A1C1"], # 6
           ["#8FC1C3", "#8FC1C3"], # 7
           ["#E9B189", "#E9B189"], # 8  -- weather widget
@@ -2115,7 +2127,7 @@ colors = [["#1A1B26", "#1A1B26"], # 0 -- BG color
           ["#BB9AF7", "#BB9AF7"], # 2
           ["#9ECE6A", "#9ECE6A"], # 3
           ["#7AA2F7", "#7AA2F7"], # 4
-          ["#4C3466", "#8264B3"], # 5
+          ["#4C3466", "#8264B3"], # 5 -- Workspace occupied
           ["#BB9AF7", "#BB9AF7"], # 6
           ["#BB9AF7", "#BB9AF7"], # 7
           ["#F6C177", "#F6C177"], # 8  -- weather widget
@@ -2125,6 +2137,6 @@ colors = [["#1A1B26", "#1A1B26"], # 0 -- BG color
           ["#7DCFFF", "#7DCFFF"], # 12 -- memory widget
           ["#BB9AF7", "#BB9AF7"], # 13 -- update widget
           ["#E0AF68", "#E0AF68"], # 14 -- volume widget
-          ["#7AA2F7", "#7AA2F7"]] # 15 -- linux icon
+          ["#1A1B26", "#1A1B26"]] # 15 -- linux icon
 
 #+END_SRC

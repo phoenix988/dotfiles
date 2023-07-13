@@ -12,11 +12,11 @@ layout_colors = [["#A093C7", "#A093C7"],
 
 # Color for the qtile bar
 colors = [["#161821", "#161821"], # 0 -- BG color
-          ["#5C6370", "#5C6370"], # 1
+          ["#495469", "#495469"], # 1
           ["#91ACD1", "#91ACD1"], # 2
           ["#C0CA8E", "#C0CA8E"], # 3
           ["#425E86", "#425E86"], # 4
-          ["#C9A6CD", "#C9A6CD"], # 5
+          ["#C9A6CD", "#C9A6CD"], # 5 -- Workspace occupied
           ["#81A1C1", "#81A1C1"], # 6
           ["#8FC1C3", "#8FC1C3"], # 7
           ["#E9B189", "#E9B189"], # 8  -- weather widget
