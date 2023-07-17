@@ -27,7 +27,8 @@ command_exist starship && eval "$(starship init zsh)"
 [ -f $HOME/.config/alias-zsh-bash ] && source $HOME/.config/alias-zsh-bash
 
 # pfetch
-[ -f /usr/bin/pfetch ] && pfetch
+# [ -f /usr/bin/pfetch ] && pfetch
+[ -f /usr/bin/neofetch ] && neofetch
 
 alias sou="source ~/.zshrc"
 
