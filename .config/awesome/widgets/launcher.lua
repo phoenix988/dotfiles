@@ -2,6 +2,7 @@ local wibox = require("wibox")
 local awful = require("awful")
 local gears = require("gears")
 
+-- import chosen_theme
 local chosen_theme  = require("activate_theme")
 local theme         = require("themes/" .. chosen_theme.chosen_theme .. "/color")
 

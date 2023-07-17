@@ -3,15 +3,20 @@ local lain    = require("lain")
 local awful   = require("awful")
 local wibox   = require("wibox")
 local var     = require("themes.default.variables")
+local command = require("widgets.layout").command
 
+-- Import theme
 local chosen_theme  = require("activate_theme")
 local theme         = require("themes/" .. chosen_theme.chosen_theme .. "/color")
 
+-- Import fonts
 local font  = require("themes.default.font")
 
-local markup       = lain.util.markup
+local markup = lain.util.markup
 
 local threshold    = 80
+local temp_command = var.temp_command
+
 
 local widget = {}
 -- Creates cpu widget
@@ -57,6 +62,8 @@ local widget = {}
           awful.spawn("kitty -e btop")
        end
    end)
+
+   local current_temp = command(temp_command) 
 
    awful.tooltip {
        objects = { widget.cpuwidget },
@@ -113,9 +120,9 @@ local widget = {}
        tempfile = "/sys/class/thermal/thermal_zone0/hwmon4/temp1_input",
        settings = function()
            if coretemp_now >= threshold then
-               temp_text_setting:set_markup("<b><span foreground='" .. var.red .. "'>" .. coretemp_now .. "°C</span></b>")
+               temp_text_setting:set_markup("<b><span foreground='" .. var.red .. "'font='" .. font.mem .. "'>" .. coretemp_now .. "°C</span></b>")
            else
-               temp_text_setting:set_markup("<b><span foreground='" .. theme.fg_cpu .. "'>" .. coretemp_now .. "°C</span></b>")
+               temp_text_setting:set_markup("<b><span foreground='" .. theme.fg_cpu .. "'font='".. font.mem .. "'>" .. coretemp_now .. "°C</span></b>")
            end
        end
    })
@@ -138,6 +145,21 @@ local widget = {}
    -- makes the colour of the temp widget
    local tempicon = wibox.container.margin(tempicon, 8, 7, 6, 0)
    widget.tempicon = wibox.container.background(tempicon, theme.seperator_2 , gears.shape.rectangle)
+
+   
+   widget.temp_custom = wibox.widget.textbox()
+   local function temp_create()
+       local temp_command = var.temp_command
+       local output = command(temp_command)
+       widget.temp_custom:set_text(output)
+   end
+   
+   widget.temp = awful.widget.watch(
+       temp_create(),
+       1,
+       widget.temp_custom)
+
+
 -- Temp  widget End
  
 

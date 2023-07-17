@@ -4,6 +4,18 @@
 
 [[file:./.images/awesome.png]]
 
+* TABLE OF CONTENTS
+- [[DEPENDENCIES]]
+  - [[ARCH]]
+  - [[OPTIONAL]]
+
+- [[INSTALLATION]]
+- [[ABOUT THE CONFIG]]
+  - [[RC]]
+  - [[WIDGETS]]
+  - [[BINDINGS]]
+  - [[THEMES]]
+
 * DEPENDENCIES:
 ** ARCH
 #+begin_src sh
@@ -43,3 +55,22 @@ rm -rf $HOME/.config/awesome
 # clone my repository
 git clone https://github.com/phoenix988/awesome.git $HOME/.config/awesome
 #+end_src
+
+
+* ABOUT THE CONFIG
+** RC
+In ~rc.lua~ I define some rules some variables etc but overall I try to keep it minimal
+
+** WIDGETS
+under the folder ~widgets~ I define my widgets that I display in my wibar. In order to add them to the wibar you need to modify
+~wibar_default.lua~ under the folder ~wibar~ and there will be two setups there, one is made for the main screen and the second one will
+be activated on the second screen or third screen depending on how many that you have.
+
+** BINDINGS
+under ~bindings.lua~ you define all the custom keybindings
+
+** THEMES
+under the ~themes~ folder you define all the colors to be used inside the wibar. and you define custom themes here too if you want.
+if you want to change the current theme you need to modify ~activate_theme.lua~ the name of the theme will be the same name as the theme folder
+and the lua file needs to be named ~theme.lua~ and you put all the colors inside a theme table, it will be easier if you just copy one of the made themes
+and just change the colors.

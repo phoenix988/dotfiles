@@ -38,12 +38,11 @@ s.mywibox:setup {
             init.sep.clock_sep,
             init.update.icon,
             init.update.widget,
-            --init.sep.clock_sep,
-            --init.layouticon,
-            --init.layoutwidget,
+            init.sep.clock_sep,
+            init.layouticon,
+            init.layoutwidget,
             init.sep.clock_sep,
             init.pow.sep_2,
-            init.sep.first_sec,
             {
             {init.sep.linuxicon,
              bottom = 2,
@@ -71,10 +70,11 @@ s.mywibox:setup {
              widget = wibox.container.margin,
             },
              left  = 0,
-             right = 0,
+             right = 6,
+             color = theme.seperator_2,
              layout = wibox.container.margin,
             },
-            init.sep.first_sec,
+            init.pow.sep_3,
             {
             {init.mem.memicon,
              bottom = 2,
@@ -86,7 +86,7 @@ s.mywibox:setup {
              layout = wibox.container.margin,
             },
             {
-            {init.mem_text,
+            {init.mem.memorywidget,
              bottom = 2,
              color  = theme.fg_mem,
              widget = wibox.container.margin,
@@ -127,7 +127,7 @@ s.mywibox:setup {
              layout = wibox.container.margin,
             },
             {
-            {init.cpu.tempwidget,
+            {init.cpu.temptext,
              bottom = 2,
              color  = theme.fg_cpu,
              widget = wibox.container.margin,
@@ -196,7 +196,7 @@ s.mywibox:setup {
 
 end
 
-
+-- For secondary monitos
 function mywibar.create_sec(s,wibox,init,theme)
 
 s.mywibox:setup {
@@ -233,12 +233,11 @@ s.mywibox:setup {
             init.sep.clock_sep,
             init.update.icon,
             init.update.widget,
-            --init.sep.clock_sep,
-            --init.layouticon,
-            --init.layoutwidget,
+            init.sep.clock_sep,
+            init.layouticon,
+            init.layoutwidget,
             init.sep.clock_sep,
             init.pow.sep_2,
-            init.sep.first_sec,
             {
             {init.sep.linuxicon,
              bottom = 2,
@@ -266,10 +265,11 @@ s.mywibox:setup {
              widget = wibox.container.margin,
             },
              left  = 0,
-             right = 0,
+             right = 6,
+             color = theme.seperator_2,
              layout = wibox.container.margin,
             },
-            init.sep.first_sec,
+            init.pow.sep_3,
             {
             {init.mem.memicon,
              bottom = 2,
@@ -281,7 +281,7 @@ s.mywibox:setup {
              layout = wibox.container.margin,
             },
             {
-            {init.mem_text,
+            {init.mem.memorywidget,
              bottom = 2,
              color  = theme.fg_mem,
              widget = wibox.container.margin,
@@ -303,6 +303,26 @@ s.mywibox:setup {
             },
             {
             {init.cpu.cpuwidget,
+             bottom = 2,
+             color  = theme.fg_cpu,
+             widget = wibox.container.margin,
+            },
+             left  = 0,
+             right = 0,
+             layout = wibox.container.margin,
+            },
+            {
+            {init.cpu.tempicon,
+             bottom = 2,
+             color  = theme.fg_cpu,
+             widget = wibox.container.margin,
+            },
+             left  = 0,
+             right = 0,
+             layout = wibox.container.margin,
+            },
+            {
+            {init.cpu.temptext,
              bottom = 2,
              color  = theme.fg_cpu,
              widget = wibox.container.margin,
@@ -354,17 +374,29 @@ s.mywibox:setup {
              layout = wibox.container.margin,
             },
             init.pow.sep_3,
+            init.sep.first_sec,
             {
-            {init.sep.linuxicon,
+            {init.weather.icon,
              bottom = 2,
-             color  = theme.fg_icon,
+             top    = 0,
+             color  = theme.fg_focus,
              widget = wibox.container.margin,
             },
-             left  = 0,
-             right = 0,
+             left  = 1,
+             right = -2,
              layout = wibox.container.margin,
             },
-            init.sep.first_sec,
+            {
+            {init.weather.widget,
+             bottom = 2,
+             top    = 0,
+             color  = theme.fg_focus,
+             widget = wibox.container.margin,
+            },
+             left  = 1,
+             right = 6,
+             layout = wibox.container.margin,
+            },
 
         },
     }

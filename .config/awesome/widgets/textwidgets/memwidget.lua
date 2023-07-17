@@ -18,25 +18,25 @@ settings = function()
 end
 })
    
-   --local memorybg = wibox.container.background(memorystack, "#474747", gears.shape.rectangle)
-   --local memorywidget = wibox.container.margin(memorybg, table.unpack(var.bar_size))
+--local memorybg = wibox.container.background(memorystack, "#474747", gears.shape.rectangle)
+--local memorywidget = wibox.container.margin(memorybg, table.unpack(var.bar_size))
 
-   --widget.memorywidget = wibox.container.background(memorywidget, theme.bg_normal, gears.shape.rectangle)
-   --
-   ---- Makes memory icon
-   --local memicon =  wibox.widget {
-   --     markup = "<span foreground='" .. theme.fg_mem .. "' font='" .. font.mem .. "'>🖬</span>",
-   --     widget = wibox.widget.textbox
-   --}
-   --
-   --local memicon = wibox.container.margin(memicon, 10, 7, 7, 4)
-   --widget.memicon = wibox.container.background(memicon, theme.bg_normal, gears.shape.rectangle)
+--widget.memorywidget = wibox.container.background(memorywidget, theme.bg_normal, gears.shape.rectangle)
+--
+---- Makes memory icon
+--local memicon =  wibox.widget {
+--     markup = "<span foreground='" .. theme.fg_mem .. "' font='" .. font.mem .. "'>🖬</span>",
+--     widget = wibox.widget.textbox
+--}
+--
+--local memicon = wibox.container.margin(memicon, 10, 7, 7, 4)
+--widget.memicon = wibox.container.background(memicon, theme.bg_normal, gears.shape.rectangle)
 
-   --awful.tooltip {
-   --    objects = { widget.memorywidget },
-   --    timer_function = function()
-   --        return mem_now.used .. " / " .. mem_now.total .. " MB" 
-   --    end
-   --}
+--awful.tooltip {
+--    objects = { widget.memorywidget },
+--    timer_function = function()
+--        return mem_now.used .. " / " .. mem_now.total .. " MB" 
+--    end
+--}
 -- Memory widget end
 

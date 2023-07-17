@@ -14,6 +14,7 @@ font.update        = "JetBrainsMono Nerd Font 13"
 font.vol           = "JetBrainsMono Nerd Font 16"
 font.taglist       = "Droid Sans 21"
 font.clock         = "JetBrainsMono Nerd Font 13"
+font.weather       = "JetBrainsMono Nerd Font 13"
 
 
 return font

@@ -17,7 +17,7 @@ local markup       = lain.util.markup
    }
    
    powerline.sep_2 = wibox.widget {
-            markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_1 .. "' font='" .. font.seperator .. "'></span>",
+            markup = "<span foreground='" .. theme.seperator_2 .. "' background='" .. theme.seperator_1 .. "' font='" .. font.seperator .. "'></span>",
             widget = wibox.widget.textbox,
    }
    
