@@ -1,17 +1,17 @@
-local gears   = require("gears")
-local lain    = require("lain")
-local awful   = require("awful")
-local wibox   = require("wibox")
-local var     = require("themes.default.variables")
+local gears         = require("gears")
+local lain          = require("lain")
+local awful         = require("awful")
+local wibox         = require("wibox")
+local var           = require("themes.default.variables")
 
 local chosen_theme  = require("activate_theme")
 local theme         = require("themes/" .. chosen_theme.chosen_theme .. "/color")
 
-local font  = require("themes.default.font")
+local font          = require("themes.default.font")
 
-local markup       = lain.util.markup
+local markup        = lain.util.markup
 
-local widget       = {}
+local widget        = {}
 -- ALSA volume bar
 -- Create volume icon
 local volicon = wibox.widget.textbox()

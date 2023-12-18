@@ -40,8 +40,8 @@ var.update_command = "bash -c 'paru -Syy &> /dev/null && paru -Qu 2> /dev/null |
 -- Command for getting current layout
 var.layout_command = "setxkbmap -query | grep layout | awk '{print $NF}'"
 
-
-var.temp_command = "sensors | grep 'Tctl' | awk '{print $NF}' | sed 's/+//g'"
+-- Command the get the cpu temp
+var.temp_command = "bash -c 'sensors | grep Tctl'"
 
 -- Set Tagicons
 -- Example of icons you can use

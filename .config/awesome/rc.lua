@@ -69,7 +69,7 @@ run_once({ "unclutter -root" }) -- entries must be comma-separated
 
 -- {{{ Variable definitions
 -- Choose your theme of widgets here
-local chosen_theme = theme.chosen_widget
+local chosen_theme = "default"
 local terminal     = "kitty"
 local terminal_alt = "kitty -e tmux attach"
 local editor       = os.getenv("EDITOR") or "nvim"

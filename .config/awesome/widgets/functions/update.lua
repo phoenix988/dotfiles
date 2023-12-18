@@ -18,14 +18,19 @@ function update:create(dist,theme,font,time)
       -- Command to run to check for updates
       if dist == "arch" then 
            M.command = "bash -c 'pacman -Qu | wc -l'"
+           M.sync = "pacman -Syyu"
            M.packages = "pacman -Qq | wc -l"
       elseif dist == "paru" then     
            M.command = "bash -c 'paru -Syy &> /dev/null && paru -Qu 2> /dev/null | wc -l'"
+           M.sync = "pacman -Syyu"
            M.packages = "pacman -Qq | wc -l"
       elseif dist == "ubuntu" then
            M.command = "dpkg -l 2> /dev/null | wc -l"
+           M.sync = "apt update"
       else      
-           M.command = "bash -c 'pacman -Syy &> /dev/null && pacman -Qu 2> /dev/null | wc -l'"
+           M.command = "bash -c 'pacman -Qu | wc -l'"
+           M.sync = "pacman -Syyu"
+           M.packages = "pacman -Qq | wc -l"
       end
 
       local function command_run(command)

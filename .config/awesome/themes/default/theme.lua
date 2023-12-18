@@ -191,9 +191,14 @@ elseif chosen_widget.chosen_widget == "laptop" then
     local mywibar = require("widgets.wibar.wibox_laptop")
 
     -- Create the wibar made for laptops or smaller res screens 
-    mywibar.create(s,wibox,seperator,powerline,mylauncher,
-               mytextclock,updateicon,updatewidget,mem,cpu,
-               bat,vol,kernelwidget,theme)
+    if s.index == 1 then
+       -- Add widgets to the wibox
+       -- Create the wibar
+       mywibar.create(s,wibox,init,theme)
+    else
+       mywibar.create_sec(s,wibox,init,theme)
+    end
+
 
 end
 

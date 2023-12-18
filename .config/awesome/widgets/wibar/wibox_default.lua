@@ -127,7 +127,7 @@ s.mywibox:setup {
              layout = wibox.container.margin,
             },
             {
-            {init.cpu.temptext,
+            {init.cpu.temp_custom,
              bottom = 2,
              color  = theme.fg_cpu,
              widget = wibox.container.margin,
@@ -322,7 +322,7 @@ s.mywibox:setup {
              layout = wibox.container.margin,
             },
             {
-            {init.cpu.temptext,
+            {init.cpu.temp_custom,
              bottom = 2,
              color  = theme.fg_cpu,
              widget = wibox.container.margin,
