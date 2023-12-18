@@ -106,7 +106,7 @@ as options in the script, -f requires an argument.
 -c will only output the files that have changed.
 if you dont specify a switch then it will simply not output anything
 #+BEGIN_SRC sh :tangle sync-script
-while getopts ":f:vc" opt; do
+while getopts ":f:vch" opt; do
   case $opt in
      f)
       file="$OPTARG"
@@ -116,6 +116,14 @@ while getopts ":f:vc" opt; do
       ;;
      c)
       only_change=true
+      ;;
+     h)
+      printf 'c print only files that has changed ( needs to be used with v)'
+      printf "\n"
+      printf 'v verbose'
+      printf "\n"
+      printf 'f filepath (store the output in a file)'
+      exit
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2

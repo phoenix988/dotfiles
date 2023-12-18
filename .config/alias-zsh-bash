@@ -356,6 +356,10 @@ alias filetothunar="xdg-mime default thunar.desktop inode/directory application"
 # Change the default xclip behaviour
 alias xclip="xclip -selection clipboard"
 
+# yandex disk alias
+alias yas="yandex-disk status"
+alias ys="yandex-disk start"
+
 # Sets some Variables
 export EDITOR=vim
 export VISUAL=vim
@@ -367,7 +371,7 @@ export github='https://github.com'
 export date_for_backup=$(date +%d-%h-%Y-%H-%M )
 
 # Docker host config
-export DOCKER_HOST=ssh://karl@192.168.1.31
+export DOCKER_HOST=ssh://karl@192.168.1.30
 
 # quickly connect to tmux sessions
 t() {

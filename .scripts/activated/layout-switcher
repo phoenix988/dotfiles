@@ -1,9 +1,32 @@
 #!/bin/bash
 
+declare -A options 
+
+options["us"]=1
+options["az"]=2
+options["se"]=3
 
 
-
+list=$(printf '%s\n' "${!options[@]}")
 layout=$(setxkbmap -query | grep layout | awk '{print $NF}')
 
+for opt in $list ;  do
+    if [ "$layout" = "$opt" ] ; then
+        choice=$(printf '%s\n' "${options[$opt]}")
+    fi
+done
 
-[ "$layout" = "us" ] && setxkbmap "se" || setxkbmap "us"  
+if [ "$choice" = 3 ] ; then
+   choice=1
+   for opt in $list ; do
+       printf '%s\n' "${options[$opt]}"
+   done
+else
+   choice=$(expr $choice + 1)
+   for opt in $list ; do
+       printf '%s\n' "${!options["az"]}"
+   done
+fi
+
+
+

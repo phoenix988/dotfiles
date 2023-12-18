@@ -169,7 +169,7 @@ input {
     kb_layout = us,se,az
     kb_variant =
     kb_model =
-    kb_options = grp:caps_toggle
+    kb_options = grp:alt_shift_toggle
     kb_rules =
 
     follow_mouse = 1
@@ -210,10 +210,10 @@ decoration {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
     rounding = 7
-    blur = true
-    blur_size = 3
-    blur_passes = 1
-    blur_new_optimizations = true
+    # blur = true
+    # blur_size = 3
+    # blur_passes = 1
+    # blur_new_optimizations = true
 
     drop_shadow = true
     shadow_range = 4
@@ -274,7 +274,7 @@ General bindings like how to exit hyprland and kill active windows
 $mainMod = SUPER
 $browser1 = qutebrowser
 $browser2 = librewolf
-$term = kitty -e tmux attach
+$term = kitty
 $script_path = $HOME/.scripts
 
 
