@@ -32,7 +32,7 @@ def init_widgets_list():
                        filename = "~/.config/qtile/icon.png",
                        scale = "False",
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(variables['run'])},
-                       padding = 10
+                       padding = 0
                        ),
              widget.Sep(
                        linewidth = 0,
@@ -152,7 +152,8 @@ def init_widgets_list():
                        background = colors[2],
                        fontsize   = widget_font,
                        font = widget_fam,
-                       format = " %A, %B %d/%Y -  %H:%M ",
+                       format = " %A, %B %d/%Y - %H:%M ",
+                       #  
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("yad --calendar")},
                        ),
              widget.NvidiaSensors(
@@ -216,7 +217,7 @@ def init_widgets_list():
                        fontsize   = widget_font,
                        font = widget_fam,
                        cityid = "598316",
-                       format = '󰖐 {main_temp} {units_temperature}°',
+                       format = '󰖐  {main_temp} {units_temperature}°',
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(variables['browser'] + " https://openweathermap.org/city/598316")},
                        decorations = [
                             BorderDecoration (
@@ -289,7 +290,7 @@ def init_widgets_list():
                        fontsize = widget_font,
                        font = widget_fam,
                        padding = 8,
-                       format = ' {load_percent}%',
+                       format = '  {load_percent}%',
                        decorations = [
                             BorderDecoration (
                             colour = colors[10],
