@@ -371,7 +371,10 @@ export github='https://github.com'
 export date_for_backup=$(date +%d-%h-%Y-%H-%M )
 
 # Docker host config
-export DOCKER_HOST=ssh://karl@192.168.1.30
+export DOCKER_HOST=ssh://karl@192.168.0.6
+
+# Ntfy server
+export ntfy="https://ntfy.phoenixonline.club/notify"
 
 # quickly connect to tmux sessions
 t() {
