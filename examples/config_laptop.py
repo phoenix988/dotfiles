@@ -28,7 +28,7 @@ def init_widgets_list():
                         filename = "~/.config/qtile/icon.png",
                         scale = "False",
                         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(MYTERM_NORMAL)},
-                        padding = 10
+                        padding = 0
                         ),
              widget.Sep(
                        linewidth = 0,

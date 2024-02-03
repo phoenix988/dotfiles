@@ -1,4 +1,5 @@
 #+title: Qtile
+#+author: Karl
 
 
 [[file:./images/qtile.png]]
@@ -203,8 +204,8 @@ Here you will configure all your prefered keybindings
 | SUPER + SHIFT + R | Restart Qtile          |
 | SUPER + SHIFT + Q | Exit qtile             |
 | ALT + CONTROL + L | Lock your screen       |
-| SUPER + F1        | Kitty help             |
-| SUPER + F2        | Qtile Help             |
+| SUPER + F1        | Qtile help             |
+| SUPER + F2        | Kitty Help             |
 
 #+BEGIN_SRC python :tangle config.py
 #START_KEYS
@@ -241,15 +242,14 @@ keys = [
 #+END_SRC
 *** APPLICATIONS
 
-| Keybinding    | DESCRIPTION     |
-|---------------+-----------------|
-| SUPER + S     | Restart Qtile   |
-| SUPER + B     | Exit qtile      |
-| SUPER + I     | Qtile Help      |
-| SUPER + O     | Kitty help      |
-| SUPER +  G    | Launch Gimp     |
-| SUPER +  G    | Launch Azla     |
-| SUPER + Enter | Launch Terminal |
+| Keybinding    | DESCRIPTION         |
+|---------------+---------------------|
+| SUPER + S     | Take Screenshot     |
+| SUPER + B     | Launch Browser      |
+| SUPER + I     | Launch lxappearance |
+| SUPER + O     | Launch OBS          |
+| SUPER +  G    | Launch Gimp         |
+| SUPER + Enter | Launch Terminal     |
 
 
 | Keybinding            | DESCRIPTION                   |
@@ -371,10 +371,11 @@ keys = [
 #+END_SRC
 *** SCRIPTS
 
-| Keybinding  | DESCRIPTION          |
-|-------------+----------------------|
-| SUPER + F12 | Set Random Wallpaper |
-| SUPER + F11 | Restart Picom        |
+| Keybinding  | DESCRIPTION                 |
+|-------------+-----------------------------|
+| SUPER + F12 | Set Random Wallpaper        |
+| SUPER + F11 | Restart Picom               |
+| SUPER + F10 | Update Multi Monitor Layout |
 
 #+BEGIN_SRC python :tangle config.py
          #KEYS_GROUP Some of my custom scripts
@@ -393,7 +394,7 @@ keys = [
 #+END_SRC
 *** MEDIA CONTROL
 This is just so all your standard media buttons on your keyboard will work
-Pretty straight forward works the same way as in windows for example
+Pretty straight forward works the same way as any desktop manager
 #+BEGIN_SRC python :tangle config.py
          #KEYS_GROUP Media control
          Key([ ],"XF86AudioPlay", #Resume/Stop
@@ -421,11 +422,12 @@ Pretty straight forward works the same way as in windows for example
              desc='Previous'
              ),
 #+END_SRC
+
 *** MONITOR CONTROL
 | Keybinding          | DESCRIPTION          |
 |---------------------+----------------------|
 | SUPER + W           | Move to Monitor 1    |
-| SUPER +  E          | Move to Monitor 2    |
+| SUPER + E           | Move to Monitor 2    |
 | SUPER + CONTROL + R | Move to Monitor 3    |
 | SUPER +  .          | Move to Next Monitor |
 | SUPER +  ,          | Move to Prev Monitor |
@@ -455,6 +457,7 @@ Pretty straight forward works the same way as in windows for example
              desc='Move focus to prev monitor'
              ),
 #+END_SRC
+
 *** WINDOW CONTROL
 | Keybinding          | DESCRIPTION          |
 |---------------------+----------------------|
@@ -474,8 +477,6 @@ Pretty straight forward works the same way as in windows for example
 | SUPER + CONTROL + L | Resize Right         |
 | SUPER + CONTROL + J | Resize Down          |
 | SUPER + CONTROL + K | Resize Up            |
-
-
 
 
 #+BEGIN_SRC python :tangle config.py
@@ -854,8 +855,8 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 #+END_SRC
 
 ** LAYOUTS
-Here you choose which layouts you want to be availble for use
-I mostly use bsp layout cause its my favorite kind of layout
+Layouts you want to be availble.
+Just uncomment the layouts name or comment it to disable it
 #+BEGIN_SRC python :tangle config.py
 
 #My default layout theme
@@ -871,20 +872,20 @@ layouts = [
                  lower_right = True,
                  border_on_single = True,
                  fair = False  ),
-    layout.RatioTile(border_width = 2,
-                     margin = 0,
-                     ratio_increment = 0.2,
-                     border_focus = layout_colors[0],
-                     border_normal = layout_colors[1],
-                      ),
+    # layout.RatioTile(border_width = 2,
+    #                  margin = 0,
+    #                  ratio_increment = 0.2,
+    #                  border_focus = layout_colors[0],
+    #                  border_normal = layout_colors[1],
+    #                  ),
     layout.MonadTall(**layout_theme),
     layout.Max(**layout_theme),
-    layout.Stack(num_stacks=2,
-                border_focus = layout_colors[0],
-                border_normal = layout_colors[1],
-                autosplit = False,
-                fair = True ),
-    layout.RatioTile(**layout_theme),
+    # layout.Stack(num_stacks=2,
+    #            border_focus = layout_colors[0],
+    #            border_normal = layout_colors[1],
+    #            autosplit = False,
+    #            fair = True ),
+    # layout.RatioTile(**layout_theme),
     layout.TreeTab(
          font = "Ubuntu Mono",
          fontsize = 10,
@@ -909,7 +910,6 @@ layouts = [
          margin_y = 20,
          panel_width = 150
          ),
-
     layout.Floating(**layout_theme,
                       fullscreen_border_width = 1,
                       max_border_width = 1),
@@ -959,7 +959,7 @@ def init_widgets_list():
                        filename = "~/.config/qtile/icon.png",
                        scale = "False",
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(variables['run'])},
-                       padding = 10
+                       padding = 0
                        ),
              widget.Sep(
                        linewidth = 0,
@@ -1143,7 +1143,7 @@ def init_widgets_list():
                        fontsize   = widget_font,
                        font = widget_fam,
                        cityid = "598316",
-                       format = '󰖐 {main_temp} {units_temperature}°',
+                       format = '󰖐  {main_temp} {units_temperature}°',
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(variables['browser'] + " https://openweathermap.org/city/598316")},
                        decorations = [
                             BorderDecoration (
@@ -1216,7 +1216,7 @@ def init_widgets_list():
                        fontsize = widget_font,
                        font = widget_fam,
                        padding = 8,
-                       format = ' {load_percent}%',
+                       format = '  {load_percent}%',
                        decorations = [
                             BorderDecoration (
                             colour = colors[10],
@@ -1443,7 +1443,7 @@ def init_widgets_list():
                         filename = "~/.config/qtile/icon.png",
                         scale = "False",
                         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(MYTERM_NORMAL)},
-                        padding = 10
+                        padding = 0
                         ),
              widget.Sep(
                        linewidth = 0,

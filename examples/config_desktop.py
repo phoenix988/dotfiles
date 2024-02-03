@@ -152,8 +152,7 @@ def init_widgets_list():
                        background = colors[2],
                        fontsize   = widget_font,
                        font = widget_fam,
-                       format = " %A, %B %d/%Y - %H:%M ",
-                       #  
+                       format = " %A, %B %d/%Y -  %H:%M ",
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("yad --calendar")},
                        ),
              widget.NvidiaSensors(
