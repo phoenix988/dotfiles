@@ -428,7 +428,7 @@ def init_widgets_list():
                        distro = "Arch",
                        fontsize = widget_font,
                        font = widget_fam,
-                       display_format = " {updates} Updates",
+                       display_format = " {updates}",
                        no_update_string = ' 0',
                        colour_have_updates = colors[13],
                        colour_no_updates = colors[13],
@@ -447,7 +447,7 @@ def init_widgets_list():
                        background = colors[0],
                        foreground = colors[0],
                        padding = -1,
-                       fontsize = 45
+                       fontsize = 20
                        ),
              widget.Sep(
                        linewidth = 0,

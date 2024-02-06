@@ -256,16 +256,6 @@ keys = [
              desc='Move focus to prev monitor'
              ),
 
-         #KEYS_GROUP Treetab controls
-         Key([mod, "control"], "h", #Move up a section in treetab
-             lazy.layout.move_left(),
-             desc='Move up a section in treetab'
-             ),
-         Key([mod, "shift"], "l", #Move up a section in treetab
-             lazy.layout.move_right(),
-             desc='Move down a section in treetab'
-             ),
-
          #KEYS_GROUP Window controls
          Key([mod], "Tab", #Toggle through layouts
              lazy.next_layout(),
@@ -283,13 +273,13 @@ keys = [
              lazy.layout.down(),
              desc='Move focus up in current stack pane'
              ),
-         Key([mod], "h", #Shrink window in tilling layout
+         Key([mod], "h", #Move to the lef5
              lazy.layout.left(),
-             desc='Shrink window (MonadTall), decrease number in master pane (Tile)'
+             desc='Move to the left'
              ),
-         Key([mod], "l", #Expand window in tilling layout
+         Key([mod], "l", #Move to the right
              lazy.layout.right(),
-             desc='Expand window (MonadTall), increase number in master pane (Tile)'
+             desc='Move to the right'
              ),
          Key([mod], "n", #Normalize window size ratio
              lazy.layout.normalize(),
@@ -310,11 +300,13 @@ keys = [
          Key([mod, "shift"], "j", #Move windows down in current stack
              lazy.layout.shuffle_down(),
              lazy.layout.section_jown(),
+             lazy.layout.move_down().when(layout=["treetab"]),
              desc='Move windows down in current stack'
              ),
          Key([mod, "shift"], "k", #Move widnows up in current stack
              lazy.layout.shuffle_up(),
              lazy.layout.section_up(),
+             lazy.layout.move_up().when(layout=["treetab"]),
              desc='Move windows up in current stack'
              ),
          Key([mod, "shift"], "l", #Move windows down in current stack
@@ -328,6 +320,10 @@ keys = [
          Key([mod, "shift"], "f", #Toggle floating
              lazy.window.toggle_floating(),
              desc='toggle floating'
+             ),
+         Key([mod, "shift"], "a", #Add new section dynamically to the treetab
+             lazy.layout.add_section("new"),
+             desc='Add new section to the treetab'
              ),
          Key([mod, "mod1"], "l", #change the position of the window to the right
              lazy.layout.flip_right(),
@@ -346,19 +342,23 @@ keys = [
              desc='change the position of the window up'
              ),
          Key([mod, "control"], "h", #increase the size of the window to the left
-             lazy.layout.grow_left(),
+             lazy.layout.grow_left().when(layout=["bsp"]),
+             lazy.layout.grow().when(layout=["monadtall", "monadwide"]),
              desc='increase the size of the window to the left'
              ),
          Key([mod, "control"], "l", #increase the size of the window to the left
-             lazy.layout.grow_right(),
+             lazy.layout.grow_right().when(layout=["bsp"]),
+             lazy.layout.shrink().when(layout=["monadtall", "monadwide"]),
              desc='increase the size of the window to the left'
              ),
          Key([mod, "control"], "j", #increase the size of the window downwards
              lazy.layout.grow_down(),
+             lazy.layout.section_down().when(layout=["treetab"]),
              desc='increase the size of the window downwards'
              ),
          Key([mod, "control"], "k", #increase the size of the window upwards
              lazy.layout.grow_up(),
+             lazy.layout.section_up().when(layout=["treetab"]),
              desc='increase the size of the window upwards'
              ),
 
@@ -446,7 +446,7 @@ keys = [
          name="Action: "),
 
          #KEYS_GROUP TreeTab Control CTRL + alt follow by key'
-         KeyChord(["control"], "t", [
+         KeyChord(["control", "mod1" ], "t", [
              Key([], "h", #Move tab to the left in the tree tab
                  lazy.layout.move_left(),
                  desc='Move tab to the left in the tree tab'
