@@ -40,6 +40,11 @@ def init_widgets_list():
                        foreground = colors[2],
                        background = colors[0]
                        ),
+             widget.Chord(
+                       background = colors[0],
+                       foreground = colors[2],
+                       padding = 1
+                       ),
              widget.GroupBox(
                        font = widget_fam,
                        fontsize = 28,
@@ -173,11 +178,6 @@ def init_widgets_list():
                        padding = 1,
                        foreground = colors[0],
                        background = colors[0]
-                       ),
-             widget.Chord(
-                       background = colors[0],
-                       foreground = colors[2],
-                       padding = 1
                        ),
              widget.TextBox(
                        text = '',

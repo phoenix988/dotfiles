@@ -30,6 +30,12 @@ from qtile_extras.widget.decorations import RectDecoration, PowerLineDecoration,
 # import some variables
 from var import variables
 
+# Allows you to input a name when adding treetab section
+@lazy.layout.function
+def add_treetab_section(layout):
+    prompt = qtile.widgets_map["prompt"]
+    prompt.start_input("Section name: "), layout.cmd_add_section
+
 # Define super key as variable
 mod = variables['mod']
 
@@ -435,6 +441,39 @@ keys = [
 
          name="Action: "),
 
+         #KEYS_GROUP TreeTab Control CTRL + alt follow by key'
+         KeyChord(["control"], "t", [
+             Key([], "h", #Move tab to the left in the tree tab
+                 lazy.layout.move_left(),
+                 desc='Move tab to the left in the tree tab'
+                 ),
+             Key([], "l", #Launch Eshell in emacs
+                 lazy.layout.move_right(),
+                 desc='Move tab to the right in the tree tab'
+                 ),
+             Key([], "j", #Move tab down in the tree tab
+                 lazy.layout.move_down(),
+                 desc='Move tab down in the tree tab'
+                 ),
+             Key([], "k", #Move tab up in the tree tab
+                 lazy.layout.move_up(),
+                 desc='Move tab up in the tree tab'
+                 ),
+             Key([], "a", #Move tab one section down in the tree tab
+                 add_treetab_section(),
+                 desc='Add tree tab section'
+                 ),
+             Key(["shift"], "j", #Move tab one section down in the tree tab
+                 lazy.layout.section_down(),
+                 desc='Move tab one section down in the tree tab'
+                 ),
+             Key(["shift"], "k", #Move tab one section up in the tree tab
+                 lazy.layout.section_up(),
+                 desc='Move tab one section up in the tree tab'
+                 ),],
+
+         name="TreeTab: "),
+
          #KEYS_GROUP Dmenu scripts launched using the key chord SUPER+p followed by 'key'
          KeyChord([mod], "p", [
              Key([], "e", #Choose config file to edit
@@ -545,7 +584,7 @@ layouts = [
     #                  ratio_increment = 0.2,
     #                  border_focus = layout_colors[0],
     #                  border_normal = layout_colors[1],
-    #                   ),
+    #                  ),
     layout.MonadTall(**layout_theme),
     layout.Max(**layout_theme),
     # layout.Stack(num_stacks=2,
@@ -557,8 +596,8 @@ layouts = [
     layout.TreeTab(
          font = "Ubuntu Mono",
          fontsize = 10,
-         sections = [""],
-         section_fontsize = 16,
+         sections = ["DEV", "Work", "Video"],
+         section_fontsize = 20,
          border_width = 2,
          bg_color = layout_colors[2],
          active_bg = layout_colors[0],
@@ -578,7 +617,6 @@ layouts = [
          margin_y = 20,
          panel_width = 150
          ),
-
     layout.Floating(**layout_theme,
                       fullscreen_border_width = 1,
                       max_border_width = 1),
@@ -586,7 +624,7 @@ layouts = [
 
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
-    del widgets_screen2[17:25]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
+    del widgets_screen2[19:24]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
     return widgets_screen2
 
 def init_widgets_screen1():

@@ -139,6 +139,12 @@ Like change terminal for example. So if you want to add a variable your
 can add it here.
 #+BEGIN_SRC python :tangle config.py
 
+# Allows you to input a name when adding treetab section
+@lazy.layout.function
+def add_treetab_section(layout):
+    prompt = qtile.widgets_map["prompt"]
+    prompt.start_input("Section name: "), layout.cmd_add_section
+
 # Define super key as variable
 mod = variables['mod']
 
@@ -608,15 +614,15 @@ Pretty straight forward works the same way as any desktop manager
 *** TMUX
 | Keybinding        | DESCRIPTION           |
 |-------------------+-----------------------|
-| CONTROL + ALT + 1 | Move to tmux window 1 |
-| CONTROL + ALT + 2 | Move to tmux window 2 |
-| CONTROL + ALT + 3 | Move to tmux window 3 |
-| CONTROL + ALT + 4 | Move to tmux window 4 |
-| CONTROL + ALT + 5 | Move to tmux window 5 |
-| CONTROL + ALT + 6 | Move to tmux window 6 |
-| CONTROL + ALT + 7 | Move to tmux window 7 |
-| CONTROL + ALT + 8 | Move to tmux window 8 |
-| CONTROL + ALT + 9 | Move to tmux window 9 |
+| ALT + 1           | Move to tmux window 1 |
+| ALT + 2           | Move to tmux window 2 |
+| ALT + 3           | Move to tmux window 3 |
+| ALT + 4           | Move to tmux window 4 |
+| ALT + 5           | Move to tmux window 5 |
+| ALT + 6           | Move to tmux window 6 |
+| ALT + 7           | Move to tmux window 7 |
+| ALT + 8           | Move to tmux window 8 |
+| ALT + 9           | Move to tmux window 9 |
 | CONTROL + ALT + S | Vertical Split        |
 | CONTROL + ALT + V | Horizontal Split      |
 
@@ -694,6 +700,52 @@ Pretty straight forward works the same way as any desktop manager
              ),],
 
          name="Action: "),
+#+END_SRC
+
+
+*** TreeTab Control
+| Keybinding          | DESCRIPTION           |
+|---------------------+-----------------------|
+| CONTROL t + j       | Move down tab         |
+| CONTROL t + k       | Move up tab           |
+| CONTROL t + h       | Move tab to the left  |
+| CONTROL t + l       | Move tab to the right |
+| CONTROL t + Shift j | Move one section down |
+| CONTROL t + Shift k | Move one section up   |
+#+BEGIN_SRC python :tangle config.py
+         #KEYS_GROUP TreeTab Control CTRL + alt follow by key'
+         KeyChord(["control"], "t", [
+             Key([], "h", #Move tab to the left in the tree tab
+                 lazy.layout.move_left(),
+                 desc='Move tab to the left in the tree tab'
+                 ),
+             Key([], "l", #Launch Eshell in emacs
+                 lazy.layout.move_right(),
+                 desc='Move tab to the right in the tree tab'
+                 ),
+             Key([], "j", #Move tab down in the tree tab
+                 lazy.layout.move_down(),
+                 desc='Move tab down in the tree tab'
+                 ),
+             Key([], "k", #Move tab up in the tree tab
+                 lazy.layout.move_up(),
+                 desc='Move tab up in the tree tab'
+                 ),
+             Key([], "a", #Move tab one section down in the tree tab
+                 add_treetab_section(),
+                 desc='Add tree tab section'
+                 ),
+             Key(["shift"], "j", #Move tab one section down in the tree tab
+                 lazy.layout.section_down(),
+                 desc='Move tab one section down in the tree tab'
+                 ),
+             Key(["shift"], "k", #Move tab one section up in the tree tab
+                 lazy.layout.section_up(),
+                 desc='Move tab one section up in the tree tab'
+                 ),],
+
+         name="TreeTab: "),
+
 #+END_SRC
 *** RUN SCRIPTS
 
@@ -889,8 +941,8 @@ layouts = [
     layout.TreeTab(
          font = "Ubuntu Mono",
          fontsize = 10,
-         sections = [""],
-         section_fontsize = 16,
+         sections = ["DEV", "Work", "Video"],
+         section_fontsize = 20,
          border_width = 2,
          bg_color = layout_colors[2],
          active_bg = layout_colors[0],
@@ -966,6 +1018,11 @@ def init_widgets_list():
                        padding = 0,
                        foreground = colors[2],
                        background = colors[0]
+                       ),
+             widget.Chord(
+                       background = colors[0],
+                       foreground = colors[2],
+                       padding = 1
                        ),
              widget.GroupBox(
                        font = widget_fam,
@@ -1100,11 +1157,6 @@ def init_widgets_list():
                        padding = 1,
                        foreground = colors[0],
                        background = colors[0]
-                       ),
-             widget.Chord(
-                       background = colors[0],
-                       foreground = colors[2],
-                       padding = 1
                        ),
              widget.TextBox(
                        text = '',
@@ -1851,7 +1903,7 @@ Here I also configure the size and the margin of the Qtile bar.
 #+BEGIN_SRC python :tangle config.py
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
-    del widgets_screen2[17:25]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
+    del widgets_screen2[19:24]               # Slicing removes unwanted widgets (systray) on Monitors 2,3
     return widgets_screen2
 
 def init_widgets_screen1():
