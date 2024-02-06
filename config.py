@@ -422,6 +422,10 @@ keys = [
                  lazy.spawn("emacsclient -c -a '' --eval '(eshell)'"),
              desc='Launch Eshell in emacs'
              ),
+             Key([], "v", #Launch Vterm in emacs
+                 lazy.spawn("emacsclient -c -a '' --eval '(vterm)'"),
+             desc='Launch vterm in emacs'
+             ),
              Key([], "h", #Launch htop
                  lazy.spawn(SYSMON),
              desc='Launch HTOP'
