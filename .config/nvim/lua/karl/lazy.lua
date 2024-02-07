@@ -124,16 +124,15 @@ require('lazy').setup({
 
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+    dependencies = { 'hrsh7th/cmp-nvim-lsp',},
   },
     {'hrsh7th/cmp-nvim-lsp'},     -- Required
     {'hrsh7th/cmp-buffer'},       -- Optional
     {'hrsh7th/cmp-path'},         -- Optional
-    {'saadparwaiz1/cmp_luasnip'}, -- Optional
     {'hrsh7th/cmp-nvim-lua'},     -- Optional
 
     -- Snippets
-    {'L3MON4D3/LuaSnip'},             -- Required
+    --{'L3MON4D3/LuaSnip'},             -- Required
     {'rafamadriz/friendly-snippets'}, -- Optional
 
 
@@ -188,15 +187,15 @@ require('lazy').setup({
     },
   },
 
-  { -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help indent_blankline.txt`
-    opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
-    },
-  },
+  --{ -- Add indentation guides even on blank lines
+  --  'lukas-reineke/indent-blankline.nvim',
+  --  -- Enable `lukas-reineke/indent-blankline.nvim`
+  --  -- See `:help indent_blankline.txt`
+  --  opts = {
+  --    char = '┊',
+  --    show_trailing_blankline_indent = false,
+  --  },
+  --},
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },

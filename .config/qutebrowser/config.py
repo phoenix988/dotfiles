@@ -680,7 +680,7 @@ c.colors.webpage.bg = 'white'
 # `colors.webpage.darkmode.threshold.background` to 205.  - "With
 # selective inversion of everything": Combines the two variants   above.
 # Type: Bool
-c.colors.webpage.darkmode.enabled = False
+c.colors.webpage.darkmode.enabled = True
 
 # Which algorithm to use for modifying how colors are rendered with
 # darkmode. The `lightness-cielab` value was added with QtWebEngine 5.14
@@ -702,7 +702,7 @@ c.colors.webpage.darkmode.contrast = 1.0
 # `colors.webpage.darkmode.algorithm` is set to `lightness-hsl` or
 # `brightness-rgb`.
 # Type: Bool
-c.colors.webpage.darkmode.grayscale.all = True
+# c.colors.webpage.darkmode.grayscale.all = True
 
 # Bindings for normal mode
 config.bind('J', 'tab-prev')
