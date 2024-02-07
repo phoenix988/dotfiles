@@ -111,6 +111,7 @@ elif command_exist pacman ; then
       alias pacman="sudo pacman"
       alias update='sudo pacman -Syyu'
       alias remove="sudo pacman -Rns"
+      alias pac="pacman -Q | wc -l"
 
       # fix obvious typo's
       alias cd..='cd ..'
@@ -397,5 +398,11 @@ elif [ -f "$1" ] ; then
 fi
 }
 
+
+clone() {
+
+git clone "https://github.com/phoenix988/$1.git"
+
+}
 
 
