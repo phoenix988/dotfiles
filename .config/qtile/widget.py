@@ -1,1 +1,1 @@
-examples/config-desktop.py
+examples/config_desktop.py

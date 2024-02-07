@@ -1,7 +1,7 @@
 from libqtile import layout, bar, widget, hook
 from libqtile.config import Click, Drag, Group, ScratchPad, DropDown, KeyChord, Key, Match, Screen
 
-group_names = [(" ", {'layout': 'bsp' ,'matches':[Match(wm_class=["Brave-browser-nightly", "Chromium" , "librewolf"])]}),
+group_names = [(" ", {'layout': 'bsp' ,'matches':[Match(wm_class=["none"])]}),
                (" ", {'layout': 'bsp','matches':[Match(wm_class=["neo"])]}),
                (" ", {'layout': 'bsp', 'matches':[Match(wm_class=["TeamViewer"])]}),
                ("󰓓 ", {'layout': 'max', 'matches':[Match(wm_class=["lutris" , "Steam" , "upc.exe" , "steam_proton" , "heroic"])]}),
