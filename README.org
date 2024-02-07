@@ -1357,7 +1357,7 @@ def init_widgets_list():
                        fontsize = 45
                        ),
              widget.TextBox(
-                       text = "♫ Vol:",
+                       text = "♫ ",
                        foreground = colors[14],
                        background = colors[0],
                        padding = 0,
@@ -1899,8 +1899,9 @@ def init_widgets_screen2():
 
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
-    del widgets_screen1[18]               # Slicing removes unwanted widgets on Monitors 1
-    return widgets_screen1                 # Monitor 1 will display all widgets in widgets_list
+    del widgets_screen1[18]                  # Slicing removes unwanted widgets on Monitors 1
+    del widgets_screen1[25:28]               # Slicing removes unwanted widgets on Monitors 1
+    return widgets_screen1                   # Monitor 1 will display most widgets in widgets_list
 
 def init_screens():
     return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=38, margin=8 )),

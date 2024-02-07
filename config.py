@@ -273,7 +273,7 @@ keys = [
              lazy.layout.down(),
              desc='Move focus up in current stack pane'
              ),
-         Key([mod], "h", #Move to the lef5
+         Key([mod], "h", #Move to the left
              lazy.layout.left(),
              desc='Move to the left'
              ),
@@ -580,9 +580,10 @@ layout_theme = {"border_width": 3,
 
 layouts = [
     layout.Bsp(**layout_theme,
-                 lower_right = True,
-                 border_on_single = True,
-                 fair = False  ),
+         lower_right = True,
+         border_on_single = True,
+         fair = False
+         ),
     # layout.RatioTile(border_width = 2,
     #                  margin = 0,
     #                  ratio_increment = 0.2,
@@ -617,13 +618,13 @@ layouts = [
          section_padding = 10,
          level_shift = 8,
          vspace = 5,
-
          margin_y = 20,
          panel_width = 150
          ),
     layout.Floating(**layout_theme,
-                      fullscreen_border_width = 1,
-                      max_border_width = 1),
+         fullscreen_border_width = 1,
+         max_border_width = 1
+         ),
 ]
 
 def init_widgets_screen2():
@@ -633,8 +634,9 @@ def init_widgets_screen2():
 
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
-    del widgets_screen1[18]               # Slicing removes unwanted widgets on Monitors 1
-    return widgets_screen1                 # Monitor 1 will display all widgets in widgets_list
+    del widgets_screen1[18]                  # Slicing removes unwanted widgets on Monitors 1
+    del widgets_screen1[25:28]               # Slicing removes unwanted widgets on Monitors 1
+    return widgets_screen1                   # Monitor 1 will display most widgets in widgets_list
 
 def init_screens():
     return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=38, margin=8 )),

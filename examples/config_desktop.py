@@ -376,7 +376,7 @@ def init_widgets_list():
                        fontsize = 45
                        ),
              widget.TextBox(
-                       text = "♫ Vol:",
+                       text = "♫ ",
                        foreground = colors[14],
                        background = colors[0],
                        padding = 0,
