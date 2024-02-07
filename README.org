@@ -1,5 +1,6 @@
 #+title: Qtile
 #+author: Karl
+#+description: Qtile configuration with comments
 
 
 [[file:./images/qtile.png]]
@@ -437,7 +438,6 @@ Pretty straight forward works the same way as any desktop environment
 | SUPER + CONTROL + R | Move to Monitor 3    |
 | SUPER +  .          | Move to Next Monitor |
 | SUPER +  ,          | Move to Prev Monitor |
-
 #+BEGIN_SRC python :tangle config.py
          #KEYS_GROUP Switch focus to specific monitor (out of two)
          Key([mod], "w", #Move focus to monitor 1
@@ -1682,61 +1682,8 @@ def init_widgets_list():
                               border_width = [0, 0, 4, 0],
                               padding_x = 0, )
                               ],
-                        ),
-             # widget.OpenWeather(
-             #           background = colors[0],
-             #           foreground = colors[8],
-             #           fontsize   = widget_font,
-             #           font = widget_fam,
-             #           cityid = "598316",
-             #           format = '󰖐 {main_temp} {units_temperature}°',
-             #           mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(variables['browser'] + " https://openweathermap.org/city/598316")},
-             #           decorations = [
-             #                BorderDecoration (
-             #                colour = colors[8],
-             #                border_width = [0, 0, 4, 0],
-             #                padding_x = 0, )
-             #                ],
-             #           ),
-             # widget.TextBox(
-             #           text = '',
-             #           background = colors[0],
-             #           foreground = colors[0],
-             #           padding = -1,
-             #           fontsize = 45
-             #           ),
-             # widget.TextBox(
-             #           #text = '🖴',
-             #           text = '⛁ ',
-             #           background = colors[0],
-             #           foreground = colors[9],
-             #           padding = 1,
-             #           font = widget_fam,
-             #           fontsize = widget_font,
-             #           mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("baobab")},
-             #           decorations = [
-             #                BorderDecoration (
-             #                colour = colors[9],
-             #                border_width = [0, 0, 4, 0],
-             #                padding_x = 0, )
-             #                ],
-             #           ),
-             # # widget.DF(
-             #           partition = "/",
-             #           visible_on_warn = False,
-             #           foreground = colors[9],
-             #           background = colors[0],
-             #           fontsize = widget_font,
-             #           font = widget_fam,
-             #           mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("baobab")},
-             #           decorations = [
-             #                BorderDecoration (
-             #                colour = colors[9],
-             #                border_width = [0, 0, 4, 0],
-             #                padding_x = 0, )
-             #                ],
-             #           ),
-               widget.TextBox(
+                       ),
+             widget.TextBox(
                        text = '',
                        background = colors[0],
                        foreground = colors[0],
