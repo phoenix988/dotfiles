@@ -12,7 +12,10 @@
 - [[VARIABLES]]
   - [[VARIABLES FILE]]
 - [[KEYBINDINGS]]
-  - [[GENERAL]]
+  - 
+
+
+[[GENERAL]]
   - [[APPLICATIONS]]
   - [[SCRIPTS]]
   - [[MEDIA CONTROL]]
@@ -533,7 +536,6 @@ Pretty straight forward works the same way as any desktop environment
              ),
          Key([mod, "shift"], "k", #Move widnows up in current stack
              lazy.layout.shuffle_up(),
-             lazy.layout.section_up(),
              lazy.layout.move_up().when(layout=["treetab"]),
              desc='Move windows up in current stack'
              ),
@@ -871,11 +873,11 @@ from libqtile.config import Click, Drag, Group, ScratchPad, DropDown, KeyChord, 
 
 group_names = [(" ", {'layout': 'bsp' ,'matches':[Match(wm_class=["none"])]}),
                (" ", {'layout': 'bsp','matches':[Match(wm_class=["neo"])]}),
-               (" ", {'layout': 'bsp', 'matches':[Match(wm_class=["TeamViewer"])]}),
-               ("󰓓 ", {'layout': 'max', 'matches':[Match(wm_class=["lutris" , "Steam" , "upc.exe" , "steam_proton" , "heroic"])]}),
-               (" ", {'layout': 'bsp', 'matches':[Match(wm_class=["re.sonny.Tangram", "crx_cifhbcnohmdccbgoicgdjpfamggdegmo", "disk.yandex.com__client_disk"])]}),
-               ("󰝚 ", {'layout': 'bsp', 'matches':[Match(wm_class=["Spotify"])]}),
-               ("󰙯 ", {'layout': 'max', 'matches':[Match(wm_class=["discord" , "Franz" , "whatsapp-nativefier-d40211" , "altus" , "whatsdesk" , "whatsapp-for-linux", "web.whatsapp.com"])]}),
+               (" ", {'layout': 'bsp', 'matches':[Match(wm_class=["TeamViewer"])]}),
+               (" ", {'layout': 'max', 'matches':[Match(wm_class=["lutris" , "Steam" , "upc.exe" , "steam_proton" , "heroic"])]}),
+               (" ", {'layout': 'bsp', 'matches':[Match(wm_class=["re.sonny.Tangram", "crx_cifhbcnohmdccbgoicgdjpfamggdegmo", "disk.yandex.com__client_disk"])]}),
+               (" ", {'layout': 'bsp', 'matches':[Match(wm_class=["Spotify"])]}),
+               (" ", {'layout': 'max', 'matches':[Match(wm_class=["discord" , "Franz" , "whatsapp-nativefier-d40211" , "altus" , "whatsdesk" , "whatsapp-for-linux", "web.whatsapp.com"])]}),
                (" ", {'layout': 'treetab', 'matches':[Match(wm_class=["io.github.celluloid_player.Celluloid" , "urxvt" , "obs", "youtube.com", "netflix.com"])]}),
                (" ", {'layout': 'bsp', 'matches':[Match(wm_class=["gimp-2.10","Gimp" ,"Cinelerra","Olive", "kdenlive" , "resolve" ])]})]
 
@@ -887,15 +889,15 @@ This is just normal text to represent workspaces. set tangle to config.py if you
 from libqtile import layout, bar, widget, hook
 from libqtile.config import Click, Drag, Group, ScratchPad, DropDown, KeyChord, Key, Match, Screen
 
-group_names = [("WWW", {'layout': 'bsp' ,'matches':[Match(wm_class=["Brave-browser-nightly", "Chromium" , "librewolf"])]}),
-               ("DEV", {'layout': 'bsp','matches':[Match(wm_class=["neo"])]}),
-               ("SYS", {'layout': 'bsp', 'matches':[Match(wm_class=["TeamViewer"])]}),
-               ("GAM", {'layout': 'max', 'matches':[Match(wm_class=["lutris" , "Steam" , "upc.exe" , "steam_proton" , "heroic"])]}),
-               ("DOC", {'layout': 'bsp', 'matches':[Match(wm_class=["re.sonny.Tangram", "crx_cifhbcnohmdccbgoicgdjpfamggdegmo", "disk.yandex.com__client_disk"])]}),
-               ("SOC", {'layout': 'max', 'matches':[Match(wm_class=["discord" , "Franz" , "whatsapp-nativefier-d40211" , "altus" , "whatsdesk" , "whatsapp-for-linux", "web.whatsapp.com"])]}),
-               ("REC", {'layout': 'bsp', 'matches':[Match(wm_class=["Spotify"])]}),
-               ("VID", {'layout': 'treetab', 'matches':[Match(wm_class=["nemo"  , "io.github.celluloid_player.Celluloid" , "urxvt" , "obs", "youtube.com", "netflix.com"])]}),
-               ("GFX", {'layout': 'bsp', 'matches':[Match(wm_class=["gimp-2.10","Gimp" ,"Cinelerra","Olive", "kdenlive" , "resolve" ])]})]
+group_names = [("1", {'layout': 'bsp' ,'matches':[Match(wm_class=["B"])]}),
+               ("2", {'layout': 'bsp','matches':[Match(wm_class=["neo"])]}),
+               ("3", {'layout': 'bsp', 'matches':[Match(wm_class=["TeamViewer"])]}),
+               ("4", {'layout': 'max', 'matches':[Match(wm_class=["lutris" , "Steam" , "upc.exe" , "steam_proton" , "heroic"])]}),
+               ("5", {'layout': 'bsp', 'matches':[Match(wm_class=["re.sonny.Tangram", "crx_cifhbcnohmdccbgoicgdjpfamggdegmo", "disk.yandex.com__client_disk"])]}),
+               ("6", {'layout': 'max', 'matches':[Match(wm_class=["discord" , "Franz" , "whatsapp-nativefier-d40211" , "altus" , "whatsdesk" , "whatsapp-for-linux", "web.whatsapp.com"])]}),
+               ("7", {'layout': 'bsp', 'matches':[Match(wm_class=["Spotify"])]}),
+               ("8", {'layout': 'treetab', 'matches':[Match(wm_class=["nemo"  , "io.github.celluloid_player.Celluloid" , "urxvt" , "obs", "youtube.com", "netflix.com"])]}),
+               ("9", {'layout': 'bsp', 'matches':[Match(wm_class=["gimp-2.10","Gimp" ,"Cinelerra","Olive", "kdenlive" , "resolve" ])]})]
 #+END_SRC
 
 *** DEFINE
@@ -916,7 +918,7 @@ Just uncomment the layouts name or comment it to disable it
 #My default layout theme
 #and if you want to activate a layout just uncomment them
 layout_theme = {"border_width": 3,
-                "margin": 5,
+                "margin": 10,
                 "border_focus": layout_colors[0],
                 "border_normal": layout_colors[1]
                 }
@@ -942,7 +944,7 @@ layouts = [
     #            fair = True ),
     # layout.RatioTile(**layout_theme),
     layout.TreeTab(
-         font = "Ubuntu Mono",
+         font = "JetBrainsMono Nerd Font",
          fontsize = 10,
          sections = ["DEV", "Work", "Video"],
          section_fontsize = 20,
@@ -1024,7 +1026,9 @@ def init_widgets_list():
              widget.Chord(
                        background = colors[0],
                        foreground = colors[2],
-                       padding = 1
+                       padding = 1,
+                       fontsize   = widget_font,
+                       font = widget_fam,
                        ),
              widget.GroupBox(
                        font = widget_fam,
@@ -1039,8 +1043,8 @@ def init_widgets_list():
                        inactive = colors[1],
                        rounded = "true",
                        disable_drag = "true",
-                       highlight_method = "text",
-                       highlight_color = colors[4],
+                       highlight_method = "line",
+                       highlight_color = colors[1],
                        this_current_screen_border = colors[6],
                        this_screen_border = colors[2],
                        other_current_screen_border = colors[6],
@@ -1100,7 +1104,7 @@ def init_widgets_list():
                        foreground = colors[2],
                        background = colors[0]
                        ),
-             widget.TaskList(
+             widget.WindowName(
                        font = widget_fam,
                        fontsize = 16,
                        foreground = colors[15],
@@ -1974,8 +1978,8 @@ floating_layout = layout.Floating(float_rules=[
     *layout.Floating.default_float_rules,
     Match(title='Confirmation'),
     Match(title='Qalculate!'),
-    Match(wm_class='kdenlive'),
-    Match(wm_class='gimp-2.10'),
+    # Match(wm_class='kdenlive'),
+    # Match(wm_class='gimp-2.10'),
     Match(wm_class='pinentry-gtk-2'),
     Match(wm_class='yad'),
     Match(wm_class='bitwarden'),

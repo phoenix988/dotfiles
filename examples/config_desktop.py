@@ -43,7 +43,9 @@ def init_widgets_list():
              widget.Chord(
                        background = colors[0],
                        foreground = colors[2],
-                       padding = 1
+                       padding = 1,
+                       fontsize   = widget_font,
+                       font = widget_fam,
                        ),
              widget.GroupBox(
                        font = widget_fam,
@@ -58,8 +60,8 @@ def init_widgets_list():
                        inactive = colors[1],
                        rounded = "true",
                        disable_drag = "true",
-                       highlight_method = "text",
-                       highlight_color = colors[4],
+                       highlight_method = "line",
+                       highlight_color = colors[1],
                        this_current_screen_border = colors[6],
                        this_screen_border = colors[2],
                        other_current_screen_border = colors[6],
@@ -119,7 +121,7 @@ def init_widgets_list():
                        foreground = colors[2],
                        background = colors[0]
                        ),
-             widget.TaskList(
+             widget.WindowName(
                        font = widget_fam,
                        fontsize = 16,
                        foreground = colors[15],

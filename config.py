@@ -305,7 +305,6 @@ keys = [
              ),
          Key([mod, "shift"], "k", #Move widnows up in current stack
              lazy.layout.shuffle_up(),
-             lazy.layout.section_up(),
              lazy.layout.move_up().when(layout=["treetab"]),
              desc='Move windows up in current stack'
              ),
@@ -573,7 +572,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 #My default layout theme
 #and if you want to activate a layout just uncomment them
 layout_theme = {"border_width": 3,
-                "margin": 5,
+                "margin": 10,
                 "border_focus": layout_colors[0],
                 "border_normal": layout_colors[1]
                 }
@@ -599,7 +598,7 @@ layouts = [
     #            fair = True ),
     # layout.RatioTile(**layout_theme),
     layout.TreeTab(
-         font = "Ubuntu Mono",
+         font = "JetBrainsMono Nerd Font",
          fontsize = 10,
          sections = ["DEV", "Work", "Video"],
          section_fontsize = 20,
@@ -698,8 +697,8 @@ floating_layout = layout.Floating(float_rules=[
     *layout.Floating.default_float_rules,
     Match(title='Confirmation'),
     Match(title='Qalculate!'),
-    Match(wm_class='kdenlive'),
-    Match(wm_class='gimp-2.10'),
+    # Match(wm_class='kdenlive'),
+    # Match(wm_class='gimp-2.10'),
     Match(wm_class='pinentry-gtk-2'),
     Match(wm_class='yad'),
     Match(wm_class='bitwarden'),
