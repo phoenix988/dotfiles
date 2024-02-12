@@ -49,7 +49,7 @@ FILE_MANAGER = variables['FILE_MANAGER']
 GUI_FILE_MANAGER = "pcmanfm"
 
 # Browsers
-BROWSER2  = "brave-browser --new-window --app=https://duckduckgo.com"
+BROWSER2  = "brave-browser-nightly --new-window --app=https://duckduckgo.com"
 BROWSER1  = "librewolf"
 
 # Text editors
