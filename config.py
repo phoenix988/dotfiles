@@ -40,30 +40,30 @@ def add_treetab_section(layout):
 mod = variables['mod']
 
 # Terminals
-MYTERM = "kitty -e tmux attach"
+MYTERM = variables['term'] + " -e tmux attach"
 MYTERM_NORMAL = variables['term']
 SYSMON = variables['sysmon']
 
 # Filemanagers
 FILE_MANAGER = variables['FILE_MANAGER']
-GUI_FILE_MANAGER = "pcmanfm"
+GUI_FILE_MANAGER = variables['GUI_FILE_MANAGER']
 
 # Browsers
-BROWSER2  = "brave-browser-nightly --new-window --app=https://duckduckgo.com"
-BROWSER1  = "librewolf"
+BROWSER2  = variables['browser2']
+BROWSER1  = variables['browser']
 
 # Text editors
-EDITOR = "emacsclient -c -a emacs"
+EDITOR = variables['editor']
 
 # Utilities
-VIRTMAN = "virt-manager"
-BACKUP = "sudo timeshift-gtk"
-LOCKSCREEN =  "slock"
+VIRTMAN = variables['virtman']
+BACKUP = variables['backup']
+LOCKSCREEN =  variables['lockscreen']
 
 # My custom scripts
-DMENU_PATH = "/home/karl/.dmenu"
-SCRIPT_PATH = "/home/karl/.scripts/activated"
-TMUX_PATH = "/home/karl/.scripts/tmux"
+DMENU_PATH = variables['dmenu_path']
+SCRIPT_PATH = variables['script_path']
+TMUX_PATH = variables['tmux_path']
 
 #START_KEYS
 keys = [
@@ -93,7 +93,7 @@ keys = [
               desc='switch between Keyboard layouts'
              ),
          Key([mod, ], "r", #Run Rofi
-              lazy.spawn("rofi -show drun -show-icons -display-drun \"Run : \" -drun-display-format \"{name}\""),
+              lazy.spawn(variables['run']),
               desc='Run rofi'
              ),
 
@@ -143,7 +143,7 @@ keys = [
 
          Key([mod, "shift"], "t", #Browser 1
              lazy.spawn(variables['sysmon']),
-             desc='Launch browser1'
+             desc='Launch system monitor'
              ),
          Key([mod, "shift"], "v", #Launch Virt-Manager
              lazy.spawn(VIRTMAN),
@@ -168,6 +168,10 @@ keys = [
          Key([mod, "shift"], "o", #Launch gparted
              lazy.spawn("Gparted"),
              desc='Launch Gparted'
+             ),
+         Key([mod, "shift"], "b", #Launch bluetooth manager
+             lazy.spawn("blueman-manager"),
+             desc='Launch bluetooth manager'
              ),
 
          #KEYS_GROUP Launch application with alt + control + key

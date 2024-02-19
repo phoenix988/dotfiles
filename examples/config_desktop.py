@@ -217,9 +217,9 @@ def init_widgets_list():
                        foreground = colors[8],
                        fontsize   = widget_font,
                        font = widget_fam,
-                       cityid = "598316",
+                       cityid = variables['city'],
                        format = '󰖐  {main_temp} {units_temperature}°',
-                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(variables['browser'] + " https://openweathermap.org/city/598316")},
+                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(variables['browser'] + " https://openweathermap.org/city/" + variables['city'])},
                        decorations = [
                             BorderDecoration (
                             colour = colors[8],
@@ -361,6 +361,7 @@ def init_widgets_list():
                        font = "JetBrainsMono Nerd Font",
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(variables['sysmon'])},
                        format = '{MemUsed: .0f}{mm} /{MemTotal: .0f}{mm}',
+                       measure_mem = 'G',
                        fontsize = widget_font,
                        padding = 5,
                        decorations = [

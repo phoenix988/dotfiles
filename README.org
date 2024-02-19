@@ -12,10 +12,7 @@
 - [[VARIABLES]]
   - [[VARIABLES FILE]]
 - [[KEYBINDINGS]]
-  - 
-
-
-[[GENERAL]]
+  - [[GENERAL]]
   - [[APPLICATIONS]]
   - [[SCRIPTS]]
   - [[MEDIA CONTROL]]
@@ -153,34 +150,36 @@ def add_treetab_section(layout):
 mod = variables['mod']
 
 # Terminals
-MYTERM = "kitty -e tmux attach"
+MYTERM = variables['term'] + " -e tmux attach"
 MYTERM_NORMAL = variables['term']
 SYSMON = variables['sysmon']
 
 # Filemanagers
 FILE_MANAGER = variables['FILE_MANAGER']
-GUI_FILE_MANAGER = "pcmanfm"
+GUI_FILE_MANAGER = variables['GUI_FILE_MANAGER']
 
 # Browsers
-BROWSER2  = "brave-browser-nightly --new-window --app=https://duckduckgo.com"
-BROWSER1  = "librewolf"
+BROWSER2  = variables['browser2']
+BROWSER1  = variables['browser']
 
 # Text editors
-EDITOR = "emacsclient -c -a emacs"
+EDITOR = variables['editor']
 
 # Utilities
-VIRTMAN = "virt-manager"
-BACKUP = "sudo timeshift-gtk"
-LOCKSCREEN =  "slock"
+VIRTMAN = variables['virtman']
+BACKUP = variables['backup']
+LOCKSCREEN =  variables['lockscreen']
 
 # My custom scripts
-DMENU_PATH = "/home/karl/.dmenu"
-SCRIPT_PATH = "/home/karl/.scripts/activated"
-TMUX_PATH = "/home/karl/.scripts/tmux"
+DMENU_PATH = variables['dmenu_path']
+SCRIPT_PATH = variables['script_path']
+TMUX_PATH = variables['tmux_path']
 #+END_SRC
 
+Here I create my variable file, if you use my config then you configure all your variables in this var file
 *** VARIABLES FILE
 #+begin_src python :tangle var.py
+# Variables for standard programs
 variables = {
     'term': 'kitty',
     'browser': 'librewolf',
@@ -188,19 +187,23 @@ variables = {
     'mod': 'mod4',
 }
 
-
+# Programs
 variables['sysmon'] = variables['term'] + ' -e btop'
 variables['editor'] = 'emacsclient -c -a emacs'
 variables['browser2'] = "brave-browser --new-window --app=https://duckduckgo.com"
-
 variables['virtman'] = "virt-manager"
 variables['backup'] = "sudo timeshift-gtk"
 variables['lockscreen'] =  "slock"
+variables['FILE_MANAGER'] = "emacsclient -c -a '' --eval '(dired nil)'"
+variables['GUI_FILE_MANAGER'] = "pcmanfm"
+
+# Paths
 variables['dmenu_path'] = "/home/karl/.dmenu"
 variables['script_path'] = "/home/karl/.scripts/activated"
 variables['tmux_path'] = "/home/karl/.scripts/tmux"
-variables['FILE_MANAGER'] = "emacsclient -c -a '' --eval '(dired nil)'"
-variables['GUI_FILE_MANAGER'] = "pcmanfm"
+
+# City
+variables['city'] = "593116"
 #+end_src
 
 
@@ -246,7 +249,7 @@ keys = [
               desc='switch between Keyboard layouts'
              ),
          Key([mod, ], "r", #Run Rofi
-              lazy.spawn("rofi -show drun -show-icons -display-drun \"Run : \" -drun-display-format \"{name}\""),
+              lazy.spawn(variables['run']),
               desc='Run rofi'
              ),
 #+END_SRC
@@ -271,6 +274,8 @@ keys = [
 | SUPER + SHIFT + Enter | Launch Graphical file manager |
 | SUPER + SHIFT + G     | Launch Kdenlive               |
 | SUPER + SHIFT + D     | Launch Doom Emacs             |
+| SUPER + SHIFT + B     | Launch Bluetooth Manager      |
+| SUPER + SHIFT + T     | Launch Sys Monitor            |
 
 
 | Keybinding        | DESCRIPTION         |
@@ -330,7 +335,7 @@ keys = [
 
          Key([mod, "shift"], "t", #Browser 1
              lazy.spawn(variables['sysmon']),
-             desc='Launch browser1'
+             desc='Launch system monitor'
              ),
          Key([mod, "shift"], "v", #Launch Virt-Manager
              lazy.spawn(VIRTMAN),
@@ -355,6 +360,10 @@ keys = [
          Key([mod, "shift"], "o", #Launch gparted
              lazy.spawn("Gparted"),
              desc='Launch Gparted'
+             ),
+         Key([mod, "shift"], "b", #Launch bluetooth manager
+             lazy.spawn("blueman-manager"),
+             desc='Launch bluetooth manager'
              ),
 
          #KEYS_GROUP Launch application with alt + control + key
@@ -1200,9 +1209,9 @@ def init_widgets_list():
                        foreground = colors[8],
                        fontsize   = widget_font,
                        font = widget_fam,
-                       cityid = "598316",
+                       cityid = variables['city'],
                        format = '󰖐  {main_temp} {units_temperature}°',
-                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(variables['browser'] + " https://openweathermap.org/city/598316")},
+                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(variables['browser'] + " https://openweathermap.org/city/" + variables['city'])},
                        decorations = [
                             BorderDecoration (
                             colour = colors[8],
@@ -1344,6 +1353,7 @@ def init_widgets_list():
                        font = "JetBrainsMono Nerd Font",
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(variables['sysmon'])},
                        format = '{MemUsed: .0f}{mm} /{MemTotal: .0f}{mm}',
+                       measure_mem = 'G',
                        fontsize = widget_font,
                        padding = 5,
                        decorations = [
