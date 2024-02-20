@@ -21,6 +21,7 @@ command_exist() {
 
 # Set your prompt ttheme here I am using starship
 command_exist starship && eval "$(starship init zsh)"
+command_exist zoxide && eval "$(zoxide init --cmd cd zsh)"
 #ZSH_THEME='nord'
 
 # aliases
