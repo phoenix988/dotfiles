@@ -403,6 +403,10 @@ set -g @continuum-capture-pane-contents 'on'
 #set -g @dracula-show-left-icon session
 set -g @plugin "arcticicestudio/nord-tmux
 #source-file ~/.tmux/iceberg_minimal.tmux.conf
+set -g @plugin 'catppuccin/tmux'
+# ...alongside
+set -g @plugin 'tmux-plugins/tpm'
+set -g @catppuccin_flavour 'frappe' # or frappe, macchiato, mocha
 source-file ~/.tmux.conf.local
 
 # -- custom variables ----------------------------------------------------------
