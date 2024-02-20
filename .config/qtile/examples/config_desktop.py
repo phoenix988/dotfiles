@@ -43,7 +43,9 @@ def init_widgets_list():
              widget.Chord(
                        background = colors[0],
                        foreground = colors[2],
-                       padding = 1
+                       padding = 1,
+                       fontsize   = widget_font,
+                       font = widget_fam,
                        ),
              widget.GroupBox(
                        font = widget_fam,
@@ -58,8 +60,8 @@ def init_widgets_list():
                        inactive = colors[1],
                        rounded = "true",
                        disable_drag = "true",
-                       highlight_method = "text",
-                       highlight_color = colors[4],
+                       highlight_method = "line",
+                       highlight_color = colors[1],
                        this_current_screen_border = colors[6],
                        this_screen_border = colors[2],
                        other_current_screen_border = colors[6],
@@ -215,9 +217,9 @@ def init_widgets_list():
                        foreground = colors[8],
                        fontsize   = widget_font,
                        font = widget_fam,
-                       cityid = "598316",
+                       cityid = variables['city'],
                        format = '󰖐  {main_temp} {units_temperature}°',
-                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(variables['browser'] + " https://openweathermap.org/city/598316")},
+                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(variables['browser'] + " https://openweathermap.org/city/" + variables['city'])},
                        decorations = [
                             BorderDecoration (
                             colour = colors[8],
@@ -359,6 +361,7 @@ def init_widgets_list():
                        font = "JetBrainsMono Nerd Font",
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(variables['sysmon'])},
                        format = '{MemUsed: .0f}{mm} /{MemTotal: .0f}{mm}',
+                       measure_mem = 'G',
                        fontsize = widget_font,
                        padding = 5,
                        decorations = [
