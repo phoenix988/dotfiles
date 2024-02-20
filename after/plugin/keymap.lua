@@ -1,5 +1,5 @@
 -- Vifm
-vim.api.nvim_set_keymap("n", "<leader>.", ':Vifm<CR>' ,{ noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>.", ':Yazi<CR>' ,{ noremap = true, silent = true })
 
 -- Quickly move between windows
 vim.api.nvim_set_keymap("n", "<leader>bn", ':BufferNext' ,{ noremap = true, silent = true })
