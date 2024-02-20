@@ -14,6 +14,11 @@ esac
 # Path to your oh-my-bash installation.
 export OSH='/home/karl/.oh-my-bash'
 
+# Function to check if a command exist
+command_exist() {
+        type "$1" &> /dev/null;
+}
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
 #OSH_THEME="powerline-multiline"
@@ -198,3 +203,6 @@ fi
 #[ -z "$doom_exist" ] &&  PATH="$PATH:$add_doom"
 
 [ -e /usr/local/bin/starship ] && eval "$(starship init bash)"
+
+# Starts zoxide if its installed
+command_exist zoxide && eval "$(zoxide init --cmd cd bash)"
