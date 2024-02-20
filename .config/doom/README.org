@@ -33,7 +33,7 @@ so that I can easily make comments inside the document so it's easier to read an
 know whats going on. In order to use this config you need to have Doom Emacs installed.
 
 
-[[file:../.images/doom.jpeg]]
+[[file:../../.images/doom.jpeg]]
 
 ** AUTOCOMPLETION
 Adding company backends for autocompletion
