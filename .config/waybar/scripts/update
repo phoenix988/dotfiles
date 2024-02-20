@@ -1,0 +1,17 @@
+#!/bin/bash
+
+command_exist() {
+        type "$1" &> /dev/null;
+}
+
+if command_exist paru ; then
+
+    paru -Qu | wc -l
+
+elif command_exist pacman ; then
+
+    pacman -Qu | wc -l
+
+fi
+
+
