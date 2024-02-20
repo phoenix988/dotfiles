@@ -175,6 +175,8 @@
 
 (rainbow-mode 1)
 
+(map! :leader "c h" 'rainbow-mode)
+
 (setq shell-file-name "/bin/zsh"
       vterm-max-scrollback 5000)
 
@@ -199,12 +201,12 @@
 
   (doom-themes-neotree-config)
 
-  (setq doom-themes-treemacs-theme "doom-iceberg")
+  (setq doom-themes-treemacs-theme "doom-nord-aurora")
 
   (doom-themes-treemacs-config)
 
   (doom-themes-org-config))
 
-  (load-theme 'doom-iceberg t)
+  (load-theme 'doom-nord-aurora t)
 
 (use-package autothemer :ensure t)
