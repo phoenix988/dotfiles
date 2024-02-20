@@ -4,7 +4,6 @@
 --    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
-
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
     'git',
@@ -15,6 +14,7 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   }
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
@@ -124,17 +124,17 @@ require('lazy').setup({
 
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    dependencies = { 'hrsh7th/cmp-nvim-lsp',},
+    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
   },
     {'hrsh7th/cmp-nvim-lsp'},     -- Required
     {'hrsh7th/cmp-buffer'},       -- Optional
     {'hrsh7th/cmp-path'},         -- Optional
+    {'saadparwaiz1/cmp_luasnip'}, -- Optional
     {'hrsh7th/cmp-nvim-lua'},     -- Optional
 
     -- Snippets
-    --{'L3MON4D3/LuaSnip'},             -- Required
+    {'L3MON4D3/LuaSnip'},             -- Required
     {'rafamadriz/friendly-snippets'}, -- Optional
-
 
     -- Highlight colors inside of vim
     {'brenoprata10/nvim-highlight-colors'},
@@ -205,31 +205,30 @@ require('lazy').setup({
   { 'smartpde/telescope-recent-files'},
   { 'nvim-telescope/telescope-file-browser.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
 
- -- Harpoon
+   -- Harpoon
   { 'ThePrimeagen/harpoon' },
- -- Vifm file manager
+  -- Vifm file manager
   { 'vifm/vifm.vim' },
- -- Undotree to see history of a file
+  -- Yazi file manager
+  {"DreamMaoMao/yazi.nvim",},
+  -- Undotree to see history of a file
   { 'mbbill/undotree' },
 
- -- Neotree
+  -- Neotree
   {'nvim-tree/nvim-web-devicons'},
   { 'nvim-neo-tree/neo-tree.nvim', dependencies = { "nvim-lua/plenary.nvim",
-                                                    "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
                                                     "MunifTanjim/nui.nvim", } },
-
+  -- Neovim tree
   { 'nvim-tree/nvim-tree.lua' },
 
 
-
- -- Which key gives hint about keybindings
+  -- Which key gives hint about keybindings
   { 'folke/which-key.nvim' },
 
-
- -- Barbar better tabs
+  -- Barbar better tabs
   { 'romgrk/barbar.nvim', dependencies = { 'nvim-web-devicons' } },
 
- -- Lastplace remeber your last posisition
+  -- Lastplace remeber your last posisition
   {'ethanholz/nvim-lastplace'},
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
@@ -262,8 +261,7 @@ require('lazy').setup({
       end
   },
 
-    -- Vimwiki
-    { "chipsenkbeil/vimwiki.nvim" },
-
+  -- Vimwiki
+  { "chipsenkbeil/vimwiki.nvim" },
 
 }, {})
