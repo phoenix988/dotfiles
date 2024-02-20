@@ -4,7 +4,6 @@
 --    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
-
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
     'git',
@@ -15,6 +14,7 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   }
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
@@ -136,7 +136,6 @@ require('lazy').setup({
     {'L3MON4D3/LuaSnip'},             -- Required
     {'rafamadriz/friendly-snippets'}, -- Optional
 
-
     -- Highlight colors inside of vim
     {'brenoprata10/nvim-highlight-colors'},
 
@@ -210,13 +209,14 @@ require('lazy').setup({
   { 'ThePrimeagen/harpoon' },
   -- Vifm file manager
   { 'vifm/vifm.vim' },
+  -- Yazi file manager
+  {"DreamMaoMao/yazi.nvim",},
   -- Undotree to see history of a file
   { 'mbbill/undotree' },
 
   -- Neotree
   {'nvim-tree/nvim-web-devicons'},
   { 'nvim-neo-tree/neo-tree.nvim', dependencies = { "nvim-lua/plenary.nvim",
-                                                    "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
                                                     "MunifTanjim/nui.nvim", } },
   -- Neovim tree
   { 'nvim-tree/nvim-tree.lua' },
@@ -224,7 +224,6 @@ require('lazy').setup({
 
   -- Which key gives hint about keybindings
   { 'folke/which-key.nvim' },
-
 
   -- Barbar better tabs
   { 'romgrk/barbar.nvim', dependencies = { 'nvim-web-devicons' } },
@@ -264,9 +263,5 @@ require('lazy').setup({
 
   -- Vimwiki
   { "chipsenkbeil/vimwiki.nvim" },
-
-  -- yazi
-  {"DreamMaoMao/yazi.nvim",},
-
 
 }, {})
