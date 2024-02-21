@@ -24,7 +24,9 @@ require('lazy').setup({
   'NeogitOrg/neogit',
   'tpope/vim-rhubarb',
   "jreybert/vimagit",
-
+  
+  -- Buffer list
+  "roblillack/vim-bufferlist",
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
@@ -263,5 +265,11 @@ require('lazy').setup({
 
   -- Vimwiki
   { "chipsenkbeil/vimwiki.nvim" },
+  
+  -- nvim-compe lsp plugin
+  {"hrsh7th/nvim-compe"},
+
+  -- bufferline
+  {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'}
 
 }, {})

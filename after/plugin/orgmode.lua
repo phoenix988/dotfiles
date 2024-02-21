@@ -22,6 +22,7 @@ require('orgmode').setup({
   org_default_notes_file = '~/Dropbox/org/refile.org',
 })
 
+-- Create tangle command for org files
 function tangle_files()
   -- Get the current buffer's path
   local current_file = vim.api.nvim_buf_get_name(0)

@@ -41,21 +41,21 @@ keybindings
 
 *** FILE MANAGEMENT
 Commands to quickly move around files in neovim
-| Command                | Description                     | Keybinding |
-|------------------------+---------------------------------+------------|
-| Ex                     | Open built in explorer          | SPC p v    |
-| Vifm                   | Open vifm file manager          | SPC .      |
-| Telescope find_files   | Find files in telescope         | SPC f f    |
-| Telescope recent_files | Find recent files               | SPC f r    |
-| mark.add_file          | Add a file in harpoon           | SPC a      |
-| ui.toggle_quick_menu   | Open harpoon menu               | C-e        |
-| ui.nav_file(1-9)       | Navigate the harpoon files      | C-(1-9)    |
-| Grep                   | Grep a string of text in a file | SPC p s    |
-| NerdTreeToggleFocus    | Focus NerdTree                  | F6         |
-| NeoTreeToggle          | Toggle NeoTree                  | SPC f t    |
-| NeoTreeFloat           | Toggle NeoTree in floating mode | SPC n f    |
-| Neotree .              | Open Neotree in current dir     | SPC n .    |
-| Neotree ~              | Open Neotree in home            | SPC n h    |
+| Command                | Description                     | Keybinding  |
+|------------------------+---------------------------------+-------------|
+| Ex                     | Open built in explorer          | SPC p v     |
+| Yazi                   | Open yazi file manager          | SPC .       |
+| Telescope find_files   | Find files in telescope         | SPC f f     |
+| Telescope recent_files | Find recent files               | SPC f r     |
+| mark.add_file          | Add a file in harpoon           | SPC a       |
+| ui.toggle_quick_menu   | Open harpoon menu               | C-e         |
+| ui.nav_file(1-9)       | Navigate the harpoon files      | SPC-h (1-9) |
+| Grep                   | Grep a string of text in a file | SPC f g     |
+| NerdTreeToggleFocus    | Focus NerdTree                  | F6          |
+| NeoTreeToggle          | Toggle NeoTree                  | SPC f t     |
+| NeoTreeFloat           | Toggle NeoTree in floating mode | SPC n f     |
+| Neotree .              | Open Neotree in current dir     | SPC n .     |
+| Neotree ~              | Open Neotree in home            | SPC n h     |
 
 *** THEME
 Commands to change theme plus highlight colors
@@ -79,7 +79,7 @@ Create new tabs and manipulate buffers using these commands
 | BufferPrev  | Previous Buffer   | SPC b p    |
 | BufferClose | Kill buffer       | SPC b k    |
 | Tabnew      | Open new tab      | SPC t n    |
-| Tabclose    | close current tab | SPC t n    |
+| Tabclose    | close current tab | SPC t d    |
 | Dashboard   | Move to dashboard | SPC d      |
 
 *** GIT

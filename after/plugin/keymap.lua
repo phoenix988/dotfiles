@@ -1,10 +1,13 @@
--- Vifm
+-- Yazi
 vim.api.nvim_set_keymap("n", "<leader>.", ':Yazi<CR>' ,{ noremap = true, silent = true })
 
--- Quickly move between windows
-vim.api.nvim_set_keymap("n", "<leader>bn", ':BufferNext' ,{ noremap = true, silent = true })
+-- Quickly move between buffers
+vim.api.nvim_set_keymap("n", "<leader>bn", ':BufferNext<CR>' ,{ noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>bp", ':BufferPrevious<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>bk", ':BufferClose<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>bl", ':BufferList<CR>', { noremap = true, silent = true })
+
+-- Manage tabs
 vim.api.nvim_set_keymap("n", "<Leader>tn", ':tabnew<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>td", ':tabclose<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>ch", ':HighlightColorsToggle<CR>', { noremap = true, silent = true })
@@ -27,8 +30,8 @@ vim.api.nvim_set_keymap("n", "<leader>gl", ':LazyGit<CR>', { noremap = true, sil
 -- Neotree keybindings
 vim.api.nvim_set_keymap("n", "<F4>", ':NvimTreeFocus<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<F5>", ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Leader>ft", ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Leader>nf", ':NeoTreeFloat<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>nt", ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>nf", ':Neotree float<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>ns', ':Neotree ~/myrepos/setup<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>na', ':Neotree ~/myrepos/azla<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>nd', ':Neotree ~/myrepos/dotfiles<CR>', { noremap = true, silent = true })
@@ -56,7 +59,7 @@ local ui   = require("harpoon.ui")
 vim.keymap.set("n", "<leader>a", mark.add_file)
 vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
 vim.api.nvim_set_keymap('n', '<Leader>h1', ':ToHarpoon 1<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>h2', ':ToHarpoon 2<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>h2', ':ToHarpoon 3<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>h3', ':ToHarpoon 3<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>h4', ':ToHarpoon 4<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>h5', ':ToHarpoon 5<CR>', { noremap = true, silent = true })
@@ -65,14 +68,14 @@ vim.api.nvim_set_keymap('n', '<Leader>h7', ':ToHarpoon 7<CR>', { noremap = true,
 vim.api.nvim_set_keymap('n', '<Leader>h8', ':ToHarpoon 8<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>h9', ':ToHarpoon 9<CR>', { noremap = true, silent = true })
 
--- Keybinding to save as sudo
-vim.api.nvim_set_keymap('n', '<Leader>fs', ':SudaWrite<CR>', { noremap = true, silent = true })
-
 -- Keybinding to open UndoTree
 vim.api.nvim_set_keymap("n", "<Leader>u", ':UndotreeToggle<CR>', { noremap = true, silent = true })
 
 -- Jump back to your dashboard
 vim.api.nvim_set_keymap('n', '<Leader>d', ':Dashboard<CR>', { noremap = true, silent = true })
+
+-- Keybinding to save as sudo
+vim.api.nvim_set_keymap('n', '<Leader>fs', ':SudaWrite<CR>', { noremap = true, silent = true })
 
 -- Keybindings for telescope
 local builtin = require('telescope.builtin')
@@ -80,6 +83,7 @@ vim.api.nvim_set_keymap('n', '<Leader>ff', ':Telescope find_files<CR>', { norema
 vim.api.nvim_set_keymap('n', '<Leader>gf', ':Telescope git_files<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>ht', ':Telescope colorscheme<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>fb', ':Telescope file_browser<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>fG', ':Telescope live_grep<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Leader>fg', function()
 builtin.grep_string({ search = vim.fn.input("Grep >") } );
 
