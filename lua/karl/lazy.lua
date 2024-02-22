@@ -47,19 +47,15 @@ require('lazy').setup({
   },
   -- Dashboard settings
   {
-    "goolord/alpha-nvim",
+    "goolord/alpha-nvim", -- Using alpha as my dashboard
      event = "VimEnter",
      opts = function()
+      local setlogo = require("karl.dash")
       local dashboard = require("alpha.themes.dashboard")
-      local myConfig = "/home/karl/.config/nvim/README.org"
-      local logo = [[
-            ███████╗██████╗ ██╗██████╗  █████╗ ██╗   ██╗
-            ██╔════╝██╔══██╗██║██╔══██╗██╔══██╗╚██╗ ██╔╝
-            █████╗  ██████╔╝██║██║  ██║███████║ ╚████╔╝
-            ██╔══╝  ██╔══██╗██║██║  ██║██╔══██║  ╚██╔╝
-            ██║     ██║  ██║██║██████╔╝██║  ██║   ██║
-            ╚═╝     ╚═╝  ╚═╝╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝
-            ]]
+      local myConfig = "/home/karl/.config/nvim/init.lua"
+
+      -- Import my custom function to set the logo
+      local logo = setlogo()
       dashboard.section.header.val = vim.split(logo, "\n")
       dashboard.section.buttons.val = {
         dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
@@ -102,7 +98,7 @@ require('lazy').setup({
         end,
       })
     end,
-  },
+  }, -- End of dashboard config
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -175,8 +171,11 @@ require('lazy').setup({
   'folke/tokyonight.nvim',
   'shaunsingh/nord.nvim',
   'ribru17/bamboo.nvim',
+  'rmehri01/onenord.nvim',
   },
 
+  {'zaldih/themery.nvim'},
+  
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
@@ -270,6 +269,9 @@ require('lazy').setup({
   {"hrsh7th/nvim-compe"},
 
   -- bufferline
-  {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'}
+  {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
+
+  -- None ls
+  {'nvimtools/none-ls.nvim'},
 
 }, {})

@@ -31,6 +31,9 @@ wk.register({
   t = {
     name = "Tab"
   },
+  p = {
+    name = "Project Harpoon"
+  },
   s = {
     name = "Session"
   },

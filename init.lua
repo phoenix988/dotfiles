@@ -4,4 +4,5 @@ vim.g.maplocalleader = ' '
 
 require("karl.lazy")
 require("karl.remap")
-require("karl.set")
+require("karl.options")
+require("karl.dash")

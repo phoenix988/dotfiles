@@ -7,9 +7,18 @@ lsp.on_attach(function(client, bufnr)
   lsp.default_keymaps({buffer = bufnr})
 end)
 
+
+require('mason').setup({})
+require('mason-lspconfig').setup({
+  ensure_installed = {},
+  handlers = {
+    lsp.default_setup,
+  },
+})
+
 -- When you don't have mason.nvim installed
 -- You'll need to list the servers installed in your system
-lsp.setup_servers({'tsserver', 'eslint'})
+lsp.setup_servers({'tsserver', 'eslint', 'lua_ls', 'ansiblels'})
 
 lsp.set_preferences({
 	sign_icons = { }
@@ -26,3 +35,4 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 
 
 lsp.setup()
+

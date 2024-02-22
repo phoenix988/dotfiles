@@ -43,7 +43,6 @@ keybindings
 Commands to quickly move around files in neovim
 | Command                | Description                     | Keybinding  |
 |------------------------+---------------------------------+-------------|
-| Ex                     | Open built in explorer          | SPC p v     |
 | Yazi                   | Open yazi file manager          | SPC .       |
 | Telescope find_files   | Find files in telescope         | SPC f f     |
 | Telescope recent_files | Find recent files               | SPC f r     |
