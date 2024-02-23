@@ -23,6 +23,8 @@ v.api.nvim_set_keymap('n', '<S-Tab>', '<C-W>W', { noremap = true, silent = true 
 -- Git commands
 v.api.nvim_set_keymap('n', '<leader>gs', ':Git<CR>', { noremap = true, silent = true })
 v.api.nvim_set_keymap('n', '<leader>gg', ':Git<CR>', { noremap = true, silent = true })
+v.api.nvim_set_keymap('n', '<leader>gb', ':Git blame<CR>', { noremap = true, silent = true })
+v.api.nvim_set_keymap('n', '<leader>gs', ':Gitsigns preview_hunk<CR>', { noremap = true, silent = true })
 v.api.nvim_set_keymap('n', '<Leader>gp', ':Git push<CR>', { noremap = true, silent = true })
 v.api.nvim_set_keymap('n', '<Leader>gP', ':Git pull<CR>', { noremap = true, silent = true })
 v.api.nvim_set_keymap('n', '<Leader>gd', ':Gdiff %<CR>', { noremap = true, silent = true })
