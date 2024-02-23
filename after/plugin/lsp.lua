@@ -36,6 +36,24 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 	['<C-Space>'] = cmp.mapping.complete(),
 })
 
+cmp.setup({
+    snippet = {
+	expand = function(args)
+	    vim.vn["vsnip#anonymous"](args.body)
+	end,
+    },
+    window = {
+	completion = cmp.config.window.bordered(),
+	documentation = cmp.config.window.bordered(),
+    },
+    sources = cmp.config.sources({
+       { name = "nvim_lsp" },
+       { name = "luasnip" }, -- For luasnip users.
+       }, {
+       { name = "buffer" },
+    }),
+})
+
 
 -- Code action 
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})

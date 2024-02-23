@@ -1,3 +1,6 @@
+-- empty setup using defaults
+require("nvim-tree").setup()
+
 vim.g.neotree_auto_open = 1
 vim.g.neotree_quit_on_open = 1
 vim.g.neotree_hide_dotfiles = 0
@@ -8,9 +11,6 @@ vim.g.loaded_netrwPlugin = 1
 
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
-
--- empty setup using defaults
-require("nvim-tree").setup()
 
 -- OR setup with some options
 require("nvim-tree").setup({
