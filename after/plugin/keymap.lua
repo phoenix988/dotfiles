@@ -112,3 +112,8 @@ v.api.nvim_set_keymap('n', '<Leader>oT', ':OrgTangle<CR>', { noremap = true, sil
 
 -- Terminal mode
 v.api.nvim_set_keymap('t', '<Esc>l', '<C-\\><C-n>', {noremap = true})
+
+-- Session 
+-- List all your sessions
+v.keymap.set("n", "<Leader>sm", require("auto-session.session-lens").search_session, {
+  noremap = true, })

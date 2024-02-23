@@ -19,7 +19,8 @@ wk.register({
     name = "Git"
   },
   c = {
-    name = "Color"
+    name = "Color",
+    a = {"Code action"},
   },
   h = {
     name = "Help",
@@ -32,10 +33,14 @@ wk.register({
     name = "Tab"
   },
   p = {
-    name = "Project Harpoon"
+    name = "Project Harpoon",
+    a = {"Add file to Harpoon"},
+    l = {"List all harpoon files"},
   },
   s = {
-    name = "Session"
+    name = "Session",
+    m = {"Session Meny"},
+    c = {"Change current word globally"},
   },
 
 

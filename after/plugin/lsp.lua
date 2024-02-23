@@ -14,11 +14,14 @@ require('mason-lspconfig').setup({
   handlers = {
     lsp.default_setup,
   },
+  opts = {
+    auto_install = true,
+  },
 })
 
 -- When you don't have mason.nvim installed
 -- You'll need to list the servers installed in your system
-lsp.setup_servers({'tsserver', 'eslint', 'lua_ls', 'ansiblels'})
+lsp.setup_servers({'tsserver', 'eslint', 'lua_ls', 'ansiblels', 'bashls', 'yamlls' })
 
 lsp.set_preferences({
 	sign_icons = { }
@@ -32,6 +35,10 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 	['<C-y>'] = cmp.mapping.confirm({ select = true }),
 	['<C-Space>'] = cmp.mapping.complete(),
 })
+
+
+-- Code action 
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
 
 
 lsp.setup()
