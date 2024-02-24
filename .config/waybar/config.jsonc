@@ -1,8 +1,8 @@
 {
 		"layer": "top",
-		"modules-left": ["clock", "hyprland/window", "custom/weather"],
+		"modules-left": ["clock", "hyprland/window","custom/weather"],
 		"modules-center": ["hyprland/workspaces"],
-		"modules-right": ["tray","hyprland/language", "custom/updates", "cpu", "temperature", "memory", "idle_inhibitor", "pulseaudio", "bluetooth", "backlight", "battery"],
+		"modules-right": ["tray","hyprland/language", "cpu", "temperature", "memory", "custom/updates", "pulseaudio", "bluetooth", "backlight", "battery"],
 
   "hyprland/window": {
 	    "format": "{title}",
@@ -113,10 +113,10 @@
   },
 
   "custom/updates" : {
-      "format" : " {}",
+		  "format": "<span foreground='#ecc6d9'> </span>{}",
       "restart-interval" : 300,
       "exec": "(paru -Qu) | wc -l",
-      "return-type" : "json",
+      "on-click": "kitty -e pacman -Syu"
    },
   "tray": {
 		  "format": "<span foreground='#957FB8'>{icon}</span>",
@@ -155,8 +155,8 @@
 
   "bluetooth": {
 		  "on-click": "./scripts/bluetooth-control",
-		  "on-click-right": "~/.config/waybar/scripts/rofi-bluetooth",
-		  "on-click-middle": "~/.config/waybar/scripts/rofi-bluetooth",
+		  "on-click-right": "~/.config/waybar/scripts/rofi-bluetooth -w",
+		  "on-click-middle": "~/.config/waybar/scripts/rofi-bluetooth -w",
 		  "format": "{icon}",
 		  "interval": 15,
 		  "format-icons": {

@@ -329,6 +329,7 @@ tmux_conf_copy_to_os_clipboard=false
 # increase history size
 #set -g history-limit 10000
 
+set-option -g status-position bottom
 # start with mouse mode enabled
 #set -g mouse on
 
@@ -337,18 +338,18 @@ tmux_conf_copy_to_os_clipboard=false
 #set -g status-keys vi
 #set -g mode-keys vi
 
- unbind C-a
- unbind C-b
- set -g prefix C-Space
- set -g prefix M-u
- bind C-Space send-prefix
- bind M-u send-prefix
+unbind C-a
+unbind C-b
+set -g prefix C-Space
+set -g prefix M-u
+bind C-Space send-prefix
+bind M-u send-prefix
 
- unbind '"'
- bind - split-window -v
+unbind '"'
+bind - split-window -v
 
- unbind %
- bind | split-window -h
+unbind %
+bind | split-window -h
 
 bind -r j resize-pane -D 5
 bind -r k resize-pane -U 5

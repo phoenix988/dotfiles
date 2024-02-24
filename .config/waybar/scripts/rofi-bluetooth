@@ -16,6 +16,9 @@
 # Depends on:
 #   Arch repositories: rofi, bluez-utils (contains bluetoothctl)
 
+# source my settings
+source $HOME/.config/dm-script.conf
+
 # Constants
 divider="---------"
 goback="Back"
@@ -305,7 +308,7 @@ show_menu() {
 }
 
 # Rofi command to pipe into, can add any options here
-rofi_command="rofi -dmenu $* -p"
+rofi_command=run
 
 case "$1" in
     --status)
