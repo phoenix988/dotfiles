@@ -134,6 +134,16 @@ window#waybar {
   color: @fg; 
 }
 
+#custom-updates {
+  margin: 5px 5px 2px 5px;
+  border-radius: 7px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: @bg;
+  color: @fg;
+}
+
+
 
 #idle_inhibitor {
   margin: 5px 5px 2px 5px;

@@ -201,12 +201,12 @@
 
   (doom-themes-neotree-config)
 
-  (setq doom-themes-treemacs-theme "doom-nord-aurora")
+  (setq doom-themes-treemacs-theme "doom-rose-pine")
 
   (doom-themes-treemacs-config)
 
   (doom-themes-org-config))
 
-  (load-theme 'doom-nord-aurora t)
+  (load-theme 'doom-rose-pine t)
 
 (use-package autothemer :ensure t)

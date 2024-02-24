@@ -26,7 +26,6 @@
 - [[THEMES][THEMES]]
 
 
-
 ** ABOUT MY DOOM
 This is my personal Doom Emacs config that I have written using emacs org mode
 so that I can easily make comments inside the document so it's easier to read and
@@ -407,13 +406,13 @@ But to make it permanent you need to modify config.el
 
   (doom-themes-neotree-config)
 
-  (setq doom-themes-treemacs-theme "doom-nord-aurora")
+  (setq doom-themes-treemacs-theme "doom-rose-pine")
 
   (doom-themes-treemacs-config)
 
   (doom-themes-org-config))
 
-  (load-theme 'doom-nord-aurora t)
+  (load-theme 'doom-rose-pine t)
 
 (use-package autothemer :ensure t)
 #+end_src

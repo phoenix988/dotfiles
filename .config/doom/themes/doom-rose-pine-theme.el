@@ -1,7 +1,7 @@
-;;; doom-rose-pine-theme.el --- Inspired by VSCode Horizon -*- no-byte-compile: t; -*-
+;;; doom-rose-pine-theme.el --- Inspired by nvim rose-pine -*- no-byte-compile: t; -*-
 
 ;;; Commentary:
-;;; This theme was inspired by the port of Horizon to Emacs
+;;; This theme was inspired by the rose-pine theme from neovun
 ;;; see: https://github.com/aodhneine/iceberg-theme.el
 
 ;;; Code:
@@ -39,28 +39,28 @@
     (base0      '("#191724" "#191724" "black"        ))
     (base1      '("#252337" "#252337" "brightblack"  ))
     (base2      '("#191724" "#191724" "brightblack"  ))
-    (base3      '("#191724" "#191724" "brightblack"  ))
-    (base4      '("#EB6F92" "#Eb6F92" "brightblack"  ))
-    (base5      '("#EA9A97" "#EA9A97" "brightblack"  ))
-    (base6      '("#EA9A97" "#EA9A97" "brightblack"  ))
-    (base7      '("#EA9A97" "#EA9A97" "brightblack"  ))
-    (base8      '("#EA9A97" "#EA9A97" "white"        ))
-    (fg-alt     '("#6E6A82" "#6E6A82" "brightwhite"  ))
+    (base3      '("#282a36" "#282a36" "brightblack"  ))
+    (base4      '("#EB6F92" "#Eb6F92" "red"  ))
+    (base5      '("#EA9A97" "#EA9A97" "brightred"  ))
+    (base6      '("#EA9A97" "#EA9A97" "brightred"  ))
+    (base7      '("#EA9A97" "#EA9A97" "brightred"  ))
+    (base8      '("#EA9A97" "#EA9A97" "brightred"        ))
+    (fg-alt     '("#6E6A82" "#6E6A82" "brightgrey"  ))
     (fg         '("#D8DEE9" "#D8DEE9" "white"        ))
 
     (grey       base4)
-    (red        '("#F6C177" "#F6C177" "red"          ))
-    (orange     '("#F6C177" "#F6C177" "brightred"    ))
-    (green      '("#9CCFD8" "#9CCFD8" "green"        ))
+    (red        '("#F6C177" "#F6C177" "yellow"          ))
+    (orange     '("#F6C177" "#F6C177" "yellow"    ))
+    (green      '("#9CCFD8" "#9CCFD8" "cyan"        ))
     (lightgreen '("#31748F" "#31748F" "lightgreen"        ))
-    (teal       '("#EB6F92" "#EB6F92" "brightgreen"  ))
+    (teal       '("#EB6F92" "#EB6F92" "brightred"  ))
     (yellow     '("#E2A478" "#E2A478" "yellow"       ))
-    (blue       '("#d36486" "#d36486" "brightblue"   ))
-    (dark-blue  '("#F6C177" "#F6C177" "blue"         ))
-    (magenta    '("#Ea9A97" "#Ea9A97" "magenta"      ))
+    (blue       '("#d36486" "#d36486" "brightred"   ))
+    (dark-blue  '("#F6C177" "#F6C177" "yellow"         ))
+    (magenta    '("#Ea9A97" "#Ea9A97" "brightred"      ))
     (violet     '("#C4A7E7" "#C4A7E7" "brightmagenta"))
-    (cyan       '("#D36486" "#d36486" "brightcyan"   ))
-    (dark-cyan  '("#EB6F92" "#EB6F92" "cyan"   ))
+    (cyan       '("#D36486" "#d36486" "brightred"   ))
+    (dark-cyan  '("#EB6F92" "#EB6F92" "darkred"   ))
 
     ;; additional highlighting colours for iceberg
     (hor-highlight  (doom-lighten base3 0.05))
