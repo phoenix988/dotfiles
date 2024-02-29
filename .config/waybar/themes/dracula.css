@@ -6,7 +6,7 @@
 @define-color red #f07178;
 @define-color pink #f28779;
 @define-color lavender #d2a6ff;
-@define-color rosewater #f07178;
+@define-color rosewater #A4FFFF;
 @define-color flamingo #f07178;
 @define-color fg #D8DEE9;
 @define-color green #7fd962;
@@ -116,13 +116,14 @@ window#waybar {
   color: @fg; 
 }
 
+
 #language {
   margin: 5px 5px 2px 5px;
   border-radius: 7px;
   padding-left: 10px;
   padding-right: 10px;
-  background-color: @bg;
-  color: @fg; 
+  background-color: @flamingo;
+  color: @bg; 
 }
 
 #custom-weather {
@@ -132,6 +133,15 @@ window#waybar {
   padding-right: 10px;
   background-color: @bg;
   color: @fg; 
+}
+
+#custom-updates {
+  margin: 5px 5px 2px 5px;
+  border-radius: 7px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: @bg;
+  color: @fg;
 }
 
 

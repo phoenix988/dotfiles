@@ -24,7 +24,7 @@
 	selected-urgent-background: @grn;
 	selected-active-background: @active-background;
 	separatorcolor: @active-background;
-	bordercolor: @ora;
+	bordercolor: @red;
 }
 
 #window {
