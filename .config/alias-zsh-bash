@@ -45,7 +45,6 @@ if command_exist btop ; then
 
     alias htop='btop'
 
-
 fi
 
 # Alias vim to neovim
@@ -371,7 +370,7 @@ export ntfy="https://ntfy.phoenixonline.club/notify"
 # Git functions
 gdd() {
 
-    cd $HOME/myrepos/dotfiles
+    cd "$HOME"/myrepos/dotfiles || exit
 
     [ "$1" = "s" ] && git status
     [ "$1" = "a" ] && git add "$2"
@@ -382,7 +381,7 @@ gdd() {
 
 # quickly connect to tmux sessions
 t() {
-   tmux attach -t $1
+   tmux attach -t "$1"
 }
 
 # function to create new tmux session
@@ -416,11 +415,11 @@ anp() {
 
    if [ "$1" = "ls" ] ; then
 
-       ls  $ANSIBLE_LOCATION/playbooks/*
+       ls  "$ANSIBLE_LOCATION"/playbooks/*
 
    else
 
-       ansible-playbook -i $ANSIBLE_LOCATION/hosts $ANSIBLE_LOCATION/playbooks/$1 -K
+       ansible-playbook -i "$ANSIBLE_LOCATION"/hosts "$ANSIBLE_LOCATION"/playbooks/"$1" -K
 
    fi
 
