@@ -22,7 +22,8 @@ require('orgmode').setup({
   org_default_notes_file = '~/Dropbox/org/refile.org',
 })
 
-function tangle_files()
+-- Create tangle command for org files
+function Tangle_files()
   -- Get the current buffer's path
   local current_file = vim.api.nvim_buf_get_name(0)
 
@@ -40,4 +41,4 @@ function tangle_files()
 end
 
 -- Register the command
-vim.cmd("command! OrgTangle lua tangle_files()")
+vim.cmd("command! OrgTangle lua Tangle_files()")
