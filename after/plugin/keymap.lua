@@ -7,12 +7,12 @@ v.api.nvim_set_keymap('n', '<leader>.', ':Yazi<CR>', { noremap = true, silent = 
 v.api.nvim_set_keymap('n', '<leader>bn', ':BufferNext<CR>', { noremap = true, silent = true })
 v.api.nvim_set_keymap('n', '<leader>bp', ':BufferPrevious<CR>', { noremap = true, silent = true })
 v.api.nvim_set_keymap('n', '<leader>bk', ':BufferClose<CR>', { noremap = true, silent = true })
-v.api.nvim_set_keymap('n', '<leader>bl', ':BufferList<CR>', { noremap = true, silent = true })
+v.api.nvim_set_keymap('n', '<leader>bl', ':Telescope buffers<CR>', { noremap = true, silent = true })
 
 -- Manage tabs
 v.api.nvim_set_keymap('n', '<Leader>tn', ':tabnew<CR>', { noremap = true, silent = true })
 v.api.nvim_set_keymap('n', '<Leader>td', ':tabclose<CR>', { noremap = true, silent = true })
-v.api.nvim_set_keymap('n', '<Leader>ch', ':HighlightColorsToggle<CR>', { noremap = true, silent = true })
+v.api.nvim_set_keymap('n', '<Leader>ch', ':HighlightColors on<CR>', { noremap = true, silent = true })
 v.api.nvim_set_keymap('n', 'gt', ':BufferNext<CR>', { noremap = true, silent = true })
 v.api.nvim_set_keymap('n', 'gT', ':BufferPrevious<CR>', { noremap = true, silent = true })
 
@@ -22,7 +22,7 @@ v.api.nvim_set_keymap('n', '<S-Tab>', '<C-W>W', { noremap = true, silent = true 
 
 -- Git commands
 v.api.nvim_set_keymap('n', '<leader>gs', ':Git<CR>', { noremap = true, silent = true })
-v.api.nvim_set_keymap('n', '<leader>gg', ':Git<CR>', { noremap = true, silent = true })
+v.api.nvim_set_keymap('n', '<leader>gg', ':Neogit<CR>', { noremap = true, silent = true })
 v.api.nvim_set_keymap('n', '<leader>gb', ':Git blame<CR>', { noremap = true, silent = true })
 v.api.nvim_set_keymap('n', '<leader>gs', ':Gitsigns preview_hunk<CR>', { noremap = true, silent = true })
 v.api.nvim_set_keymap('n', '<Leader>gp', ':Git push<CR>', { noremap = true, silent = true })
@@ -43,6 +43,10 @@ v.api.nvim_set_keymap('n', '<Leader>nc', ':Neotree ~/.config<CR>', { noremap = t
 v.api.nvim_set_keymap('n', '<Leader>nn', ':Neotree ~/.config/nvim<CR>', { noremap = true, silent = true })
 v.api.nvim_set_keymap('n', '<Leader>nh', ':Neotree ~<CR>', { noremap = true, silent = true })
 v.api.nvim_set_keymap('n', '<Leader>n.', ':Neotree .<CR>', { noremap = true, silent = true })
+
+-- Oil
+v.api.nvim_set_keymap('n', '<Leader>fo', ':Oil<CR>', { noremap = true, silent = true })
+
 
 -- Update plugins using lazy
 v.api.nvim_set_keymap('n', '<Leader>hr', ':Lazy<CR>', { noremap = true, silent = true })
@@ -119,3 +123,6 @@ v.keymap.set('n', '<Leader>sm', require('auto-session.session-lens').search_sess
 
 -- None-ls format
 v.keymap.set('n', '<leader>fF', vim.lsp.buf.format, {})
+
+-- CO-pilot
+v.api.nvim_set_keymap('i', '<C-/>', 'copilot#Accept(“<CR>”)', {expr=true, silent=true})

@@ -22,9 +22,9 @@ require('lazy').setup({
 
   -- Git related plugins
   'tpope/vim-fugitive',
-  'NeogitOrg/neogit',
   'tpope/vim-rhubarb',
   'jreybert/vimagit',
+  { 'NeogitOrg/neogit', config = true },
 
   {
     'kdheepak/lazygit.nvim',
@@ -281,9 +281,6 @@ require('lazy').setup({
   -- nvim-compe lsp plugin
   { 'hrsh7th/nvim-compe' },
 
-  -- bufferline
-  { 'akinsho/bufferline.nvim', version = '*', dependencies = 'nvim-tree/nvim-web-devicons' },
-
   -- None ls
   { 'nvimtools/none-ls.nvim' },
 
@@ -295,7 +292,7 @@ require('lazy').setup({
     'rmagatti/auto-session',
     config = function()
       require('auto-session').setup {
-        auto_sessions_supress_dirs = { '~/', '~/Downloads' },
+        auto_sessions_supress_dirs = { '~/', '~/Downloads', '~/Documents' },
         session_lents = {
           buftypes_to_ignore = {},
           load_on_setup = true,
@@ -304,5 +301,17 @@ require('lazy').setup({
         },
       }
     end,
+  },
+
+  -- Oil
+  { 'stevearc/oil.nvim' },
+
+  -- DAP Debuggers
+  {
+    'mfussenegger/nvim-dap',
+    dependencies = {
+      'rcarriga/nvim-dap-ui',
+      'mfussenegger/nvim-dap-python',
+    },
   },
 }, {})

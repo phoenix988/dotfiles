@@ -1,6 +1,6 @@
-vim.g.barbar_auto_setup = false -- disable auto-setup
+vim.g.barbar_auto_setup = true -- disable auto-setup
 
-require'barbar'.setup {
+require('barbar').setup {
   -- WARN: do not copy everything below into your config!
   --       It is just an example of what configuration options there are.
   --       The defaults are suitable for most people.
@@ -20,22 +20,22 @@ require'barbar'.setup {
   clickable = true,
 
   -- Excludes buffers from the tabline
-  exclude_ft = {'javascript'},
-  exclude_name = {'package.json'},
+  exclude_ft = { 'javascript' },
+  exclude_name = { 'package.json' },
 
   -- A buffer to this direction will be focused (if it exists) when closing the current buffer.
   -- Valid options are 'left' (the default), 'previous', and 'right'
   focus_on_close = 'left',
 
   -- Hide inactive buffers and file extensions. Other options are `alternate`, `current`, and `visible`.
-  hide = {extensions = true, inactive = true},
+  hide = { extensions = true, inactive = true },
 
   -- Disable highlighting alternate buffers
   highlight_alternate = false,
 
   -- Disable highlighting file icons in inactive buffers
   highlight_inactive_file_icons = false,
-  
+
   -- If true, new buffers will be inserted at the start/end of the list.
   -- Default is to insert after current buffer.
   insert_at_end = false,
@@ -64,11 +64,11 @@ require'barbar'.setup {
     -- Use the default values: {event = 'BufWinLeave', text = nil}
     NvimTree = true,
     -- Or, specify the text used for the offset:
-    undotree = {text = 'undotree'},
+    undotree = { text = 'undotree' },
     -- Or, specify the event which the sidebar executes when leaving:
-    ['neo-tree'] = {event = 'BufWipeout'},
+    ['neo-tree'] = { event = 'BufWipeout' },
     -- Or, specify both
-    Outline = {event = 'BufWinLeave', text = 'symbols-outline'},
+    Outline = { event = 'BufWinLeave', text = 'symbols-outline' },
   },
 
   -- New buffer letters are assigned in this order. This order is
