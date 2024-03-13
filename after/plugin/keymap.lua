@@ -45,22 +45,19 @@ v.api.nvim_set_keymap('n', '<Leader>nh', ':Neotree ~<CR>', { noremap = true, sil
 v.api.nvim_set_keymap('n', '<Leader>n.', ':Neotree .<CR>', { noremap = true, silent = true })
 
 -- Oil
-v.api.nvim_set_keymap('n', '<Leader>fo', ':Oil<CR>', { noremap = true, silent = true })
-
+v.api.nvim_set_keymap('n', '<Leader>fo', ':Oil<CR>', { noremap = true, silent = true, desc = 'Oil file tree' })
 
 -- Update plugins using lazy
-v.api.nvim_set_keymap('n', '<Leader>hr', ':Lazy<CR>', { noremap = true, silent = true })
+v.api.nvim_set_keymap('n', '<Leader>hr', ':Lazy<CR>', { noremap = true, silent = true, desc = 'Lazy Plugin Menu' })
 
 -- Terminal
-v.api.nvim_set_keymap('n', '<Leader>tt', ':terminal<CR>', { noremap = true, silent = true })
-v.api.nvim_set_keymap('n', '<Leader>ok', ':terminal<CR>', { noremap = true, silent = true })
+v.api.nvim_set_keymap('n', '<Leader>tt', ':terminal<CR>', { noremap = true, silent = true, desc = 'Open Terminal' })
+v.api.nvim_set_keymap('n', '<Leader>ok', ':terminal<CR>', { noremap = true, silent = true, desc = 'Open Terminal' })
 
 -- Keybindings for Harpoon
 local mark = require 'harpoon.mark'
 local ui = require 'harpoon.ui'
 
-v.keymap.set('n', '<leader>a', mark.add_file)
-v.keymap.set('n', '<C-e>', ui.toggle_quick_menu)
 v.api.nvim_set_keymap('n', '<Leader>h1', ':ToHarpoon 1<CR>', { noremap = true, silent = true })
 v.api.nvim_set_keymap('n', '<Leader>h2', ':ToHarpoon 3<CR>', { noremap = true, silent = true })
 v.api.nvim_set_keymap('n', '<Leader>h3', ':ToHarpoon 3<CR>', { noremap = true, silent = true })
@@ -79,12 +76,14 @@ v.api.nvim_set_keymap('n', '<Leader>p6', ':ToHarpoon 6<CR>', { noremap = true, s
 v.api.nvim_set_keymap('n', '<Leader>p7', ':ToHarpoon 7<CR>', { noremap = true, silent = true })
 v.api.nvim_set_keymap('n', '<Leader>p8', ':ToHarpoon 8<CR>', { noremap = true, silent = true })
 v.api.nvim_set_keymap('n', '<Leader>p9', ':ToHarpoon 9<CR>', { noremap = true, silent = true })
-v.keymap.set('n', '<leader>pa', mark.add_file)
-v.keymap.set('n', '<leader>pl', ui.toggle_quick_menu)
-v.api.nvim_set_keymap('n', '<C-h>', ':ToHarpoon 1<CR>', { noremap = true, silent = true })
-v.api.nvim_set_keymap('n', '<C-j>', ':ToHarpoon 2<CR>', { noremap = true, silent = true })
-v.api.nvim_set_keymap('n', '<C-k>', ':ToHarpoon 3<CR>', { noremap = true, silent = true })
-v.api.nvim_set_keymap('n', '<C-l>', ':ToHarpoon 4<CR>', { noremap = true, silent = true })
+v.keymap.set('n', '<leader>a', mark.add_file, { desc = 'Harpoon Add file' })
+v.keymap.set('n', '<C-e>', ui.toggle_quick_menu, { desc = 'Harpoon Quick File Menu' })
+v.keymap.set('n', '<leader>pa', mark.add_file, { desc = 'Harpoon Add file' })
+v.keymap.set('n', '<leader>pl', ui.toggle_quick_menu, { desc = 'Harpoon Quick File Menu' })
+--v.api.nvim_set_keymap('n', '<C-h>', ':ToHarpoon 1<CR>', { noremap = true, silent = true })
+--v.api.nvim_set_keymap('n', '<C-j>', ':ToHarpoon 2<CR>', { noremap = true, silent = true })
+--v.api.nvim_set_keymap('n', '<C-k>', ':ToHarpoon 3<CR>', { noremap = true, silent = true })
+--v.api.nvim_set_keymap('n', '<C-l>', ':ToHarpoon 4<CR>', { noremap = true, silent = true })
 
 -- Keybinding to open UndoTree
 v.api.nvim_set_keymap('n', '<Leader>u', ':UndotreeToggle<CR>', { noremap = true, silent = true })
@@ -94,23 +93,32 @@ v.api.nvim_set_keymap('n', '<Leader>fs', ':SudaWrite<CR>', { noremap = true, sil
 
 -- Keybindings for telescope
 local builtin = require 'telescope.builtin'
-v.api.nvim_set_keymap('n', '<Leader>ff', ':Telescope find_files<CR>', { noremap = true, silent = true })
-v.api.nvim_set_keymap('n', '<Leader>gf', ':Telescope git_files<CR>', { noremap = true, silent = true })
-v.api.nvim_set_keymap('n', '<Leader>ht', ':Telescope colorscheme<CR>', { noremap = true, silent = true })
-v.api.nvim_set_keymap('n', '<Leader>fb', ':Telescope file_browser<CR>', { noremap = true, silent = true })
-v.api.nvim_set_keymap('n', '<Leader>fG', ':Telescope live_grep<CR>', { noremap = true, silent = true })
+require('telescope').load_extension 'recent_files'
+require('telescope').load_extension 'file_browser'
+v.api.nvim_set_keymap('n', '<Leader>ff', ':Telescope find_files<CR>',
+  { noremap = true, silent = true, desc = 'Find Files' })
+v.api.nvim_set_keymap('n', '<Leader>gf', ':Telescope git_files<CR>',
+  { noremap = true, silent = true, desc = 'Git Files' })
+v.api.nvim_set_keymap('n', '<Leader>ht', ':Telescope colorscheme<CR>',
+  { noremap = true, silent = true, desc = 'Colorschemes' })
+v.api.nvim_set_keymap('n', '<Leader>fb', ':Telescope file_browser<CR>',
+  { noremap = true, silent = true, desc = 'File Browser' })
+v.api.nvim_set_keymap('n', '<Leader>fG', ':Telescope live_grep<CR>',
+  { noremap = true, silent = true, desc = 'Live Grep for string' })
 v.keymap.set('n', '<Leader>fg', function()
   builtin.grep_string { search = v.fn.input 'Grep >' }
 end)
 
-require('telescope').load_extension 'recent_files'
-
-v.api.nvim_set_keymap('n', '<Leader>fr', [[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]], { noremap = true, silent = true })
-
-require('telescope').load_extension 'file_browser'
+v.api.nvim_set_keymap(
+  'n',
+  '<Leader>fr',
+  [[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]],
+  { noremap = true, silent = true, desc = 'Recent Files' }
+)
 
 -- ORGMODE Tangle
-v.api.nvim_set_keymap('n', '<Leader>oT', ':OrgTangle<CR>', { noremap = true, silent = true })
+v.api.nvim_set_keymap('n', '<Leader>oT', ':OrgTangle<CR>',
+  { noremap = true, silent = true, desc = 'Tangle Org Document' })
 
 -- Terminal mode
 v.api.nvim_set_keymap('t', '<Esc>l', '<C-\\><C-n>', { noremap = true })
@@ -123,6 +131,16 @@ v.keymap.set('n', '<Leader>sm', require('auto-session.session-lens').search_sess
 
 -- None-ls format
 v.keymap.set('n', '<leader>fF', vim.lsp.buf.format, {})
+v.api.nvim_set_keymap('n', '<Leader>hm', ':Mason<CR>', { noremap = true, silent = true })
 
--- CO-pilot
-v.api.nvim_set_keymap('i', '<C-/>', 'copilot#Accept(“<CR>”)', {expr=true, silent=true})
+-- Co-pilot
+v.api.nvim_set_keymap('i', '<C-/>', 'copilot#Accept(“<CR>”)', { expr = true, silent = true })
+
+-- Tmux navigation
+v.api.nvim_set_keymap('n', '<C-h', ':TmuxNavigateLeft<CR>', { noremap = true, silent = true })
+v.api.nvim_set_keymap('n', '<C-l', ':TmuxNavigateRight<CR>', { noremap = true, silent = true })
+v.api.nvim_set_keymap('n', '<C-j', ':TmuxNavigateDown<CR>', { noremap = true, silent = true })
+v.api.nvim_set_keymap('n', '<C-k', ':TmuxNavigateUp<CR>', { noremap = true, silent = true })
+
+-- Silicon
+v.api.nvim_set_keymap('v', '<Leader>S', ':Silicon<CR>', { noremap = true, silent = true })

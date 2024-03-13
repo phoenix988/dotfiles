@@ -8,7 +8,8 @@ end)
 
 require('mason').setup {}
 require('mason-lspconfig').setup {
-  ensure_installed = {'tsserver', 'eslint', 'lua_ls', 'ansiblels', 'bashls', 'yamlls', 'pylsp'},
+  -- LSP servers you want to install
+  ensure_installed = { 'tsserver', 'eslint', 'lua_ls', 'ansiblels', 'bashls', 'yamlls', 'pylsp', 'gopls' },
   handlers = {
     lsp.default_setup,
   },
@@ -25,6 +26,8 @@ lsp.set_preferences {
   sign_icons = {},
 }
 
+lsp.setup()
+
 local cmp = require 'cmp'
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings {
@@ -38,7 +41,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings {
 cmp.setup {
   snippet = {
     expand = function(args)
-      require("luasnip").lsp_expand(args.body)
+      require('luasnip').lsp_expand(args.body)
     end,
   },
   window = {
@@ -53,10 +56,5 @@ cmp.setup {
   }),
 }
 
--- Code action
-vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
-
-lsp.setup()
-
-
-
+-- Code action key binding
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Perform Code Action' })

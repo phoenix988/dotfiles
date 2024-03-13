@@ -1,47 +1,39 @@
-local wk = require("which-key")
+local wk = require 'which-key'
 
 wk.register({
   f = {
-    name = "Find Files", -- optional group name
-    g = {"Grep for string"},
-    v = {"Built-in-explorer"},
+    name = 'Find Files', -- optional group name
+    g = { 'Grep for string' },
+    F = { 'Format file' },
   },
   n = {
-    name = "File Tree"
+    name = 'File Tree',
   },
   o = {
-    name = "Org Mode"
+    name = 'Org Mode',
   },
   b = {
-    name = "Buffers"
+    name = 'Buffers',
   },
   g = {
-    name = "Git"
+    name = 'Git',
   },
   c = {
-    name = "Color",
-    a = {"Code action"},
+    name = 'Color',
   },
   h = {
-    name = "Help",
-    s = {"Source-file"},
-  },
-  a = {
-    name = "Add-Harpoon"
+    name = 'Help',
+    s = { 'Source-file' },
   },
   t = {
-    name = "Tab"
+    name = 'Tab',
   },
   p = {
-    name = "Project Harpoon",
-    a = {"Add file to Harpoon"},
-    l = {"List all harpoon files"},
+    name = 'Project Harpoon',
   },
   s = {
-    name = "Session",
-    m = {"Session Meny"},
-    c = {"Change current word globally"},
+    name = 'Session',
+    m = { 'Session Meny' },
+    c = { 'Change Current Word Globally' },
   },
-
-
-}, { prefix = "<leader>" })
+}, { prefix = '<leader>' })

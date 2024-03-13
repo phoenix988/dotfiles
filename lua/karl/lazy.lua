@@ -23,8 +23,10 @@ require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
-  'jreybert/vimagit',
-  { 'NeogitOrg/neogit', config = true },
+  {
+    'NeogitOrg/neogit',
+    config = true,
+  },
 
   {
     'kdheepak/lazygit.nvim',
@@ -121,7 +123,7 @@ require('lazy').setup({
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
-  { 'VonHeikemen/lsp-zero.nvim', dependencies = { 'neovim/nvim-lspconfig' } },
+  { 'VonHeikemen/lsp-zero.nvim',        dependencies = { 'neovim/nvim-lspconfig' } },
   { 'williamboman/mason-lspconfig.nvim' },
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -132,7 +134,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -143,14 +145,14 @@ require('lazy').setup({
     'hrsh7th/nvim-cmp',
     dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
   },
-  { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-  { 'hrsh7th/cmp-buffer' }, -- Optional
-  { 'hrsh7th/cmp-path' }, -- Optional
+  { 'hrsh7th/cmp-nvim-lsp' },     -- Required
+  { 'hrsh7th/cmp-buffer' },       -- Optional
+  { 'hrsh7th/cmp-path' },         -- Optional
   { 'saadparwaiz1/cmp_luasnip' }, -- Optional
-  { 'hrsh7th/cmp-nvim-lua' }, -- Optional
+  { 'hrsh7th/cmp-nvim-lua' },     -- Optional
 
   -- Snippets
-  { 'L3MON4D3/LuaSnip' }, -- Required
+  { 'L3MON4D3/LuaSnip' },             -- Required
   { 'rafamadriz/friendly-snippets' }, -- Optional
   -- End of Lsp configuration
 
@@ -181,6 +183,7 @@ require('lazy').setup({
     'shaunsingh/nord.nvim',
     'ribru17/bamboo.nvim',
     'rmehri01/onenord.nvim',
+    'catppuccin/nvim',
   },
 
   { 'zaldih/themery.nvim' },
@@ -208,11 +211,11 @@ require('lazy').setup({
   --},
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',                      opts = {} },
 
   -- Quickly navigate files
   -- Fuzzy Finder (files, lsp, etc)
-  { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
+  { 'nvim-telescope/telescope.nvim',              version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
   { 'smartpde/telescope-recent-files' },
   { 'nvim-telescope/telescope-file-browser.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
 
@@ -253,7 +256,7 @@ require('lazy').setup({
   { 'folke/which-key.nvim' },
 
   -- Barbar better tabs
-  { 'romgrk/barbar.nvim', dependencies = { 'nvim-web-devicons' } },
+  { 'romgrk/barbar.nvim',      dependencies = { 'nvim-web-devicons' } },
 
   -- Lastplace remeber your last posisition
   { 'ethanholz/nvim-lastplace' },
@@ -305,6 +308,12 @@ require('lazy').setup({
 
   -- Oil
   { 'stevearc/oil.nvim' },
+
+  -- Tmux navigator
+  { 'christoomey/vim-tmux-navigator' },
+
+  -- Silicon snapshot
+  { 'michaelrommel/nvim-silicon',    lazy = true, cmd = 'Silicon' },
 
   -- DAP Debuggers
   {

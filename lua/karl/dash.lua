@@ -1,12 +1,11 @@
-local os = require("os")
+local os = require 'os'
 
--- Local function to set the logo of my alpa dashboard for neovim 
+-- Local function to set the logo of my alpa dashboard for neovim
 local function setLogo()
+  local dayOfWeek = os.date '%A'
 
-    local dayOfWeek = os.date("%A")
-
-    if dayOfWeek == "Friday" or dayOfWeek == "friday" then
-      local logo = [[
+  if dayOfWeek == 'Friday' or dayOfWeek == 'friday' then
+    local logo = [[
 
             ███████╗██████╗ ██╗██████╗  █████╗ ██╗   ██╗
             ██╔════╝██╔══██╗██║██╔══██╗██╔══██╗╚██╗ ██╔╝
@@ -15,9 +14,9 @@ local function setLogo()
             ██║     ██║  ██║██║██████╔╝██║  ██║   ██║
             ╚═╝     ╚═╝  ╚═╝╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝
             ]]
-      return logo
-    elseif dayOfWeek == "Thursday" or dayOfWeek == "thursday" then
-      local logo = [[
+    return logo
+  elseif dayOfWeek == 'Thursday' or dayOfWeek == 'thursday' then
+    local logo = [[
             ████████╗██╗  ██╗██╗   ██╗██████╗ ███████╗██████╗  █████╗ ██╗   ██╗
             ╚══██╔══╝██║  ██║██║   ██║██╔══██╗██╔════╝██╔══██╗██╔══██╗╚██╗ ██╔╝
                ██║   ███████║██║   ██║██████╔╝███████╗██║  ██║███████║ ╚████╔╝
@@ -26,10 +25,9 @@ local function setLogo()
                ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═════╝ ╚═╝  ╚═╝   ╚═╝
              ]]
 
-      return logo
-
-    elseif dayOfWeek == "Monday" or dayOfWeek == "monday" then
-        local logo = [[
+    return logo
+  elseif dayOfWeek == 'Monday' or dayOfWeek == 'monday' then
+    local logo = [[
                                                     ___  
                                                  ,o88888 
                                               ,o8888888' 
@@ -53,9 +51,9 @@ local function setLogo()
        .                                                 
                                                          
              ]]
-        return logo
-    else
-        local logo = [[
+    return logo
+  else
+    local logo = [[
             ██████╗  █████╗ ███████╗██╗  ██╗██████╗  ██████╗  █████╗ ██████╗ ██████╗
             ██╔══██╗██╔══██╗██╔════╝██║  ██║██╔══██╗██╔═══██╗██╔══██╗██╔══██╗██╔══██╗
             ██║  ██║███████║███████╗███████║██████╔╝██║   ██║███████║██████╔╝██║  ██║
@@ -64,12 +62,8 @@ local function setLogo()
             ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝
             ]]
 
-        return logo
-    end
-
+    return logo
+  end
 end
 
 return setLogo
-
-
-
