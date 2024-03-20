@@ -13,7 +13,7 @@ local theme = {}
 -- Tokyo-night}}
 
 -- Color scheme
-theme.chosen_theme = "rose-pine"
+theme.chosen_theme = "iceberg"
 
 -- Widget layout
 --{{ default
