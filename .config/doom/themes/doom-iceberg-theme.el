@@ -7,7 +7,7 @@
 
 ;;; Code:
 (defgroup doom-iceberg-theme nil
-  "Options for doom-themes"
+  "Options for doom-themes."
   :group 'doom-themes)
 
 (defcustom doom-iceberg-brighter-modeline nil
