@@ -402,7 +402,7 @@ set -g @continuum-capture-pane-contents 'on'
 #set -g @dracula-plugins "cpu-usage gpu-usage ram-usage"
 #set -g @dracula-show-powerline true
 #set -g @dracula-show-left-icon session
-set -g @plugin "arcticicestudio/nord-tmux
+#set -g @plugin "arcticicestudio/nord-tmux"
 #source-file ~/.tmux/iceberg_minimal.tmux.conf
 set -g @plugin 'catppuccin/tmux'
 # ...alongside
